@@ -6,49 +6,70 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[hmargin=2cm,vmargin=3.5cm,bmargin=2cm]{geometry}
-
+\usepackage[utf8]{inputenc}
 
 \newcommand{\select}{\mbox{\Large$\sigma$}}
 
 \pagenumbering{arabic}
 
-\title{\textbf{Projecto de Base de Dados}}
+\title{\textbf{Projecto de Bases de Dados, Parte 1}}
  
-\author{Bruno Cardoso, Lidia Freitas e Rodrigo Bernardo} 
+\author{Bruno Cardoso, Lídia Freitas e Rodrigo Bernardo} 
 
 \affil{Instituto Superior T\'{e}cnico}
- 
-\date{Parte 1}
- 
+
 \begin{document}
+
+\date{25 horas de trabalho por aluno.}
 
 \maketitle
 
+\centerline{\includegraphics[width=0.4\textwidth]{ist-simbolo.jpg}}
 \newpage
 
-
-\tableofcontents %Índice de conteúdos
+\tableofcontents
 \newpage
-\setcounter{page}{1}
-\section{O Modelo}
-\subsection{Modelo Entidade-Associa\c{c}\~ao}
 
-%\advance\leftskip-5.0cm
+\section{Modelo Entidade-Associa\c{c}\~ao}
+\subsection{O Modelo}
+
 \centerline{\includegraphics[width=1.0\textwidth]{modelo-ea.png}}
-%\advance\leftskip+2.5cm
 
-
-ADICIONAR CHAVE CANDIDATA A PESSOA.(Alternativa de entrar na conta)
 \newpage
+
 \subsection{Restri\c{c}\~oes de Integridade do Modelo Entidade-Associa\c{c}\~ao}
 
 \paragraph{}
 
-O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n\~{a}o ocorram situa\c{c}\~{o}es fora do dom\'{\i}nio do problema.
+O Modelo Entidade-Associação não limita todas as ocorrências possíveis e por isso podem dar-se situações fora do domínio do problema.
+
+\\Como por exemplo, não se consegue assegurar que a ordem das datas estejam coerentes. Isto é, não é possível garantir que o timestamp\_nascimento seja inferior ao timestamp\_registo, ou que o timestamp\_login seja posterior ao timestamp\_registo.
+Assim como não é possível assegurar que os números de tentativas de insucesso (num\_insucessos\_login) sejam positivos, ou o número de undo’s já realizados pela pessoa (num\_undos).
+Outro aspecto que não é explicável através do modelo é o número de perguntas a que a pessoa responde, ou a unicidade da associação entre os objectos mutáveis (Páginas, páginas\_registos, Registos, Tipos\_de\_registos e Campos).
+De forma a impedir que tais situações não ocorram, o Modelo Entidade-Associação é completado com as seguintes restrições de integridade:
+\\
+
+\begin{description}
+  \item[RI1] Na entidade Pessoa, o atributo timestamp\_nascimento \'{e} uma data anterior ao atributo timestamp\_registo.
+  \item[RI2] Na entidade Pessoa, o atributo bloqueado \'{e} um valor l\'{o}gico, verdadeiro ou falso.
 
 
+  \item[RI3] Na entidade Pessoa, o atributo num\_undos \'{e} um n\'{u}mero inteiro positivo.
 
 
+  \item[RI4] Na entidade Pessoa, o atributo num\_insucessos\_login '{e} um n\'{u}mero inteiro positivo menor ou igual a 3.
+  \item[RI5] Cada instância de Pessoa associa-se, em cada instante, a duas instâncias da entidade Pergunta.
+  \item[RI6] Na entidade Login, o atributo timestamp\_login \'{e} uma data posterior ao atributo timestamp\_registo de Pessoa.
+  \item[RI7] Na entidade Login, o atributo sucesso \'{e} um valor l\'{o}gico, verdadeiro ou falso.
+  \item[RI8] Cada instância da entidade Versão tem apenas uma associação activa a P\'{a}ginas, paginas\_registos, Registos, Tipos\_de\_registos e Campos.
+  \item[RI9] Na entidade Versão, o atributo deleted \'{e} um valor l\'{o}gico, verdadeiro ou falso.
+  \item[RI10] Na entidade Versão, o atributo changed \'{e} um valor l\'{o}gico, verdadeiro ou falso.
+  \item[RI11] Uma instância da entidade Versão est\'{a} associada a uma ou duas instâncias da entidade Log.
+  \item[RI12] Uma instância da entidade Log está associada a duas e s\'{o} duas instâncias da entidade Versão.
+  \item[RI13] Na entidade Log, o atributo log\_id \'{e} um inteiro positivo.
+\end{description}
+
+\newpage
 \section{Modelo Relacional}
 \subsection{O Modelo}
 
@@ -99,7 +120,7 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Tipos\_de\_registos(\underline{nome\_t, email}, id)
+	\item Tipo\_de\_registos(\underline{nome\_t, email}, id)
 	\item email: FK(Pessoa)
 	\item notnull(id)
 	\item id: FK(Vers\~{a}o)
@@ -139,7 +160,13 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 	\item id: FK(Vers\~{a}o)
 \end{description}
 
+\newpage
+
 \subsection{Restri\c{c}\~oes de Integridade do Modelo Relacional}
+
+
+
+\newpage
 \section{\'{A}lgebra Relacional}
 \subsection{Pergunta 1}
 
@@ -147,16 +174,12 @@ $\Pi_{nome\_t}(\sigma_{email = 'Manel@Notebook.pt'}(Tipo\_de\_registos))$
 
 \subsection{Pergunta 2}
 
-Pessoa $\bowtie \Pi_{email}$ ( $\select_{sucesso=falso} (login)$ )
+$\Pi_{email}$ (Pessoa $ \bowtie \select_{sucesso=falso} (Login)$ )
 
 \subsection{Pergunta 3}
 
-
-
-
-
-
-
+$\Pi_{timestamp\_nascimento}(\sigma_{nome\_p = 'facebook' \wedge nome\_r = 'facebook'} Pessoa \bowtie 
+\\\rho( P, P\'{a}ginas) \bowtie_{P.email = R.email} \rho( R, Registos)) $
 
 \section{Linguagem SQL}
 \subsection{Pergunta 1}
@@ -165,7 +188,7 @@ SELECT DISTINCT nome\_t
 \\WHERE email="Manel@notebook.pt";
 
 \subsection{Pergunta 2}
-SELECT DISTINCT Pessoa.* 
+SELECT DISTINCT Pessoa.email 
 \\FROM Pessoa, Login 
 \\WHERE Pessoa.email = Login.email AND sucesso = false;
 
