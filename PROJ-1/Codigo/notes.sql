@@ -149,3 +149,7 @@ insert into versao      values(11,0,0);
 insert into tipos_de_registos   values('Xixi', 'lidiafreitas4@gmail.com', 11);
 insert into versao      values(12,0,0);
 insert into registos    values('Facebook', 'Coco', 'lidiafreitas3@gmail.com', 12);
+insert into versao      values(13,0,0);
+insert into registos    values('Facebook', 'Xixi', 'lidiafreitas4@gmail.com', 13);
+insert into versao      values(14,0,0);
+insert into registos    values('Facebook2', 'Facebook', 'lidiafreitas2@gmail.com', 14);
