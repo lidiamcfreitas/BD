@@ -1,4 +1,4 @@
-SELECT nome_t
+/*SELECT nome_t
 FROM tipos_de_registos T
 WHERE T.email="Manuel@notebook.pt";
 
@@ -7,8 +7,8 @@ FROM pessoa NATURAL JOIN (SELECT email FROM login WHERE sucesso=falso);
 
 SELECT data_nascimento
 FROM Pessoas, paginas P, tipos_de_registos T, registos R
-WHERE T.nome_t = R.nome_T AND P.email = T.email AND nome_p = "Facebook" AND nome_r = "Facebook";
-
+WHERE P.email = R.email AND Pessoa.email = P.email AND nome_p = "Facebook" AND nome_r = "Facebook";
+*/
 
 
 
@@ -16,11 +16,11 @@ WHERE T.nome_t = R.nome_T AND P.email = T.email AND nome_p = "Facebook" AND nome
 
 SELECT nome_t
 FROM tipos_de_registos T
-WHERE T.email="lidiafreitas4@gmail.com";
+WHERE T.email="lidiafreitas3@gmail.com";
 
-SELECT *
-FROM pessoa NATURAL JOIN (SELECT email FROM login WHERE sucesso=falso);
+SELECT DISTINCT pessoa.* 
+FROM pessoa, login WHERE pessoa.email = login.email AND sucesso=0;
 
-SELECT data_nascimento
-FROM Pessoas Paginas P, tipos_de_registos T, registos R
-WHERE T.nome_t = R.nome_T AND P.email = T.email AND nome_p = "Facebook" AND nome_r = "Facebook";
+SELECT DISTINCT timestamp_nascimento, pessoa.email
+FROM pessoa, paginas P, tipos_de_registos T, registos R
+WHERE P.email = R.email AND pessoa.email = P.email AND nome_p = "Facebook" AND nome_r = "Facebook";
