@@ -16,7 +16,7 @@ drop table registos_campos;
 SET foreign_key_checks = 1;
 
 create table pessoa
-(email        	varchar(255)	not null unique,
+(email           varchar(255)    not null  ,
  bloqueado           boolean         not null default 0,
  nome 		varchar(255)	not null,
  num_insucessos_login    numeric(1,0)    not null,
@@ -27,14 +27,14 @@ create table pessoa
  primary key(email));
 
 create table pergunta
-(questao      	varchar(255)	not null unique,
+(questao      	varchar(255)	not null  ,
  email        	varchar(255)	not null,
  resposta     	varchar(255)	not null,
  primary key(questao, email),
  foreign key(email) references pessoa(email));
 
 create table login
-(timestamp_login    timestamp       not null unique,
+(timestamp_login    timestamp       not null  ,
  email               varchar(255)    not null,
  sucesso             boolean         not null,
  primary key(timestamp_login, email),
@@ -42,14 +42,14 @@ create table login
 
 
 create table versao
-(id                 numeric(5,0)    not null unique,
+(id                 numeric(5,0)    not null  ,
  changed             boolean         not null default 0,
  deleted             boolean         not null default 0,
  primary key(id));
 
 
 create table paginas
-(nome_p             varchar(255)    not null unique,
+(nome_p             varchar(255)    not null  ,
  email               varchar(255)    not null,
  id                  numeric(5,0)    not null,
  primary key(nome_p, email),
@@ -98,10 +98,11 @@ create table registos_campos
 (nome_r	varchar(255) not null,
  nome_t varchar(255) not null,
  nome_c varchar(255) not null,
- primary key(nome_r, nome_t, nome_c),
- foreign key(nome_r) references registos(nome_r), 	
- foreign key(nome_t) references tipos_de_registos(nome_t),
- foreign key(nome_c) references campos(nome_c));
+ email  varchar(255) not null,
+ valor  varchar(255) not null,
+ primary key(nome_r, nome_t, nome_c, email),
+ foreign key(nome_r, nome_t, email) references registos(nome_r, nome_t, email), 	
+ foreign key(nome_c, nome_t, email) references campos(nome_c, nome_t, email));
 
 
 create table log 
@@ -112,11 +113,11 @@ create table log
 
 create table log_versao
 (log_id             varchar(255)	not null,
+ email              varchar(255)        not null,
  id		    numeric(5,0)	not null,
- primary key(log_id, id),
+ primary key(log_id, email, id),
  foreign key(log_id, email) references log(log_id, email),
  foreign key(id)     references versao(id));
-
 
 
 
@@ -147,6 +148,4 @@ insert into tipos_de_registos   values('Coco', 'lidiafreitas3@gmail.com', 10);
 insert into versao      values(11,0,0);
 insert into tipos_de_registos   values('Xixi', 'lidiafreitas4@gmail.com', 11);
 insert into versao      values(12,0,0);
-insert into registos    registos('Facebook', 'Coco', 'lidiafreitas3@gmail.com', 12);
-
-
+insert into registos    values('Facebook', 'Coco', 'lidiafreitas3@gmail.com', 12);
