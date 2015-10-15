@@ -1,0 +1,18 @@
+\select@language {portuguese}
+\contentsline {section}{\numberline {1}O Modelo}{2}
+\contentsline {subsection}{\numberline {1.1}Modelo Entidade-Associa\c {c}\~ao}{2}
+\contentsline {subsection}{\numberline {1.2}Restri\c {c}\~oes de Integridade do Modelo Entidade-Associa\c {c}\~ao}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {section}{\numberline {2}Modelo Relacional}{3}
+\contentsline {subsection}{\numberline {2.1}O Modelo}{3}
+\contentsline {subsection}{\numberline {2.2}Restri\c {c}\~oes de Integridade do Modelo Relacional}{4}
+\contentsline {section}{\numberline {3}\'{A}lgebra Relacional}{4}
+\contentsline {subsection}{\numberline {3.1}Pergunta 1}{4}
+\contentsline {subsection}{\numberline {3.2}Pergunta 2}{4}
+\contentsline {subsection}{\numberline {3.3}Pergunta 3}{4}
+\contentsline {subsection}{\numberline {3.4}Pergunta 4}{4}
+\contentsline {section}{\numberline {4}Linguagem SQL}{4}
+\contentsline {subsection}{\numberline {4.1}Pergunta 1}{4}
+\contentsline {subsection}{\numberline {4.2}Pergunta 2}{4}
+\contentsline {subsection}{\numberline {4.3}Pergunta 3}{4}
+\contentsline {subsection}{\numberline {4.4}Pergunta 4}{4}
