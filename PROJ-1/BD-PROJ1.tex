@@ -8,6 +8,8 @@
 \usepackage[hmargin=2cm,vmargin=3.5cm,bmargin=2cm]{geometry}
 
 
+\newcommand{\select}{\mbox{\Large$\sigma$}}
+
 \pagenumbering{arabic}
 
 \title{\textbf{Projecto de Base de Dados}}
@@ -82,16 +84,16 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 \end{description}
 
 \begin{description}[noitemsep]
-	\item P\'{a}ginas\_registos(\underline{nome\_p, nome\_r},id )
-	\item nome\_p: FK(P\'{a}ginas)
-	\item nome\_r: FK(Registos)
+	\item P\'{a}ginas\_registos(\underline{nome\_p, email, nome\_r, nome\_t},id )
+	\item nome\_p, email: FK(P\'{a}ginas)
+	\item nome\_r, nome\_t, email: FK(Registos)
 	\item id: FK(Vers\~{a}o)
 	\item notnull(id)
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Registos(\underline{nome\_r, nome\_t},  id)
-	\item nome\_t: FK(Tipos\_de\_registos)
+	\item Registos(\underline{nome\_r, nome\_t, email}, id)
+	\item nome\_t, email: FK(tipos\_de\_registos)
 	\item id: FK(Vers\~{a}o)
 	\item notnull(id)
 \end{description}
@@ -105,11 +107,20 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 \newpage
 
 \begin{description}[noitemsep]
-	\item Campos(\underline{nome\_c, nome\_t}, id)
-	\item nome\_t: FK(Tipo\_de\_registos)
+	\item Campos(\underline{nome\_c, nome\_t, email}, id)
+	\item nome\_t, email: FK(Tipo\_de\_registos)
 	\item id: FK(Vers\~{a}o)
 	\item notnull(id)
 \end{description}
+
+\begin{description}[noitemsep]
+	\item Registo\_Campos(\underline{nome\_r, nome\_t, nome\_c, email}, id)
+	\item nome\_r, nome\_t, email: FK(Registos)
+	\item nome\_c, nome\_t, email: FK(Campos)
+	\item id: FK(Vers\~{a}o)
+	\item notnull(id)
+\end{description}
+
 
 \begin{description}[noitemsep]
 	\item Vers\~{a}o(\underline{id}, changed, deleted)
@@ -123,26 +134,54 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Log\_vers\~{a}o(\underline{log\_id, id})
-	\item log\_id: FK(Log)
+	\item Log\_vers\~{a}o(\underline{log\_id, email, id})
+	\item log\_id, email: FK(Log)
 	\item id: FK(Vers\~{a}o)
 \end{description}
-
-
-
-
-
-
-
 
 \subsection{Restri\c{c}\~oes de Integridade do Modelo Relacional}
 \section{\'{A}lgebra Relacional}
 \subsection{Pergunta 1}
+
+$\Pi_{nome\_t}(\sigma_{email = 'Manel@Notebook.pt'}(Tipo\_de\_registos))$
+
 \subsection{Pergunta 2}
+
+Pessoa $\bowtie \Pi_{email}$ ( $\select_{sucesso=falso} (login)$ )
+
 \subsection{Pergunta 3}
+
+
+
+
+
+
+
 
 \section{Linguagem SQL}
 \subsection{Pergunta 1}
+SELECT DISTINCT nome\_t
+\\FROM Tipo\_de\_registos
+\\WHERE email="Manel@notebook.pt";
+
 \subsection{Pergunta 2}
+SELECT DISTINCT Pessoa.* 
+\\FROM Pessoa, Login 
+\\WHERE Pessoa.email = Login.email AND sucesso = false;
+
 \subsection{Pergunta 3}
+SELECT timestamp\_nascimento
+\\FROM Pessoa, Paginas, Registos 
+\\WHERE Pessoa.email = Registos.email 
+\\AND Pessoa.email = Paginas.email 
+\\AND nome\_p = "facebook" 
+\\AND nome\_r = "facebook";
+
+
+
+
+
+
+
+
 \end{document}
