@@ -121,10 +121,10 @@ create table log_versao
 
 
 
-insert into pessoa      values ( 'lidiafreitas4@gmail.com', 0, 'Lidia4', 0 , 'password4', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5);
+insert into pessoa      values ( 'lidiafreitas4@gmail.com', 0, 'Lidia4', 0 , 'password4', '2015-10-15 17:12:03', CURRENT_TIMESTAMP, 5);
 insert into pessoa      values ( 'lidiafreitas3@gmail.com', 0, 'Lidia3', 0 , 'password3', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5);
 insert into pessoa      values ( 'lidiafreitas2@gmail.com', 0, 'Lidia2', 0 , 'password2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5);
-insert into pessoa      values ( 'lidiafreitas1@gmail.com', 0, 'Lidia1', 0 , 'password1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5);
+insert into pessoa      values ( 'lidiafreitas1@gmail.com', 0, 'Lidia1', 2 , 'password1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5);
 insert into versao      values (1,0,0);
 insert into paginas     values ('Pagina1', 'lidiafreitas4@gmail.com', 1);
 insert into versao      values (2,0,0);
@@ -153,3 +153,8 @@ insert into versao      values(13,0,0);
 insert into registos    values('Facebook', 'Xixi', 'lidiafreitas4@gmail.com', 13);
 insert into versao      values(14,0,0);
 insert into registos    values('Facebook2', 'Facebook', 'lidiafreitas2@gmail.com', 14);
+insert into login       values(CURRENT_TIMESTAMP, 'lidiafreitas3@gmail.com', 1);
+insert into login       values('2015-10-15 17:12:45', 'lidiafreitas3@gmail.com', 0);
+insert into login       values(CURRENT_TIMESTAMP, 'lidiafreitas2@gmail.com', 1);
+insert into login       values(CURRENT_TIMESTAMP, 'lidiafreitas4@gmail.com', 0);
+insert into login       values('2015-10-15 17:12:22', 'lidiafreitas4@gmail.com', 0);
