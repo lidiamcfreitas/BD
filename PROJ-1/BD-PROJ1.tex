@@ -5,37 +5,36 @@
 \usepackage{authblk}
 \usepackage{enumitem}
 \usepackage{graphicx}
-
+\usepackage[hmargin=2cm,vmargin=3.5cm,bmargin=2cm]{geometry}
 
 
 \pagenumbering{arabic}
 
-\setlist[description]{labelindent=1cm}
-
 \title{\textbf{Projecto de Base de Dados}}
  
-\author{Bruno Cardoso e Lidia Freitas e Rodrigo Bernardo} 
+\author{Bruno Cardoso, Lidia Freitas e Rodrigo Bernardo} 
 
 \affil{Instituto Superior T\'{e}cnico}
  
 \date{Parte 1}
  
 \begin{document}
-\setlength{\pdfpxdimen}{1in/250}
+
 \maketitle
 
 \newpage
-\setcounter{page}{1}
+
 
 \tableofcontents %Índice de conteúdos
 \newpage
-
+\setcounter{page}{1}
 \section{O Modelo}
 \subsection{Modelo Entidade-Associa\c{c}\~ao}
 
-\advance\leftskip-2.5cm
-\includegraphics[width=1.40\textwidth]{modelo-ea.png}
-\advance\leftskip+2.5cm
+%\advance\leftskip-5.0cm
+\centerline{\includegraphics[width=1.0\textwidth]{modelo-ea.png}}
+%\advance\leftskip+2.5cm
+
 
 ADICIONAR CHAVE CANDIDATA A PESSOA.(Alternativa de entrar na conta)
 \newpage
@@ -58,8 +57,15 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Pessoa(\underline{email}, bloqueado, nome, insucesso, password, timestamp\_nascimento, timestamp\_registo)
-	\item nutnull(email,bloqueado, nome, insucesso, password, timestamp\_nascimento, timestamp\_registo)
+	\item Pessoa(\underline{email}, bloqueado, nome, num\_insucessos\_login, password, timestamp\_nascimento, timestamp\_registo, num\_undos)
+	\item notnull(email)
+	\item notnull(bloqueado)
+	\item notnull(nome)
+	\item notnull(num\_insucessos\_login)
+	\item notnull(password)
+	\item notnull(timestamp\_nascimento)
+	\item notnull(timestamp\_registo)
+	\item notnull(num\_undos)
 \end{description}
 
 \begin{description}[noitemsep]
@@ -76,8 +82,7 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 \end{description}
 
 \begin{description}[noitemsep]
-	\item P\'{a}ginas\_registos(\underline{nome\_p, email, nome\_r},id )
-	\item email: FK(Pessoa)
+	\item P\'{a}ginas\_registos(\underline{nome\_p, nome\_r},id )
 	\item nome\_p: FK(P\'{a}ginas)
 	\item nome\_r: FK(Registos)
 	\item id: FK(Vers\~{a}o)
@@ -100,9 +105,9 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 \newpage
 
 \begin{description}[noitemsep]
-	\item Campos(\underline{nome\_c, nome\_t, nome\_r}, valor, id)
+	\item Campos(\underline{nome\_c, nome\_t}, id)
 	\item nome\_t: FK(Tipo\_de\_registos)
-	\item nome\_r: FK(Registos)
+	\item id: FK(Vers\~{a}o)
 	\item notnull(id)
 \end{description}
 
@@ -119,7 +124,7 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 
 \begin{description}[noitemsep]
 	\item Log\_vers\~{a}o(\underline{log\_id, id})
-	\item log\_id: FK(log)
+	\item log\_id: FK(Log)
 	\item id: FK(Vers\~{a}o)
 \end{description}
 
