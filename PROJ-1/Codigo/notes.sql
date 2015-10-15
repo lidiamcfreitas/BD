@@ -1,9 +1,3 @@
--- drop table borrower cascade;
--- drop table loan cascade;
--- drop table depositor cascade;
--- drop table account cascade;
--- drop table customer cascade;
--- drop table branch cascade;
 SET foreign_key_checks = 0;
 
 drop table pergunta cascade;
@@ -14,6 +8,9 @@ drop table paginas cascade;
 drop table tipos_de_registos cascade;
 drop table registos cascade;
 drop table paginas_registos cascade;
+drop table campos cascade;
+drop table log cascade;
+drop table log_versao cascade;
 
 SET foreign_key_checks = 1;
 
@@ -59,7 +56,7 @@ create table paginas
 
 
 create table tipos_de_registos
-    (nome_t             varchar(255),	not null
+    (nome_t             varchar(255)	not null,
      email              varchar(255)    not null,
      id                 numeric(5,0)    not null,
     primary key(nome_t, email),
@@ -67,8 +64,8 @@ create table tipos_de_registos
     foreign key(id) references versao(id));
 
 create table registos
-    (nome_r             varchar(255),	not null
-    nome_t             varchar(255),    not null
+    (nome_r             varchar(255)	not null,
+    nome_t             varchar(255)    not null,
     id                 numeric(5,0)    not null,
     primary key(nome_r, nome_t),
     foreign key(nome_t) references tipos_de_registos(nome_t),
@@ -86,27 +83,26 @@ create table paginas_registos
     foreign key(id) references versao(id));
 
 create table campos
-    (nome_p             varchar(255) not null,
+    (nome_c             varchar(255) not null,
     nome_t             varchar(255) not null,   
     nome_r             varchar(255) not null,
     valor				numeric(5,0) not null,
     id                 numeric(5,0) not null,
     primary key(nome_c, nome_t, nome_r),
-    foreign key(email) references pessoa(email),
-    foreign key(nome_t) references tipos_de_registos(nome_t), 
+    foreign key(nome_t) references tipos_de_registos(nome_t),
     foreign key(nome_r) references registos(nome_r));
 
 create table log 
-	(log_id			varchar(255),	not null
-	email			varchar(255), 	not null
+	(log_id			varchar(255)	not null,
+	email			varchar(255) 	not null,
 	primary key(log_id, email),
 	foreign key(email) references pessoa(email));
 
 create table log_versao
-	(log_id			varchar(255),	not null
-	 id				varchar(255),	not null
+	(log_id			varchar(255)	not null,
+	 id				numeric(5,0)	not null,
 	 primary key(log_id, id),
-	 foreign key(log_id) references pessoa(log_id),
+	 foreign key(log_id) references log(log_id),
 	 foreign key(id)     references versao(id));
 
 
