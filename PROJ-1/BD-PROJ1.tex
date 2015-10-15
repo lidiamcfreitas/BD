@@ -29,13 +29,13 @@
 
 \tableofcontents %Índice de conteúdos
 \newpage
+
 \section{O Modelo}
 \subsection{Modelo Entidade-Associa\c{c}\~ao}
 
-
-
-\includegraphics[scale=0.48]{modelo-ea.png}
-
+\advance\leftskip-2.5cm
+\includegraphics[width=1.40\textwidth]{modelo-ea.png}
+\advance\leftskip+2.5cm
 
 ADICIONAR CHAVE CANDIDATA A PESSOA.(Alternativa de entrar na conta)
 \newpage
@@ -73,20 +73,20 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 	\item email: FK(Pessoa)
 	\item id: FK(Pessoa)
 	\item notnull(id)
-	\item unique(id)
 \end{description}
 
 \begin{description}[noitemsep]
-	\item P\'{a}ginas\_registos(\underline{nome\_p, email, nome\_r})
+	\item P\'{a}ginas\_registos(\underline{nome\_p, email, nome\_r},id )
 	\item email: FK(Pessoa)
 	\item nome\_p: FK(P\'{a}ginas)
 	\item nome\_r: FK(Registos)
+	\item id: FK(Vers\~{a}o)
+	\item notnull(id)
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Registos(\underline{nome\_r, nome\_t}, id)
+	\item Registos(\underline{nome\_r, nome\_t},  id)
 	\item nome\_t: FK(Tipo\_de\_registos)
-	\item unique(id)
 	\item notnull(id)
 	\item id: FK(Vers\~{a}o)
 \end{description}
@@ -95,16 +95,15 @@ O Modelo Entidade-Associa\c{c}\~{a}o, apenas com o diagrama, n\~{a}o exige que n
 	\item Tipos\_de\_registos(\underline{nome\_t, email}, id)
 	\item email: FK(Pessoa)
 	\item notnull(id)
-	\item unique(id)
 	\item id: FK(Vers\~{a}o)
 \end{description}
+\newpage
 
 \begin{description}[noitemsep]
 	\item Campos(\underline{nome\_c, nome\_t, nome\_r}, valor, id)
 	\item nome\_t: FK(Tipo\_de\_registos)
 	\item nome\_r: FK(Registos)
 	\item notnull(id)
-	\item unique(id)
 \end{description}
 
 \begin{description}[noitemsep]
