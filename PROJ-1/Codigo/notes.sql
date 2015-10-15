@@ -11,6 +11,7 @@ drop table paginas_registos cascade;
 drop table campos cascade;
 drop table log cascade;
 drop table log_versao cascade;
+drop table registos_campos;
 
 SET foreign_key_checks = 1;
 
@@ -85,12 +86,20 @@ create table paginas_registos
 create table campos
     (nome_c             varchar(255) not null,
     nome_t             varchar(255) not null,   
-    nome_r             varchar(255) not null,
-    valor				numeric(5,0) not null,
+    valor				varchar(255) not null,
     id                 numeric(5,0) not null,
-    primary key(nome_c, nome_t, nome_r),
+    primary key(nome_c, nome_t),
+    foreign key(nome_t) references tipos_de_registos(nome_t));
+
+create table registos_campos
+	(nome_r	varchar(255) not null,
+	nome_t varchar(255) not null,
+	nome_c varchar(255) not null,
+	primary key(nome_r, nome_t, nome_c),
+    foreign key(nome_r) references registos(nome_r), 	
     foreign key(nome_t) references tipos_de_registos(nome_t),
-    foreign key(nome_r) references registos(nome_r));
+    foreign key(nome_c) references campos(nome_c));
+
 
 create table log 
 	(log_id			varchar(255)	not null,
