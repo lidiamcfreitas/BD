@@ -33,7 +33,7 @@
 \section{Modelo Entidade-Associa\c{c}\~ao}
 \subsection{O Modelo}
 
-\centerline{\includegraphics[width=1.0\textwidth]{modelo-ea.png}}
+\centerline{\includegraphics[width=1.0\textwidth]{modelo-ea-2.png}}
 
 \newpage
 
@@ -98,48 +98,42 @@ De forma a impedir que tais situações não ocorram, o Modelo Entidade-Associa�
 \end{description}
 
 \begin{description}[noitemsep]
-	\item P\'{a}ginas(\underline{nome\_p, email}, id)
+	\item P\'{a}ginas(\underline{nome\_p, email, id})
 	\item email: FK(Pessoa)
 	\item id: FK(Pessoa)
-	\item notnull(id)
 \end{description}
 
 \begin{description}[noitemsep]
-	\item P\'{a}ginas\_registos(\underline{nome\_p, email, nome\_r, nome\_t},id )
+	\item P\'{a}ginas\_registos(\underline{nome\_p, email, nome\_r, nome\_t, id})
 	\item nome\_p, email: FK(P\'{a}ginas)
 	\item nome\_r, nome\_t, email: FK(Registos)
 	\item id: FK(Vers\~{a}o)
-	\item notnull(id)
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Registos(\underline{nome\_r, nome\_t, email}, id)
+	\item Registos(\underline{nome\_r, nome\_t, email, id})
 	\item nome\_t, email: FK(tipos\_de\_registos)
 	\item id: FK(Vers\~{a}o)
-	\item notnull(id)
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Tipo\_de\_registos(\underline{nome\_t, email}, id)
+	\item Tipo\_de\_registos(\underline{nome\_t, email, id})
 	\item email: FK(Pessoa)
-	\item notnull(id)
 	\item id: FK(Vers\~{a}o)
 \end{description}
 \newpage
 
 \begin{description}[noitemsep]
-	\item Campos(\underline{nome\_c, nome\_t, email}, id)
+	\item Campos(\underline{nome\_c, nome\_t, email, id})
 	\item nome\_t, email: FK(Tipo\_de\_registos)
 	\item id: FK(Vers\~{a}o)
-	\item notnull(id)
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Registo\_Campos(\underline{nome\_r, nome\_t, nome\_c, email}, id)
+	\item Registo\_Campos(\underline{nome\_r, nome\_t, nome\_c, email, id})
 	\item nome\_r, nome\_t, email: FK(Registos)
 	\item nome\_c, nome\_t, email: FK(Campos)
 	\item id: FK(Vers\~{a}o)
-	\item notnull(id)
 \end{description}
 
 
