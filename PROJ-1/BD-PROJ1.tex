@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[portuguese]{babel}
 \usepackage{authblk}
+\usepackage{listings}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[hmargin=2cm,vmargin=3.5cm,bmargin=3cm]{geometry}
@@ -14,17 +15,26 @@
 
 \title{\textbf{Projecto de Bases de Dados, Parte 1}}
  
-\author{Bruno Cardoso, Lídia Freitas e Rodrigo Bernardo} 
+\author{Bruno Cardoso (72619), Lídia Freitas (78559) e Rodrigo Bernardo (78942)
+} 
 
 \affil{Instituto Superior T\'{e}cnico}
 
 \begin{document}
 
-\date{25 horas de trabalho por aluno.}
+\date{16 de Outubro de 2015}
 
 \maketitle
 
 \centerline{\includegraphics[width=0.4\textwidth]{ist-simbolo.jpg}}
+
+\begin{description}[noitemsep]
+	\item \centering{Grupo 17}
+	\item Turno: Quinta-Feira, ás 08h00, LAB 14
+	\item 25 horas de trabalho por aluno.
+\end{description}
+
+
 \newpage
 
 \tableofcontents
@@ -49,7 +59,7 @@ Outro aspecto que não é explicável através do modelo é o número de pergunt
 De forma a impedir que tais situações não ocorram, o Modelo Entidade-Associação é completado com as seguintes restrições de integridade:
 \\
 
-\begin{description}[itemsep=3em]
+\begin{description}[itemsep=1.4em]
   \item[RI1] Na entidade \textit{Pessoa}, o atributo \textit{timestamp\_nascimento} \'{e} uma data anterior ao atributo \textit{timestamp\_registo}.
   \item[RI2] Na entidade \textit{Pessoa}, o atributo \textit{bloqueado} \'{e} um valor l\'{o}gico, verdadeiro ou falso.
 
@@ -57,7 +67,7 @@ De forma a impedir que tais situações não ocorram, o Modelo Entidade-Associa�
   \item[RI3] Na entidade \textit{Pessoa}, o atributo \textit{num\_undos} \'{e} um n\'{u}mero inteiro positivo.
 
 
-  \item[RI4] Na entidade \textit{Pessoa}, o atributo \textit{num\_insucessos\_login} '{e} um n\'{u}mero inteiro positivo menor ou igual a 3.
+  \item[RI4] Na entidade \textit{Pessoa}, o atributo \textit{num\_insucessos\_login} \'{e} um n\'{u}mero inteiro positivo menor ou igual a 3.
   \item[RI5] Cada instância de \textit{Pessoa} associa-se, em cada instante, a duas instâncias da entidade \textit{Pergunta}.
   \item[RI6] Na entidade \textit{Login}, o atributo \textit{timestamp\_login} \'{e} uma data posterior ao atributo \textit{timestamp\_registo} de \textit{Pessoa}.
   \item[RI7] Na entidade \textit{Login}, o atributo \textit{sucesso} \'{e} um valor l\'{o}gico, verdadeiro ou falso.
@@ -74,84 +84,84 @@ De forma a impedir que tais situações não ocorram, o Modelo Entidade-Associa�
 \subsection{O Modelo}
 
 \begin{description}[noitemsep]
-	\item Pergunta(\underline{quest\~ao, email}, resposta)
-	\item email: FK(Pessoa)
-	\item notnull(resposta)
+	\item\textit{ Pergunta(\underline{quest\~ao, email}, resposta)}
+	\item\textit{ email: FK(Pessoa)}
+	\item\textit{ notnull(resposta)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Pessoa(\underline{email}, bloqueado, nome, num\_insucessos\_login, password, timestamp\_nascimento, timestamp\_registo, num\_undos)
-	\item notnull(email)
-	\item notnull(bloqueado)
-	\item notnull(nome)
-	\item notnull(num\_insucessos\_login)
-	\item notnull(password)
-	\item notnull(timestamp\_nascimento)
-	\item notnull(timestamp\_registo)
-	\item notnull(num\_undos)
+	\item\textit{ Pessoa(\underline{email}, bloqueado, nome, num\_insucessos\_login, password, timestamp\_nascimento, timestamp\_registo, num\_undos)}
+	\item\textit{ notnull(email)}
+	\item\textit{ notnull(bloqueado)}
+	\item\textit{ notnull(nome)}
+	\item\textit{ notnull(num\_insucessos\_login)}
+	\item\textit{ notnull(password)}
+	\item\textit{ notnull(timestamp\_nascimento)}
+	\item\textit{ notnull(timestamp\_registo)}
+	\item\textit{ notnull(num\_undos)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Login(\underline{timestamp\_login, email}, sucesso)
-	\item email: FK(Pessoa)
-	\item notnull(sucesso)
+	\item\textit{ Login(\underline{timestamp\_login, email}, sucesso)}
+	\item\textit{ email: FK(Pessoa)}
+	\item\textit{ notnull(sucesso)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item P\'{a}ginas(\underline{nome\_p, email, id})
-	\item email: FK(Pessoa)
-	\item id: FK(Pessoa)
+	\item\textit{ P\'{a}ginas(\underline{nome\_p, email, id})}
+	\item\textit{ email: FK(Pessoa)}
+	\item\textit{ id: FK(Pessoa)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item P\'{a}ginas\_registos(\underline{nome\_p, email, nome\_r, nome\_t, id})
-	\item nome\_p, email: FK(P\'{a}ginas)
-	\item nome\_r, nome\_t, email: FK(Registos)
-	\item id: FK(Vers\~{a}o)
+	\item\textit{ P\'{a}ginas\_registos(\underline{nome\_p, email, nome\_r, nome\_t, id})}
+	\item\textit{ nome\_p, email: FK(P\'{a}ginas)}
+	\item\textit{ nome\_r, nome\_t, email: FK(Registos)}
+	\item\textit{ id: FK(Vers\~{a}o)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Registos(\underline{nome\_r, nome\_t, email, id})
-	\item nome\_t, email: FK(tipos\_de\_registos)
-	\item id: FK(Vers\~{a}o)
+	\item\textit{ Registos(\underline{nome\_r, nome\_t, email, id})}
+	\item\textit{ nome\_t, email: FK(tipos\_de\_registos)}
+	\item\textit{ id: FK(Vers\~{a}o)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Tipo\_de\_registos(\underline{nome\_t, email, id})
-	\item email: FK(Pessoa)
-	\item id: FK(Vers\~{a}o)
+	\item\textit{ Tipo\_de\_registos(\underline{nome\_t, email, id})}
+	\item\textit{ email: FK(Pessoa)}
+	\item\textit{ id: FK(Vers\~{a}o)}
 \end{description}
 \newpage
 
 \begin{description}[noitemsep]
-	\item Campos(\underline{nome\_c, nome\_t, email, id})
-	\item nome\_t, email: FK(Tipo\_de\_registos)
-	\item id: FK(Vers\~{a}o)
+	\item\textit{ Campos(\underline{nome\_c, nome\_t, email, id})}
+	\item\textit{ nome\_t, email: FK(Tipo\_de\_registos)}
+	\item\textit{ id: FK(Vers\~{a}o)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Registo\_Campos(\underline{nome\_r, nome\_t, nome\_c, email, id})
-	\item nome\_r, nome\_t, email: FK(Registos)
-	\item nome\_c, nome\_t, email: FK(Campos)
-	\item id: FK(Vers\~{a}o)
+	\item\textit{ Registo\_Campos(\underline{nome\_r, nome\_t, nome\_c, email, id})}
+	\item\textit{ nome\_r, nome\_t, email: FK(Registos)}
+	\item\textit{ nome\_c, nome\_t, email: FK(Campos)}
+	\item\textit{ id: FK(Vers\~{a}o)}
 \end{description}
 
 
 \begin{description}[noitemsep]
-	\item Vers\~{a}o(\underline{id}, changed, deleted)
-	\item notnull(changed)
-	\item notnull(deleted)
+	\item\textit{ Vers\~{a}o(\underline{id}, changed, deleted)}
+	\item\textit{ notnull(changed)}
+	\item\textit{ notnull(deleted)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Log(\underline{log\_id, email})
-	\item email: FK(Pessoa)
+	\item\textit{ Log(\underline{log\_id, email})}
+	\item\textit{ email: FK(Pessoa)}
 \end{description}
 
 \begin{description}[noitemsep]
-	\item Log\_vers\~{a}o(\underline{log\_id, email, id})
-	\item log\_id, email: FK(Log)
-	\item id: FK(Vers\~{a}o)
+	\item\textit{ Log\_vers\~{a}o(\underline{log\_id, email, id})}
+	\item\textit{ log\_id, email: FK(Log)}
+	\item\textit{ id: FK(Vers\~{a}o)}
 \end{description}
 
 \newpage
@@ -166,7 +176,7 @@ eram antes necess\'{a}rias considerar. Assim, as restri\c{c}\~{o}es RIn, com n \
 restri\c{c}\~{o}es novas, exclusivas do Modelo Relacional, para cobrir casos que n\~{a}o s\~{a}o
 poss\'{\i}veis modelar directamente neste modelo.
 
-\begin{description}[itemsep=3em]
+\begin{description}[itemsep=1.5em]
   \item[RI1] Na entidade \textit{Pessoa}, o atributo \textit{timestamp\_nascimento} \'{e} uma data anterior ao atributo \textit{timestamp\_registo}.
   \item[RI2] Na entidade \textit{Pessoa}, o atributo \textit{bloqueado} \'{e} um valor l\'{o}gico, verdadeiro ou falso.
 
@@ -174,7 +184,7 @@ poss\'{\i}veis modelar directamente neste modelo.
   \item[RI3] Na entidade \textit{Pessoa}, o atributo \textit{num\_undos} \'{e} um n\'{u}mero inteiro positivo.
 
 
-  \item[RI4] Na entidade \textit{Pessoa}, o atributo \textit{num\_insucessos\_login} '{e} um n\'{u}mero inteiro positivo menor ou igual a 3.
+  \item[RI4] Na entidade \textit{Pessoa}, o atributo \textit{num\_insucessos\_login} \'{e} um n\'{u}mero inteiro positivo menor ou igual a 3.
   \item[RI5] Cada instância de \textit{Pessoa} associa-se, em cada instante, a duas instâncias da entidade \textit{Pergunta}.
   \item[RI6] Na entidade \textit{Login}, o atributo \textit{timestamp\_login} \'{e} uma data posterior ao atributo \textit{timestamp\_registo} de \textit{Pessoa}.
   \item[RI7] Na entidade \textit{Login}, o atributo \textit{sucesso} \'{e} um valor l\'{o}gico, verdadeiro ou falso.
@@ -218,35 +228,45 @@ com valor igual para os atributos \textit{log\_id} e \textit{email} na tabela \t
 \section{\'{A}lgebra Relacional}
 \subsection{Pergunta 1}
 
-$\Pi_{nome\_t}(\sigma_{email = 'Manel@Notebook.pt'}(Tipo\_de\_registos))$
+$\Pi_{\textit{nome\_t}}(\sigma_{\textit{email = 'Manel@Notebook.pt'}}(\textit{Tipo\_de\_registos)})$
 
 \subsection{Pergunta 2}
 
-$\Pi_{email}$ (Pessoa $ \bowtie \select_{sucesso=falso} (Login)$ )
+$\Pi_{\textit{email}}$ (\textit{Pessoa} $ \bowtie \select_{\textit{sucesso=falso}} (\textit{Login})$ )
 
 \subsection{Pergunta 3}
 
-$\Pi_{timestamp\_nascimento}(\sigma_{nome\_p = 'facebook' \wedge nome\_r = 'facebook'} Pessoa \bowtie 
-\\\rho( P, Paginas) \bowtie_{P.email = R.email} \rho( R, Registos)) $
+$\Pi_{\textit{timestamp\_nascimento}}(\sigma_{\textit{nome\_p = 'facebook'} \wedge \textit{nome\_r = 'facebook'}} \textit{Pessoa} \bowtie 
+\\\rho\textit{( P, Paginas)} \bowtie_{\textit{P.email = R.email}} \rho( \textit{R, Registos)}) $
 
 \section{Linguagem SQL}
+
 \subsection{Pergunta 1}
-SELECT DISTINCT nome\_t
-\\FROM Tipo\_de\_registos
-\\WHERE email="Manel@notebook.pt";
+\begin{lstlisting}
+
+SELECT DISTINCT nome_t
+FROM Tipo_de_registos
+WHERE email="Manel@notebook.pt";
+\end{lstlisting}
 
 \subsection{Pergunta 2}
+
+\begin{lstlisting}
 SELECT DISTINCT Pessoa.email 
-\\FROM Pessoa, Login 
-\\WHERE Pessoa.email = Login.email AND sucesso = false;
+FROM Pessoa, Login 
+WHERE Pessoa.email = Login.email AND sucesso = false;
+\end{lstlisting}
 
 \subsection{Pergunta 3}
-SELECT timestamp\_nascimento
-\\FROM Pessoa, Paginas, Registos 
-\\WHERE Pessoa.email = Registos.email 
-\\AND Pessoa.email = Paginas.email 
-\\AND nome\_p = "facebook" 
-\\AND nome\_r = "facebook";
+
+\begin{lstlisting}
+SELECT timestamp_nascimento
+FROM Pessoa, Paginas, Registos 
+WHERE Pessoa.email = Registos.email 
+AND Pessoa.email = Paginas.email 
+AND Paginas.nome_p = "facebook" 
+AND Registos.nome_r = "facebook";
+\end{lstlisting}
 
 
 
