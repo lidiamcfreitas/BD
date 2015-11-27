@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bloco de Notas</title>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="normalize.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png">
+</head>
+<body>
+    <center><h2>Inserir nova Página</h2></center>
+    <form name="inserir_nova_pagina" action="InserirNovaPagina.php" method="post" accept-charset="utf-8">
+
+        <li>
+            <center><label for="userid">ID do utilizador</label></center>
+            <center><input type="number" name="userID" placeholder="UserID" required></center>
+        </li>
+        <li>
+            <center><label for="nomepagina">Nome da Página</label></center>
+            <center><input type="text" name="nomepagina" placeholder="nomepagina" required></center>
+        </li>
+        <center><input type="submit" value="Aceder"></center>
+        
+    </form>
+
+
+    <center><h2>Inserir novo Tipo de registo</h2></center>
+    <form name="inserir_novo_tipo_registo" action="InserirNovoTipoRegisto.php" method="post" accept-charset="utf-8">
+        <li>
+            <center><label for="userid">ID do utilizador</label></center>
+            <center><input type="number" name="userID" placeholder="UserID" required></center>
+        </li>
+        <li>
+            <center><label for="TipoRegistoNovouserid">Tipo de Registo Novo</label></center>
+            <center><input type="text" name="TipoRegistoNovo" placeholder="TipoRegistoNovo" required></center>
+        </li>
+        <center><input type="submit" value="Aceder"></center>
+    </form>
+    
+    <center><h2>Inserir novos campos em registo</h2></center>
+    <form name="inserir_novos_campos_em_registo" action="InserirNovosCamposParaumTipoRegisto.php" method="post" accept-charset="utf-8">
+        <center><input type="submit" value="Aceder"></center>
+    </form>
+    <center><h2>Retirar uma Página</h2></center>
+    <form name="retirar_pagina" action="RetirarPagina.php" method="post" accept-charset="utf-8">
+        <center><input type="submit" value="Aceder"></center>
+    </form>
+    <center><h2>Retirar um tipo de Registo</h2></center>
+    <form name="retirar_tipo_registo" action="RetirarTipoRegisto.php" method="post" accept-charset="utf-8">
+        <center><input type="submit" value="Aceder"></center>
+    </form>
+    <center><h2>Retirar um campo de um tipo de registo</h2></center>
+    <form name="retirar_campo_tipo_registo" action="RetirarCampoTipoRegisto.php" method="post" accept-charset="utf-8">
+        <center><input type="submit" value="Aceder"></center>
+    </form>
+    <center><h2>Inserir um registo e os respectivos valores dos campos associados</h2></center>
+    <form name="inserir_registo_respectivos_valores" action="InserirRegistoValoresCampos.php" method="post" accept-charset="utf-8">
+        <center><input type="submit" value="Aceder"></center>
+    </form>
+    <center><h2>Ver uma página com os registos nela contido</h2></center>
+    <form name="ver_pagina_com_registos" action="VerPaginaRegistos.php" method="post" accept-charset="utf-8">
+        <center><input type="submit" value="Aceder"></center>
+    </form>
+
+</body>
+</html>
+
