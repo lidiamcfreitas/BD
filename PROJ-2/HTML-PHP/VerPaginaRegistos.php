@@ -27,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 
-
 $host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
 $user="ist172619"; // -> substituir pelo nome de utilizador
 $password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
@@ -42,7 +41,7 @@ $result = $connection->query($sql);
 echo('<div id="left">');
 echo('<table class="center"> ');
 
-echo $nomepagina;
+echo ($nomepagina);
 
 echo("<tr><th>UserID</th><th>pagecounter</th><th>nome</th><th>IDSeq</th><th>ativa</th><th>ppagecounter</th></tr>\n");
 $nome = 0;foreach($result as $row){
