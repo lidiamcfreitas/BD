@@ -42,7 +42,7 @@ $result = $connection->query($sql);
 echo('<div id="left">');
 echo('<table class="center"> ');
 
-echo $nomepagina
+echo $nomepagina;
 
 echo("<tr><th>UserID</th><th>pagecounter</th><th>nome</th><th>IDSeq</th><th>ativa</th><th>ppagecounter</th></tr>\n");
 $nome = 0;foreach($result as $row){
