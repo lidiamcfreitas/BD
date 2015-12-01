@@ -36,11 +36,13 @@ $dbname = $user; // a BD tem nome identico ao utilizador
 $connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
 
-$sql = "SELECT * FROM pagina WHERE nome = "nomepagina""; 
+$sql = "SELECT * FROM pagina WHERE nome = nomepagina"; 
 $result = $connection->query($sql);
 //echo("<table border=\"1\">\n");
 echo('<div id="left">');
 echo('<table class="center"> ');
+
+echo $nomepagina
 
 echo("<tr><th>UserID</th><th>pagecounter</th><th>nome</th><th>IDSeq</th><th>ativa</th><th>ppagecounter</th></tr>\n");
 $nome = 0;foreach($result as $row){
@@ -51,7 +53,6 @@ $nome = 0;foreach($result as $row){
 		echo($row["idseq"]); echo("</td><td>");
 		echo($row["ativa"]); echo("</td><td>");
 		echo($row["ppagecounter"]); echo("</td></tr>");
-		$leilao[$idleilao]= array($row["nif"],$row["diahora"],$row["nrleilaonodia"]);
 	}
 }
 
