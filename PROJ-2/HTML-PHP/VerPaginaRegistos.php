@@ -34,27 +34,42 @@ $dbname = $user; // a BD tem nome identico ao utilizador
 
 $connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
+$resultado = $connection->prepare('SELECT * FROM pagina WHERE nome = :nomepagina');
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->execute();
+$result = $resultado->fetchAll();
 
-$sql = $connection->prepare('SELECT * FROM pagina WHERE nome = nomepagina');
-$sql->bindParam("nomepagina", $username);
-$result = $connection->query($sql);
+
+//$sql = $connection->prepare('SELECT * FROM pagina WHERE nome = nomepagina');
+//$sql->bindParam("nomepagina", $username);
+//$sql->execute();
+//$result = $sql->fetchAll();
+//$result = $sql->query($sql);
 //echo("<table border=\"1\">\n");
 
 echo('<div id="left">');
 echo('<table class="center"> ');
 
-echo ($nomepagina);
-
 echo("<tr><th>UserID</th><th>pagecounter</th><th>nome</th><th>IDSeq</th><th>ativa</th><th>ppagecounter</th></tr>\n");
-$nome = 0;foreach($result as $row){
-	if ( $row["nome"] == 1){
-		echo($row["userid"]); echo("</td><td>");
-		echo($row["pagecounter"]); echo("</td><td>");
-		echo($row["nome"]); echo("</td><td>");
-		echo($row["idseq"]); echo("</td><td>");
-		echo($row["ativa"]); echo("</td><td>");
-		echo($row["ppagecounter"]); echo("</td></tr>");
-	}
+
+foreach($result as $row){
+                echo("<tr><th>");
+		echo($row["userid"]);
+                echo("</th><th>");
+		echo($row["pagecounter"]);
+                echo("</th><th>");
+		echo($row["nome"]);
+                echo("</th><th>");
+		echo($row["idseq"]);
+                echo("</th><th>");
+		echo($row["ativa"]);
+                echo("</th><th>");
+		echo($row["ppagecounter"]);
+                echo("</th><tr>");
+
+                echo "<br/>";
+
+
 }
 
 ?>
