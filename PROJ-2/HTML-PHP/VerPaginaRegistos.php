@@ -35,7 +35,7 @@ $dbname = $user; // a BD tem nome identico ao utilizador
 $connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
 
-$sql = $connection->prepare('SELECT * FROM pagina WHERE nome = nomepagina'
+$sql = $connection->prepare('SELECT * FROM pagina WHERE nome = nomepagina');
 $sql->bindParam("nomepagina", $username);
 $result = $connection->query($sql);
 //echo("<table border=\"1\">\n");
