@@ -10,8 +10,6 @@
 <body>
 	<div id="wrap">
 		<?php 
-// inicia sessão para passar variaveis entre ficheiros php
-		session_start();
 
 // Função para limpar os dados de entrada
 		function test_input($data) {
@@ -35,23 +33,102 @@ $dbname = $user; // a BD tem nome identico ao utilizador
 
 $connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, 
 	array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+	
 $TOBEDONE=0
 
-$sql = "INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa,ppagecounter) VALUES ($userid, $TOBEDONE, $nomepagina, $TOBEDONE, $TOBEDONE, $TOBEDONE)"; 
-$result = $connection->query($sql);
-if (!$result) {
-	echo("<p> Página nãõ criada: Erro na Query</p>");
-	exit();
-}else{
-	echo'<section class="loginform cf">';
-	echo("<center><p> Página com o nome ($nomepagina) criada pelo utilizador ($userid) com sucesso</p>");
+//$resultado = $connection->prepare('SELECT * FROM pagina WHERE nome = :nomepagina');
+$resultado = $connection->prepare('INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa,ppagecounter) VALUES (:userid, :TOBEDONE, :nomepagina, :TOBEDONE, :TOBEDONE, :TOBEDONE'); 
+echo ($resultado);
+
+/*
+$resultado->bindParam(":userid", $$userid);
+$resultado->bindParam(":TOBEDONE", $TOBEDONE);
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->execute();
+
+
+$resultado = $connection->prepare('SELECT * FROM pagina WHERE nome = :nomepagina');
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->execute();
+$result = $resultado->fetchAll();
+
+foreach($result as $row){
+                echo("<tr><th>");
+		echo($row["userid"]);
+                echo("</th><th>");
+		echo($row["pagecounter"]);
+                echo("</th><th>");
+		echo($row["nome"]);
+                echo("</th><th>");
+		echo($row["idseq"]);
+                echo("</th><th>");
+		echo($row["ativa"]);
+                echo("</th><th>");
+		echo($row["ppagecounter"]);
+                echo("</th><tr>");
+
+                echo "<br/>";
+
+
+$resultado->bindParam(":userid", $$userid);
+$resultado->bindParam(":TOBEDONE", $TOBEDONE);
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->execute();
+
+
+$resultado = $connection->prepare('SELECT * FROM pagina WHERE nome = :nomepagina');
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->execute();
+$result = $resultado->fetchAll();
+
+foreach($result as $row){
+                echo("<tr><th>");
+		echo($row["userid"]);
+                echo("</th><th>");
+		echo($row["pagecounter"]);
+                echo("</th><th>");
+		echo($row["nome"]);
+                echo("</th><th>");
+		echo($row["idseq"]);
+                echo("</th><th>");
+		echo($row["ativa"]);
+                echo("</th><th>");
+		echo($row["ppagecounter"]);
+                echo("</th><tr>");
+
+                echo "<br/>";
+
+
+$resultado->bindParam(":userid", $$userid);
+$resultado->bindParam(":TOBEDONE", $TOBEDONE);
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->execute();
+
+
+$resultado = $connection->prepare('SELECT * FROM pagina WHERE nome = :nomepagina');
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->execute();
+$result = $resultado->fetchAll();
+
+foreach($result as $row){
+                echo("<tr><th>");
+		echo($row["userid"]);
+                echo("</th><th>");
+		echo($row["pagecounter"]);
+                echo("</th><th>");
+		echo($row["nome"]);
+                echo("</th><th>");
+		echo($row["idseq"]);
+                echo("</th><th>");
+		echo($row["ativa"]);
+                echo("</th><th>");
+		echo($row["ppagecounter"]);
+                echo("</th><tr>");
+
+                echo "<br/>";
 
 }
-
-
-// to be continued….
-//termina a sessão
-session_destroy();
+*/
 ?>
 
 <form name="regressaindex" action="index.html" method="post" accept-charset="utf-8" >
