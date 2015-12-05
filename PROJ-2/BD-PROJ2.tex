@@ -45,6 +45,9 @@
 \tableofcontents
 \newpage
 
+\section{Introdução}
+\newpage
+
 \section{Consultas SQL}
 % http://sqlformat.org/
 \begin{enumerate}[label=(\alph*)]
@@ -62,6 +65,24 @@ HAVING count(*) > ALL
 		\end{lstlisting}
 
 	\item Quais são os registos que aparecem em todas as paginas de um utilizador?
+	
+	A query utiliza \textit{ID\_USER} que deve ser substituido pelo id do utilizador desejado (userid):
+		\lstset{emph={ID_USER}, emphstyle=\itshape} % da enfase a palavra ID_USER
+		\begin{lstlisting}[language=SQL]
+SELECT r.regid
+FROM reg_pag AS r
+WHERE r.userid = ID_USER
+    AND NOT EXISTS
+        (SELECT r2.pageid
+         FROM reg_pag AS r2
+         WHERE r2.userid = ID_USER
+             AND r.regid NOT IN
+                 (SELECT r3.regid
+                  FROM reg_pag AS r3
+                  WHERE r3.userid= ID_USER
+                      AND r3.regid = r.regid
+                      AND r3.pageid = r2.pageid));
+        		\end{lstlisting}
 	\item Quais os utilizadores que tem o maior número médio de registos por página?
 		\begin{lstlisting}[language=SQL]
 SELECT userid
@@ -93,7 +114,10 @@ HAVING count(*) / count(DISTINCT pageid) >= all
 \newpage
 
 \section{Data Warehouse}
+\newpage
 
+\section{Conclusão}
+\newpage
 
 
 
