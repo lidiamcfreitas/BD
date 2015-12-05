@@ -46,32 +46,33 @@
 \newpage
 
 \section{Consultas SQL}
-
+% http://sqlformat.org/
 \begin{enumerate}[label=(\alph*)]
 	\item Quais são os utilizadores que falharam o login mais vezes do que tiveram sucesso?
 		\begin{lstlisting}[language=SQL]
-		
-select userid from login as l 
-where sucesso = 0 
-group by userid 
-having count(*) > 
-	all(	select count(*) 
-		from login as l1 
-		where sucesso = 1 and l1.userid =l.userid);
+SELECT userid
+FROM login AS l
+WHERE sucesso = 0
+GROUP BY userid
+HAVING count(*) > ALL
+    (SELECT count(*)
+     FROM login AS l1
+     WHERE sucesso = 1
+         AND l1.userid =l.userid);
 		\end{lstlisting}
 
 	\item Quais são os registos que aparecem em todas as paginas de um utilizador?
 	\item Quais os utilizadores que tem o maior número médio de registos por página?
 		\begin{lstlisting}[language=SQL]
-		
-select userid, count(*) / count(distinct pageid) as average
-from reg_pag  
-where ativa=1  
-group by userid  
-having average  >= all(select count(*) / count(distinct pageid) 
-			from reg_pag 
-			where ativa=1 
-			group by userid);
+SELECT userid
+FROM reg_pag
+WHERE ativa=1
+GROUP BY userid
+HAVING count(*) / count(DISTINCT pageid) >= all
+    (SELECT count(*) / count(DISTINCT pageid)
+     FROM reg_pag
+     WHERE ativa=1
+     GROUP BY userid);
 		\end{lstlisting}
 	
 	\item Quais os utilizadores que, em todas as suas páginas, têm registos de todos os tipos de registos que criaram?
