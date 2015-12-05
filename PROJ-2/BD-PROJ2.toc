@@ -1,0 +1,7 @@
+\select@language {portuguese}
+\contentsline {section}{\numberline {1}Consultas SQL}{3}
+\contentsline {section}{\numberline {2}Restri\IeC {\c c}\IeC {\~o}es de Integridade}{4}
+\contentsline {section}{\numberline {3}Formas Normais}{5}
+\contentsline {section}{\numberline {4}Indices}{6}
+\contentsline {section}{\numberline {5}Transa\IeC {\c c}\IeC {\~o}es}{7}
+\contentsline {section}{\numberline {6}Data Warehouse}{8}

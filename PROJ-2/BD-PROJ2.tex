@@ -1,13 +1,19 @@
 \documentclass[11pt,a4paper]{article}
  
-\usepackage[T1]{fontenc}
+% use latex in portuguese
 \usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
 \usepackage{authblk}
 \usepackage{listings}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[hmargin=2cm,vmargin=3.5cm,bmargin=3cm]{geometry}
-\usepackage[utf8]{inputenc}
+
+% for code snippets
+\usepackage{listings}
+
 
 \newcommand{\select}{\mbox{\Large$\sigma$}}
 
@@ -15,14 +21,14 @@
 
 \title{\textbf{Projecto de Bases de Dados, Parte 2}}
  
-\author{Bruno Cardoso (72619), Lídia Freitas (78559) e Rodrigo Bernardo (78942)
-} 
+\author{Bruno Cardoso (72619), Lídia Freitas (78559) e Rodrigo Bernardo (78942)} 
 
-\affil{Instituto Superior T\'{e}cnico}
+\affil{Instituto Superior Técnico}
 
 \begin{document}
 
-\date{11 de Dezembro de 2015}
+% \date{11 de Dezembro de 2015}
+\date {\today}
 
 \maketitle
 
@@ -30,10 +36,9 @@
 
 \begin{description}[noitemsep]
 	\item \centering{Grupo 17}
-	\item Turno: Quinta-Feira, ás 08h00, LAB 14
+	\item Turno: Quinta-Feira, às 08h00, LAB 14
 	\item 25 horas de trabalho por aluno.
 \end{description}
-
 
 \newpage
 
@@ -41,15 +46,51 @@
 \newpage
 
 \section{Consultas SQL}
+
+\begin{enumerate}[label=(\alph*)]
+	\item Quais são os utilizadores que falharam o login mais vezes do que tiveram sucesso?
+		\begin{lstlisting}[language=SQL]
+		
+select userid from login as l 
+where sucesso = 0 
+group by userid 
+having count(*) > 
+	all(	select count(*) 
+		from login as l1 
+		where sucesso = 1 and l1.userid =l.userid);
+		\end{lstlisting}
+
+	\item Quais são os registos que aparecem em todas as paginas de um utilizador?
+	\item Quais os utilizadores que tem o maior número médio de registos por página?
+		\begin{lstlisting}[language=SQL]
+		
+select userid, count(*) / count(distinct pageid) as average
+from reg_pag  
+where ativa=1  
+group by userid  
+having average  >= all(select count(*) / count(distinct pageid) 
+			from reg_pag 
+			where ativa=1 
+			group by userid);
+		\end{lstlisting}
+	
+	\item Quais os utilizadores que, em todas as suas páginas, têm registos de todos os tipos de registos que criaram?
+\end{enumerate}
+
 \newpage
+
 \section{Restrições de Integridade}
 \newpage
+
 \section{Formas Normais}\newpage
 \newpage
+
 \section{Indices}
 \newpage
+
 \section{Transações}
 \newpage
+
 \section{Data Warehouse}
 
 
