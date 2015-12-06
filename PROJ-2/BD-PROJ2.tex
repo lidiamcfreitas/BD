@@ -1,43 +1,37 @@
 \documentclass[11pt,a4paper]{article}
  
-
-
 \usepackage{amsmath}
 \usepackage{authblk}
 \usepackage[portuguese]{babel}
 \usepackage{enumitem}
 \usepackage{eurosym}\def\texteuro{\euro}
+\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[hmargin=2cm,vmargin=3.5cm,bmargin=3cm]{geometry}
 \usepackage{graphicx}
 \usepackage[latin9]{inputenc}
+\usepackage{lastpage}
 \usepackage{listings}
 
 \newcommand{\select}{\mbox{\Large$\sigma$}}
-
 \pagenumbering{arabic}
-
 \title{\textbf{Projecto de Bases de Dados, Parte 2}}
- 
-\author{Bruno Cardoso (72619), Lídia Freitas (78559) e Rodrigo Bernardo (78942)
-} 
-
+\author{Bruno Cardoso (72619), Lídia Freitas (78559) e Rodrigo Bernardo (78942)} 
 \affil{Instituto Superior Técnico}
 
+\pagestyle{fancy}
+\cfoot{\thepage\ of \pageref{LastPage}}
+
 \begin{document}
-
 \date{11 de Dezembro de 2015}
-
 \maketitle
-
+\thispagestyle{empty} % remove numeracao na primeira pagina
 \centerline{\includegraphics[width=0.4\textwidth]{ist-simbolo.jpg}}
 
 \begin{description}[noitemsep]
 	\item \centering{Grupo 17}
 	\item Turno: Quinta-Feira, 08h00, LAB 14
-	\item 25 horas de trabalho por aluno.
 \end{description}
-
 
 \newpage
 
