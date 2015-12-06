@@ -71,15 +71,15 @@ HAVING count(*) > ALL
 		\begin{lstlisting}[language=SQL]
 SELECT r.regid
 FROM reg_pag AS r
-WHERE r.userid = ID_USER
+WHERE  r.ativa=1 and r.userid = ID_USER
     AND NOT EXISTS
         (SELECT r2.pageid
          FROM reg_pag AS r2
-         WHERE r2.userid = ID_USER
+         WHERE r2.ativa = 1 and r2.userid = ID_USER 
              AND r.regid NOT IN
                  (SELECT r3.regid
                   FROM reg_pag AS r3
-                  WHERE r3.userid= ID_USER
+                  WHERE r3.ativa = 1 and r3.userid= ID_USER
                       AND r3.regid = r.regid
                       AND r3.pageid = r2.pageid));
         		\end{lstlisting}
