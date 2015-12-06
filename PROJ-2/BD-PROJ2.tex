@@ -7,7 +7,9 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[hmargin=2cm,vmargin=3.5cm,bmargin=3cm]{geometry}
-\usepackage[utf8]{inputenc}
+\usepackage[latin9]{inputenc}
+\usepackage{eurosym}\def\texteuro{\euro}
+
 
 \newcommand{\select}{\mbox{\Large$\sigma$}}
 
@@ -15,10 +17,10 @@
 
 \title{\textbf{Projecto de Bases de Dados, Parte 2}}
  
-\author{Bruno Cardoso (72619), LÃ­dia Freitas (78559) e Rodrigo Bernardo (78942)
+\author{Bruno Cardoso (72619), Lídia Freitas (78559) e Rodrigo Bernardo (78942)
 } 
 
-\affil{Instituto Superior T\'{e}cnico}
+\affil{Instituto Superior Técnico}
 
 \begin{document}
 
@@ -30,7 +32,7 @@
 
 \begin{description}[noitemsep]
 	\item \centering{Grupo 17}
-	\item Turno: Quinta-Feira, Ã¡s 08h00, LAB 14
+	\item Turno: Quinta-Feira, 08h00, LAB 14
 	\item 25 horas de trabalho por aluno.
 \end{description}
 
@@ -42,18 +44,29 @@
 
 \section{Consultas SQL}
 \newpage
-\section{RestriÃ§Ãµes de Integridade}
+\section{Restrições de Integridade}
 \newpage
-\section{Formas Normais}\newpage
+\section{Formas Normais}
+
+\paragraph{}
+(a) A relação utilizador, tem apenas as dependências funcionais (DFs) da forma X -> A,
+com A pertencente aos atributos desta relacao e X ¤ {userid, email}. Como em todas
+estas DFs se tem que o determinante é chave, a relação utilizador encontra-se na
+Boyce-Codd Normal Form (BCNF).
+(b)
+(1) Para além das DFs anteriores, a relação tem agora uma nova DF na qual o determinante
+não é chave, mas o dependente é. Assim, a relação utilizador encontra-se na terceira forma
+normal.
+(2) R1(\_nome, email, \_password, \_questao1, \_resposta1, \_questao2, \_resposta2)
+     R2(\_userid, nome, password, questao1, resposta1, questao2, resposta2, pais, categoria)
+
+
 \newpage
-\section{Indices}
+\section{Índices}
 \newpage
-\section{TransaÃ§Ãµes}
+\section{Transacções}
 \newpage
 \section{Data Warehouse}
-
-
-
 
 
 \end{document}
