@@ -53,20 +53,23 @@
 \section{Consultas SQL}
 % http://sqlformat.org/
 \begin{enumerate}[label=(\alph*)]
+\begin{minipage}{\textwidth}
 	\item Quais são os utilizadores que falharam o login mais vezes do que tiveram sucesso?
 	
 		\begin{code}[language=SQL]
-SELECT userid
+SELECT l.userid
 FROM login AS l
-WHERE sucesso = 0
-GROUP BY userid
+WHERE l.sucesso = 0
+GROUP BY l.userid
 HAVING count(*) > ALL
     (SELECT count(*)
      FROM login AS l1
-     WHERE sucesso = 1
+     WHERE l1.sucesso = 1
          AND l1.userid =l.userid);
 		\end{code}
+\end{minipage}
 
+\begin{minipage}{\textwidth}
 	\item Quais são os registos que aparecem em todas as paginas de um utilizador?
 	
 	A query utiliza \textit{ID\_USER} que deve ser substituido pelo id do utilizador desejado (userid):
@@ -95,21 +98,56 @@ WHERE r.ativo
                                AND tp.userid = ID_USER
                                AND tp.ativo)))
         		\end{code}
+\end{minipage}	
+
+\begin{minipage}{\textwidth}
 	\item Quais os utilizadores que têm o maior número médio de registos por página?
 	
 		\begin{code}[language=SQL]
-SELECT userid
-FROM reg_pag
-WHERE ativa=1
-GROUP BY userid
-HAVING count(*) / count(DISTINCT pageid) >= all
-    (SELECT count(*) / count(DISTINCT pageid)
-     FROM reg_pag
-     WHERE ativa=1
-     GROUP BY userid);
+SELECT rp.userid
+FROM reg_pag as rp
+WHERE rp.ativa and 
+	exists (
+		select p.pagecounter 
+		from pagina p
+		where 	p.userid = rp.userid and
+			p.pagecounter = rp.pageid and
+			p.ativa) and
+	exists (
+		select r.regcounter
+		from registo r
+		where	r.userid = rp.userid and
+			r.regcounter = rp.regid and
+			r.ativo)
+			
+GROUP BY rp.userid
+HAVING count(*) / count(DISTINCT rp.pageid) >= all
+    (SELECT count(*) / count(DISTINCT rp2.pageid)
+     FROM reg_pag rp2
+     WHERE rp2.ativa and 
+		exists (
+			select p1.pagecounter 
+			from pagina p1
+			where 	p1.userid = rp2.userid and
+				p1.pagecounter = rp2.pageid and
+				p1.ativa) and
+		exists (
+			select r1.regcounter
+			from registo r1
+			where	r1.userid = rp2.userid and
+				r1.regcounter = rp2.regid and
+				r1.ativo)
+	     GROUP BY rp2.userid);
 		\end{code}
-	
+\end{minipage}
+\begin{minipage}{\textwidth}
 	\item Quais os utilizadores que, em todas as suas páginas, têm registos de todos os tipos de registos que criaram?
+	
+\begin{code}[language=SQL]
+
+\end{code}
+	
+\end{minipage}
 \end{enumerate}
 
 \subsection{Notas sobre as Consultas SQL}
