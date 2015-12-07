@@ -1,9 +1,11 @@
 \select@language {portuguese}
 \contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{3}
 \contentsline {section}{\numberline {2}Consultas SQL}{4}
-\contentsline {section}{\numberline {3}Restri\IeC {\c c}\IeC {\~o}es de Integridade}{5}
-\contentsline {section}{\numberline {4}Formas Normais}{6}
-\contentsline {section}{\numberline {5}\IeC {\'I}ndices}{7}
-\contentsline {section}{\numberline {6}Transac\IeC {\c c}\IeC {\~o}es}{8}
-\contentsline {section}{\numberline {7}Data Warehouse}{9}
-\contentsline {section}{\numberline {8}Conclus\IeC {\~a}o}{10}
+\contentsline {subsection}{\numberline {2.1}Notas sobre as Consultas SQL}{5}
+\contentsline {subsubsection}{\numberline {2.1.1}Consulta b - Quais s\IeC {\~a}o os registos que aparecem em todas as p\IeC {\'a}ginas de um utilizador?}{5}
+\contentsline {section}{\numberline {3}Restri\IeC {\c c}\IeC {\~o}es de Integridade}{6}
+\contentsline {section}{\numberline {4}Formas Normais}{7}
+\contentsline {section}{\numberline {5}\IeC {\'I}ndices}{8}
+\contentsline {section}{\numberline {6}Transac\IeC {\c c}\IeC {\~o}es}{9}
+\contentsline {section}{\numberline {7}Data Warehouse}{10}
+\contentsline {section}{\numberline {8}Conclus\IeC {\~a}o}{11}

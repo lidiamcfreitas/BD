@@ -14,6 +14,12 @@
 \usepackage{lastpage}
 \usepackage{listings}
 
+% listing environment for code
+\lstnewenvironment{code}[1][]%
+  {\noindent\minipage{\linewidth}\medskip 
+   \lstset{basicstyle=\ttfamily\footnotesize,frame=single,#1}}
+  {\endminipage}
+
 \newcommand{\select}{\mbox{\Large$\sigma$}}
 %\pagenumbering{arabic}
 \title{\textbf{Projecto de Bases de Dados, Parte 2}}
@@ -48,7 +54,8 @@
 % http://sqlformat.org/
 \begin{enumerate}[label=(\alph*)]
 	\item Quais são os utilizadores que falharam o login mais vezes do que tiveram sucesso?
-		\begin{lstlisting}[language=SQL]
+	
+		\begin{code}[language=SQL]
 SELECT userid
 FROM login AS l
 WHERE sucesso = 0
@@ -58,32 +65,39 @@ HAVING count(*) > ALL
      FROM login AS l1
      WHERE sucesso = 1
          AND l1.userid =l.userid);
-		\end{lstlisting}
+		\end{code}
 
 	\item Quais são os registos que aparecem em todas as paginas de um utilizador?
 	
 	A query utiliza \textit{ID\_USER} que deve ser substituido pelo id do utilizador desejado (userid):
 		\lstset{emph={ID_USER}, emphstyle=\itshape} % da enfase a palavra ID_USER
-		\begin{lstlisting}[language=SQL]
+		\begin{code}[language=SQL]
 SELECT r.regcounter
 FROM registo AS r
-WHERE r.ativo = 1
+WHERE r.ativo
     AND r.userid = ID_USER
     AND NOT EXISTS
-        ( SELECT p.pagecounter
+        (SELECT p.pagecounter
          FROM pagina AS p
          WHERE p.userid = ID_USER
              AND r.regcounter NOT IN
-                 ( SELECT rp.regid
+                 (SELECT rp.regid
                   FROM reg_pag AS rp
                   WHERE rp.regid = r.regcounter
                       AND rp.pageid = p.pagecounter
                       AND rp.userid = ID_USER
-                      AND rp.ativa = 1
-                      AND p.ativa ))
-        		\end{lstlisting}
+                      AND rp.ativa
+                      AND p.ativa
+                      AND EXISTS
+                          (SELECT tp.typecnt
+                           FROM tipo_registo AS tp
+                           WHERE tp.typecnt = rp.typeid
+                               AND tp.userid = ID_USER
+                               AND tp.ativo)))
+        		\end{code}
 	\item Quais os utilizadores que têm o maior número médio de registos por página?
-		\begin{lstlisting}[language=SQL]
+	
+		\begin{code}[language=SQL]
 SELECT userid
 FROM reg_pag
 WHERE ativa=1
@@ -93,10 +107,47 @@ HAVING count(*) / count(DISTINCT pageid) >= all
      FROM reg_pag
      WHERE ativa=1
      GROUP BY userid);
-		\end{lstlisting}
+		\end{code}
 	
 	\item Quais os utilizadores que, em todas as suas páginas, têm registos de todos os tipos de registos que criaram?
 \end{enumerate}
+
+\subsection{Notas sobre as Consultas SQL}
+\subsubsection{Consulta b -  Quais são os registos que aparecem em todas as páginas de um utilizador?}
+Para esta consulta assume-se que se um utilizador não tem páginas então é impossível um registo desse mesmo utilizador aparecer em alguma(s) página(s) (devido à inexistência destas).
+
+Entendeu-se também com esta questão que eram pedidos os registos que aparecem em todas as páginas de um dado utilizador, caso contrário diria "para cada o utilizador". No entanto, como o número de casos em que o facto é verídico é baixo decidimos verificar então quais os registos por todos os utilizadores que verificavam a consulta, e por isso deixamos em baixo a consulta que nos permitiu ver essa informação:
+
+\begin{code}[language=SQL]
+SELECT r_0.userid,
+       r_0.regcounter
+FROM registo AS r_0
+WHERE regcounter IN
+        (SELECT r.regcounter
+         FROM registo AS r
+         WHERE r.ativo
+             AND r.userid = r_0.userid
+             AND NOT EXISTS
+                 ( SELECT p.pagecounter
+                  FROM pagina AS p
+                  WHERE p.userid = r_0.userid
+                      AND r.regcounter NOT IN
+                          ( SELECT rp.regid
+                           FROM reg_pag AS rp
+                           WHERE rp.regid = r.regcounter
+                               AND rp.pageid = p.pagecounter
+                               AND rp.userid = r_0.userid
+                               AND rp.ativa
+                               AND p.ativa
+                               AND EXISTS
+                                   ( SELECT tp.typecnt
+                                    FROM tipo_registo AS tp
+                                    WHERE tp.typecnt = rp.typeid
+                                        AND tp.userid = r_0.userid
+                                        AND tp.ativo))))
+GROUP BY r_0.userid,
+         r_0.regcounter
+\end{code}
 
 \newpage
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.15)  6 DEC 2015 17:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.15)  7 DEC 2015 10:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -441,18 +441,18 @@ Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
 (./BD-PROJ2.aux)
 \openout1 = `BD-PROJ2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -548,12 +548,12 @@ e
 ))
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 27.
+(lastpage)             ! on input line 33.
 
 <ist-simbolo.jpg, id=1, 269.005pt x 323.2075pt>
 File: ist-simbolo.jpg Graphic file (type jpg)
  <use ist-simbolo.jpg>
-Package pdftex.def Info: ist-simbolo.jpg used on input line 32.
+Package pdftex.def Info: ist-simbolo.jpg used on input line 38.
 (pdftex.def)             Requested size: 193.47578pt x 232.46263pt.
  [1
 
@@ -579,41 +579,44 @@ Package Fancyhdr Warning: \headheight is too small (13.59999pt):
 [3] (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 56.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 58.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 56.
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 59.
  [4] [5] [6]
-[7] [8] [9] [10] 
+[7] [8] [9] [10] [11] 
 AED: lastpage setting LastPage
 (./BD-PROJ2.aux) ) 
 Here is how much of TeX's memory you used:
- 5939 strings out of 493089
- 78204 string characters out of 6134841
- 185143 words of memory out of 5000000
- 9325 multiletter control sequences out of 15000+600000
- 13972 words of font info for 35 fonts, out of 8000000 for 9000
+ 5967 strings out of 493089
+ 78798 string characters out of 6134841
+ 193435 words of memory out of 5000000
+ 9349 multiletter control sequences out of 15000+600000
+ 15690 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,10n,43p,247b,1615s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,11n,43p,459b,1529s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/
 cm-super-t1.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 sy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx10
-95.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1440
-.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1728.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on BD-PROJ2.pdf (10 pages, 195037 bytes).
+95.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1200
+.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1440.p
+fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfit0900.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb>
+Output written on BD-PROJ2.pdf (11 pages, 261836 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
