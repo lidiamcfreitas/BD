@@ -53,7 +53,18 @@ $GETTYPECNT   = 0;
 $GETIDSEQ     = 0;
 $GETPPAGECOUNT= 0;
 
-$resultado = $connection->prepare('INSERT INTO pagina (userid,typecnt,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT)');
+$result =mysql_query("SELECT count(*) FROM utilizador WHERE exists `userid` = '$userid'");
+if ($result && mysql_num_rows($result) > 0)
+
+    {
+        echo 'Username and Password Found'; 
+    }
+else
+    {
+    echo 'Username and Password NOT Found';
+    }
+
+$resultado = $connection->prepare('INSERT INTO pagina (userid,pagecounter,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT)');
 
 $resultado->bindParam(":userid", $userid);
 $resultado->bindParam(":GETTYPECNT", $GETTYPECNT);
