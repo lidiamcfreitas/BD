@@ -54,11 +54,14 @@ $GETIDSEQ     = 0;
 $GETPPAGECOUNT= 0;
 
 //$result =mysql_query("SELECT count(*) FROM utilizador WHERE exists `userid` = '$userid'");
-$sql  = "SELECT count(*) ";
-$sql .= "FROM utilizador  ";
-$sql .= "WHERE userid = $userid";
 
-if ($sql && mysql_num_rows($sql) > 0)
+$sql  = "SELECT count(*) ";
+$sql .= "FROM utilizador";
+$sql .= "WHERE userid = $userid";
+$result = mysql_query($sql);
+
+
+if ($result  > 0)
 
     {
         echo 'ENCONTREI O USER !!'; 
