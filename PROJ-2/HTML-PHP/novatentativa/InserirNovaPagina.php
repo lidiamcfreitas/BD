@@ -31,9 +31,15 @@
 
 		$connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		 	$npag = test_input($_POST["nomepagina"]);
+		 	$uid = test_input($_POST["userid"]);
+		}
 
-		$sequencia = $connection->prepare("INSERT INTO sequencia (userid, moment) VALUES (:userid, NOW())");
+		$sequencia = $connection->prepare("INSERT INTO sequencia (userid, moment) VALUES (:userid, 2015-12-09 23:04:54");
 		$sequencia = $bindParam(":userid", $userid);
+		$userid = $uid;
+		$sequencia->execute();
 
 		$sql_maxmom  = "SELECT s.contador_sequencia ";
 		$sql_maxmom .= "FROM sequencia s  ";
@@ -46,6 +52,7 @@
 		// idseq quando o momento e maximo
 		$getmoment = $connection->prepare($sql_maxmom);
 		$getmoment = $bindParam(":userid", $userid);
+		$userid = $uid;
 		$getmoment->execute();
 
 
@@ -60,6 +67,7 @@
 		// maximo page counter do utilizador
 		$getmaxpc = $connection->prepare($sql_maxpc);
 		$getmaxpc = $bindParam(":userid", $userid);
+		$userid = $uid;
 		$getmaxpc->execute();
 
 
@@ -69,11 +77,8 @@
 		$pagina->bindParam(":pagecounter", $maxpc);
 		$pagina->bindParam(":userid", $userid);
 
-
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		 	$nomepagina = test_input($_POST["nomepagina"]);
-		 	$userid = test_input($_POST["userid"]);
-		}
+		$nomepagina = $npag;
+		$userid = $uid;
 		$pagemoment = $getmoment->fetchColumn();
 		$maxpc = $getmaxpc->fetchColumn() + 1;
 		echo $pagemoment;
