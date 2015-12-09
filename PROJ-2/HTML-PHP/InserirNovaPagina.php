@@ -48,14 +48,15 @@ echo( "cheguei aqui");
 
 //AQUI FALTA SABER COMO RECEBER O NUMERO SEGUINTE IDSEQ
 
-$GETPAGECOUNT = 0;
+
+$GETTYPECNT   = 0;
 $GETIDSEQ     = 0;
 $GETPPAGECOUNT= 0;
 
-$resultado = $connection->prepare('INSERT INTO pagina (userid,typecounter,regcounter,nome,ativo,idseq,pregcounter) VALUES (:userid, :GETPAGECOUNT, :nomepagina, :GETIDSEQ, 1, :GETPPAGECOUNT');
+$resultado = $connection->prepare('INSERT INTO pagina (userid,typecnt,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT');
 
 $resultado->bindParam(":userid", $userid);
-$resultado->bindParam(":GETPAGECOUNT", $GETPAGECOUNT);
+$resultado->bindParam(":GETTYPECNT", $GETTYPECNT);
 $resultado->bindParam(":nomepagina", $nomepagina);
 $resultado->bindParam(":GETIDSEQ", $GETIDSEQ);
 $resultado->bindParam(":GETPPAGECOUNT", $GETPPAGECOUNT);
