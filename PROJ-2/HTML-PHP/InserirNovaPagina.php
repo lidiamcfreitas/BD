@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,126 +11,56 @@
 </head>
 <body>
         <div id="wrap">
-<?php 
-// inicia sessão para passar variaveis entre ficheiros php
-session_start();
+    <?php
+    echo "<table style='border: solid 1px black;'>";
+    echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
 
-// Função para limpar os dados de entrada
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
+    class TableRows extends RecursiveIteratorIterator { 
+        function __construct($it) { 
+            parent::__construct($it, self::LEAVES_ONLY); 
+        }
 
-    return $data;
-}
+        function current() {
+            return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
+        }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $userid = test_input($_POST["userID"]);
-    $nomepagina = test_input($_POST["nomepagina"]);
-}
-echo($userid);
-echo($nomepagina);
+        function beginChildren() { 
+            echo "<tr>"; 
+        } 
 
-$tobedone=0;
+        function endChildren() { 
+            echo "</tr>" . "\n";
+        } 
+    } 
 
-$host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
-$user="ist172619"; // -> substituir pelo nome de utilizador
-$password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
-$dbname = $user; // a BD tem nome identico ao utilizador
-
-$connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-echo( "cheguei aqui");
-
-//$resultado = $connection->prepare('INSERT INTO pagina
-//VALUES (':userid', ':TOBEDONE', ':nomepagina', ':TOBEDONE', ':TOBEDONE', :TOBEDONE');
-
-//AQUI FALTA SABER COMO RECEBER O NUMERO SEGUINTE IDSEQ
-
-
-$GETTYPECNT   = 0;
-$GETIDSEQ     = 0;
-$GETPPAGECOUNT= 0;
-
-//$result =mysql_query("SELECT count(*) FROM utilizador WHERE exists `userid` = '$userid'");
-
-$sql  = "SELECT count(*) ";
-$sql .= "FROM utilizador ";
-$sql .= "WHERE userid = :userid";
-$result = $connection->prepare($sql);
-
-echo( "cheguei aqui");
-$result->bindParam(":userid", $userid);
-
-echo( "cheguei aqui");
-$result->execute();
-
-echo( "cheguei aqui");
-
-
-if ($result  > 0)
-
-    {
-        echo 'ENCONTREI O USER !!'; 
-    }
-else
-    {
-    echo 'NAO FIND THA USSER !!';
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nomepagina = test_input($_POST["nomepagina"]);
+        $userid     = test_input($_POST["userID"]);
     }
 
-$resultado = $connection->prepare('INSERT INTO pagina (userid,pagecounter,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT)');
+    $host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
+    $user="ist172619"; // -> substituir pelo nome de utilizador
+    $password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
+    $dbname = $user; // a BD tem nome identico ao utilizador
 
-$resultado->bindParam(":userid", $userid);
-$resultado->bindParam(":GETTYPECNT", $GETTYPECNT);
-$resultado->bindParam(":nomepagina", $nomepagina);
-$resultado->bindParam(":GETIDSEQ", $GETIDSEQ);
-$resultado->bindParam(":GETPPAGECOUNT", $GETPPAGECOUNT);
-$resultado->execute();
+    try {
+        $conn = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $stmt = $conn->prepare("SELECT count(*) FROM utilizador where userid = :userid"); 
+        $stmt->bindParam(":userid", $userid);
+        $stmt->execute();
 
-
-
-
-
-echo ("Acabai a query");
-$resultado = $connection->prepare('SELECT * FROM pagina WHERE nome = :nomepagina');
-$resultado->bindParam(":nomepagina", $nomepagina);
-$resultado->execute();
-$result = $resultado->fetchAll();
-
-
-//$sql = $connection->prepare('SELECT * FROM pagina WHERE nome = nomepagina');
-//$sql->bindParam("nomepagina", $username);
-//$sql->execute();
-//$result = $sql->fetchAll();
-//$result = $sql->query($sql);
-//echo("<table border=\"1\">\n");
-
-echo('<div id="left">');
-echo('<table class="center"> ');
-if (empty($result)) {
-    echo "Não existe uma pagina com esse nome";
-     } else{
-echo("<tr><th>UserID</th><th>pagecounter</th><th>nome</th><th>IDSeq</th><th>ativa</th><th>ppagecounter</th></tr>\n");
-
-foreach($result as $row){
-                echo("<tr><th>");
-        echo($row["userid"]);
-                echo("</th><th>");
-        echo($row["pagecounter"]);
-                echo("</th><th>");
-        echo($row["nome"]);
-                echo("</th><th>");
-        echo($row["idseq"]);
-                echo("</th><th>");
-        echo($row["ativa"]);
-                echo("</th><th>");
-        echo($row["ppagecounter"]);
-                echo("</th><tr>");
-
-                echo "<br/>";
-}
-}
-?>
+        // set the resulting array to associative
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
+            echo $v;
+        }
+    }
+    catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    $conn = null;
+    echo "</table>";
+    ?>
 
 </body>
 </html>
