@@ -47,10 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userid = test_input($_POST["userID"]);
     $nomepagina = test_input($_POST["nomepagina"]);
 }
-echo($userid);
-echo($nomepagina);
-
-$tobedone=0;
+echo $userid;
+echo $nomepagina;
 
 $host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
 $user="ist172619"; // -> substituir pelo nome de utilizador
@@ -81,10 +79,6 @@ $result->bindParam(":userid", $userid);
 $result->execute();
 echo "ja executei"
 
-$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
-        echo $v;
-    }
 /*
 if ($result  > 0)
 
@@ -96,6 +90,7 @@ else
     echo 'NAO FIND THA USSER !!';
     }
 */
+            
 $resultado = $connection->prepare('INSERT INTO pagina (userid,pagecounter,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT)');
 
 $resultado->bindParam(":userid", $userid);
