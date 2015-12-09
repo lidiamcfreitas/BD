@@ -53,7 +53,7 @@ $GETTYPECNT   = 0;
 $GETIDSEQ     = 0;
 $GETPPAGECOUNT= 0;
 
-$resultado = $connection->prepare('INSERT INTO pagina (userid,typecnt,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT');
+$resultado = $connection->prepare('INSERT INTO pagina (userid,typecnt,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT)');
 
 $resultado->bindParam(":userid", $userid);
 $resultado->bindParam(":GETTYPECNT", $GETTYPECNT);
