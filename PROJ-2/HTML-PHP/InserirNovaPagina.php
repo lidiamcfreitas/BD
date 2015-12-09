@@ -48,14 +48,41 @@ echo( "cheguei aqui");
 
 //AQUI FALTA SABER COMO RECEBER O NUMERO SEGUINTE IDSEQ
 
-$GETPAGECOUNT = 0;
+
+$GETTYPECNT   = 0;
 $GETIDSEQ     = 0;
 $GETPPAGECOUNT= 0;
 
-$resultado = $connection->prepare('INSERT INTO pagina (userid,typecounter,regcounter,nome,ativo,idseq,pregcounter) VALUES (:userid, :GETPAGECOUNT, :nomepagina, :GETIDSEQ, 1, :GETPPAGECOUNT');
+//$result =mysql_query("SELECT count(*) FROM utilizador WHERE exists `userid` = '$userid'");
+
+$sql  = "SELECT count(*) ";
+$sql .= "FROM utilizador ";
+$sql .= "WHERE userid = :userid";
+$result = $connection->prepare($sql);
+
+echo( "cheguei aqui");
+$result->bindParam(":userid", $userid);
+
+echo( "cheguei aqui");
+$result->execute();
+
+echo( "cheguei aqui");
+
+
+if ($result  > 0)
+
+    {
+        echo 'ENCONTREI O USER !!'; 
+    }
+else
+    {
+    echo 'NAO FIND THA USSER !!';
+    }
+
+$resultado = $connection->prepare('INSERT INTO pagina (userid,pagecounter,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT)');
 
 $resultado->bindParam(":userid", $userid);
-$resultado->bindParam(":GETPAGECOUNT", $GETPAGECOUNT);
+$resultado->bindParam(":GETTYPECNT", $GETTYPECNT);
 $resultado->bindParam(":nomepagina", $nomepagina);
 $resultado->bindParam(":GETIDSEQ", $GETIDSEQ);
 $resultado->bindParam(":GETPPAGECOUNT", $GETPPAGECOUNT);
