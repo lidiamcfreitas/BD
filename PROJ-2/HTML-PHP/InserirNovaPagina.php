@@ -52,13 +52,14 @@ $GETPAGECOUNT = 0;
 $GETIDSEQ     = 0;
 $GETPPAGECOUNT= 0;
 
-$resultado = $connection->prepare('INSERT INTO pagina VALUES ($userid, $GETPAGECOUNT, $nomepagina, $GETIDSEQ, 1, $GETPPAGECOUNT');
-$resultado->execute();
+$resultado = $connection->prepare('INSERT INTO pagina VALUES (:userid, :GETPAGECOUNT, :nomepagina, :GETIDSEQ, 1, :GETPPAGECOUNT');
 
-//$resultado->bindParam(":userid", $userid);
-//$resultado->bindParam(":TOBEDONE", $TOBEDONE);
-//$resultado->bindParam(":nomepagina", $nomepagina);
-//$resultado->execute();
+$resultado->bindParam(":userid", $userid);
+$resultado->bindParam(":GETPAGECOUNT", $GETPAGECOUNT);
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->bindParam(":GETIDSEQ", $GETIDSEQ);
+$resultado->bindParam(":GETPPAGECOUNT", $GETPPAGECOUNT);
+$resultado->execute();
 
 
 
