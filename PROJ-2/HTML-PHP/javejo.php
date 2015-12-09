@@ -57,6 +57,10 @@ $password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
 $dbname = $user; // a BD tem nome identico ao utilizador
 
 $connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            
+            
+            
+            
 /*
 echo( "cheguei aqui");
 
@@ -75,12 +79,13 @@ $GETPPAGECOUNT= 0;
 $sql  = "SELECT count(*) ";
 $sql .= "FROM utilizador ";
 $sql .= "WHERE userid = :userid";
-$stmt = $connection->prepare($sql);
+*/
+$result = $connection->prepare('SELECT count(*) FROM utilizador WHERE exists userid = :userid');
 $result->bindParam(":userid", $userid);
 $result->execute();
 echo "ja executei"
 
-/*
+
 if ($result  > 0)
 
     {
@@ -90,7 +95,10 @@ else
     {
     echo 'NAO FIND THA USSER !!';
     }
-*/
+
+
+            
+            
             
 $resultado = $connection->prepare('INSERT INTO pagina (userid,pagecounter,nome,idseq,ativa,ppagecounter) VALUES (:userid, :GETTYPECNT, :nomepagina, :IDSEQ, 1, :GETPPAGECOUNT)');
 
