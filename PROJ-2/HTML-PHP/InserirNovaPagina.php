@@ -67,7 +67,7 @@ echo( "cheguei aqui");
 $result->execute();
 
 echo( "cheguei aqui");
-echo($result);
+
 
 if ($result  > 0)
 
