@@ -24,7 +24,11 @@ function test_input($data) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userid = test_input($_POST["userID"]);
-    $nomepagina = test_input($_POST["nomepagina"]);
+    $typecnt = test_input($_POST["typecnt"]);
+    $nome = test_input($_POST["nome"]);
+    $ativo = test_input($_POST["ativo"]);
+    $idseq = test_input($_POST["idseq"]);
+    $ptypecnt = test_input($_POST["ptypecnt"]);
 }
 
 

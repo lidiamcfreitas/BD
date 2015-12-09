@@ -48,7 +48,11 @@ echo( "cheguei aqui");
 
 //AQUI FALTA SABER COMO RECEBER O NUMERO SEGUINTE IDSEQ
 
-$resultado = $connection->prepare('INSERT INTO pagina VALUES ($userid, $tobedone, $nomepagina, $tobedone, $tobedone, $tobedone)');
+$GETPAGECOUNT = 0;
+$GETIDSEQ     = 0;
+$GETPPAGECOUNT= 0;
+
+$resultado = $connection->prepare('INSERT INTO pagina VALUES ($userid, $GETPAGECOUNT, $nomepagina, $GETIDSEQ, 1, $GETPPAGECOUNT)');
 
 
 //$resultado->bindParam(":userid", $userid);
@@ -61,46 +65,44 @@ $resultado = $connection->prepare('INSERT INTO pagina VALUES ($userid, $tobedone
 
 
 echo ("Acabai a query");
+$resultado = $connection->prepare('SELECT * FROM pagina WHERE nome = :nomepagina');
+$resultado->bindParam(":nomepagina", $nomepagina);
+$resultado->execute();
+$result = $resultado->fetchAll();
 
-try{
-    $done = $connection->prepare('SELECT * FROM pagina WHERE nome = nomepagina');
-    $done->bindParam("nomepagina", $nomepagina);
-    if($resultado->execute()){
-        $result = $resultado->fetchAll();
-    }else{
-        echo'<section class="loginform cf">';
-        echo("<p> Erro na Query:($sql)<p>");
-        echo '</section>';
-        exit();
-    }       
-}catch(PDOException $e){
-    echo $e->getMessage();
-}
+
+//$sql = $connection->prepare('SELECT * FROM pagina WHERE nome = nomepagina');
+//$sql->bindParam("nomepagina", $username);
+//$sql->execute();
+//$result = $sql->fetchAll();
+//$result = $sql->query($sql);
+//echo("<table border=\"1\">\n");
 
 echo('<div id="left">');
 echo('<table class="center"> ');
-
+if (empty($result)) {
+    echo "Não existe uma pagina com esse nome";
+     } else{
 echo("<tr><th>UserID</th><th>pagecounter</th><th>nome</th><th>IDSeq</th><th>ativa</th><th>ppagecounter</th></tr>\n");
 
 foreach($result as $row){
-    echo("<tr><th>");
-    echo($row["userid"]);
-    echo("</th><th>");
-    echo($row["pagecounter"]);
-    echo("</th><th>");
-    echo($row["nome"]);
-    echo("</th><th>");
-    echo($row["idseq"]);
-    echo("</th><th>");
-    echo($row["ativa"]);
-    echo("</th><th>");
-    echo($row["ppagecounter"]);
-    echo("</th><tr>");
+                echo("<tr><th>");
+        echo($row["userid"]);
+                echo("</th><th>");
+        echo($row["pagecounter"]);
+                echo("</th><th>");
+        echo($row["nome"]);
+                echo("</th><th>");
+        echo($row["idseq"]);
+                echo("</th><th>");
+        echo($row["ativa"]);
+                echo("</th><th>");
+        echo($row["ppagecounter"]);
+                echo("</th><tr>");
 
-    echo "<br/>";
-
+                echo "<br/>";
 }
-
+}
 ?>
 
 </body>
