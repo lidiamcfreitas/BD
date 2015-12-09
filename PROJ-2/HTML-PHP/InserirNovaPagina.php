@@ -57,8 +57,11 @@ $GETPPAGECOUNT= 0;
 
 $sql  = "SELECT count(*) ";
 $sql .= "FROM utilizador";
-$sql .= "WHERE userid = $userid";
-$result = mysql_query($sql);
+$sql .= "WHERE userid = :userid";
+$result = $connection->prepare($sql);
+$result->bindParam(":userid", $userid);
+$result->execute();
+
 echo ("result: ". $result);
 if ($result  > 0)
 
