@@ -23,7 +23,7 @@
 			
 			return $data;
 		}
-
+		echo "1";
 		$host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
 		$user="ist172619"; // -> substituir pelo nome de utilizador
 		$password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
@@ -36,11 +36,10 @@
 		 	$uid = test_input($_POST["userid"]);
 		}
 
-		$sequencia = $connection->prepare("INSERT INTO sequencia (userid, moment) VALUES (:userid, 2015-12-09 23:04:54");
-		$sequencia = $bindParam(":userid", $userid);
-		$userid = $uid;
+		$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $userid)");
 		$sequencia->execute();
 
+		echo "2";
 		$sql_maxmom  = "SELECT s.contador_sequencia ";
 		$sql_maxmom .= "FROM sequencia s  ";
 		$sql_maxmom .= "WHERE s.userid = :userid ";
@@ -49,12 +48,14 @@
 		$sql_maxmom .= "     FROM sequencia s2  ";
 		$sql_maxmom .= "     WHERE s2.userid = :userid)";
 
+		echo "3";
 		// idseq quando o momento e maximo
 		$getmoment = $connection->prepare($sql_maxmom);
 		$getmoment = $bindParam(":userid", $userid);
 		$userid = $uid;
 		$getmoment->execute();
 
+		echo "4";
 
 		$sql_maxpc  = "SELECT p.pagecounter ";
 		$sql_maxpc .= "FROM pagina p  ";
@@ -64,12 +65,13 @@
 		$sql_maxpc .= "     FROM pagina p2  ";
 		$sql_maxpc .= "     WHERE p2.userid = :userid)";
 
+		echo "5";
 		// maximo page counter do utilizador
 		$getmaxpc = $connection->prepare($sql_maxpc);
 		$getmaxpc = $bindParam(":userid", $userid);
 		$userid = $uid;
 		$getmaxpc->execute();
-
+		echo "6";
 
 		$pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
 		$pagina->bindParam(":nomepagina", $nomepagina);
@@ -77,6 +79,7 @@
 		$pagina->bindParam(":pagecounter", $maxpc);
 		$pagina->bindParam(":userid", $userid);
 
+		echo "7";
 		$nomepagina = $npag;
 		$userid = $uid;
 		$pagemoment = $getmoment->fetchColumn();
@@ -84,7 +87,7 @@
 		echo $pagemoment;
 		echo $maxpc;
 		$pagina->execute();
-
+		echo "8";
 
 	} catch (PDOException $e){
 		echo("<p>ERROR: {$e->getMessage()}</p>");
