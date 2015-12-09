@@ -36,8 +36,9 @@
 		 	$uid = test_input($_POST["userid"]);
 		}
 
-		$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $userid)");
+		$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 		$sequencia->execute();
+
 
 		echo "2";
 		$sql_maxmom  = "SELECT s.contador_sequencia ";
