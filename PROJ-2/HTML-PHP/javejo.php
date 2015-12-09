@@ -15,7 +15,7 @@
 <?php 
 // inicia sessão para passar variaveis entre ficheiros php
 session_start();
-
+/*
 class TableRows extends RecursiveIteratorIterator { 
     function __construct($it) { 
         parent::__construct($it, self::LEAVES_ONLY); 
@@ -32,7 +32,7 @@ class TableRows extends RecursiveIteratorIterator {
     function endChildren() { 
         echo "</tr>" . "\n";
     } 
-} 
+} */
 
 // Função para limpar os dados de entrada
 function test_input($data) {
@@ -47,8 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userid = test_input($_POST["userID"]);
     $nomepagina = test_input($_POST["nomepagina"]);
 }
-echo $userid;
-echo $nomepagina;
+/*echo $userid;
+echo $nomepagina;*/
 
 $host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
 $user="ist172619"; // -> substituir pelo nome de utilizador
