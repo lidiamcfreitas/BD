@@ -27,10 +27,14 @@
 
 	    <center><h2>Ver uma página com os registos nela contido</h2></center>
 	    <form name="ver_pagina_com_registos" action="VerPaginaRegistos.php" method="post" accept-charset="utf-8">
+	    		<li>
+	            	<center><label for="userid">Identificação do Utilizador</label></center>
+	            	<center><input type="number" name="userid" placeholder="ex: 11321" required></center>
+	        	</li>
 	            <li>
 	            <center><label for="nomepagina">Nome da Página</label></center>
 	            <center><input type="text" name="nomepagina" placeholder="Nome da Página" required></center>
-	        </li>
+	        	</li>
 	        <center><input type="submit" value="Aceder"></center>
 	    </form>
 

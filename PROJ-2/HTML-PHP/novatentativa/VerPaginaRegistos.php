@@ -26,6 +26,7 @@
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		 $nomepagina = test_input($_POST["nomepagina"]);
+		 $userid = test_input($_POST["userid"]);
 		}
 
 		$host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
@@ -53,25 +54,46 @@
 		}
 
 		$connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+$sql  = "SELECT r.regcounter ";
+$sql .= "FROM registo AS r  ";
+$sql .= "WHERE r.ativo = 1 ";
+$sql .= "  AND r.userid = :userid ";
+$sql .= "  AND EXISTS  ";
+$sql .= "    (SELECT rp.pageid,  ";
+$sql .= "            rp.regid ";
+$sql .= "     FROM reg_pag AS rp  ";
+$sql .= "     WHERE r.regcounter = rp.regid ";
+$sql .= "       AND rp.userid = :userid  ";
+$sql .= "       AND rp.ativa = 1 ";
+$sql .= "       AND EXISTS  ";
+$sql .= "         (SELECT p.pagecounter ";
+$sql .= "          FROM pagina AS p  ";
+$sql .= "          WHERE p.pagecounter = rp.pageid ";
+$sql .= "            AND p.userid = :userid ";
+$sql .= "            AND p.nome = :nomepagina ";
+$sql .= "            AND p.ativa = 1))";
 
+
+/*
 		$sql  = "SELECT r.regcounter ";
 		$sql .= "FROM registo AS r  ";
-		$sql .= "WHERE r.ativo = 1 ";
+		$sql .= "WHERE r.ativo = 1 AND r.userid = :userid";
 		$sql .= "  AND EXISTS  ";
 		$sql .= "    ( SELECT rp.pageid,  ";
 		$sql .= "             rp.regid ";
 		$sql .= "     FROM reg_pag AS rp  ";
-		$sql .= "     WHERE r.regcounter = rp.regid ";
+		$sql .= "     WHERE r.regcounter = rp.regid and rp.userid = :userid";
 		$sql .= "       AND ativa = 1 ";
-		$sql .= "       AND rp.pageid = 26949 ";
+		$sql .= "       AND rp.pageid = :nomepagina ";
 		$sql .= "       AND EXISTS  ";
 		$sql .= "         ( SELECT p.pagecounter ";
 		$sql .= "          FROM pagina AS p  ";
-		$sql .= "          WHERE p.pagecounter = rp.pageid ";
+		$sql .= "          WHERE p.pagecounter = rp.pageid and p.userid = :userid";
 		$sql .= "            AND p.ativa = 1))";
-
+*/
 		$resultado = $connection->prepare($sql);
 		$resultado->bindParam(":nomepagina", $nomepagina);
+                $resultado->bindParam(":userid", $userid);
 		$resultado->execute();
 
 		$result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
