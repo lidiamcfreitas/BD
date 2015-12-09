@@ -56,7 +56,7 @@ $GETPPAGECOUNT= 0;
 //$result =mysql_query("SELECT count(*) FROM utilizador WHERE exists `userid` = '$userid'");
 
 $sql  = "SELECT count(*) ";
-$sql .= "FROM utilizador";
+$sql .= "FROM utilizador ";
 $sql .= "WHERE userid = :userid";
 $result = $connection->prepare($sql);
 
@@ -67,7 +67,7 @@ echo( "cheguei aqui");
 $result->execute();
 
 echo( "cheguei aqui");
-
+echo($result);
 
 if ($result  > 0)
 
