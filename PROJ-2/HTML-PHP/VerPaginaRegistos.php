@@ -10,7 +10,7 @@
 <body>
 	<div id="wrap">
 		<?php 
-		try{
+		//try{
 // inicia sessão para passar variaveis entre ficheiros php
 		session_start();
 
@@ -72,11 +72,10 @@ foreach($result as $row){
 
 
 }
-catch (PDOException $e)
-    {
-        echo("<p>ERROR: {$e->getMessage()}</p>");
-    }
-}
+//catch (PDOException $e){
+//        echo("<p>ERROR: {$e->getMessage()}</p>");
+//    }
+//}
 ?>
 </body>
 </html>
