@@ -59,7 +59,7 @@ $sql  = "SELECT count(*) ";
 $sql .= "FROM utilizador";
 $sql .= "WHERE userid = $userid";
 $result = mysql_query($sql);
-echo ($result);
+echo ("result: ", $result);
 if ($result  > 0)
 
     {
