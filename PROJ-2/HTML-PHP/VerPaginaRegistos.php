@@ -51,7 +51,9 @@ $result = $resultado->fetchAll();
 
 echo('<div id="left">');
 echo('<table class="center"> ');
-
+if (empty($result)) {
+	echo "Não existe uma pagina com esse nome";
+     } else{
 echo("<tr><th>UserID</th><th>pagecounter</th><th>nome</th><th>IDSeq</th><th>ativa</th><th>ppagecounter</th></tr>\n");
 
 foreach($result as $row){
@@ -70,6 +72,7 @@ foreach($result as $row){
                 echo("</th><tr>");
 
                 echo "<br/>";
+}
 }
 
 }
