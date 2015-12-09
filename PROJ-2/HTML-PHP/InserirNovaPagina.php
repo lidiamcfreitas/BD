@@ -59,8 +59,14 @@ $sql  = "SELECT count(*) ";
 $sql .= "FROM utilizador";
 $sql .= "WHERE userid = :userid";
 $result = $connection->prepare($sql);
+
+echo( "cheguei aqui");
 $result->bindParam(":userid", $userid);
+
+echo( "cheguei aqui");
 $result->execute();
+
+echo( "cheguei aqui");
 
 echo ("result: ". $result);
 if ($result  > 0)
