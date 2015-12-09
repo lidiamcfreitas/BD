@@ -80,12 +80,18 @@ $sql  = "SELECT count(*) ";
 $sql .= "FROM utilizador ";
 $sql .= "WHERE userid = :userid";
 */
+            
+/*            
 $result = $connection->prepare('SELECT count(*) FROM utilizador WHERE exists userid = :userid');
 $result->bindParam(":userid", $userid);
 $result->execute();
-echo "ja executei"
-
-
+echo "ja executei";
+*/
+            
+$sql = "SELECT count(*) FROM utilizador WHERE exists userid = ";
+$send = $sql . $userid . ';';
+$result = $connection->query($send);
+            
 if ($result  > 0)
 
     {
