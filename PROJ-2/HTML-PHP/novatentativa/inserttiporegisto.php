@@ -129,18 +129,19 @@
         $sequencia->bindParam(":userid", $uid_itp3);
         $uid_itp3 = $userid;
   			$sequencia->execute();
+        echo "criei sequencia - verifica lá";
 
-  			$sql_maxmom  = "SELECT s.contador_sequencia ";
-  			$sql_maxmom .= "FROM sequencia s  ";
-  			$sql_maxmom .= "WHERE s.userid = :userid";
-  			$sql_maxmom .= " AND s.moment = all ";
-  			$sql_maxmom .= "( SELECT max(s2.moment) ";
-  			$sql_maxmom .= "FROM sequencia s2  ";
-  			$sql_maxmom .= "WHERE s2.userid = :userid)";
-  			$getseq = $connection->prepare($sql_maxmom);
-  			$getseq->$bindParam(":userid", $uid_itp4);
+  			$sql_maxmom_2  = "SELECT s.contador_sequencia ";
+  			$sql_maxmom_2 .= "FROM sequencia s  ";
+  			$sql_maxmom_2 .= "WHERE s.userid = :userid";
+  			$sql_maxmom_2 .= " AND s.moment = all ";
+  			$sql_maxmom_2 .= "( SELECT max(s2.moment) ";
+  			$sql_maxmom_2 .= "FROM sequencia s2  ";
+  			$sql_maxmom_2 .= "WHERE s2.userid = :userid)";
+  			$getseq_2 = $connection->prepare($sql_maxmom_2);
+  			$getseq_2->$bindParam(":userid", $uid_itp4);
         $uit_itp4 = $userid;
-  			$getseq->execute();
+  			$getseq_2->execute();
 
         echo "aqui";
 
