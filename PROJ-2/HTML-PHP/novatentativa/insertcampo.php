@@ -151,19 +151,19 @@
 
             $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
 
-            $campo = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (:userid, :tipoid, :campoid ,:nomecampo,:seqid,1)";
-            $insert = $connection->prepare($campocnt);
-            $insert->bindParam(":userid", $uid2);
-            $insert->bindParam(":tipoid", $tipoid2);
-            $insert->bindParam(":campoid", $campoid2);
-            $insert->bindParam(":nomecampo", $camponome2);
-            $insert->bindParam(":seqid", $seqid2);
-            $uid2 = $userid;
-            $tipoid2 = $idtipo;
-            $campoid2 = $campocounter;
-            $camponome2 = $nomecampo;
-            $seqid2 = $getseq;
-            $insert->execute();
+            $campo_insertquery = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (:userid, :tipoid, :campoid ,:nomecampo,:seqid,1)";
+            $insert_campo = $connection->prepare($campo_insertquery);
+            $insert_campo->bindParam(":userid", $uid2_ic);
+            $insert_campo->bindParam(":tipoid", $tipoid2_ic);
+            $insert_campo->bindParam(":campoid", $campoid2_ic);
+            $insert_campo->bindParam(":nomecampo", $camponome2_ic);
+            $insert_campo->bindParam(":seqid", $seqid2_ic);
+            $uid2_ic= $userid;
+            $tipoid2_ic = $idtipo_type;
+            $campoid2_ic = $campocounter_insertcampo;
+            $camponome2_ic = $nomecampo;
+            $seqid2_ic = $id_sequenciaa;
+            $insert_campo->execute();
 
     }
     $connection = null;
