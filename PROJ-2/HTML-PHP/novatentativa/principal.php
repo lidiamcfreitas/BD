@@ -63,8 +63,8 @@
 	        <center><input type="submit" value="Aceder"></center>
 	    </form>
 
-<center><h2>Inserir novo tipo de registo</h2></center>
-	    <form name="inserir_novo_tipo_registo" action="InserirNovosCampos.php" method="post" accept-charset="utf-8">
+<center><h2>Inserir novos Campos para um Tipo de Registo</h2></center>
+	    <form name="inserir_novo_tipo_registo" action="InserirnovosCampos.php" method="post" accept-charset="utf-8">
 	    	    <li>
 	            	<center><label for="userid">Identificação do Utilizador</label></center>
 	            	<center><input type="number" name="userid" placeholder="ex: 11321" required></center>

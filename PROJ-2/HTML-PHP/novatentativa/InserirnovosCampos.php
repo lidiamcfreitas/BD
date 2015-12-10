@@ -35,21 +35,18 @@
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
 
-			$sql_maxmom  = "SELECT s.contador_sequencia ";
-			$sql_maxmom .= "FROM sequencia s  ";
-			$sql_maxmom .= "WHERE s.userid = ".$uid;
-			$sql_maxmom .= " AND s.moment = all ";
-			$sql_maxmom .= "( SELECT max(s2.moment) ";
-			$sql_maxmom .= "FROM sequencia s2  ";
-			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
+			$sqltypeid  = "SELECT typecnt ";
+			$sqltypeid .= "FROM tipo_registo  ";
+			$sqltypeid .= "WHERE userid = ".$uid;
+			$sqltypeid .= "  AND nome = ".$ntiporeg;
+			$sqltypeid .= "  AND ativo = 1";
 
-
-			$getseq = $connection->prepare($sql_maxmom);
+			$getseq = $connection->prepare($sqltypeid);
 
 			//$getseq = $bindParam(":userid", $uid);
 			$getseq->execute();
 
-			$sql_maxtc  = "SELECT r.typecnt ";
+			$sql_maxtc  = "SELECT r.typecnt + 1 ";
 			$sql_maxtc .= "FROM tipo_registo r  ";
 			$sql_maxtc .= "WHERE r.userid = ".$uid;
 			$sql_maxtc .= "  AND r.typecnt = ALL  ";
@@ -63,16 +60,13 @@
 
 			$cenas2 = $getmaxtc->fetchColumn();
 
-			++$cenas2;
-
 			$cenas = $getseq->fetchColumn();
 
-			++$cenas;
 
 			$campocnt  = "SELECT c.campocnt + 1 ";
 			$campocnt .= "FROM campo c  ";
-			$campocnt .= "WHERE c.userid = 103 ";
-			$campocnt .= "  AND c.typecnt = 13877 ";
+			$campocnt .= "WHERE c.userid =".$uid;
+			$campocnt .= "  AND c.typecnt = ".$getmaxtc;
 			$campocnt .= "  AND c.ativo = 1 ";
 			$campocnt .= "  AND c.campocnt = all ";
 			$campocnt .= "    ( SELECT max(c1.campocnt) ";
@@ -84,7 +78,7 @@
 			$campocounter = $connection->prepare($campocnt);
 			$campocounter->execute();
 
-			$preparation = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.','.$campocounter.',"'.$nomecampo.'",'.$cenas.',1)';
+			$preparation = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.','.$campocounter.',"'.$ncampo.'",'.$cenas.',1)';
 			echo ' '.$preparation;
 			$final = $connection->prepare($preparation);
 			$final->execute();
