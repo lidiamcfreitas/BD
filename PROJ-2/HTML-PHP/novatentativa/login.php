@@ -69,14 +69,23 @@
         $testarseexiste->bindParam(":password", $password_teste);
         $password_teste = $password;
         $testarseexiste->execute();
-        foreach($testarseexiste as $row){
 
+
+
+        while ($row = $testarseexiste->fetch(PDO::FETCH_ASSOC))
+        {
+          $deu= $row['deu'];
+          $userid_1= $row['userid'];
+          $email_1= $row['email'];
+        }
+
+
+    /*    while($row = $testarseexiste->fetch(PDO::FETCH_ASSOC)){
             $deu= $row['deu'];
             $userid_1= $row['userid'];
             $email_1= $row['email'];
-}
-
-
+}*/
+        echo "deu:".$deu;
         echo "userid:".$userid_1;
         echo "eamil".$email_1;
 
