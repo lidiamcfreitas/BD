@@ -14,10 +14,11 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation" class="active"><a href="insertpagina">Inserir Pagina</a></li>
+            <li role="presentation" class="active"><a href="insertpagina">Apagar Pagina</a></li>
             <li role="presentation"><a href="pagina"> Ver Pagina </a></li>
+            <li role="presentation"><a href="insertpagina"> Inserir Pagina </a></li>
         </ul>
-        <h3 class="text-muted">Inserir Pagina</h3>
+        <h3 class="text-muted">Apagar Pagina</h3>
       </div>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
@@ -86,63 +87,39 @@
             }
         }
 
-        $uid = null;
+        $sql_pageid  = "SELECT pagecounter ";
+        $sql_pageid .= "FROM pagina  ";
+        $sql_pageid .= "WHERE userid = :userid ";
+        $sql_pageid .= "  AND nome = :pagename";
 
-        $sql_maxmom  = "SELECT s.contador_sequencia ";
-        $sql_maxmom .= "FROM sequencia s  ";
-        $sql_maxmom .= "WHERE s.userid = :userid ";
-        $sql_maxmom .= "  AND s.moment = all ";
-        $sql_maxmom .= "    ( SELECT max(s2.moment) ";
-        $sql_maxmom .= "     FROM sequencia s2  ";
-        $sql_maxmom .= "     WHERE s2.userid = :userid)";
 
-        $getmoment = $connection->prepare($sql_maxmom);
-        $getmoment->bindParam(":userid", $uid);
+        $getpageid = $connection->prepare($sql_maxpc);
+        $getpageid->bindParam(":userid", $uid);
+        $getpageid->bindParam(":pagename", $pagename);
         $uid = $userid;
-		$getmoment->execute();
+        $pagename = $nomepagina;
+        $getpageid->execute();
 
-        //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC); 
-        //$result = $getmoment->fetchAll();
+        $getpagecounter = $getpageid->fetchColumn();
 
-        //print_result($result);
+        $sqlInsert = 'DELETE from pagina where id=:id';
+        $preparedStatement = $conn->prepare($sqlInsert);
 
-        $sql_maxpc  = "SELECT p.pagecounter ";
-        $sql_maxpc .= "FROM pagina p  ";
-        $sql_maxpc .= "WHERE p.userid = :userid ";
-        $sql_maxpc .= "  AND p.pagecounter = all ";
-        $sql_maxpc .= "    ( SELECT max(p2.pagecounter) ";
-        $sql_maxpc .= "     FROM pagina p2  ";
-        $sql_maxpc .= "     WHERE p2.userid = :userid)";
 
-        $getmaxpc = $connection->prepare($sql_maxpc);
-        $getmaxpc->bindParam(":userid", $uid2);
-        $uid2 = $userid;
-        $getmaxpc->execute();
+        $sql_delete  = "DELETE ";
+        $sql_delete .= "FROM pagina  ";
+        $sql_delete .= "WHERE userid = :userid ";
+        $sql_delete .= "  AND pagecounter = :pagecounter";
 
-        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
-        //$result = $getmaxpc->fetchAll();
+        $delete_page = $connection->prepare($sql_delete);
+        $delete_page->bindParam(":userid", $uid1);
+        $delete_page->bindParam(":pagecounter", $pagec);
+        $uid1 = $userid;
+        $pagec = $getpagecounter;
+        $delete_page->execute();
 
-        //print_result($result);
+        }
 
-        $getseq = $getmoment->fetchColumn();
-        $getmaxpcount = $getmaxpc->fetchColumn();
-        ++$getmaxpcount;
-
-        $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
-        $pagina->bindParam(":nomepagina", $nomep);
-        $pagina->bindParam(":idseq", $pagemoment);
-        $pagina->bindParam(":pagecounter", $maxpc);
-        $pagina->bindParam(":userid", $uid3);
-
-        $nomep  = $nomepagina;
-        $uid3   = $userid;
-        $pagemoment = $getseq;
-        $maxpc  = $getmaxpcount;
-        $pagina->execute();
-
-    } else {
-
-    }
     $connection = null;
     ?>
 
