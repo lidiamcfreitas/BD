@@ -107,7 +107,7 @@
         $gettipos = $getpageid->fetchColumn();
 
         $sql_delete  = "UPDATE tipo_registo ";
-        $sql_delete .= "SET ativa=0  ";
+        $sql_delete .= "SET ativo=0  ";
         $sql_delete .= "WHERE typecnt=:typecnt and userid = :userid";
 
         $delete_page = $connection->prepare($sql_delete);
