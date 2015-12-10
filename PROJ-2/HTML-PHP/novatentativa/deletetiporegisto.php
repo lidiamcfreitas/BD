@@ -107,7 +107,7 @@
 
 
        $cenas=45464;
-       $userid=1695;
+       $uid=1695;
 
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET ativo=0  ";
@@ -119,7 +119,7 @@
         $delete_campo = $connection->prepare($sql_delete);
         //$delete_campo->bindParam(":typecnt", $cenas);
         //$delete_campo->bindParam(":userid", $uid);
-        $uid = $userid;
+        //$uid = $userid;
         $delete_campo->execute();
  
         }
