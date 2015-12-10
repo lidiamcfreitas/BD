@@ -115,20 +115,20 @@
             $id_sequenciaa = $get_moment->fetchColumn();
             echo $id_sequenciaa;
 
-            $sqltypeid  = "SELECT typecnt ";
-            $sqltypeid .= "FROM tipo_registo  ";
-            $sqltypeid .= "WHERE userid = :userid";
-            $sqltypeid .= "  AND nome = :nometiporegisto";
-            $sqltypeid .= "  AND ativo = 1";
+            $sqltypeid1  = "SELECT typecnt ";
+            $sqltypeid1 .= "FROM tipo_registo  ";
+            $sqltypeid1 .= "WHERE userid = :userid";
+            $sqltypeid1 .= "  AND nome = :nometiporegisto";
+            $sqltypeid1 .= "  AND ativo = 1";
 
-            $gettype = $connection->prepare($sqltypeid);
-            $gettype->bindParam(":userid", $uid);
-            $gettype>bindParam(":nometiporegisto", $nometr);
-            $uid = $userid;
+            $gettype1 = $connection->prepare($sqltypeid1);
+            $gettype1->bindParam(":userid", $uid_type);
+            $gettype1>bindParam(":nometiporegisto", $nometr);
+            $uid_type1 = $userid;
             $nometr = $nometipo;
-            $gettype->execute();
+            $gettype1->execute();
 
-            $idtipo = $gettype->fetchColumn();
+            $idtipo = $gettype1->fetchColumn();
             echo "id do tipo: ".$idtipo;
 
 
