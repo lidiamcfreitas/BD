@@ -108,15 +108,16 @@
 
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET `ativo`=0  ";
-        $sql_delete .= "WHERE typecnt=:typecnt and userid = :userid";
+        $sql_delete .= "WHERE typecnt=".$cenas;
 
-        echo " SQL DELETE ? ";
+        $sql_delete .= "and userid ="+$uid;
+  
 
         $delete_campo = $connection->prepare($sql_delete);
-        $delete_campo->bindParam(":typecnt", $cenas);
-        $delete_campo->bindParam(":userid", $uid);
+        //$delete_campo->bindParam(":typecnt", $cenas);
+        //$delete_campo->bindParam(":userid", $uid);
         $uid1 = $userid;
-        $delete_page->execute();
+        $delete_campo->execute();
 
         }
 
