@@ -136,12 +136,12 @@
   			$sql_maxtr .= "     WHERE r2.userid = :userid )";
 
         echo $sql_maxtr;
-  			$getmaxtr = $connection->prepare($sql_maxtr);
-  			$getmaxtr->bindParam(":userid", $userid_itr);
+  			$getmaxtr_itr = $connection->prepare($sql_maxtr);
+  			$getmaxtr_itr->bindParam(":userid", $userid_itr);
   			$userid_itr = $userid;
-  			$getmaxtr->execute();
+  			$getmaxtr_itr-->execute();
 
-        $gettypecounter = $getmaxtr->fetchColumn();
+        $gettypecounter = $getmaxtr_itr->fetchColumn();
         $getseqcounter = $getmoment->fetchColumn();
         echo $gettypecounter;
         echo $getseqcounter;
