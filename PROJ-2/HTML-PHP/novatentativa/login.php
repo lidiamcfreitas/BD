@@ -37,9 +37,10 @@
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["username"] != "") && ($_POST["password"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["username"] != "") && ($_POST["email"] != "")){
 
         $username = $_POST["username"];
+        $email = $_POST["email"];
 
 
         class TableRows extends RecursiveIteratorIterator {
