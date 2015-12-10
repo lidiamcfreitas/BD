@@ -86,7 +86,7 @@
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["password"] != "")){
 
         session_start();
 
@@ -110,15 +110,15 @@
         $_SESSION['pais'] = $pais;
         $_SESSION['categoria'] = $categoria;
 
-        echo $nome;
-        echo $email ;
-        echo $password_aux;
-        echo $questao1_aux;
-        echo $resposta1;
-        echo $questao2;
-        echo $resposta2;
-        echo $pais;
-        echo $categoria;
+        echo "1".$nome;
+        echo "2".$email ;
+        echo "3".$password_aux;
+        echo "4".$questao1_aux;
+        echo "5".$resposta1;
+        echo "6".$questao2;
+        echo "7".$resposta2;
+        echo "8".$pais;
+        echo "9".$categoria;
 
         $query_cria = "INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid,:email,:nome,:password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
         $utilizador_obj = $connection->prepare($query_cria_aux);
