@@ -43,7 +43,7 @@
 			$sql_maxmom .= "FROM sequencia s2  ";
 			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
 
-			echo $sql_maxmom
+			echo $sql_maxmom;
 
 			$getseq = $connection->prepare($sql_maxmom);
 
