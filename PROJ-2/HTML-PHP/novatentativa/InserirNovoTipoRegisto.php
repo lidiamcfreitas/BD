@@ -60,7 +60,7 @@
 			$sql_maxtc .= "     FROM tipo_registo r2  ";
 			$sql_maxtc .= "     WHERE r2.userid = ".$uid.')';
 
-			$getmaxtc = $connection->prepare($sql_maxpc);
+			$getmaxtc = $connection->prepare($sql_maxtc);
 			//$getmaxtc = $bindParam(":userid", $userid);
 			//$userid = $uid;
 			$getmaxtc->execute();
