@@ -91,25 +91,23 @@
         $sql_pageid .= "FROM pagina  ";
         $sql_pageid .= "WHERE userid = :userid ";
         $sql_pageid .= "  AND nome = :pagename";
-
+        echo "2";
 
         $getpageid = $connection->prepare($sql_maxpc);
         $getpageid->bindParam(":userid", $uid);
         $getpageid->bindParam(":pagename", $pagename);
+        echo "3";
         $uid = $userid;
         $pagename = $nomepagina;
         $getpageid->execute();
 
         $getpagecounter = $getpageid->fetchColumn();
-
-        $sqlInsert = 'DELETE from pagina where id=:id';
-        $preparedStatement = $conn->prepare($sqlInsert);
+        echo $getpagecounter;
 
 
-        $sql_delete  = "DELETE ";
-        $sql_delete .= "FROM pagina  ";
-        $sql_delete .= "WHERE userid = :userid ";
-        $sql_delete .= "  AND pagecounter = :pagecounter";
+        $sql_delete  = "UPDATE pagina ";
+        $sql_delete .= "SET ativa=0  ";
+        $sql_delete .= "WHERE pagecounter=:pagecounter and userid = :userid";
 
         $delete_page = $connection->prepare($sql_delete);
         $delete_page->bindParam(":userid", $uid1);
