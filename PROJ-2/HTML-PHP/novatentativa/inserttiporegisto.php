@@ -135,7 +135,7 @@
   			$sql_maxtr .= "     FROM tipo_registo r2  ";
   			$sql_maxtr .= "     WHERE r2.userid = :userid )";
 
-
+        echo $sql_matr;
   			$getmaxtr = $connection->prepare($sql_maxtr);
   			$getmaxtr->bindParam(":userid", $userid_itr);
   			$userid_itr = $userid;
