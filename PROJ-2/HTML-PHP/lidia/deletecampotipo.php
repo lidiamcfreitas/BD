@@ -41,7 +41,7 @@
                     <td><input type="text" name="nomecampoaretirar" placeholder="Nome do Campo a Retirar" required></td>
                 </div><br>
                 </tr>
-                
+
                 <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
@@ -115,13 +115,13 @@
         $sql_delete  = "UPDATE campo ";
         $sql_delete .= "SET ativo=0  ";
         $sql_delete .= "WHERE typecnt=:typecnt AND userid = :userid";
-        $sql_delete .= "AND nome = :nomecampo "
+        $sql_delete .= "AND nome = :nomecampo ";
 
         $delete_field = $connection->prepare($sql_delete);
         $delete_field->bindParam(":userid", $uid);
         $delete_field->bindParam(":typecnt", $getcenas2);
         $uid = $userid;
-        $delete_field->bindParam(":nomecampo",$nomecampoaremover )
+        $delete_field->bindParam(":nomecampo",$nomecampoaremover);
         $nomecampoaremover = $nomecampoaretirar;
         $getcenas2 = $gettipos;
         $delete_field->execute();
