@@ -35,9 +35,9 @@
             </form>
         </div>
     <?php
-    echo "diz qualquer coisa";
+    echo "<p>diz qualquer coisa</p>";
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
-
+		echo "estou aqui mãe";
         $userid = $_POST["userid"];
         $nomepagina = $_POST["nomepagina"];
 
@@ -79,11 +79,12 @@
         $sql .= "            AND p.nome = :nomepagina ";
         $sql .= "            AND p.ativa = 1))";
 
+		echo "estou aqui</br>";
         $resultado = $connection->prepare($sql);
         $resultado->bindParam(":nomepagina", $nomepagina);
                 $resultado->bindParam(":userid", $userid);
         $resultado->execute();
-
+		echo "fiz bind pai! </br>";
         $result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
         $result = $resultado->fetchAll();
     
