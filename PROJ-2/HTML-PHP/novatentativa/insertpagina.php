@@ -97,7 +97,9 @@
         $query_cria_sequencia = "INSERT INTO sequencia (moment, userid) VALUES (\"2015-12-10 17:00:00\", :userid)";
 
         $sequencia_ip123 = $connection->prepare($query_cria_sequencia);
+        echo "1";
     		$sequencia_ip123->$bindParam(":userid", $user_ipseq);
+        echo "2";
         $user_ipseq = $userid;
         echo "aqui tambem";
     		$sequencia_ip123->execute();
