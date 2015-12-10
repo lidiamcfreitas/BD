@@ -14,9 +14,10 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation" class="active"><a href="insertpagina">Apagar Pagina</a></li>
-            <li role="presentation"><a href="pagina"> Ver Pagina </a></li>
-            <li role="presentation"><a href="insertpagina"> Inserir Pagina </a></li>
+            <li role="presentation"><a href="deletetiporegisto.php">Apagar Tipo</a></li>
+            <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
+            <li role="presentation"><a href="insertpagina.php"> Inserir Pagina </a></li>
+            <li role="presentation class="active""><a href="deletepagina.php"> Apagar Pagina </a></li>
         </ul>
         <h3 class="text-muted">Apagar Pagina</h3>
       </div>

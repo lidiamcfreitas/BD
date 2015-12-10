@@ -14,12 +14,12 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation"><a href="deletetiporegisto.php">Apagar Tipo</a></li>
-            <li role="presentation class="active""><a href="pagina.php"> Ver Pagina </a></li>
+            <li role="presentation" class="active"><a href="deletetiporegisto.php">Apagar Tipo</a></li>
+            <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
             <li role="presentation"><a href="insertpagina.php"> Inserir Pagina </a></li>
             <li role="presentation"><a href="deletepagina.php"> Apagar Pagina </a></li>
         </ul>
-        <h3 class="text-muted">Ver Pagina</h3>
+        <h3 class="text-muted">Apagar Pagina</h3>
       </div>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
@@ -70,50 +70,55 @@
             } 
         }
 
-        $sql  = "SELECT r.regcounter ";
-        $sql .= "FROM registo AS r  ";
-        $sql .= "WHERE r.ativo = 1 ";
-        $sql .= "  AND r.userid = :userid ";
-        $sql .= "  AND EXISTS  ";
-        $sql .= "    (SELECT rp.pageid,  ";
-        $sql .= "            rp.regid ";
-        $sql .= "     FROM reg_pag AS rp  ";
-        $sql .= "     WHERE r.regcounter = rp.regid ";
-        $sql .= "       AND rp.userid = :userid  ";
-        $sql .= "       AND rp.ativa = 1 ";
-        $sql .= "       AND EXISTS  ";
-        $sql .= "         (SELECT p.pagecounter ";
-        $sql .= "          FROM pagina AS p  ";
-        $sql .= "          WHERE p.pagecounter = rp.pageid ";
-        $sql .= "            AND p.userid = :userid ";
-        $sql .= "            AND p.nome = :nomepagina ";
-        $sql .= "            AND p.ativa = 1))";
+        function print_result($result){
 
-        $resultado = $connection->prepare($sql);
-		$resultado->bindParam(":nomepagina", $nomepagina);
-        $resultado->bindParam(":userid", $userid);
-		$resultado->execute();
+            $uid = null;
 
-		
-		$result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
-		$result = $resultado->fetchAll();
-
-        if (empty($result)) {
-            echo "<p>Não existe uma pagina com esse nome</p>";
-        } else {
-        	echo "<div style='width=100px;'><br><br>";
-            echo "<table class=\"table table-striped\">";
-            echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-            foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
-                echo  $v;
+            if (empty($result)) {
+                echo "<p>Não existe uma pagina com esse nome</p>";
+            } else {
+                echo "<div style='width=100px;'><br><br>";
+                echo "<table class=\"table table-striped\">";
+                echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
+                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
+                    echo  $v;
+                }
+                echo "</table>";
+                echo "</div>";
             }
-            echo "</table>";
-            echo "</div>";
         }
 
-    } else {
+        $sql_pageid  = "SELECT pagecounter ";
+        $sql_pageid .= "FROM pagina  ";
+        $sql_pageid .= "WHERE userid = :userid ";
+        $sql_pageid .= "  AND nome = :pagename";
 
-    }
+
+        $getpageid = $connection->prepare($sql_pageid);
+        $getpageid->bindParam(":userid", $uid);
+        $getpageid->bindParam(":pagename", $pagename);
+
+        $uid = $userid;
+        $pagename = $nomepagina;
+        $getpageid->execute();
+
+
+        $getpagecounter = $getpageid->fetchColumn();
+
+
+        $sql_delete  = "UPDATE pagina ";
+        $sql_delete .= "SET ativa=0  ";
+        $sql_delete .= "WHERE pagecounter=:pagecounter and userid = :userid";
+
+        $delete_page = $connection->prepare($sql_delete);
+        $delete_page->bindParam(":userid", $uid1);
+        $delete_page->bindParam(":pagecounter", $pagec);
+        $uid1 = $userid;
+        $pagec = $getpagecounter;
+        $delete_page->execute();
+
+        }
+
     $connection = null;
     ?>
 

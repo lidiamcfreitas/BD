@@ -35,14 +35,13 @@
             </form>
         </div>
     <?php
-        
-        require "connect.php";
-        
+    echo "<p>diz qualquer coisa</p>";
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
-
+		echo "estou aqui mãe";
         $nomepagina = $_POST["nomepagina"];
 		$userid = $_POST["userid"];
-
+		echo "user: ".$userid;
+		echo "nomepagina: ".$nomepagina;
         class TableRows extends RecursiveIteratorIterator { 
             
             function __construct($it) { 
@@ -50,7 +49,7 @@
             }
 
             function current() {
-                return "<td >" . parent::current(). "</td>";
+                return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
             }
 
             function beginChildren() { 
@@ -81,11 +80,15 @@
         $sql .= "            AND p.nome = :nomepagina ";
         $sql .= "            AND p.ativa = 1))";
 
+		echo "estou aqui</br>";
         $resultado = $connection->prepare($sql);
+        echo "fiz bind pai! </br>";
 		$resultado->bindParam(":nomepagina", $nomepagina);
+		echo "fiz bind pai! </br>";
         $resultado->bindParam(":userid", $userid);
+        echo "fiz bind pai! </br>";
 		$resultado->execute();
-
+		echo "fiz bind pai! </br>";
 		
 		$result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
 		$result = $resultado->fetchAll();
@@ -93,14 +96,12 @@
         if (empty($result)) {
             echo "<p>Não existe uma pagina com esse nome</p>";
         } else {
-        	echo "<div style='width=100px;'></br></br>";
-            echo "<table class=\"table table-striped\">";
+            echo "<table style='border: solid 1px black;'>";
             echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
             foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
                 echo  $v;
             }
             echo "</table>";
-            echo "</div>";
         }
 
     } else {

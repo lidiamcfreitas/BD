@@ -35,6 +35,7 @@
 		}
 
 		$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
+		$bindParam(":userid", $userid);
 		$sequencia->execute();
 
 
@@ -82,9 +83,12 @@
 		$nomepagina = $npag;
 		$userid = $uid;
 		$pagemoment = $getmoment->fetchColumn();
-		$maxpc = $getmaxpc->fetchColumn() + 1;
-		echo $pagemoment;
+		$maxpc = $getmaxpc->fetchColumn();
+		++$maxpc;
+		echo "pagemoment:".$pagemoment;
 		echo $maxpc;
+		echo $nomepagina;
+		echo $userid;
 		$pagina->execute();
 		echo "8";
 
