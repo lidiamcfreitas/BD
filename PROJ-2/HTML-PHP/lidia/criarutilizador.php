@@ -84,9 +84,9 @@
         </div>
     <?php
 
-        require "connect.php";
+    require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["password"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["password"] != "") && ($_POST["questao1"] != "") && ($_POST["questao2"] != "") && ($_POST["resposta1"] != "") && ($_POST["resposta2"] != "")){
 
         session_start();
 
@@ -143,16 +143,6 @@
         $pais_aux = $pais;
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
-
-        echo $nome;
-        echo $email ;
-        echo $password_aux;
-        echo $questao1_aux;
-        echo $resposta1;
-        echo $questao2;
-        echo $resposta2;
-        echo $pais;
-        echo $categoria;
         //header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/criarutilizador.php");
 
         }
