@@ -93,7 +93,7 @@
         $sql_pageid .= "  AND nome = :pagename";
         echo "2";
 
-        $getpageid = $connection->prepare($sql_maxpc);
+        $getpageid = $connection->prepare($sql_pageid);
         $getpageid->bindParam(":userid", $uid);
         $getpageid->bindParam(":pagename", $pagename);
         echo "3";
@@ -103,11 +103,6 @@
 
         echo "1:".$pagename;
         echo "1:".$uid;
-
-        foreach($getpageid as $row)
-        {
-        echo("<p>$row</p>");
-        }
 
         $getpagecounter = $getpageid->fetchColumn();
         echo "1:".$getpagecounter;
