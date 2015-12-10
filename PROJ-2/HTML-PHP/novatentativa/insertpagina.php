@@ -67,6 +67,25 @@
                 echo "</tr>" . "\n";
             } 
         }
+
+        function print_result($result){
+
+            $uid = null;
+
+            if (empty($result)) {
+                echo "<p>Não existe uma pagina com esse nome</p>";
+            } else {
+                echo "<div style='width=100px;'><br><br>";
+                echo "<table class=\"table table-striped\">";
+                echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
+                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
+                    echo  $v;
+                }
+                echo "</table>";
+                echo "</div>";
+            }
+        }
+
         $uid = null;
 
         $sql_maxmom  = "SELECT s.contador_sequencia ";
@@ -77,27 +96,37 @@
         $sql_maxmom .= "     FROM sequencia s2  ";
         $sql_maxmom .= "     WHERE s2.userid = :userid)";
 
-        $getseq = $connection->prepare($sql_maxmom);
-        $getseq->bindParam(":userid", $uid);
+        $getmoment = $connection->prepare($sql_maxmom);
+        $getmoment->bindParam(":userid", $uid);
         $uid = $userid;
-		$getseq->execute();
+		$getmoment->execute();
+        echo "1";
 
-		$result = $getseq->setFetchMode(PDO::FETCH_ASSOC); 
-		$result = $getseq->fetchAll();
+        $result = $getmoment->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $getmoment->fetchAll();
 
+        print_result($result);
+        echo "aqui";
 
-        if (empty($result)) {
-            echo "<p>Não existe uma pagina com esse nome</p>";
-        } else {
-        	echo "<div style='width=100px;'><br><br>";
-            echo "<table class=\"table table-striped\">";
-            echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-            foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
-                echo  $v;
-            }
-            echo "</table>";
-            echo "</div>";
-        }
+        $sql_maxpc  = "SELECT p.pagecounter ";
+        $sql_maxpc .= "FROM pagina p  ";
+        $sql_maxpc .= "WHERE p.userid = :userid ";
+        $sql_maxpc .= "  AND p.pagecounter = all ";
+        $sql_maxpc .= "    ( SELECT max(p2.pagecounter) ";
+        $sql_maxpc .= "     FROM pagina p2  ";
+        $sql_maxpc .= "     WHERE p2.userid = :userid)";
+
+        $getmaxpc = $connection->prepare($sql_maxpc);
+        $getmaxpc = $bindParam(":userid", $uid);
+        $uid = $userid;
+        $getmaxpc->execute();
+
+        echo "2";
+
+        $result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $getmaxpc->fetchAll();
+
+        print_result($result);
 
     } else {
 
