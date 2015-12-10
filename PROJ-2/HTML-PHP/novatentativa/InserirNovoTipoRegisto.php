@@ -41,14 +41,13 @@
 			$sql_maxmom  = "SELECT s.contador_sequencia ";
 			$sql_maxmom .= "FROM sequencia s  ";
 			$sql_maxmom .= "WHERE s.userid = :userid ";
-			$sql_maxmom .= "  AND s.moment = all ";
-			$sql_maxmom .= "    ( SELECT max(s2.moment) ";
-			$sql_maxmom .= "     FROM sequencia s2  ";
-			$sql_maxmom .= "     WHERE s2.userid = :userid)";
+			$sql_maxmom .= "AND s.moment = all ";
+			$sql_maxmom .= "( SELECT max(s2.moment) ";
+			$sql_maxmom .= "FROM sequencia s2  ";
+			$sql_maxmom .= "WHERE s2.userid = :userid)";
 
 			$getseq = $connection->prepare($sql_maxmom);
-			$getseq = $bindParam(":userid", $userid);
-			$userid = $uid;
+			$getseq = $bindParam(":userid", $uid);
 			$getseq->execute();
 
 			echo "acabei de ver qual é a sequencia";
