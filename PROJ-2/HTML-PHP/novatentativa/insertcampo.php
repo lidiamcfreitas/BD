@@ -143,7 +143,7 @@
             $getcampo_counter->bindParam(":userid", $uid1_campocounter);
             $uid1_campocounter = $userid;
             echo "here";
-            $getcampocounter->execute();
+            $getcampo_counter->execute();
 
             $campocounter_insertcampo = $getcampo_counter->fetchColumn();
             echo "counter campo: ".$campocounter_insertcampo;
