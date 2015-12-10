@@ -106,7 +106,8 @@
         echo $cenas;
 
 
-       $cenas=1695;
+       $cenas=45464;
+       $userid=1695;
 
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET ativo=0  ";
