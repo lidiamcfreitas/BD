@@ -54,14 +54,14 @@
 			$sql_maxtc .= "     FROM tipo_registo r2  ";
 			$sql_maxtc .= "     WHERE r2.userid = ".$uid.')';
 
-
+echo "1";
 			$getmaxtc = $connection->prepare($sql_maxtc);
 			$getmaxtc->execute();
-
+echo "2";
 			$cenas2 = $getmaxtc->fetchColumn();
 
 			$cenas = $getseq->fetchColumn();
-
+echo "3";
 
 			$campocnt  = "SELECT c.campocnt + 1 ";
 			$campocnt .= "FROM campo c  ";
