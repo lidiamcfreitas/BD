@@ -12,13 +12,15 @@
   </head>
   <body>
     <div class="container">
+      <?php if(dsadsa){ ?>
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation"><a href="criarutilizador.php"> Login</a></li>
+            <li role="presentation"><a href="criarutilizador.php"> Criar Utilizador</a></li>
             <li role="presentation" class="active"><a href="login.php"> Login</a></li>
         </ul>
         <h3 class="text-muted">Criar Utilizador</h3>
       </div>
+      <?php } ?>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
