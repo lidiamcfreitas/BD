@@ -138,7 +138,7 @@
   			$sql_maxmom .= "FROM sequencia s2  ";
   			$sql_maxmom .= "WHERE s2.userid = :userid)";
   			$getseq = $connection->prepare($sql_maxmom);
-  			$getseq = $bindParam(":userid", $uid_itp4);
+  			$getseq->$bindParam(":userid", $uid_itp4);
         $uit_itp4 = $userid;
   			$getseq->execute();
 
@@ -154,7 +154,7 @@
 
 
   			$getmaxtc = $connection->prepare($sql_maxtc);
-  			$getmaxtc = $bindParam(":userid", $uid_itp5);
+  			$getmaxtc->$bindParam(":userid", $uid_itp5);
   			$uid_itp5 = $userid;
   			$getmaxtc->execute();
 
