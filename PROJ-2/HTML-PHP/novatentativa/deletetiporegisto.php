@@ -96,28 +96,28 @@
         $sql_pageid .= "WHERE userid = :userid ";
         $sql_pageid .= "  AND nome = :nome";
 
-        echo '1';
+
         $getpageid = $connection->prepare($sql_pageid);
         $getpageid->bindParam(":userid", $userid);
         $getpageid->bindParam(":nome", $nometiporegisto);
- echo '2';
+
         $uid = $userid;
         $getpageid->execute();
 
         $gettipos = $getpageid->fetchColumn();
- echo '3';
+
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET ativo=0  ";
         $sql_delete .= "WHERE typecnt=:typecnt and userid = :userid";
- echo '4';
+ 
         $delete_page = $connection->prepare($sql_delete);
         $delete_page->bindParam(":userid", $uid);
         $delete_page->bindParam(":typecnt", $getcenas);
         $uid = $userid;
- echo '5';
+
         $getcenas = $gettipos;
         $delete_page->execute();
-         echo '6';
+         
     }
 
 
