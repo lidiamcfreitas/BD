@@ -72,9 +72,10 @@
 
 			echo $cenas;
 			++$cenas;
+			echo $cenas;
 
 
-			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$idseq.',1)';
+			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$cenas.',1)';
 			echo ' '.$preparation;
 			$tiporegisto = $connection->prepare($preparation);
 			$tiporegisto->execute();
