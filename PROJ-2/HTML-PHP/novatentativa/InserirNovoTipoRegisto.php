@@ -35,15 +35,13 @@
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
 
-			echo "Acabei de criar uma sequencia";
-
 			$sql_maxmom  = "SELECT s.contador_sequencia ";
 			$sql_maxmom .= "FROM sequencia s  ";
 			$sql_maxmom .= "WHERE s.userid = ".$uid;
 			$sql_maxmom .= "AND s.moment = all ";
 			$sql_maxmom .= "( SELECT max(s2.moment) ";
 			$sql_maxmom .= "FROM sequencia s2  ";
-			$sql_maxmom .= "WHERE s2.userid = )".$uid.')';
+			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
 
 			$getseq = $connection->prepare($sql_maxmom);
 
