@@ -14,7 +14,8 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation"><a href="criarutilizador.php"> Criar Utilizador</a></li>
+            <li role="presentation" class="active"><a href="criarutilizador.php"> Criar Utilizador</a></li>
+            <li role="presentation"><a href="login.php"> Login</a></li>
         </ul>
         <h3 class="text-muted">Criar Utilizador</h3>
       </div>
