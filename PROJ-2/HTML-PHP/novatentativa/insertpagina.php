@@ -108,7 +108,7 @@
         print_result($result);
         echo "aqui";
 
-        $sql_maxpc  = "SELECT p.pagecounter ";
+        $sql_maxpc  = "SELECT p.pagecounter as coco";
         $sql_maxpc .= "FROM pagina p  ";
         $sql_maxpc .= "WHERE p.userid = :userid ";
         $sql_maxpc .= "  AND p.pagecounter = all ";
@@ -117,19 +117,19 @@
         $sql_maxpc .= "     WHERE p2.userid = :userid)";
 
         $getmaxpc = $connection->prepare($sql_maxpc);
-        echo "lala";
         $getmaxpc->bindParam(":userid", $uid2);
-        echo "lala";
         $uid2 = $userid;
-        echo "lala";
         $getmaxpc->execute();
 
-        echo "2";
+        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
+        //$result = $getmaxpc->fetchAll();
 
-        $result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
-        $result = $getmaxpc->fetchAll();
+        //print_result($result);
+        $row = $getmaxpc->fetch();
+        echo "coco: ". $row['username'];
 
-        print_result($result);
+
+
 
     } else {
 
