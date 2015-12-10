@@ -31,6 +31,15 @@
 			 	$nreg = test_input($_POST["nometiporegisto"]);
 			}
 
+			$teste = "select count(*) from utilizador where userid = ".$uid;
+			$testarseexiste =$connection->prepare($teste);
+			$testarseexiste->execute();
+			$deu = $testarseexiste->fetchAll();
+
+if (empty($deu)) {
+	echo "Esse Utilizador não existe";
+}
+
 
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
@@ -72,9 +81,6 @@
 			echo cenas2;
 
 
-
-
-
 			$cenas = $getseq->fetchColumn();
 
 			++$cenas;
@@ -95,9 +101,8 @@
 			//$nomeregisto = $nreg;
 			//$userid = $uid;
 
+			echo "Executei sem erros";
 
-
-			echo "END";
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
 		}
