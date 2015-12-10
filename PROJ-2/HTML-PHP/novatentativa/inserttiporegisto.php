@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"> 
-    <title>Patient's readings and settings</title>
+    <meta charset="utf-8">
+    <title>Bloco de Notas</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../bootstrap/css/jumbotron-narrow.css" rel="stylesheet">
-    
+
   </head>
   <body>
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation" class="active"><a href="insertpagina.php"> Inserir Página </a></li>
-            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Tipo </a></li>
+            <li role="presentation"><a href="insertpagina.php"> Inserir Página </a></li>
+            <li role="presentation" class="active"><a href="inserttiporegisto.php"> Inserir Tipo </a></li>
             <li role="presentation"><a href="insertcampo.php"> Inserir Campos </a></li>
             <li role="presentation"><a href="deletepagina.php"> Apagar Página </a></li>
             <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
@@ -23,10 +23,10 @@
             <li role="presentation"><a href="inserttiporegisto.php"> Inserir Valores de Campos</a></li>
             <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
         </ul>
-        <h3 class="text-muted">Inserir Pagina</h3>
+        <h3 class="text-muted">Inserir Tipo de Registo</h3>
       </div>
         <div>
-            <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
+            <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
             	<tr>
                 <div class="form-group">
@@ -47,31 +47,31 @@
             </form>
         </div>
     <?php
-        
+
         require "connect.php";
-        
+
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 
         $nomepagina = $_POST["nomepagina"];
 		$userid = $_POST["userid"];
 
-        class TableRows extends RecursiveIteratorIterator { 
-            
-            function __construct($it) { 
-                parent::__construct($it, self::LEAVES_ONLY); 
+        class TableRows extends RecursiveIteratorIterator {
+
+            function __construct($it) {
+                parent::__construct($it, self::LEAVES_ONLY);
             }
 
             function current() {
                 return "<td >" . parent::current(). "</td>";
             }
 
-            function beginChildren() { 
-                echo "<tr>"; 
-            } 
+            function beginChildren() {
+                echo "<tr>";
+            }
 
-            function endChildren() { 
+            function endChildren() {
                 echo "</tr>" . "\n";
-            } 
+            }
         }
 
         function print_result($result){
@@ -84,7 +84,7 @@
                 echo "<div style='width=100px;'><br><br>";
                 echo "<table class=\"table table-striped\">";
                 echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
+                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
                     echo  $v;
                 }
                 echo "</table>";
@@ -107,44 +107,69 @@
         $uid = $userid;
 		$getmoment->execute();
 
-        //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC); 
+        //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC);
         //$result = $getmoment->fetchAll();
 
         //print_result($result);
+        $teste = "select count(*) from utilizador where userid = ".$uid;
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchAll();
 
-        $sql_maxpc  = "SELECT p.pagecounter ";
-        $sql_maxpc .= "FROM pagina p  ";
-        $sql_maxpc .= "WHERE p.userid = :userid ";
-        $sql_maxpc .= "  AND p.pagecounter = all ";
-        $sql_maxpc .= "    ( SELECT max(p2.pagecounter) ";
-        $sql_maxpc .= "     FROM pagina p2  ";
-        $sql_maxpc .= "     WHERE p2.userid = :userid)";
+        if ($deu == 0) {
+          echo "Esse Utilizador não existe";
+        }
 
-        $getmaxpc = $connection->prepare($sql_maxpc);
-        $getmaxpc->bindParam(":userid", $uid2);
-        $uid2 = $userid;
-        $getmaxpc->execute();
+        $sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
+  			$sequencia->execute();
 
-        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
-        //$result = $getmaxpc->fetchAll();
+  			$sql_maxmom  = "SELECT s.contador_sequencia ";
+  			$sql_maxmom .= "FROM sequencia s  ";
+  			$sql_maxmom .= "WHERE s.userid = ".$uid;
+  			$sql_maxmom .= " AND s.moment = all ";
+  			$sql_maxmom .= "( SELECT max(s2.moment) ";
+  			$sql_maxmom .= "FROM sequencia s2  ";
+  			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
 
-        //print_result($result);
 
-        $getseq = $getmoment->fetchColumn();
-        $getmaxpcount = $getmaxpc->fetchColumn();
-        ++$getmaxpcount;
+  			$getseq = $connection->prepare($sql_maxmom);
 
-        $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
-        $pagina->bindParam(":nomepagina", $nomep);
-        $pagina->bindParam(":idseq", $pagemoment);
-        $pagina->bindParam(":pagecounter", $maxpc);
-        $pagina->bindParam(":userid", $uid3);
+  			//$getseq = $bindParam(":userid", $uid);
+  			$getseq->execute();
 
-        $nomep  = $nomepagina;
-        $uid3   = $userid;
-        $pagemoment = $getseq;
-        $maxpc  = $getmaxpcount;
-        $pagina->execute();
+
+
+  			$sql_maxtc  = "SELECT r.typecnt ";
+  			$sql_maxtc .= "FROM tipo_registo r  ";
+  			$sql_maxtc .= "WHERE r.userid = ".$uid;
+  			$sql_maxtc .= "  AND r.typecnt = ALL  ";
+  			$sql_maxtc .= "    (SELECT max(r2.typecnt) ";
+  			$sql_maxtc .= "     FROM tipo_registo r2  ";
+  			$sql_maxtc .= "     WHERE r2.userid = ".$uid.')';
+
+
+  			$getmaxtc = $connection->prepare($sql_maxtc);
+  			//$getmaxtc = $bindParam(":userid", $userid);
+  			//$userid = $uid;
+  			$getmaxtc->execute();
+
+  			$cenas2 = $getmaxtc->fetchColumn();
+
+  			++$cenas2;
+
+
+
+  			$cenas = $getseq->fetchColumn();
+
+  			++$cenas;
+
+
+  			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.',"'.$nreg.'",'.$cenas.',1)';
+  			echo ' '.$preparation;
+  			$tiporegisto = $connection->prepare($preparation);
+  			$tiporegisto->execute();
+
+  			echo "Executei sem erros";
 
     } else {
 

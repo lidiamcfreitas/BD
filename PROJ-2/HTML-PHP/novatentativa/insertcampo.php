@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"> 
-    <title>Patient's readings and settings</title>
+    <title>Bloco de Notas</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">

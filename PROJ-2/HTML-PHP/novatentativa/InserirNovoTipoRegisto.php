@@ -10,7 +10,7 @@
 	<body>
 		<div id="wrap">
 
-	<?php 
+	<?php
 		try{
 			// inicia sessão para passar variaveis entre ficheiros php
 			session_start();
@@ -20,13 +20,13 @@
 				$data = trim($data);
 				$data = stripslashes($data);
 				$data = htmlspecialchars($data);
-				
+
 				return $data;
 			}
 
 			require "connect.php";
 
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {			 	
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$uid = test_input($_POST["userid"]);
 			 	$nreg = test_input($_POST["nometiporegisto"]);
 			}
@@ -111,5 +111,3 @@
 
 	</body>
 	</html>
-
-
