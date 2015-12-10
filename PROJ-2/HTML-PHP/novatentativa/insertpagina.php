@@ -54,8 +54,6 @@
 
         $nomepagina = $_POST["nomepagina"];
 		    $userid = $_POST["userid"];
-        echo $nomepagina;
-        echo $userid;
 
         class TableRows extends RecursiveIteratorIterator {
 

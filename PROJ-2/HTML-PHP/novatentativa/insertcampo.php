@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <title>Bloco de Notas</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../bootstrap/css/jumbotron-narrow.css" rel="stylesheet">
-    
+
   </head>
   <body>
     <div class="container">
@@ -27,7 +27,7 @@
         <h3 class="text-muted">Inserir Pagina</h3>
       </div>
         <div>
-            <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
+            <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
             	<tr>
                     <div class="form-group">
@@ -54,32 +54,32 @@
             </form>
         </div>
     <?php
-        
+
         require "connect.php";
-        
+
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
 
         $nomecampo = $_POST["nomecampo"];
         $nometipo = $_POST["nometipo"];
 		$userid = $_POST["userid"];
 
-        class TableRows extends RecursiveIteratorIterator { 
-            
-            function __construct($it) { 
-                parent::__construct($it, self::LEAVES_ONLY); 
+        class TableRows extends RecursiveIteratorIterator {
+
+            function __construct($it) {
+                parent::__construct($it, self::LEAVES_ONLY);
             }
 
             function current() {
                 return "<td >" . parent::current(). "</td>";
             }
 
-            function beginChildren() { 
-                echo "<tr>"; 
-            } 
+            function beginChildren() {
+                echo "<tr>";
+            }
 
-            function endChildren() { 
+            function endChildren() {
                 echo "</tr>" . "\n";
-            } 
+            }
         }
 
         function print_result($result){
@@ -92,14 +92,21 @@
                 echo "<div style='width=100px;'><br><br>";
                 echo "<table class=\"table table-striped\">";
                 echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
+                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
                     echo  $v;
                 }
                 echo "</table>";
                 echo "</div>";
             }
         }
-
+            echo "here";
+            // cria sequencia
+            $query_cria_ic = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
+            $sequencia_ic = $connection->prepare($query_cria_ic);
+            $sequencia_ic->bindParam(":userid", $user_ipseq_ic);
+            $user_ipseq_ic = $userid;
+            $sequencia_ic->execute();
+            echo "here";
             $sqlmaxmom  = "SELECT s.contador_sequencia ";
             $sqlmaxmom .= "FROM sequencia s  ";
             $sqlmaxmom .= "WHERE s.userid = :userid ";
@@ -107,30 +114,30 @@
             $sqlmaxmom .= "    ( SELECT max(s2.moment) ";
             $sqlmaxmom .= "     FROM sequencia s2  ";
             $sqlmaxmom .= "     WHERE s2.userid = :userid)";
-
+            echo "here";
             $get_moment = $connection->prepare($sqlmaxmom);
             $get_moment->bindParam(":userid", $uid_maxmom);
             $uid_maxmom = $userid;
             $get_moment->execute();
-
+            echo "here";
             $id_sequenciaa = $get_moment->fetchColumn();
 
-
+            echo "here";
             $sqltypeid1  = "SELECT typecnt ";
             $sqltypeid1 .= "FROM tipo_registo  ";
             $sqltypeid1 .= "WHERE userid = :userid";
             $sqltypeid1 .= "  AND nome = :nometiporegisto";
             $sqltypeid1 .= "  AND ativo = 1";
-
+            echo "here";
             $gettype1 = $connection->prepare($sqltypeid1);
             $gettype1->bindParam(":userid", $uid_type1);
             $gettype1->bindParam(":nometiporegisto", $nometr);
             $uid_type1 = $userid;
             $nometr = $nometipo;
             $gettype1->execute();
-
+            echo "here";
             $idtipo_type = $gettype1->fetchColumn();
-
+            echo "here";
 
             $sql_campocnt  = "SELECT c.campocnt ";
             $sql_campocnt .= "FROM campo c  ";
@@ -139,7 +146,7 @@
             $sql_campocnt .= "    (SELECT max(c1.campocnt) ";
             $sql_campocnt .= "     FROM campo c1  ";
             $sql_campocnt .= "     WHERE c1.userid = c.userid)";
-
+            echo "here";
             $getcampo_counter = $connection->prepare($sql_campocnt);
             $getcampo_counter->bindParam(":userid", $uid1_campocounter);
             $uid1_campocounter = $userid;
@@ -148,7 +155,7 @@
 
             $campocounter_insertcampo = $getcampo_counter->fetchColumn();
 
-
+            echo "here";
             ++$campocounter_insertcampo;
 
             $campo_insertquery = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (:userid, :tipoid, :campoid ,:nomecampo,:seqid,1)";
@@ -158,7 +165,7 @@
 
             $insert_campo = $connection->prepare($campo_insertquery);
 
-
+            echo "here";
             $insert_campo->bindParam(":userid", $uid2_ic);
             $insert_campo->bindParam(":tipoid", $tipoid2_ic);
             $insert_campo->bindParam(":campoid", $campoid2_ic);
@@ -170,7 +177,7 @@
             $camponome2_ic = $nomecampo;
             $seqid2_ic = $id_sequenciaa;
             $insert_campo->execute();
-
+            echo "here";
 
     }
     $connection = null;
