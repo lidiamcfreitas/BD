@@ -125,6 +125,7 @@
         $getmoment->bindParam(":userid", $uid_itr);
         $uid_itr = $userid;
 		    $getmoment->execute();
+        $getseqcounter = $getmoment->fetchColumn();
 
         echo "vai buscar typecounter seguinte";
         $sql_maxtr  = "SELECT r.typecnt";
@@ -139,10 +140,17 @@
         $typecounterobj->bindParam(":userid", $useridobj);
         $useridobj = $userid;
         $typecounterobj->execute();
-
         $gettypecounter = $typecounterobj->fetchColumn();
-        $getseqcounter = $getmoment->fetchColumn();
+
+        foreach($typecounterobj as $row_tc)
+{
+echo("<p>$row_tc</p>");
+}
+
+
         echo $gettypecounter;
+
+
         echo $getseqcounter;
 
         $tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, 1)";
