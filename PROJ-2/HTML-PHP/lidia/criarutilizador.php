@@ -112,16 +112,16 @@
 
         echo "1".$nome."<br>";
         echo "2".$email ."<br>";
-        echo "3".$password_aux."<br>";
-        echo "4".$questao1_aux."<br>";
+        echo "3".$password."<br>";
+        echo "4".$questao1."<br>";
         echo "5".$resposta1."<br>";
         echo "6".$questao2."<br>";
         echo "7".$resposta2."<br>";
         echo "8".$pais."<br>";
         echo "9".$categoria."<br>";
 
-        $query_cria = "INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid, :email, :nome, :password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
-        $utilizador_obj = $connection->prepare($query_cria_aux);
+        $query_cria = "INSERT INTO utilizador (userid , email , nome , password , questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid, :email, :nome, :password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
+        $utilizador_obj = $connection->prepare($query_cria);
     		$utilizador_obj->bindParam(":userid", $userid_aux);
         $utilizador_obj->bindParam(":email", $email_aux);
         $utilizador_obj->bindParam(":nome", $nome_aux);
@@ -135,16 +135,15 @@
 
         $nome_aux = $nome;
         $email_aux = $email ;
-        $password_aux = $password_aux;
-        $questao1_aux = $questao1_aux;
+        $password_aux = $password;
+        $questao1_aux = $questao1;
         $resposta1_aux = $resposta1;
         $questao2_aux = $questao2;
         $resposta2_aux = $resposta2;
         $pais_aux = $pais;
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
-        //header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/criarutilizador.php");
-
+        header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
         }
 
     $connection = null;
