@@ -72,12 +72,12 @@
 
             $uid = null;
 
-            if (empty($result, $string_1)) {
+            if (empty($result)) {
                 echo "<p>Não existe uma pagina com esse nome</p>";
             } else {
                 echo "<div style='width=100px;'><br><br>";
                 echo "<table class=\"table table-striped\">";
-                echo("<tr><th>".$string_1." " . $nomepagina . "</th></tr>\n");
+                echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
                 foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
                     echo  $v;
                 }
@@ -105,7 +105,7 @@
         $result = $getmoment->setFetchMode(PDO::FETCH_ASSOC); 
         $result = $getmoment->fetchAll();
 
-        print_result($result, "maxima sequencia");
+        print_result($result);
         echo "aqui";
 
         $sql_maxpc  = "SELECT p.pagecounter ";
@@ -120,7 +120,7 @@
         echo "lala";
         $getmaxpc->bindParam(":userid", $uid2);
         echo "lala";
-        $uid2 = $userid;
+        $uid = $userid;
         echo "lala";
         $getmaxpc->execute();
 
@@ -129,7 +129,7 @@
         $result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
         $result = $getmaxpc->fetchAll();
 
-        print_result($result, "maximo pagecounter");
+        print_result($result);
 
     } else {
 
