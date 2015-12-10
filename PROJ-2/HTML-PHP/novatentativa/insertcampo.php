@@ -135,7 +135,7 @@
             $uid_type1 = $userid;
             $nometr = $nometipo;
             $gettype1->execute();
-            echo "here";
+            echo "here rebenta";
             $idtipo_type = $gettype1->fetchColumn();
             echo "here";
 
