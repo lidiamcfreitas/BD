@@ -120,8 +120,8 @@
         echo "8".$pais."<br>";
         echo "9".$categoria."<br>";
 
-        $query_cria = "INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid, :email, :nome, :password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
-        $utilizador_obj = $connection->prepare($query_cria_aux);
+        $query_cria = "INSERT INTO utilizador (userid , email , nome , password , questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid, :email, :nome, :password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
+        $utilizador_obj = $connection->prepare($query_cria);
     		$utilizador_obj->bindParam(":userid", $userid_aux);
         $utilizador_obj->bindParam(":email", $email_aux);
         $utilizador_obj->bindParam(":nome", $nome_aux);
