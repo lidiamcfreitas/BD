@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="nomepagina">Nome da Página</label>
                     <input type="text" name="nomepagina" placeholder="Nome da Página" required>
-                </div></br>
+                </div><br>
                 <div class="form-group">
                     <label for="userid">Identificação do Utilizador</label>
                     <input type="number" name="userid" placeholder="ex: 11321" required>
@@ -93,7 +93,7 @@
         if (empty($result)) {
             echo "<p>Não existe uma pagina com esse nome</p>";
         } else {
-        	echo "<div style='width=100px;'></br></br>";
+        	echo "<div style='width=100px;'><br><br>";
             echo "<table class=\"table table-striped\">";
             echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
             foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
