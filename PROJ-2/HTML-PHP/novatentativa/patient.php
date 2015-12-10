@@ -107,7 +107,7 @@
     } else {
     	echo "please";
     }
-    $con = null;
+    $connection = null;
     ?>
 
     </div> <!-- /container -->
