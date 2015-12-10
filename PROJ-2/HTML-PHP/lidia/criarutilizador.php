@@ -143,8 +143,7 @@
         $pais_aux = $pais;
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
-        //header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/criarutilizador.php");
-
+        header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
         }
 
     $connection = null;
