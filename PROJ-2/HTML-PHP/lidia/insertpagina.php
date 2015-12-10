@@ -51,6 +51,7 @@ session_start();
 
         $nomepagina = $_POST["nomepagina"];
 		    $userid = $_SESSION['userid'];
+        echo $userid;
 
         class TableRows extends RecursiveIteratorIterator {
 

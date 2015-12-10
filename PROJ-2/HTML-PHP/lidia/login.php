@@ -140,7 +140,7 @@
           $idutilizador2 = $testarseexiste->fetchColumn();
 
           $_SESSION['userid'] = $idutilizador2;
-
+          
           $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 1);";
 
           $sequencia_itr = $connection->prepare($query_cria);
