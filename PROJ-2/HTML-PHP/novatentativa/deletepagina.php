@@ -91,21 +91,18 @@
         $sql_pageid .= "FROM pagina  ";
         $sql_pageid .= "WHERE userid = :userid ";
         $sql_pageid .= "  AND nome = :pagename";
-        echo "2";
+
 
         $getpageid = $connection->prepare($sql_pageid);
         $getpageid->bindParam(":userid", $uid);
         $getpageid->bindParam(":pagename", $pagename);
-        echo "3";
+
         $uid = $userid;
         $pagename = $nomepagina;
         $getpageid->execute();
 
-        echo "1:".$pagename;
-        echo "1:".$uid;
 
         $getpagecounter = $getpageid->fetchColumn();
-        echo $getpagecounter;
 
 
         $sql_delete  = "UPDATE pagina ";
