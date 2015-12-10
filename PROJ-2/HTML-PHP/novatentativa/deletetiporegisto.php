@@ -47,7 +47,7 @@
         
         require "connect.php";
         
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nometiporegisto"] != "")){
 
         $nometiporegisto = $_POST["nometiporegisto"];
 		$userid = $_POST["userid"];
@@ -88,8 +88,9 @@
                 echo "</div>";
             }
         }
-        
+
      echo "BADJORAS ?";
+
         $sql_pageid  = "SELECT typecnt ";
         $sql_pageid .= "FROM tipo_registo  ";
         $sql_pageid .= "WHERE userid = ".$uid;
@@ -113,13 +114,13 @@
 
         $sql_delete .= "and userid ="+$uid;
   
-
+        echo " a menina chupa ?";
         $delete_campo = $connection->prepare($sql_delete);
         //$delete_campo->bindParam(":typecnt", $cenas);
         //$delete_campo->bindParam(":userid", $uid);
         $uid = $userid;
         $delete_campo->execute();
-
+        echo "pelos vistos ...";
         }
 
     $connection = null;
