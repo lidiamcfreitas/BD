@@ -142,7 +142,7 @@
         $uit_itp4 = $userid;
   			$getseq->execute();
 
-
+        echo "aqui";
 
   			$sql_maxtc  = "SELECT r.typecnt ";
   			$sql_maxtc .= "FROM tipo_registo r  ";
@@ -162,7 +162,7 @@
 
   			++$cenas2;
 
-
+        echo "aqui 2";
 
   			$cenas = $getseq->fetchColumn();
 
