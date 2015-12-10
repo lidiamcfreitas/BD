@@ -54,24 +54,25 @@
 		}
 
 		$connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-$sql  = "SELECT r.regcounter ";
-$sql .= "FROM registo AS r  ";
-$sql .= "WHERE r.ativo = 1 ";
-$sql .= "  AND r.userid = :userid ";
-$sql .= "  AND EXISTS  ";
-$sql .= "    (SELECT rp.pageid,  ";
-$sql .= "            rp.regid ";
-$sql .= "     FROM reg_pag AS rp  ";
-$sql .= "     WHERE r.regcounter = rp.regid ";
-$sql .= "       AND rp.userid = :userid  ";
-$sql .= "       AND rp.ativa = 1 ";
-$sql .= "       AND EXISTS  ";
-$sql .= "         (SELECT p.pagecounter ";
-$sql .= "          FROM pagina AS p  ";
-$sql .= "          WHERE p.pagecounter = rp.pageid ";
-$sql .= "            AND p.userid = :userid ";
-$sql .= "            AND p.nome = :nomepagina ";
-$sql .= "            AND p.ativa = 1))";
+		
+		$sql  = "SELECT r.regcounter ";
+		$sql .= "FROM registo AS r  ";
+		$sql .= "WHERE r.ativo = 1 ";
+		$sql .= "  AND r.userid = :userid ";
+		$sql .= "  AND EXISTS  ";
+		$sql .= "    (SELECT rp.pageid,  ";
+		$sql .= "            rp.regid ";
+		$sql .= "     FROM reg_pag AS rp  ";
+		$sql .= "     WHERE r.regcounter = rp.regid ";
+		$sql .= "       AND rp.userid = :userid  ";
+		$sql .= "       AND rp.ativa = 1 ";
+		$sql .= "       AND EXISTS  ";
+		$sql .= "         (SELECT p.pagecounter ";
+		$sql .= "          FROM pagina AS p  ";
+		$sql .= "          WHERE p.pagecounter = rp.pageid ";
+		$sql .= "            AND p.userid = :userid ";
+		$sql .= "            AND p.nome = :nomepagina ";
+		$sql .= "            AND p.ativa = 1))";
 
 
 /*
