@@ -102,6 +102,7 @@
 
         if ($deu == 0) {
           echo "Esse Utilizador não existe";
+          exit();
         }
         echo "utilizador existe";
 
