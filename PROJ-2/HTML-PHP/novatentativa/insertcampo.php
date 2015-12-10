@@ -99,23 +99,21 @@
             }
         }
             echo "1";
-            $sql_maxmom  = "SELECT s.contador_sequencia + 1";
-            $sql_maxmom .= "FROM sequencia s  ";
-            $sql_maxmom .= "WHERE s.userid = :userid ";
-            $sql_maxmom .= "  AND s.moment = all ";
-            $sql_maxmom .= "    ( SELECT max(s2.moment) ";
-            $sql_maxmom .= "     FROM sequencia s2  ";
-            $sql_maxmom .= "     WHERE s2.userid = :userid)";
+            $sqlmaxmom  = "SELECT s.contador_sequencia ";
+            $sqlmaxmom .= "FROM sequencia s  ";
+            $sqlmaxmom .= "WHERE s.userid = :userid ";
+            $sqlmaxmom .= "  AND s.moment = all ";
+            $sqlmaxmom .= "    ( SELECT max(s2.moment) ";
+            $sqlmaxmom .= "     FROM sequencia s2  ";
+            $sqlmaxmom .= "     WHERE s2.userid = :userid)";
 
-            $getmoment2 = $connection->prepare($sql_maxmom);
-            echo "2";
-            $getmoment2->bindParam(":userid", $u_id);
-            echo "3";
-            $u_id = $userid;
-            $getmoment2->execute();
-            echo "4<br>";
-            $getseq = $getmoment2->fetchColumn();
-            echo $getseq;
+            $get_moment = $connection->prepare($sqlmaxmom);
+            $get_moment->bindParam(":userid", $uid_maxmom);
+            $uid_maxmom = $userid;
+            $get_moment->execute();
+
+            $id_sequenciaa = $get_moment->fetchColumn();
+            echo $id_sequenciaa;
 
             $sqltypeid  = "SELECT typecnt ";
             $sqltypeid .= "FROM tipo_registo  ";
