@@ -50,7 +50,7 @@
 			//$getseq = $bindParam(":userid", $uid);
 			$getseq->execute();
 
-			$idseq = $getseq->fetchColumn();
+
 
 			$sql_maxtc  = "SELECT r.typecnt ";
 			$sql_maxtc .= "FROM tipo_registo r  ";
@@ -67,12 +67,11 @@
 			$getmaxtc->execute();
 
 			$typecnt = $getmaxtc->fetchColumn();
-			$idseq = $getseq->fetchColumn();
 
-			echo "My name is " , get_class($idseq) , "\n";
-			echo $idseq;
-			++$idseq;
-			echo $typecnt;
+			$cenas = $getseq->fetchColumn();
+
+			echo $cenas;
+			++$cenas;
 
 
 			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$idseq.',1)';
