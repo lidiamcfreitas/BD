@@ -30,8 +30,7 @@
 				$uid = test_input($_POST["userid"]);
 			 	$nreg = test_input($_POST["nometiporegisto"]);
 			}
-			echo 'userid:'.$uid;
-			echo 'nreg:'.$nreg;
+
 
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
@@ -45,6 +44,9 @@
 			$sql_maxmom .= "( SELECT max(s2.moment) ";
 			$sql_maxmom .= "FROM sequencia s2  ";
 			$sql_maxmom .= "WHERE s2.userid = :userid)";
+
+			echo 'MAXMOM ='.$sql_maxmom;
+			echo "ACABEI DE FAZER SET AO SQL_MAXMOM";
 
 			$getseq = $connection->prepare($sql_maxmom);
 			$getseq = $bindParam(":userid", $uid);
