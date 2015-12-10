@@ -88,7 +88,8 @@
                 echo "</div>";
             }
         }
-
+        
+     echo "BADJORAS ?";
         $sql_pageid  = "SELECT typecnt ";
         $sql_pageid .= "FROM tipo_registo  ";
         $sql_pageid .= "WHERE userid = ".$uid;
