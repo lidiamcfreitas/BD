@@ -50,9 +50,9 @@
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nometiporegisto"] != "")){
 
-        $nomepagina = $_POST["nomepagina"];
+        $nometiporegisto = $_POST["nometiporegisto"];
 		    $userid = $_POST["userid"];
 
         class TableRows extends RecursiveIteratorIterator {
