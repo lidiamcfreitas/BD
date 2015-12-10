@@ -134,7 +134,13 @@
         $nomep = $nomepagina;
         $uid3 = $userid;
         $pagemoment = $getmoment->fetchColumn();
-        $maxpc = $getmaxpc->fetchColumn() + 1;
+        $maxpc = $getmaxpc->fetchColumn();
+        ++$maxpc;
+        echo $nomep;
+        echo $uid3;
+        echo $pagemoment;
+        echo $maxpc;
+        $pagina->execute();
 
 
 
