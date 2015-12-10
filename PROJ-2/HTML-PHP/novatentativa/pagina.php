@@ -110,7 +110,7 @@
         }
 
     } else {
-    	echo "please";
+
     }
     $connection = null;
     ?>
