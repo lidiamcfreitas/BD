@@ -1,9 +1,9 @@
 <?php
 
-$host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
-$user="ist172619"; // -> substituir pelo nome de utilizador
-$password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
-$dbname = $user; // a BD tem nome identico ao utilizador
+	$host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
+	$user="ist172619"; // -> substituir pelo nome de utilizador
+	$password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
+	$dbname = $user; // a BD tem nome identico ao utilizador
 
 
 
