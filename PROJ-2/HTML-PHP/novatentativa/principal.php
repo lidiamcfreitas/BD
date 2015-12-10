@@ -63,6 +63,24 @@
 	        <center><input type="submit" value="Aceder"></center>
 	    </form>
 
+<center><h2>Inserir novo tipo de registo</h2></center>
+	    <form name="inserir_novo_tipo_registo" action="InserirNovosCampos.php" method="post" accept-charset="utf-8">
+	    	    <li>
+	            	<center><label for="userid">Identificação do Utilizador</label></center>
+	            	<center><input type="number" name="userid" placeholder="ex: 11321" required></center>
+	        	</li>
+	            <li>
+					<center><label for="nomecampo">Nome do Campo</label></center>
+	            	<center><input type="text" name="ncampo" placeholder="Nome Campo" required></center>
+	        	</li>
+	        	<li>
+	            	<center><label for="nometipoCampo">Nome do Tipo de Campo</label></center>
+	            	<center><input type="text" name="nometiporeg" placeholder="Nome Tipo" required></center>
+	        	</li>
+
+	        <center><input type="submit" value="Aceder"></center>
+	    </form>
+
 
 	    <center><h2>Ver uma página com os registos nela contido</h2></center>
 	    <form name="ver_pagina_com_registos" action="VerPaginaRegistos.php" method="post" accept-charset="utf-8">
