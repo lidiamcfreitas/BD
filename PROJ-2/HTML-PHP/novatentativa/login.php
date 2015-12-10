@@ -11,20 +11,6 @@
 
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation"><a href="insertpagina.php"> Inserir Página </a></li>
-            <li role="presentation" class="active"><a href="inserttiporegisto.php"> Inserir Tipo </a></li>
-            <li role="presentation"><a href="insertcampo.php"> Inserir Campos </a></li>
-            <li role="presentation"><a href="deletepagina.php"> Apagar Página </a></li>
-            <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
-            <li role="presentation"><a href="deletepagina.php"> Apagar Campo de Tipo </a></li>
-            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Valores de Campos</a></li>
-            <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
-        </ul>
-        <h3 class="text-muted">Inserir Tipo de Registo</h3>
-      </div>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
@@ -86,25 +72,21 @@
 
         if ($deu == 0) {
           echo "<h1>Username ou Palavra passe errada </h1>";
-        $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 0);";
-        $sequencia_itr = $connection->prepare($query_cria);
-        $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
-        $user_ipseq_tr = $userid;
-        $sequencia_itr->execute();
-
+          $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 0);";
+          $sequencia_itr = $connection->prepare($query_cria);
+          $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
+          $user_ipseq_tr = $userid;
+          $sequencia_itr->execute();
           exit();
         }else{
-
-        $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 1);";
-        $sequencia_itr = $connection->prepare($query_cria);
+          $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 1);";
+          $sequencia_itr = $connection->prepare($query_cria);
             $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
-        $user_ipseq_tr = $userid;
+            $user_ipseq_tr = $userid;
             $sequencia_itr->execute();
 
-        
-
         }
-
+      }
 
         $connection = null;
     ?>
@@ -112,5 +94,3 @@
     </div> <!-- /container -->
   </body>
 </html>
-
-
