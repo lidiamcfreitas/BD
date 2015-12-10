@@ -19,7 +19,7 @@
             <li role="presentation"><a href="insertpagina.php"> Inserir Pagina </a></li>
             <li role="presentation"><a href="deletepagina.php"> Apagar Pagina </a></li>
         </ul>
-        <h3 class="text-muted">Apagar Pagina</h3>
+        <h3 class="text-muted">Apagar Tipo</h3>
       </div>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
