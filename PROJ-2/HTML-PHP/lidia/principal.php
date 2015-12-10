@@ -132,7 +132,7 @@ session_start();
         $badboy = $connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
-        <table>
+        <table class=\"table table-striped\">
           <thead>
             <tr>
               <?php

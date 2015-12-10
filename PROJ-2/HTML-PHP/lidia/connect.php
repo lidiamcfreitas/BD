@@ -9,11 +9,11 @@
 
 	try
 	{
-		$connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+		$connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname.";charset=utf-8", $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
 	}
 	catch(PDOException $exception)
-	{		
+	{
 		echo "<div class=\"alert alert-danger\" role=\"alert\">{$exception->getMessage()}</div>";
 		exit();
 	}
