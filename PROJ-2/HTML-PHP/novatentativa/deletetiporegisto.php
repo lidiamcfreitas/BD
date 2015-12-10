@@ -91,13 +91,13 @@
 
         $sql_pageid  = "SELECT typecnt ";
         $sql_pageid .= "FROM tipo_registo  ";
-        $sql_pageid .= "WHERE userid = :userid ";
-        $sql_pageid .= "  AND nome = `:pagename`";
+        $sql_pageid .= "WHERE userid = ".$uid;
+        $sql_pageid .= "  AND nome = ".$pagename;
 
 
         $gettypecnt = $connection->prepare($sql_pageid);
-        $gettypecnt->bindParam(":userid", $uid);
-        $gettypecnt->bindParam(":pagename", $nometiporegisto);
+        //$gettypecnt->bindParam(":userid", $uid);
+       // $gettypecnt->bindParam(":pagename", $nometiporegisto);
         $uid = $userid;
         $gettypecnt->execute();
         $cenas=$gettypecnt->fetchColumn();
@@ -108,15 +108,16 @@
 
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET `ativo`=0  ";
-        $sql_delete .= "WHERE typecnt=:typecnt and userid = :userid";
+        $sql_delete .= "WHERE typecnt=".$cenas;
 
-        echo " SQL DELETE ? ";
+        $sql_delete .= "and userid ="+$uid;
+  
 
         $delete_campo = $connection->prepare($sql_delete);
-        $delete_campo->bindParam(":typecnt", $cenas);
-        $delete_campo->bindParam(":userid", $uid);
-        $uid1 = $userid;
-        $delete_page->execute();
+        //$delete_campo->bindParam(":typecnt", $cenas);
+        //$delete_campo->bindParam(":userid", $uid);
+        $uid = $userid;
+        $delete_campo->execute();
 
         }
 
