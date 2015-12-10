@@ -146,7 +146,7 @@
         echo $gettypecounter; */
 
 
-        $sql_maxtc  = "SELECT r.typecnt ";
+        $sql_maxtc  = "SELECT r.typecnt + 1 ";
         $sql_maxtc .= "FROM tipo_registo r  ";
         $sql_maxtc .= "WHERE r.userid = ".$userid;
         $sql_maxtc .= "  AND r.typecnt = ALL  ";
