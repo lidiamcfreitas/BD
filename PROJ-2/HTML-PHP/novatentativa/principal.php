@@ -45,9 +45,6 @@
 
 
 
-
-
-
 		<center><h2>Inserir nova página</h2></center>
 	    <form name="inserir_nova_pagina" action="InserirNovaPagina.php" method="post" accept-charset="utf-8">
 	            <li>
