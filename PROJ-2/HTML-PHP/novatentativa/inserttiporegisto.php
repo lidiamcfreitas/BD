@@ -98,7 +98,7 @@
         $testarseexiste->bindParam(":userid", $userid_teste);
         $userid_teste = $userid;
         $testarseexiste->execute();
-        $deu = $testarseexiste->fetchAll();
+        $deu = $testarseexiste->fetchColumn();
 
         if ($deu == 0) {
           echo "Esse Utilizador não existe";
