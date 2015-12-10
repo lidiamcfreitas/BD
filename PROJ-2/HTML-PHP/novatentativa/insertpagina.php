@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <title>Bloco de Notas</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../bootstrap/css/jumbotron-narrow.css" rel="stylesheet">
-    
+
   </head>
   <body>
     <div class="container">
@@ -26,7 +26,7 @@
         <h3 class="text-muted">Inserir Pagina</h3>
       </div>
         <div>
-            <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
+            <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
             	<tr>
                 <div class="form-group">
@@ -47,31 +47,31 @@
             </form>
         </div>
     <?php
-        
+
         require "connect.php";
-        
+
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 
         $nomepagina = $_POST["nomepagina"];
-		$userid = $_POST["userid"];
+		    $userid = $_POST["userid"];
 
-        class TableRows extends RecursiveIteratorIterator { 
-            
-            function __construct($it) { 
-                parent::__construct($it, self::LEAVES_ONLY); 
+        class TableRows extends RecursiveIteratorIterator {
+
+            function __construct($it) {
+                parent::__construct($it, self::LEAVES_ONLY);
             }
 
             function current() {
                 return "<td >" . parent::current(). "</td>";
             }
 
-            function beginChildren() { 
-                echo "<tr>"; 
-            } 
+            function beginChildren() {
+                echo "<tr>";
+            }
 
-            function endChildren() { 
+            function endChildren() {
                 echo "</tr>" . "\n";
-            } 
+            }
         }
 
         function print_result($result){
@@ -84,7 +84,7 @@
                 echo "<div style='width=100px;'><br><br>";
                 echo "<table class=\"table table-striped\">";
                 echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
+                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
                     echo  $v;
                 }
                 echo "</table>";
@@ -92,7 +92,10 @@
             }
         }
 
-        $uid = null;
+        $sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid)");
+    		$bindParam(":userid", $user_ipseq);
+        $user_ipseq  = $userid;
+    		$sequencia->execute();
 
         $sql_maxmom  = "SELECT s.contador_sequencia ";
         $sql_maxmom .= "FROM sequencia s  ";
@@ -105,9 +108,9 @@
         $getmoment = $connection->prepare($sql_maxmom);
         $getmoment->bindParam(":userid", $uid);
         $uid = $userid;
-		$getmoment->execute();
+		    $getmoment->execute();
 
-        //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC); 
+        //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC);
         //$result = $getmoment->fetchAll();
 
         //print_result($result);
@@ -125,7 +128,7 @@
         $uid2 = $userid;
         $getmaxpc->execute();
 
-        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
+        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC);
         //$result = $getmaxpc->fetchAll();
 
         //print_result($result);
