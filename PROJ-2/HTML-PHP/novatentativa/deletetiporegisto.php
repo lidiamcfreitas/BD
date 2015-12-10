@@ -107,7 +107,7 @@
 
 
         $sql_delete  = "UPDATE tipo_registo ";
-        $sql_delete .= "SET `ativo`=0  ";
+        $sql_delete .= "SET ativo=0  ";
         $sql_delete .= "WHERE typecnt=".$cenas;
 
         $sql_delete .= "and userid ="+$uid;
