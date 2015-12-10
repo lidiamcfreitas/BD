@@ -35,22 +35,20 @@
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
 
-			echo "Acabei de criar uma sequencia";
-
 			$sql_maxmom  = "SELECT s.contador_sequencia ";
 			$sql_maxmom .= "FROM sequencia s  ";
 			$sql_maxmom .= "WHERE s.userid = ".$uid;
 			$sql_maxmom .= "AND s.moment = all ";
 			$sql_maxmom .= "( SELECT max(s2.moment) ";
 			$sql_maxmom .= "FROM sequencia s2  ";
-			$sql_maxmom .= "WHERE s2.userid = )".$uid.')';
+			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
 
 			$getseq = $connection->prepare($sql_maxmom);
 
 			//$getseq = $bindParam(":userid", $uid);
 			$getseq->execute();
 
-
+			$idseq = $getseq->fetchColumn();
 
 			$sql_maxtc  = "SELECT r.typecnt ";
 			$sql_maxtc .= "FROM tipo_registo r  ";
@@ -65,15 +63,19 @@
 			//$userid = $uid;
 			$getmaxtc->execute();
 
-			echo 'HERE WE ARE !! ';
-
 			$typecnt = $getmaxtc->fetchColumn();
-			$idseq = $getseq->fetchColumn() + 1;
+			$idseq = $getseq->fetchColumn();
 
-			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$idseq.'1)';
-			echo 'PREPARARATE GOOD TAIME->'.$preparation;
+			echo "My name is " , get_class($idseq) , "\n";
+			echo $idseq;
+			++$idseq;
+			echo $typecnt;
+
+
+			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$idseq.',1)';
+			echo ' '.$preparation;
 			$tiporegisto = $connection->prepare($preparation);
-
+			$tiporegisto->execute();
 
 
 			//$tiporegisto->bindParam(":userid", $userid);
@@ -86,7 +88,7 @@
 			//$userid = $uid;
 
 
-			$tiporegisto->execute();
+
 			echo "IN THE END... IT DOESN´T EVEN MATTER !!!!";
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
