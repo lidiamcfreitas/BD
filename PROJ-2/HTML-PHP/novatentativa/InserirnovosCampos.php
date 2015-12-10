@@ -74,15 +74,15 @@
 			$campocnt .= "     WHERE c1.userid = c.userid ";
 			$campocnt .= "       AND c1.typecnt = c.typecnt ";
 			$campocnt .= "       AND c1.ativo = 1)";
-
+echo "1";
 			$campocounter = $connection->prepare($campocnt);
 			$campocounter->execute();
-
+echo "2";
 			$preparation = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.','.$campocounter.',"'.$ncampo.'",'.$cenas.',1)';
 			echo ' '.$preparation;
 			$final = $connection->prepare($preparation);
 			$final->execute();
-
+echo "3";
 } catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
 		}
