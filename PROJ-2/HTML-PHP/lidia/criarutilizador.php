@@ -135,8 +135,8 @@
 
         $nome_aux = $nome;
         $email_aux = $email ;
-        $password_aux = $password_aux;
-        $questao1_aux = $questao1_aux;
+        $password_aux = $password;
+        $questao1_aux = $questao1;
         $resposta1_aux = $resposta1;
         $questao2_aux = $questao2;
         $resposta2_aux = $resposta2;
