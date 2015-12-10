@@ -141,7 +141,7 @@
   			$uid_itr = $userid;
   			$getmaxtr->execute();
 
-        $gettypecounter = $getmaxtc->fetchColumn();
+        $gettypecounter = $getmaxtr->fetchColumn();
         $getseqcounter = $getmoment->fetchColumn();
         echo $gettypecounter;
         echo $getseqcounter;
