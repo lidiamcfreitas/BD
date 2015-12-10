@@ -43,6 +43,8 @@
 			$sql_maxmom .= "FROM sequencia s2  ";
 			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
 
+			echo $sql_maxmom
+
 			$getseq = $connection->prepare($sql_maxmom);
 
 			//$getseq = $bindParam(":userid", $uid);
@@ -57,6 +59,7 @@
 			$sql_maxtc .= "    (SELECT max(r2.typecnt) ";
 			$sql_maxtc .= "     FROM tipo_registo r2  ";
 			$sql_maxtc .= "     WHERE r2.userid = ".$uid.')';
+
 
 			$getmaxtc = $connection->prepare($sql_maxtc);
 			//$getmaxtc = $bindParam(":userid", $userid);
