@@ -1,9 +1,9 @@
 <?php
 
-	$host="localhost";	// MySQL is hosted in this machine
-	$user="";	// <== replace istxxx by your IST identity
-	$password="";	// <== paste here the password assigned by mysql_reset
-	$dbname = "";	// Do nothing here, your database has the same name as your username.
+$host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
+$user="ist172619"; // -> substituir pelo nome de utilizador
+$password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
+$dbname = $user; // a BD tem nome identico ao utilizador
 
 
 
