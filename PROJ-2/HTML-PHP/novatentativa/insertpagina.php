@@ -102,10 +102,10 @@
 		$getmoment->execute();
         echo "1";
 
-        $result = $getmoment->setFetchMode(PDO::FETCH_ASSOC); 
-        $result = $getmoment->fetchAll();
+        //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC); 
+        //$result = $getmoment->fetchAll();
 
-        print_result($result);
+        //print_result($result);
         echo "aqui";
 
         $sql_maxpc  = "SELECT p.pagecounter ";
@@ -121,25 +121,25 @@
         $uid2 = $userid;
         $getmaxpc->execute();
 
-        $result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
-        $result = $getmaxpc->fetchAll();
+        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
+        //$result = $getmaxpc->fetchAll();
 
-        print_result($result);
+        //print_result($result);
+
+        $getseq = $getmoment->fetchColumn();
+        $getmaxpcount = $getmaxpc->fetchColumn();
+        ++$getmaxpcount;
 
         $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
         $pagina->bindParam(":nomepagina", $nomep);
         $pagina->bindParam(":idseq", $pagemoment);
         $pagina->bindParam(":pagecounter", $maxpc);
         $pagina->bindParam(":userid", $uid3);
-        $nomep = $nomepagina;
-        $uid3 = $userid;
-        $pagemoment = $getmoment->fetchColumn();
-        $maxpc = $getmaxpc->fetchColumn();
-        ++$maxpc;
-        echo $nomep;
-        echo $uid3;
-        echo $pagemoment;
-        echo $maxpc;
+
+        $nomep  = $nomepagina;
+        $uid3   = $userid;
+        $pagemoment = $getseq;
+        $maxpc  = $getmaxpcount;
         $pagina->execute();
         echo "here?";
         $querriiiieee = "INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES ($uid3, $maxpc, $nomep, $maxpc, 1 , NULL)";
