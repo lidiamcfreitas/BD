@@ -68,6 +68,7 @@
 			echo 'HERE WE ARE !! ';
 
 			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nomeregisto.','.$idseq.'1)';
+			echo 'PREPARARATE GOOD TAIME->'.$preparation;
 			$tiporegisto = $connection->prepare($preparation);
 
 
