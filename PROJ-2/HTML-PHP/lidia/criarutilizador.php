@@ -61,7 +61,7 @@
               <tr>
                 <div class="form-group">
                     <td><label for="resposta2">Resposta2</label></td>
-                    <td><input type="resposta2" name="text" placeholder="." required></td>
+                    <td><input type="text" name="resposta2" placeholder="." required></td>
                 </div><br>
               </tr>
               <tr>
@@ -77,7 +77,7 @@
                 </div><br>
               </tr>
             </table>
-                  <br><input type="text" name="submit" class="btn btn-success" value="Show">
+                  <br><input type="submit" name="submit" class="btn btn-success" value="Show">
               </div>
           </form>
 
@@ -86,10 +86,10 @@
 
     require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["password"] != "") && ($_POST["questao1"] != "") && ($_POST["questao2"] != "") && ($_POST["resposta1"] != "") && ($_POST["resposta2"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["questao1"] != "") && ($_POST["questao2"] != "") && ($_POST["resposta1"] != "") && ($_POST["resposta2"] != "")){
 
         session_start();
-
+        echo "here";
         $nome = $_POST["nome"];
         $email = $_POST["email"];
         $password = $_POST["password"];
