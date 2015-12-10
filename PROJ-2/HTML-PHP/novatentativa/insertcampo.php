@@ -144,7 +144,7 @@
             $uid1_campocounter = $userid;
             echo "here";
             $getcampo_counter->execute();
-
+            echo "and here";
             $campocounter_insertcampo = $getcampo_counter->fetchColumn();
             echo "counter campo: ".$campocounter_insertcampo;
 
