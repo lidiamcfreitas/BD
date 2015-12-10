@@ -37,14 +37,7 @@ session_start();
                     <td><label for="nomepagina">Nome da Página</label></td>
                     <td><input type="text" name="nomepagina" placeholder="Nome da Página" required></td>
                 </div><br>
-                </tr>
-                <tr>
-                <div class="form-group">
-                    <td><label for="userid">Identificação do Utilizador</label></td>
-                    <td><input type="number" name="userid" placeholder="ex: 11321" required></td>
-                </div>
-                </tr>
-                <div class="form-group">
+              </tr>
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
                 </div>
@@ -57,7 +50,7 @@ session_start();
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 
         $nomepagina = $_POST["nomepagina"];
-		    $userid = $_POST["userid"];
+		    $userid = $_SESSION['userid'];
 
         class TableRows extends RecursiveIteratorIterator {
 

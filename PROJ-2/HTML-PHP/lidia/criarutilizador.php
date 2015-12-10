@@ -153,12 +153,10 @@
         $testarseexiste1->execute();
         $idutilizador3 = $testarseexiste1->fetchColumn();
 
-        echo "something1";
-        echo "userid: ".$idutilizador3;
         $_SESSION['userid'] = $idutilizador3;
 
 
-        //header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
+        header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
         }
 
     $connection = null;
