@@ -126,8 +126,18 @@
 
         print_result($result);
 
+        $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
+        $pagina->bindParam(":nomepagina", $nomep);
+        $pagina->bindParam(":idseq", $pagemoment);
+        $pagina->bindParam(":pagecounter", $maxpc);
+        $pagina->bindParam(":userid", $uid3);
+        $nomep = $nomepagina;
+        $uid3 = $userid;
+        $pagemoment = $getmoment->fetchColumn();
+        $maxpc = $getmaxpc->fetchColumn() + 1;
 
-        
+
+
 
     } else {
 
