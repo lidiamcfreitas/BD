@@ -77,7 +77,7 @@
         $sql_maxmom .= "     FROM sequencia s2  ";
         $sql_maxmom .= "     WHERE s2.userid = :userid)";
 
-        $getseq = $connection->prepare($sql);
+        $getseq = $connection->prepare($sql_maxmom);
         $getseq->bindParam(":userid", $uid);
         $uid = $userid;
 		$getseq->execute();
