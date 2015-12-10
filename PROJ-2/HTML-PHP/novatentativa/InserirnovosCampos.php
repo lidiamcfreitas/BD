@@ -78,7 +78,7 @@ echo "1";
 			$campocounter = $connection->prepare($campocnt);
 			$campocounter->execute();
 echo "2";
-			$preparation = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.','.$campocounter.',"'.$ncampo.'",'.$cenas.',1)';
+			$preparation = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.','.$campocnt.',"'.$ncampo.'",'.$cenas.',1)';
 			echo ' '.$preparation;
 			$final = $connection->prepare($preparation);
 			$final->execute();
