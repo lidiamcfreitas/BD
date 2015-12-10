@@ -54,6 +54,8 @@
 
         $nometiporegisto = $_POST["nometiporegisto"];
 		    $userid = $_POST["userid"];
+        echo $userid;
+        echo $nometiporegisto;
 
         class TableRows extends RecursiveIteratorIterator {
 
@@ -101,54 +103,59 @@
         $sql_maxmom .= "     WHERE s2.userid = :userid)";
 
         $getmoment = $connection->prepare($sql_maxmom);
-        $getmoment->bindParam(":userid", $uid);
-        $uid = $userid;
+        $getmoment->bindParam(":userid", $uid_itp);
+        $uid_itp = $userid;
 		    $getmoment->execute();
 
         //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC);
         //$result = $getmoment->fetchAll();
 
         //print_result($result);
-        $teste = "select count(*) from utilizador where userid = ".$userid;
+        $teste = "select count(*) from utilizador where userid = :userid";
         $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":userid", $uid_itp2);
+        $uid_itp2 = $userid;
         $testarseexiste->execute();
-        $deu = $testarseexiste->fetchAll();
+        $deu = $testarseexiste->fetchColumn();
+        echo $deu;
 
         if ($deu == 0) {
           echo "Esse Utilizador não existe";
+          exit();
         }
 
-        $sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $userid)");
+        // cria sequencia
+        $sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid)");
+        $sequencia->bindParam(":userid", $uid_itp3);
+        $uid_itp3 = $userid;
   			$sequencia->execute();
 
   			$sql_maxmom  = "SELECT s.contador_sequencia ";
   			$sql_maxmom .= "FROM sequencia s  ";
-  			$sql_maxmom .= "WHERE s.userid = ".$userid;
+  			$sql_maxmom .= "WHERE s.userid = :userid";
   			$sql_maxmom .= " AND s.moment = all ";
   			$sql_maxmom .= "( SELECT max(s2.moment) ";
   			$sql_maxmom .= "FROM sequencia s2  ";
-  			$sql_maxmom .= "WHERE s2.userid = ".$userid.')';
-
-
+  			$sql_maxmom .= "WHERE s2.userid = :userid)";
   			$getseq = $connection->prepare($sql_maxmom);
-
-  			//$getseq = $bindParam(":userid", $uid);
+  			$getseq = $bindParam(":userid", $uid_itp4);
+        $uit_itp4 = $userid;
   			$getseq->execute();
 
 
 
   			$sql_maxtc  = "SELECT r.typecnt ";
   			$sql_maxtc .= "FROM tipo_registo r  ";
-  			$sql_maxtc .= "WHERE r.userid = ".$userid;
+  			$sql_maxtc .= "WHERE r.userid = :userid";
   			$sql_maxtc .= "  AND r.typecnt = ALL  ";
   			$sql_maxtc .= "    (SELECT max(r2.typecnt) ";
   			$sql_maxtc .= "     FROM tipo_registo r2  ";
-  			$sql_maxtc .= "     WHERE r2.userid = ".$userid.')';
+  			$sql_maxtc .= "     WHERE r2.userid = :userid)";
 
 
   			$getmaxtc = $connection->prepare($sql_maxtc);
-  			//$getmaxtc = $bindParam(":userid", $userid);
-  			//$userid = $uid;
+  			$getmaxtc = $bindParam(":userid", $uid_itp5);
+  			$uid_itp5 = $userid;
   			$getmaxtc->execute();
 
   			$cenas2 = $getmaxtc->fetchColumn();
@@ -162,9 +169,18 @@
   			++$cenas;
 
 
-  			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$userid.','.$cenas2.',"'.$nreg.'",'.$cenas.',1)';
-  			echo ' '.$preparation;
-  			$tiporegisto = $connection->prepare($preparation);
+  			$printstring = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$userid.','.$cenas2.',"'.$nreg.'",'.$cenas.',1)';
+  			echo ' '.$printstring;
+        $preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, :ativo)";
+        $preparation->bindParam(":userid", $uid_itp6);
+        $preparation->bindParam(":typecnt", $typecnt_itp6);
+        $preparation->bindParam(":nome", $nome_itp6);
+        $preparation->bindParam(":idseq", $idseq_itp6);
+        $uid_itp6 = $userid ;
+        $typecnt_itp6 = $cenas2;
+        $nome_itp6 = $nreg;
+        $idseq_itp6 = $cenas;
+        $tiporegisto = $connection->prepare($preparation);
   			$tiporegisto->execute();
 
   			echo "Executei sem erros";
