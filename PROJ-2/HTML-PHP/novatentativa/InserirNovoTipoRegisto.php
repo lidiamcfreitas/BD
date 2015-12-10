@@ -45,15 +45,12 @@
 			$sql_maxmom .= "FROM sequencia s2  ";
 			$sql_maxmom .= "WHERE s2.userid = )".$uid.')';
 
-			echo 'MAXMOM ='.$sql_maxmom;
-			echo "ACABEI DE FAZER SET AO SQL_MAXMOM";
-
 			$getseq = $connection->prepare($sql_maxmom);
-			echo 'LOOK MOM, NO BINDPARAM';
+
 			//$getseq = $bindParam(":userid", $uid);
 			$getseq->execute();
 
-			echo "acabei de ver qual é a sequencia";
+
 
 			$sql_maxtc  = "SELECT r.typecnt ";
 			$sql_maxtc .= "FROM tipo_registo r  ";
@@ -70,21 +67,22 @@
 
 			echo 'HERE WE ARE !! ';
 
-			$tiporegisto = $connection->prepare("INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, 1)");
+			$tiporegisto = $connection->prepare("INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES 
+				(".$uid.','.$typecnt.','.$nomeregisto.','.$idseq.'1)' );
 
-			$tiporegisto->bindParam(":userid", $userid);
-			$userid = $uid;
-			$tiporegisto->bindParam(":typecnt", $typecnt);
-			$tiporegisto->bindParam(":nome", $nomeregisto);
-			$tiporegisto->bindParam(":idseq", $idseq);
+			//$tiporegisto->bindParam(":userid", $userid);
+			//$userid = $uid;
+			//$tiporegisto->bindParam(":typecnt", $typecnt);
+			//$tiporegisto->bindParam(":nome", $nomeregisto);
+			//$tiporegisto->bindParam(":idseq", $idseq);
 
-			$nomeregisto = $nreg;
-			$userid = $uid;
+			//$nomeregisto = $nreg;
+			//$userid = $uid;
 			$typecnt = $getmaxtc->fetchColumn();
 			$idseq = $getseq->fetchColumn() + 1;
 
 			$tiporegisto->execute();
-
+			echo "IN THE END... IT DOESN´T EVEN MATTER !!!!"
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
 		}
