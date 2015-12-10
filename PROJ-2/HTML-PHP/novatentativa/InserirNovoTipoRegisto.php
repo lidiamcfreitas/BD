@@ -31,9 +31,9 @@
 			 	$nreg = test_input($_POST["nomeregisto"]);
 			 	$uid = test_input($_POST["userid"]);
 			}
-			echo "depois do connect"
+			echo "depois do connect";
 
-		
+
 			$sequencia = $connection->prepare("INSERT INTO sequencia (userid) VALUES ($uid)");
 			$sequencia->execute();
 
