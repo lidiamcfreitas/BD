@@ -146,9 +146,10 @@
 
             $getcampocounter = $connection->prepare($campocnt);
             $getcampocounter->bindParam(":userid", $uid1_campocounter);
-            $getcampocounter>bindParam(":tipoid", $tipoid1);
+            $getcampocounter->bindParam(":tipoid", $tipoid1);
             $uid1_campocounter = $userid;
             $tipoid1 = $idtipo_type;
+            echo "here";
             $getcampocounter->execute();
 
             $campocounter_insertcampo = $getcampocounter->fetchColumn();
@@ -160,10 +161,10 @@
             $campo = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (:userid, :tipoid, :campoid ,:nomecampo,:seqid,1)";
             $insert = $connection->prepare($campocnt);
             $insert->bindParam(":userid", $uid2);
-            $insert>bindParam(":tipoid", $tipoid2);
-            $insert>bindParam(":campoid", $campoid2);
-            $insert>bindParam(":nomecampo", $camponome2);
-            $insert>bindParam(":seqid", $seqid2);
+            $insert->bindParam(":tipoid", $tipoid2);
+            $insert->bindParam(":campoid", $campoid2);
+            $insert->bindParam(":nomecampo", $camponome2);
+            $insert->bindParam(":seqid", $seqid2);
             $uid2 = $userid;
             $tipoid2 = $idtipo;
             $campoid2 = $campocounter;
