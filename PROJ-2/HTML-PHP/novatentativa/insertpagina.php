@@ -93,7 +93,7 @@
         }
 
         $sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid)");
-    		$bindParam(":userid", $user_ipseq);
+    		$sequencia->$bindParam(":userid", $user_ipseq);
         $user_ipseq  = $userid;
     		$sequencia->execute();
 

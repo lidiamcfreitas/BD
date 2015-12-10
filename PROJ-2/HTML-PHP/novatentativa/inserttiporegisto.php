@@ -104,7 +104,7 @@
           echo "Esse Utilizador não existe";
           exit();
         }
-        echo "utilizador existe";
+        echo "<h1>Utilizador existe</h1>";
 
     } else {
 
