@@ -36,18 +36,6 @@
 			</form>
 	    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
 		<center><h2>Inserir nova página</h2></center>
 	    <form name="inserir_nova_pagina" action="InserirNovaPagina.php" method="post" accept-charset="utf-8">
 	            <li>
@@ -69,7 +57,7 @@
 	        	</li>
 	            <li>
 	            	<center><label for="nometiporegisto">Nome do Tipo de Registo</label></center>
-	            	<center><input type="text" name="nreg" placeholder="Nome Tipo" required></center>
+	            	<center><input type="text" name="nometiporegisto" placeholder="Nome Tipo" required></center>
 	        	</li>
 
 	        <center><input type="submit" value="Aceder"></center>

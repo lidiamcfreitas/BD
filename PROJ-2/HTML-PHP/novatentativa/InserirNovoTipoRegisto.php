@@ -28,12 +28,12 @@
 
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {			 	
 				$uid = test_input($_POST["userid"]);
-			 	$nreg = test_input($_POST["nomeregisto"]);
+			 	$nreg = test_input($_POST["nometiporegisto"]);
 			}
 			echo 'userid:'.$uid;
 			echo 'nreg:'.$nreg;
 
-		$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
+		$sequencia = $connection->prepare("INSERT INTO sequencia (userid) VALUES ($uid)");
 		$sequencia->execute();
 
 			echo "Acabei de criar uma sequencia";
