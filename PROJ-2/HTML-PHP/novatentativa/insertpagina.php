@@ -121,7 +121,7 @@
         $uid2 = $userid;
         $getmaxpc->execute();
 
-        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
         //$result = $getmaxpc->fetchAll();
 
         //print_result($result);
