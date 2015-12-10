@@ -86,19 +86,17 @@
 
         $result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
         $result = $resultado->fetchAll();
+    
 
-
-        echo('<div id="left">');
-        echo('<table class="center"> ');
         if (empty($result)) {
-            echo "<p>Não existe uma pagina com esse nome";
+            echo "<p>Não existe uma pagina com esse nome</p>";
         } else {
             echo "<table style='border: solid 1px black;'>";
-        echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
+            echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
             foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
                 echo  $v;
             }
-        echo "</table>";
+            echo "</table>";
         }
 
     }
