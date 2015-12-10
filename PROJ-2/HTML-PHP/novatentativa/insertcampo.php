@@ -107,14 +107,14 @@
             $sql_maxmom .= "     FROM sequencia s2  ";
             $sql_maxmom .= "     WHERE s2.userid = :userid)";
 
-            $getmoment = $connection->prepare($sql_maxmom);
+            $getmoment2 = $connection->prepare($sql_maxmom);
             echo "2";
-            $getmoment->bindParam(":userid", $u_id);
+            $getmoment2->bindParam(":userid", $u_id);
             echo "3";
             $u_id = $userid;
-            $getmoment->execute();
+            $getmoment2->execute();
             echo "4<br>";
-            $getseq = $getmoment->fetchColumn();
+            $getseq = $getmoment2->fetchColumn();
             echo $getseq;
 
             $sqltypeid  = "SELECT typecnt ";
