@@ -166,7 +166,7 @@
 
         $tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, 1)";
 
-$print_tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES ($userid, $gettypecounter, $nome_tp, $idseq_tp, 1)";
+$print_tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES ($userid, $gettypecounter, $nometiporegisto, $getseqcounter, 1)";
   echo $print_tp_query;
         $tiporegisto_tp = $connection->prepare($tp_query);
         $tiporegisto_tp->bindParam(":userid", $uid_tp);
