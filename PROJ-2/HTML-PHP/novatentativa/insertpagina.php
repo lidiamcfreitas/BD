@@ -54,6 +54,8 @@
 
         $nomepagina = $_POST["nomepagina"];
 		    $userid = $_POST["userid"];
+        echo $nomepagina;
+        echo $userid;
 
         class TableRows extends RecursiveIteratorIterator {
 
@@ -93,7 +95,7 @@
         }
         echo "here";
         $query_cria_sequencia = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid)";
-        
+
         $sequencia_ip123 = $connection->prepare($query_cria_sequencia);
     		$sequencia_ip123->$bindParam(":userid", $user_ipseq);
         $user_ipseq = $userid;
