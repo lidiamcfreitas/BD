@@ -36,7 +36,9 @@
         </div>
     <?php
     echo "<p>diz qualquer coisa</p>";
-        require "connection.php";
+        
+        require "connect.php";
+        
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 		echo "estou aqui mãe";
         $nomepagina = $_POST["nomepagina"];
