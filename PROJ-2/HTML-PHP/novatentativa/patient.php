@@ -38,8 +38,8 @@
     echo "<p>diz qualquer coisa</p>";
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 		echo "estou aqui mãe";
-        $nomepagina = test_input($_POST["nomepagina"]);
-		$userid = test_input($_POST["userid"]);
+        $nomepagina = $_POST["nomepagina"];
+		$userid = $_POST["userid"];
 		echo "user: ".$userid;
 		echo "nomepagina: ".$nomepagina;
         class TableRows extends RecursiveIteratorIterator { 
