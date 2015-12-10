@@ -99,7 +99,7 @@
         echo '1';
         $getpageid = $connection->prepare($sql_pageid);
         $getpageid->bindParam(":userid", $userid);
-        $getpageid->bindParam(":name", $nometiporegisto);
+        $getpageid->bindParam(":nome", $nometiporegisto);
  echo '2';
         $uid = $userid;
         $getpageid->execute();
