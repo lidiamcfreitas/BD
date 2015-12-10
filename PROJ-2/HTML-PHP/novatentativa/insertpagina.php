@@ -141,7 +141,7 @@
         echo $pagemoment;
         echo $maxpc;
         $pagina->execute();
-
+        echo "here?";
 
 
 
