@@ -13,7 +13,7 @@
 
 	}
 	catch(PDOException $exception)
-	{		
+	{
 		echo "<div class=\"alert alert-danger\" role=\"alert\">{$exception->getMessage()}</div>";
 		exit();
 	}

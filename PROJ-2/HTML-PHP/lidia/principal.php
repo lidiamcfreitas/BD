@@ -128,7 +128,29 @@ session_start();
         $uid2 = $userid;
         $getmaxpc->execute();
         $resultado = $getmaxpc->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC));
+
+        $badboy = $connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
+        <table class=\"table table-striped\">
+          <thead>
+            <tr>
+              <?php
+              foreach($badboy[0] as $nome_coluna => $valor_coluna){
+                echo "<td>$nome_coluna</td>";
+              }
+              ?>
+            </tr>
+          </thead>
+          <tbody>
+        <?php
+        foreach($badboy as $num=>$row){
+          echo "<tr>";
+          foreach($row as $nome_coluna => $valor_coluna){
+            echo "<td>$valor_coluna</td>";
+          }
+          echo "</tr>";
+        }
         die();
 
 
