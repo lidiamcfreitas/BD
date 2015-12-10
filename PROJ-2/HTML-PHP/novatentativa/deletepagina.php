@@ -105,7 +105,7 @@
         echo "1:".$uid;
 
         $getpagecounter = $getpageid->fetchColumn();
-        echo "1:".$getpagecounter;
+        echo $getpagecounter;
 
 
         $sql_delete  = "UPDATE pagina ";
