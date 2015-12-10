@@ -52,6 +52,7 @@
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["email"] != "") && ($_POST["password"] != "")){
 
+        session_start();
         $email = $_POST["email"];
         $password = $_POST["password"];
 
@@ -128,13 +129,17 @@
           exit();
         }else{
           echo "<h1>Login efectuado com sucesso ! </h1>";
+          $_SESSION['email'] = $email ;
+          $_SESSION['password'] = $password;
 
-          $teste = "select count(1) userid from utilizador where email = :email ";
+          $teste = "select userid from utilizador where email = :email ";
           $testarseexiste =$connection->prepare($teste);
           $testarseexiste->bindParam(":email", $email_teste);
           $email_teste = $email;
           $testarseexiste->execute();
           $idutilizador2 = $testarseexiste->fetchColumn();
+
+          $_SESSION['userid'] = $idutilizador2;
 
           $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 1);";
 

@@ -55,7 +55,7 @@ session_start();
         require "connect.php";
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
-      echo "sessao funciona? simpleease: ".$_SESSION['nome'];
+
         $nomepagina = $_POST["nomepagina"];
 		    $userid = $_POST["userid"];
 

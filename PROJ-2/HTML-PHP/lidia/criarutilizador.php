@@ -144,6 +144,18 @@
         $pais_aux = $pais;
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
+
+
+        $teste1 = "select userid from utilizador where email = :email ";
+        $testarseexiste1 =$connection->prepare($teste1);
+        $testarseexiste1->bindParam(":email", $email_teste1);
+        $email_teste1 = $email;
+        $testarseexiste1->execute();
+        $idutilizador3 = $testarseexiste->fetchColumn();
+
+        echo "userid: ".$idutilizador3;
+        $_SESSION['userid'] = $idutilizador3;
+
         header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
         }
 
