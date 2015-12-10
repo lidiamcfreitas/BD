@@ -101,7 +101,7 @@
 
           $sequencia_itr = $connection->prepare($query_cria);
             $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
-            $user_ipseq_tr = $udutilizador2;
+            $user_ipseq_tr = $idutilizador2;
             $sequencia_itr->execute();
 
         }
