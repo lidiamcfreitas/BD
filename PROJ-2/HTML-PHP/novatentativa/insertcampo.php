@@ -108,8 +108,8 @@
             $sql_maxmom .= "     WHERE s2.userid = :userid)";
 
             $getmoment = $connection->prepare($sql_maxmom);
-            $getmoment->bindParam(":userid", $uid);
-            $uid = $userid;
+            $getmoment->bindParam(":userid", $u_id);
+            $u_id = $userid;
             $getmoment->execute();
 
             $getseq = $getmoment->fetchColumn();
