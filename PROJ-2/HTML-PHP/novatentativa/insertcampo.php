@@ -131,24 +131,17 @@
             $idtipo_type = $gettype1->fetchColumn();
             echo "id do tipo: ".$idtipo_type;
 
-
-            $sql_campocnt  = "SELECT c.campocnt + 1 ";
+            $sql_campocnt  = "SELECT c.campocnt ";
             $sql_campocnt .= "FROM campo c  ";
-            $sql_campocnt .= "WHERE c.userid = :userid";
-            $sql_campocnt .= "  AND c.typecnt = :tipoid";
-            $sql_campocnt .= "  AND c.ativo = 1 ";
-            $sql_campocnt .= "  AND c.campocnt = all ";
-            $sql_campocnt .= "    ( SELECT max(c1.campocnt) ";
+            $sql_campocnt .= "WHERE c.userid = :userid  ";
+            $sql_campocnt .= "  AND c.campocnt = ALL  ";
+            $sql_campocnt .= "    (SELECT max(c1.campocnt) ";
             $sql_campocnt .= "     FROM campo c1  ";
-            $sql_campocnt .= "     WHERE c1.userid = c.userid ";
-            $sql_campocnt .= "       AND c1.typecnt = c.typecnt ";
-            $sql_campocnt .= "       AND c1.ativo = 1)";
+            $sql_campocnt .= "     WHERE c1.userid = c.userid)";
 
             $getcampo_counter = $connection->prepare($sql_campocnt);
             $getcampo_counter->bindParam(":userid", $uid1_campocounter);
-            $getcampo_counter->bindParam(":tipoid", $tipoid_ic1);
             $uid1_campocounter = $userid;
-            $tipoid_ic1 = $idtipo_type;
             echo "here";
             $getcampocounter->execute();
 
