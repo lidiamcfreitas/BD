@@ -70,6 +70,7 @@
 			$tiporegisto = $connection->prepare("INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES 
 				(".$uid.','.$typecnt.','.$nomeregisto.','.$idseq.'1)' );
 
+
 			//$tiporegisto->bindParam(":userid", $userid);
 			//$userid = $uid;
 			//$tiporegisto->bindParam(":typecnt", $typecnt);
@@ -80,7 +81,7 @@
 			//$userid = $uid;
 			$typecnt = $getmaxtc->fetchColumn();
 			$idseq = $getseq->fetchColumn() + 1;
-
+			echo 'QUERY TIPO REGISTO'.$tiporegisto;
 			$tiporegisto->execute();
 			echo "IN THE END... IT DOESN´T EVEN MATTER !!!!";
 	} catch (PDOException $e){
