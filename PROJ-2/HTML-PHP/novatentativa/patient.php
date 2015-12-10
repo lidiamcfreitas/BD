@@ -81,9 +81,12 @@
         $sql .= "            AND p.ativa = 1))";
 
 		echo "estou aqui</br>";
-        		$resultado = $connection->prepare($sql);
+        $resultado = $connection->prepare($sql);
+        echo "fiz bind pai! </br>";
 		$resultado->bindParam(":nomepagina", $nomepagina);
-                $resultado->bindParam(":userid", $userid);
+		echo "fiz bind pai! </br>";
+        $resultado->bindParam(":userid", $userid);
+        echo "fiz bind pai! </br>";
 		$resultado->execute();
 		echo "fiz bind pai! </br>";
 		
