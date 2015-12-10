@@ -67,6 +67,8 @@
 
 			$typecnt = $getmaxtc->fetchColumn();
 			$idseq = $getseq->fetchColumn() + 1;
+			echo $typecnt;
+			echo $idseq;
 
 			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$idseq.',1)';
 			echo 'PREPARARATE GOOD TAIME->'.$preparation;
