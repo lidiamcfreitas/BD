@@ -20,14 +20,15 @@
             <li role="presentation"><a href="deletepagina.php"> Apagar Pagina </a></li>
         </ul>
         <h3 class="text-muted">Apagar Tipo</h3>
+
       </div>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
             	<table cellspacing="10">
             	<tr>
                 <div class="form-group">
-                    <td><label for="nomepagina">Nome da Página</label></td>
-                    <td><input type="text" name="nomepagina" placeholder="Nome da Página" required></td>
+                    <td><label for="Tipo">Nome do Tipo</label></td>
+                    <td><input type="text" name="nometiporegisto" placeholder="Nome da Página" required></td>
                 </div><br>
                 </tr>
                 <tr>
@@ -48,7 +49,7 @@
         
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 
-        $nomepagina = $_POST["nomepagina"];
+        $nometiporegisto = $_POST["nometiporegisto"];
 		$userid = $_POST["userid"];
 
         class TableRows extends RecursiveIteratorIterator { 
@@ -88,15 +89,15 @@
             }
         }
 
-        $sql_pageid  = "SELECT pagecounter ";
-        $sql_pageid .= "FROM pagina  ";
+        $sql_pageid  = "SELECT typecnt ";
+        $sql_pageid .= "FROM tipo_registo  ";
         $sql_pageid .= "WHERE userid = :userid ";
         $sql_pageid .= "  AND nome = :pagename";
 
 
         $getpageid = $connection->prepare($sql_pageid);
         $getpageid->bindParam(":userid", $uid);
-        $getpageid->bindParam(":pagename", $pagename);
+        $getpageid->bindParam(":pagename", $nometiporegisto);
 
         $uid = $userid;
         $pagename = $nomepagina;
@@ -106,9 +107,9 @@
         $getpagecounter = $getpageid->fetchColumn();
 
 
-        $sql_delete  = "UPDATE pagina ";
+        $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET ativa=0  ";
-        $sql_delete .= "WHERE pagecounter=:pagecounter and userid = :userid";
+        $sql_delete .= "WHERE typecnt=:typecnt and userid = :userid";
 
         $delete_page = $connection->prepare($sql_delete);
         $delete_page->bindParam(":userid", $uid1);
