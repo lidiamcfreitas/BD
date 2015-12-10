@@ -23,7 +23,7 @@
             <li role="presentation"><a href="inserttiporegisto.php"> Inserir Valores de Campos</a></li>
             <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
 
-        </ul><br><br>
+        </ul>
         <h3 class="text-muted">Inserir Pagina</h3>
       </div>
         <div>
