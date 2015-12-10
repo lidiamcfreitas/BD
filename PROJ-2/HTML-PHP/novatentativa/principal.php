@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="utf-8"> 
 
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 		<link href="../jumbotron-narrow.css" rel="stylesheet">
 
@@ -48,7 +47,7 @@
 
 
 
-	
+
 		<center><h2>Inserir nova página</h2></center>
 	    <form name="inserir_nova_pagina" action="InserirNovaPagina.php" method="post" accept-charset="utf-8">
 	            <li>

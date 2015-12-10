@@ -1,66 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <title>Bloco de Notas</title>
-        <meta charset="utf-16">
-        <link rel="stylesheet" href="normalize.css">
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" href="favicon.png">
+    <title>Bloco de Notas</title>
+    <meta charset="utf-16">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" type='text/css' href="./bd.css">
+    <link rel="icon" href="favicon.png">
 </head>
 <body>
-        <div id="wrap">
+<div id="wrap">
+
     <?php
-    echo "<table style='border: solid 1px black;'>";
-    echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
+    try{
+        // inicia sessão para passar variaveis entre ficheiros php
+        session_start();
 
-    class TableRows extends RecursiveIteratorIterator { 
-        function __construct($it) { 
-            parent::__construct($it, self::LEAVES_ONLY); 
+        // Função para limpar os dados de entrada
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+
+            return $data;
+        }
+        echo "1";
+        $host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
+        $user="ist172619"; // -> substituir pelo nome de utilizador
+        $password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
+        $dbname = $user; // a BD tem nome identico ao utilizador
+
+        $connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $npag = test_input($_POST["nomepagina"]);
+            $uid = test_input($_POST["userid"]);
         }
 
-        function current() {
-            return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
-        }
+        $sequencia = $connection->prepare("INSERT INTO sequencia (userid, moment) VALUES (?)");
+        //$sequencia = $bindParam(":userid", $userid);
+        //$userid = $uid;
+        $sequencia->execute(array($uid));
 
-        function beginChildren() { 
-            echo "<tr>"; 
-        } 
+        echo "2";
+        $sql_maxmom  = "SELECT s.contador_sequencia ";
+        $sql_maxmom .= "FROM sequencia s  ";
+        $sql_maxmom .= "WHERE s.userid = :userid ";
+        $sql_maxmom .= "  AND s.moment = all ";
+        $sql_maxmom .= "    ( SELECT max(s2.moment) ";
+        $sql_maxmom .= "     FROM sequencia s2  ";
+        $sql_maxmom .= "     WHERE s2.userid = :userid)";
 
-        function endChildren() { 
-            echo "</tr>" . "\n";
-        } 
-    } 
+        echo "3";
+        // idseq quando o momento e maximo
+        $getmoment = $connection->prepare($sql_maxmom);
+        $getmoment = $bindParam(":userid", $userid);
+        $userid = $uid;
+        $getmoment->execute();
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nomepagina = test_input($_POST["nomepagina"]);
-        $userid     = test_input($_POST["userID"]);
+        echo "4";
+
+        $sql_maxpc  = "SELECT p.pagecounter ";
+        $sql_maxpc .= "FROM pagina p  ";
+        $sql_maxpc .= "WHERE p.userid = :userid ";
+        $sql_maxpc .= "  AND p.pagecounter = all ";
+        $sql_maxpc .= "    ( SELECT max(p2.pagecounter) ";
+        $sql_maxpc .= "     FROM pagina p2  ";
+        $sql_maxpc .= "     WHERE p2.userid = :userid)";
+
+        echo "5";
+        // maximo page counter do utilizador
+        $getmaxpc = $connection->prepare($sql_maxpc);
+        $getmaxpc = $bindParam(":userid", $userid);
+        $userid = $uid;
+        $getmaxpc->execute();
+        echo "6";
+
+        $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
+        $pagina->bindParam(":nomepagina", $nomepagina);
+        $pagina->bindParam(":idseq", $pagemoment);
+        $pagina->bindParam(":pagecounter", $maxpc);
+        $pagina->bindParam(":userid", $userid);
+
+        echo "7";
+        $nomepagina = $npag;
+        $userid = $uid;
+        $pagemoment = $getmoment->fetchColumn();
+        $maxpc = $getmaxpc->fetchColumn() + 1;
+        echo $pagemoment;
+        echo $maxpc;
+        $pagina->execute();
+        echo "8";
+
+    } catch (PDOException $e){
+        echo("<p>ERROR: {$e->getMessage()}</p>");
     }
-
-    $host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
-    $user="ist172619"; // -> substituir pelo nome de utilizador
-    $password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
-    $dbname = $user; // a BD tem nome identico ao utilizador
-
-    try {
-        $conn = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-        $stmt = $conn->prepare("SELECT count(*) FROM utilizador where userid = :userid"); 
-        $stmt->bindParam(":userid", $userid);
-        $stmt->execute();
-
-        // set the resulting array to associative
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-        foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
-            echo $v;
-        }
-    }
-    catch(PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
-    $conn = null;
-    echo "</table>";
+    $connection = null;
     ?>
+
 
 </body>
 </html>
