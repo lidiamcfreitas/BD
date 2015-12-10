@@ -62,7 +62,7 @@
             }
         }
 
-        $teste = "select count(1) userid from utilizador where email = :email AND password = :password";
+        $teste = "select count(1) from utilizador where email = :email AND password = :password";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":email", $email_teste);
         $email_teste = $email;
