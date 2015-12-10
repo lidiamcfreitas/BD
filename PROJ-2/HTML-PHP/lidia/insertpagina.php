@@ -91,7 +91,8 @@
                 echo "</div>";
             }
         }
-
+        $SESSIONEMAIL = $_SESSION['email'];
+        echo $SESSIONEMAIL;
         // cria sequencia
         $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
         $sequencia_ip = $connection->prepare($query_cria);
