@@ -30,8 +30,8 @@
             	<table cellspacing="10">
             	<tr>
                 <div class="form-group">
-                    <td><label for="nomepagina">Nome da Página</label></td>
-                    <td><input type="text" name="nomepagina" placeholder="Nome da Página" required></td>
+                    <td><label for="nometiporegisto">Nome do Tipo</label></td>
+                    <td><input type="text" name="nometiporegisto" placeholder="Nome do Tipo" required></td>
                 </div><br>
                 </tr>
                 <tr>
@@ -53,7 +53,7 @@
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 
         $nomepagina = $_POST["nomepagina"];
-		$userid = $_POST["userid"];
+		    $userid = $_POST["userid"];
 
         class TableRows extends RecursiveIteratorIterator {
 
