@@ -128,8 +128,9 @@ session_start();
         $uid2 = $userid;
         $getmaxpc->execute();
         $resultado = $getmaxpc->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($resultado);
+        var_dump($connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC));
         die();
+
 
         //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC);
         //$result = $getmaxpc->fetchAll();
