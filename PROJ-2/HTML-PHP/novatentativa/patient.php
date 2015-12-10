@@ -52,7 +52,7 @@
             }
 
             function current() {
-                return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
+                return "<td >" . parent::current(). "</td>";
             }
 
             function beginChildren() { 
@@ -99,7 +99,7 @@
         if (empty($result)) {
             echo "<p>Não existe uma pagina com esse nome</p>";
         } else {
-            echo "<table>";
+            echo "<table class=\"table table-striped\">";
             echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
             foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
                 echo  $v;
