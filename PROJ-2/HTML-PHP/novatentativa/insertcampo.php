@@ -149,10 +149,19 @@
             echo "counter campo: ".$campocounter_insertcampo;
 
             ++$campocounter_insertcampo;
-            
+
             $campo_insertquery = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (:userid, :tipoid, :campoid ,:nomecampo,:seqid,1)";
 
             $insert_campo = $connection->prepare($campo_insertquery);
+
+
+            if (!$insert_campo) {
+                echo "\nPDO::errorInfo():\n";
+                print_r($connection->errorInfo());
+            }
+
+
+
             $insert_campo->bindParam(":userid", $uid2_ic);
             $insert_campo->bindParam(":tipoid", $tipoid2_ic);
             $insert_campo->bindParam(":campoid", $campoid2_ic);
