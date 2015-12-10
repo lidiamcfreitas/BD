@@ -137,8 +137,8 @@
 
 
   			$getmaxtr = $connection->prepare($sql_maxtr);
-  			$getmaxtr->bindParam(":userid", $uid_itr);
-  			$uid_itr = $userid;
+  			$getmaxtr->bindParam(":userid", $userid_itr);
+  			$userid_itr = $userid;
   			$getmaxtr->execute();
 
         $gettypecounter = $getmaxtr->fetchColumn();
