@@ -113,9 +113,9 @@
             echo "3";
             $u_id = $userid;
             $getmoment->execute();
-            echo "4";
+            echo "4<br>";
             $getseq = $getmoment->fetchColumn();
-            echo "sequencia: ".$getseq;
+            echo $getseq;
 
             $sqltypeid  = "SELECT typecnt ";
             $sqltypeid .= "FROM tipo_registo  ";
