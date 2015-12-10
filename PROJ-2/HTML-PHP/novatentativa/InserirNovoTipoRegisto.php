@@ -36,9 +36,9 @@
 			$testarseexiste->execute();
 			$deu = $testarseexiste->fetchAll();
 
-if (empty($deu)) {
-	echo "Esse Utilizador não existe";
-}
+			if (empty($deu)) {
+				echo "Esse Utilizador não existe";
+			}
 
 
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
@@ -52,7 +52,6 @@ if (empty($deu)) {
 			$sql_maxmom .= "FROM sequencia s2  ";
 			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
 
-			echo $sql_maxmom;
 
 			$getseq = $connection->prepare($sql_maxmom);
 
@@ -76,9 +75,9 @@ if (empty($deu)) {
 			$getmaxtc->execute();
 
 			$cenas2 = $getmaxtc->fetchColumn();
-			echo cenas2;
+
 			++$cenas2;
-			echo cenas2;
+
 
 
 			$cenas = $getseq->fetchColumn();

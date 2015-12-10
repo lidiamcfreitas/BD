@@ -122,11 +122,10 @@
         $getmaxpc->execute();
 
         $result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC); 
-        //$result = $getmaxpc->fetchAll();
+        $result = $getmaxpc->fetchAll();
 
-        //print_result($result);
-        $row = $getmaxpc->fetchColumn();
-        echo "coco: ". $row;
+        print_result($result);
+        echo "coco: ". $result[0];
 
 
 
