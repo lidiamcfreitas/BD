@@ -43,37 +43,37 @@
               <tr>
                 <div class="form-group">
                     <td><label for="questao1">Questao1</label></td>
-                    <td><input type="questao1" name="text" placeholder="?" required></td>
+                    <td><input type="text" name="questao1" placeholder="?" required></td>
                 </div><br>
               </tr>
               <tr>
                 <div class="form-group">
                     <td><label for="resposta1">Resposta1</label></td>
-                    <td><input type="resposta1" name="text" placeholder="." required></td>
+                    <td><input type="text" name="resposta1" placeholder="." required></td>
                 </div><br>
               </tr>
               <tr>
                 <div class="form-group">
                     <td><label for="questao2">Questao2</label></td>
-                    <td><input type="questao2" name="text" placeholder="?" required></td>
+                    <td><input type="text" name="questao2" placeholder="?" required></td>
                 </div><br>
               </tr>
               <tr>
                 <div class="form-group">
                     <td><label for="resposta2">Resposta2</label></td>
-                    <td><input type="resposta2" name="text" placeholder="." required></td>
+                    <td><input type="text" name="resposta2" placeholder="." required></td>
                 </div><br>
               </tr>
               <tr>
                 <div class="form-group">
                     <td><label for="pais">Pais</label></td>
-                    <td><input type="pais" name="text" required></td>
+                    <td><input type="text" name="pais" required></td>
                 </div><br>
               </tr>
               <tr>
                 <div class="form-group">
                     <td><label for="categoria">Categoria</label></td>
-                    <td><input type="categoria" name="text" placeholder="" required></td>
+                    <td><input type="text" name="categoria" placeholder="" required></td>
                 </div><br>
               </tr>
             </table>
@@ -84,12 +84,12 @@
         </div>
     <?php
 
-        require "connect.php";
+    require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["password"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["questao1"] != "") && ($_POST["questao2"] != "") && ($_POST["resposta1"] != "") && ($_POST["resposta2"] != "")){
 
         session_start();
-
+        echo "here";
         $nome = $_POST["nome"];
         $email = $_POST["email"];
         $password = $_POST["password"];
@@ -120,7 +120,7 @@
         echo "8".$pais."<br>";
         echo "9".$categoria."<br>";
 
-        $query_cria = "INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid,:email,:nome,:password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
+        $query_cria = "INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid, :email, :nome, :password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
         $utilizador_obj = $connection->prepare($query_cria_aux);
     		$utilizador_obj->bindParam(":userid", $userid_aux);
         $utilizador_obj->bindParam(":email", $email_aux);
@@ -143,16 +143,6 @@
         $pais_aux = $pais;
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
-
-        echo $nome;
-        echo $email ;
-        echo $password_aux;
-        echo $questao1_aux;
-        echo $resposta1;
-        echo $questao2;
-        echo $resposta2;
-        echo $pais;
-        echo $categoria;
         //header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/criarutilizador.php");
 
         }
