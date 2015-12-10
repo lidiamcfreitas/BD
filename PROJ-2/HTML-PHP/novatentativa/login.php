@@ -75,10 +75,10 @@
           $deu= $row['deu'];
         }
 
-        $teste = "select count(1) as userid from utilizador where email = :email";
+        $teste = "select  userid from utilizador where email = :email";
         $testarseid =$connection->prepare($teste);
-        $testarseid->bindParam(":email", $email_teste);
-        $email_teste = $email;
+        $testarseid->bindParam(":email", $email_);
+        $email_ = $email;
         $testarseid->execute();
 
 
