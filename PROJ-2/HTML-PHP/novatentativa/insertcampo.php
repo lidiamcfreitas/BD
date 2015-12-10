@@ -99,7 +99,32 @@
                 echo "</div>";
             }
         }
-            echo "here";
+
+        $teste = "select count(*) from utilizador where userid = :userid";
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":userid", $userid_teste);
+        $userid_teste = $userid;
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchColumn();
+
+        if ($deu == 0) {
+          echo "<h1>O Utilizador não existe </h1>";
+          exit();
+        }
+
+        $teste = "select count(*) from tipo_registo where nome = :nomeregisto";
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":nomeregisto", $nomeregisto_teste);
+        $nomeregisto_teste = $nometipo;
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchColumn();
+
+        if ($deu == 0) {
+          echo "<h1>O Tipo não existe </h1>";
+          exit();
+        }
+
+        echo "<h1>Utilizador existe</h1>";
             // cria sequencia
             $query_cria_ic = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
             $sequencia_ic = $connection->prepare($query_cria_ic);
