@@ -156,7 +156,7 @@
         $_SESSION['userid'] = $idutilizador3;
 
 
-        header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
+        header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/principal.php");
         }
 
     $connection = null;
