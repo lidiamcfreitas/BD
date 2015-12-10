@@ -33,7 +33,7 @@
 			echo 'userid:'.$uid;
 			echo 'nreg:'.$nreg;
 
-		$sequencia = $connection->prepare("INSERT INTO sequencia (userid) VALUES ($uid)");
+		$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 		$sequencia->execute();
 
 			echo "Acabei de criar uma sequencia";
