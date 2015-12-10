@@ -69,8 +69,8 @@
 			$idseq = $getseq->fetchColumn();
 
 			echo "My name is " , get_class($idseq) , "\n";
-
-			$idseq = idseq+1;
+			echo $idseq;
+			++$idseq;
 			echo $typecnt;
 			echo $idseq;
 
