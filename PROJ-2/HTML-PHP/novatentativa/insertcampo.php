@@ -123,7 +123,7 @@
 
             $gettype1 = $connection->prepare($sqltypeid1);
             $gettype1->bindParam(":userid", $uid_type);
-            $gettype1>bindParam(":nometiporegisto", $nometr);
+            $gettype1->bindParam(":nometiporegisto", $nometr);
             $uid_type1 = $userid;
             $nometr = $nometipo;
             $gettype1->execute();
