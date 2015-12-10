@@ -140,14 +140,14 @@
           $idutilizador2 = $testarseexiste->fetchColumn();
 
           $_SESSION['userid'] = $idutilizador2;
-          
+
           $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 1);";
 
           $sequencia_itr = $connection->prepare($query_cria);
             $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
             $user_ipseq_tr = $idutilizador2;
             $sequencia_itr->execute();
-          header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
+          header("Location: /insertpagina.php");
         }
       }
 
