@@ -100,9 +100,7 @@
         }
 
     }
-        $con = null;
-    }
-    
+    $con = null;
     ?>
 
     </div> <!-- /container -->
