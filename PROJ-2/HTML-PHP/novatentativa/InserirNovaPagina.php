@@ -10,26 +10,24 @@
 <body>
 	<div id="wrap">
 
-<?php 
-	try{
-		// inicia sessão para passar variaveis entre ficheiros php
-		session_start();
+	<?php 
+		try{
+			// inicia sessão para passar variaveis entre ficheiros php
+			session_start();
 
-		// Função para limpar os dados de entrada
-		function test_input($data) {
-			$data = trim($data);
-			$data = stripslashes($data);
-			$data = htmlspecialchars($data);
-			
-			return $data;
-		}
+			// Função para limpar os dados de entrada
+			function test_input($data) {
+				$data = trim($data);
+				$data = stripslashes($data);
+				$data = htmlspecialchars($data);
+				
+				return $data;
+			}
+
+		
 		echo "1";
-		$host="db.ist.utl.pt"; // o MySQL esta disponivel nesta maquina
-		$user="ist172619"; // -> substituir pelo nome de utilizador
-		$password="oefc3659"; // -> substituir pela password dada pelo mysql_reset
-		$dbname = $user; // a BD tem nome identico ao utilizador
 
-		$connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+		require "connect.php";
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		 	$npag = test_input($_POST["nomepagina"]);

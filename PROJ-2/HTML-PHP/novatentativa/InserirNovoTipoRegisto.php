@@ -23,19 +23,18 @@
 				
 				return $data;
 			}
-			echo "Antes do connect";
 
 			require "connect.php";
 
-			echo "depois do connect";
-
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {			 	
 				$uid = test_input($_POST["userid"]);
-			 	$nreg = test_input($_POST["nomeregisto"]);
+			 	$nreg = test_input($_POST["nometiporegisto"]);
 			}
+			echo 'userid:'.$uid;
+			echo 'nreg:'.$nreg;
 
-		$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
-		$sequencia->execute();
+			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
+			$sequencia->execute();
 
 			echo "Acabei de criar uma sequencia";
 
