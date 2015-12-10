@@ -43,19 +43,19 @@
               <tr>
                 <div class="form-group">
                     <td><label for="questao1">Questao1</label></td>
-                    <td><input type="questao1" name="text" placeholder="?" required></td>
+                    <td><input type="text" name="questao1" placeholder="?" required></td>
                 </div><br>
               </tr>
               <tr>
                 <div class="form-group">
                     <td><label for="resposta1">Resposta1</label></td>
-                    <td><input type="resposta1" name="text" placeholder="." required></td>
+                    <td><input type="text" name="resposta1" placeholder="." required></td>
                 </div><br>
               </tr>
               <tr>
                 <div class="form-group">
                     <td><label for="questao2">Questao2</label></td>
-                    <td><input type="questao2" name="text" placeholder="?" required></td>
+                    <td><input type="text" name="questao2" placeholder="?" required></td>
                 </div><br>
               </tr>
               <tr>
@@ -67,17 +67,17 @@
               <tr>
                 <div class="form-group">
                     <td><label for="pais">Pais</label></td>
-                    <td><input type="pais" name="text" required></td>
+                    <td><input type="text" name="pais" required></td>
                 </div><br>
               </tr>
               <tr>
                 <div class="form-group">
                     <td><label for="categoria">Categoria</label></td>
-                    <td><input type="categoria" name="text" placeholder="" required></td>
+                    <td><input type="text" name="categoria" placeholder="" required></td>
                 </div><br>
               </tr>
             </table>
-                  <br><input type="submit" name="submit" class="btn btn-success" value="Show">
+                  <br><input type="text" name="submit" class="btn btn-success" value="Show">
               </div>
           </form>
 
@@ -120,7 +120,7 @@
         echo "8".$pais."<br>";
         echo "9".$categoria."<br>";
 
-        $query_cria = "INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid,:email,:nome,:password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
+        $query_cria = "INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid, :email, :nome, :password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
         $utilizador_obj = $connection->prepare($query_cria_aux);
     		$utilizador_obj->bindParam(":userid", $userid_aux);
         $utilizador_obj->bindParam(":email", $email_aux);
