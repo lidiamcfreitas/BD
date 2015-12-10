@@ -57,16 +57,18 @@
 
 			$sql_maxtc  = "SELECT r.typecnt ";
 			$sql_maxtc .= "FROM tipo_registo r  ";
-			$sql_maxtc .= "WHERE r.userid = :userid ";
+			$sql_maxtc .= "WHERE r.userid = ".$uid;
 			$sql_maxtc .= "  AND r.typecnt = ALL  ";
 			$sql_maxtc .= "    (SELECT max(r2.typecnt) ";
 			$sql_maxtc .= "     FROM tipo_registo r2  ";
-			$sql_maxtc .= "     WHERE r2.userid = :userid)";
+			$sql_maxtc .= "     WHERE r2.userid = ".$uid.')';
 
 			$getmaxtc = $connection->prepare($sql_maxpc);
-			$getmaxtc = $bindParam(":userid", $userid);
-			$userid = $uid;
+			//$getmaxtc = $bindParam(":userid", $userid);
+			//$userid = $uid;
 			$getmaxtc->execute();
+
+			echo 'HERE WE ARE !! '
 
 			$tiporegisto = $connection->prepare("INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, 1)");
 
