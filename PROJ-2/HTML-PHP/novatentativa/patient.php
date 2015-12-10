@@ -100,15 +100,16 @@
         }
 
     }
-catch (PDOException $e)
-{
+catch (PDOException $e){
         echo("<p>ERROR: {$e->getMessage()}</p>");
     }
 
 
         $con = null;
     }
+    
     ?>
+
     </div> <!-- /container -->
   </body>
 </html>
