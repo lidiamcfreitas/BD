@@ -27,16 +27,17 @@
 
 
 
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {			 	
+				$uid = test_input($_POST["userid"]);
 			 	$nreg = test_input($_POST["nomeregisto"]);
-			 	$uid = test_input($_POST["userid"]);
 			}
 
 			require "connect.php";
 
 			echo "depois do connect";
 
-			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
+			$sequencia = $connection->prepare("INSERT INTO sequencia (userid) VALUES (:userid)");
+			$sequencia->bindParam(":userid", $uid);
 			$sequencia->execute();
 
 			echo "Acabei de criar uma sequencia";
