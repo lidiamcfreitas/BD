@@ -66,16 +66,21 @@
 			//$userid = $uid;
 			$getmaxtc->execute();
 
-			$typecnt = $getmaxtc->fetchColumn();
-			++$typecnt;
+			$cenas2 = $getmaxtc->fetchColumn();
+			echo cenas2;
+			++$cenas2;
+			echo cenas2;
+
+
+
+
+
 			$cenas = $getseq->fetchColumn();
 
-			echo $cenas;
 			++$cenas;
-			echo $cenas;
 
 
-			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.',"'.$nreg.'",'.$cenas.',1)';
+			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.',"'.$nreg.'",'.$cenas.',1)';
 			echo ' '.$preparation;
 			$tiporegisto = $connection->prepare($preparation);
 			$tiporegisto->execute();
