@@ -132,27 +132,28 @@
             echo "id do tipo: ".$idtipo_type;
 
 
-            $campocnt  = "SELECT c.campocnt + 1 ";
-            $campocnt .= "FROM campo c  ";
-            $campocnt .= "WHERE c.userid = :userid";
-            $campocnt .= "  AND c.typecnt = :tipoid";
-            $campocnt .= "  AND c.ativo = 1 ";
-            $campocnt .= "  AND c.campocnt = all ";
-            $campocnt .= "    ( SELECT max(c1.campocnt) ";
-            $campocnt .= "     FROM campo c1  ";
-            $campocnt .= "     WHERE c1.userid = c.userid ";
-            $campocnt .= "       AND c1.typecnt = c.typecnt ";
-            $campocnt .= "       AND c1.ativo = 1)";
+            $sql_campocnt  = "SELECT c.campocnt + 1 ";
+            $sql_campocnt .= "FROM campo c  ";
+            $sql_campocnt .= "WHERE c.userid = :userid";
+            $sql_campocnt .= "  AND c.typecnt = :tipoid";
+            $sql_campocnt .= "  AND c.ativo = 1 ";
+            $sql_campocnt .= "  AND c.campocnt = all ";
+            $sql_campocnt .= "    ( SELECT max(c1.campocnt) ";
+            $sql_campocnt .= "     FROM campo c1  ";
+            $sql_campocnt .= "     WHERE c1.userid = c.userid ";
+            $sql_campocnt .= "       AND c1.typecnt = c.typecnt ";
+            $sql_campocnt .= "       AND c1.ativo = 1)";
 
-            $getcampocounter = $connection->prepare($campocnt);
-            $getcampocounter->bindParam(":userid", $uid1);
-            $getcampocounter>bindParam(":tipoid", $tipoid1);
-            $uid1 = $userid;
-            $tipoid1 = $idtipo;
+            $getcampocounter = $connection->prepare($sql_campocnt);
+            $getcampocounter->bindParam(":userid", $uid1_campocounter);
+            $getcampocounter->bindParam(":tipoid", $tipoid_ic1);
+            $uid1_campocounter = $userid;
+            $tipoid_ic1 = $idtipo_type;
+            echo "here";
             $getcampocounter->execute();
 
-            $campocounter = $getcampocounter->fetchColumn();
-            echo "counter campo: ".$campocounter;
+            $campocounter_insertcampo = $getcampocounter->fetchColumn();
+            echo "counter campo: ".$campocounter_insertcampo;
 
 
             $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
@@ -160,10 +161,10 @@
             $campo = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (:userid, :tipoid, :campoid ,:nomecampo,:seqid,1)";
             $insert = $connection->prepare($campocnt);
             $insert->bindParam(":userid", $uid2);
-            $insert>bindParam(":tipoid", $tipoid2);
-            $insert>bindParam(":campoid", $campoid2);
-            $insert>bindParam(":nomecampo", $camponome2);
-            $insert>bindParam(":seqid", $seqid2);
+            $insert->bindParam(":tipoid", $tipoid2);
+            $insert->bindParam(":campoid", $campoid2);
+            $insert->bindParam(":nomecampo", $camponome2);
+            $insert->bindParam(":seqid", $seqid2);
             $uid2 = $userid;
             $tipoid2 = $idtipo;
             $campoid2 = $campocounter;
