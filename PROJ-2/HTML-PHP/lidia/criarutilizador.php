@@ -134,6 +134,15 @@
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
 
+        echo $nome;
+        echo $email ;
+        echo $password_aux;
+        echo $questao1_aux;
+        echo $resposta1;
+        echo $questao2;
+        echo $resposta2;
+        echo $pais;
+        echo $categoria;
         header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/criarutilizador.php");
 
         }
