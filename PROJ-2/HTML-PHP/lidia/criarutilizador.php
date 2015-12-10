@@ -112,8 +112,8 @@
 
         echo "1".$nome."<br>";
         echo "2".$email ."<br>";
-        echo "3".$password_aux."<br>";
-        echo "4".$questao1_aux."<br>";
+        echo "3".$password."<br>";
+        echo "4".$questao1."<br>";
         echo "5".$resposta1."<br>";
         echo "6".$questao2."<br>";
         echo "7".$resposta2."<br>";
