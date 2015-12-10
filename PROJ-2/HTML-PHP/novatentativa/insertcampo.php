@@ -152,6 +152,9 @@
 
             $campo_insertquery = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (:userid, :tipoid, :campoid ,:nomecampo,:seqid,1)";
 
+             $print_campo_insertquery = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES ($userid, $idtipo_type, $campocounter_insertcampo ,$nomecampo,$id_sequenciaa,1)";
+             echo $print_campo_insertquery;
+
             $insert_campo = $connection->prepare($campo_insertquery);
 
 
@@ -173,6 +176,7 @@
             $camponome2_ic = $nomecampo;
             $seqid2_ic = $id_sequenciaa;
             $insert_campo->execute();
+
 
     }
     $connection = null;
