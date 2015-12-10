@@ -106,6 +106,56 @@
         }
         echo "<h1>Utilizador existe</h1>";
 
+        // cria sequencia
+        $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
+        $sequencia_itr = $connection->prepare($query_cria);
+    		$sequencia_itr->bindParam(":userid", $user_ipseq_tr);
+        $user_ipseq_tr = $userid;
+    		$sequencia_itr->execute();
+
+        $sql_maxmom_itr  = "SELECT s.contador_sequencia ";
+        $sql_maxmom_itr .= "FROM sequencia s  ";
+        $sql_maxmom_itr .= "WHERE s.userid = :userid ";
+        $sql_maxmom_itr .= "  AND s.moment = all ";
+        $sql_maxmom_itr .= "    ( SELECT max(s2.moment) ";
+        $sql_maxmom_itr .= "     FROM sequencia s2  ";
+        $sql_maxmom_itr .= "     WHERE s2.userid = :userid)";
+
+        $getmoment = $connection->prepare($sql_maxmom_itr);
+        $getmoment->bindParam(":userid", $uid_itr);
+        $uid_itr = $userid;
+		    $getmoment->execute();
+
+        echo "vai buscar typecounter seguinte";
+        $sql_maxtc  = "SELECT r.typecnt + 1";
+  			$sql_maxtc .= "FROM tipo_registo r  ";
+  			$sql_maxtc .= "WHERE r.userid = :userid";
+  			$sql_maxtc .= "  AND r.typecnt = ALL  ";
+  			$sql_maxtc .= "    (SELECT max(r2.typecnt) ";
+  			$sql_maxtc .= "     FROM tipo_registo r2  ";
+  			$sql_maxtc .= "     WHERE r2.userid = :userid)";
+
+
+  			$getmaxtc = $connection->prepare($sql_maxtc);
+  			$getmaxtc->bindParam(":userid", $uid_itr);
+  			$uid_itr = $userid;
+  			$getmaxtc->execute();
+
+        $gettypecounter = $getmaxtc->fetchColumn();
+        $getseqcounter = $getmoment->fetchColumn();
+
+        $tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, 1)";
+        $tiporegisto_tp = $connection->prepare($tp_query);
+        $tiporegisto_tp->bindParam(":userid", $uid_tp);
+        $tiporegisto_tp->bindParam(":typecnt", $typecnt_tp);
+        $tiporegisto_tp->bindParam(":nome", $nome_tp);
+        $tiporegisto_tp->bindParam(":idseq", $idseq_tp);
+        $uid_tp = $userid;
+        $typecnt_tp = $gettypecounter;
+        $nome_tp = $nometiporegisto;
+        $idseq_tp = $getseqcounter;
+        $tiporegisto_tp->execute();
+
     } else {
 
     }
