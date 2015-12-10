@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="nomepagina">Nome da Página</label>
                     <input type="text" name="nomepagina" placeholder="Nome da Página" required>
-                </div>
+                </div></br>
                 <div class="form-group">
                     <label for="userid">Identificação do Utilizador</label>
                     <input type="number" name="userid" placeholder="ex: 11321" required>
