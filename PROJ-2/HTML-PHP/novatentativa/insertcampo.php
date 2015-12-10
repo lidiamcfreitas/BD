@@ -14,9 +14,9 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation class="active""><a href="insertpagina.php"> Inserir Página </a></li>
+            <li role="presentation"><a href="insertpagina.php"> Inserir Página </a></li>
             <li role="presentation"><a href="inserttiporegisto.php"> Inserir Tipo </a></li>
-            <li role="presentation"><a href="insertcampo.php"> Inserir Campos </a></li>
+            <li role="presentation" class="active"><a href="insertcampo.php"> Inserir Campos </a></li>
             <li role="presentation"><a href="deletepagina.php"> Apagar Página </a></li>
             <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
             <li role="presentation"><a href="deletepagina.php"> Apagar Campo de Tipo </a></li>
