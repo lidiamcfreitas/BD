@@ -127,7 +127,7 @@
 		    $getmoment->execute();
 
         echo "vai buscar typecounter seguinte";
-        $sql_maxtr  = "SELECT r.typecnt + 1";
+        $sql_maxtr  = "SELECT r.typecnt";
   			$sql_maxtr .= "FROM tipo_registo r  ";
   			$sql_maxtr .= "WHERE r.userid = :userid ";
   			$sql_maxtr .= "  AND r.typecnt = ALL  ";
