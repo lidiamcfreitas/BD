@@ -70,10 +70,10 @@
 			$typecnt = $getmaxtc->fetchColumn();
 			$idseq = $getseq->fetchColumn() + 1;
 
-			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$idseq.'1)';
+			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$idseq.',1)';
 			echo 'PREPARARATE GOOD TAIME->'.$preparation;
 			$tiporegisto = $connection->prepare($preparation);
-
+			$tiporegisto->execute();
 
 
 			//$tiporegisto->bindParam(":userid", $userid);
@@ -86,7 +86,7 @@
 			//$userid = $uid;
 
 
-			$tiporegisto->execute();
+
 			echo "IN THE END... IT DOESN´T EVEN MATTER !!!!";
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
