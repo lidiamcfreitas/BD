@@ -148,7 +148,7 @@
             $user_ipseq_tr = $idutilizador2;
             $sequencia_itr->execute();
 
-          header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/principal.php");
+          header("Location: insertpagina.php");
 
         }
       }
