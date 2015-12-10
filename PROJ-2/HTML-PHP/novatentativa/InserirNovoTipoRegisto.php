@@ -68,7 +68,7 @@
 			//$userid = $uid;
 			$getmaxtc->execute();
 
-			echo 'HERE WE ARE !! '
+			echo 'HERE WE ARE !! ';
 
 			$tiporegisto = $connection->prepare("INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, 1)");
 
