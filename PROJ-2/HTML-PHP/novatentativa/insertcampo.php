@@ -98,38 +98,38 @@
                 echo "</div>";
             }
         }
+            echo "1";
+            $sqlmaxmom  = "SELECT s.contador_sequencia ";
+            $sqlmaxmom .= "FROM sequencia s  ";
+            $sqlmaxmom .= "WHERE s.userid = :userid ";
+            $sqlmaxmom .= "  AND s.moment = all ";
+            $sqlmaxmom .= "    ( SELECT max(s2.moment) ";
+            $sqlmaxmom .= "     FROM sequencia s2  ";
+            $sqlmaxmom .= "     WHERE s2.userid = :userid)";
 
-            $sql_maxmom  = "SELECT s.contador_sequencia + 1";
-            $sql_maxmom .= "FROM sequencia s  ";
-            $sql_maxmom .= "WHERE s.userid = :userid ";
-            $sql_maxmom .= "  AND s.moment = all ";
-            $sql_maxmom .= "    ( SELECT max(s2.moment) ";
-            $sql_maxmom .= "     FROM sequencia s2  ";
-            $sql_maxmom .= "     WHERE s2.userid = :userid)";
+            $get_moment = $connection->prepare($sqlmaxmom);
+            $get_moment->bindParam(":userid", $uid_maxmom);
+            $uid_maxmom = $userid;
+            $get_moment->execute();
 
-            $getmoment = $connection->prepare($sql_maxmom);
-            $getmoment->bindParam(":userid", $uid);
-            $uid = $userid;
-            $getmoment->execute();
+            $id_sequenciaa = $get_moment->fetchColumn();
+            echo $id_sequenciaa;
 
-            $getseq = $getmoment->fetchColumn();
-            echo "sequencia: ".$getseq;
+            $sqltypeid1  = "SELECT typecnt ";
+            $sqltypeid1 .= "FROM tipo_registo  ";
+            $sqltypeid1 .= "WHERE userid = :userid";
+            $sqltypeid1 .= "  AND nome = :nometiporegisto";
+            $sqltypeid1 .= "  AND ativo = 1";
 
-            $sqltypeid  = "SELECT typecnt ";
-            $sqltypeid .= "FROM tipo_registo  ";
-            $sqltypeid .= "WHERE userid = :userid";
-            $sqltypeid .= "  AND nome = :nometiporegisto";
-            $sqltypeid .= "  AND ativo = 1";
-
-            $gettype = $connection->prepare($sqltypeid);
-            $gettype->bindParam(":userid", $uid);
-            $gettype>bindParam(":nometiporegisto", $nometr);
-            $uid = $userid;
+            $gettype1 = $connection->prepare($sqltypeid1);
+            $gettype1->bindParam(":userid", $uid_type1);
+            $gettype1->bindParam(":nometiporegisto", $nometr);
+            $uid_type1 = $userid;
             $nometr = $nometipo;
-            $gettype->execute();
+            $gettype1->execute();
 
-            $idtipo = $gettype->fetchColumn();
-            echo "id do tipo: ".$idtipo;
+            $idtipo_type = $gettype1->fetchColumn();
+            echo "id do tipo: ".$idtipo_type;
 
 
             $campocnt  = "SELECT c.campocnt + 1 ";
