@@ -100,7 +100,7 @@
         $getpageid->bindParam(":pagename", $nometiporegisto);
 
         $uid = $userid;
-        $pagename = $nomepagina;
+
         $getpageid->execute();
 
 
@@ -110,6 +110,8 @@
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET ativa=0  ";
         $sql_delete .= "WHERE typecnt=:typecnt and userid = :userid";
+
+        echo $sql_delete;
 
         $delete_page = $connection->prepare($sql_delete);
         $delete_page->bindParam(":userid", $uid1);
