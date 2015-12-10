@@ -145,14 +145,14 @@
             $campocnt .= "       AND c1.ativo = 1)";
 
             $getcampocounter = $connection->prepare($campocnt);
-            $getcampocounter->bindParam(":userid", $uid1);
+            $getcampocounter->bindParam(":userid", $uid1_campocounter);
             $getcampocounter>bindParam(":tipoid", $tipoid1);
-            $uid1 = $userid;
-            $tipoid1 = $idtipo;
+            $uid1_campocounter = $userid;
+            $tipoid1 = $idtipo_type;
             $getcampocounter->execute();
 
-            $campocounter = $getcampocounter->fetchColumn();
-            echo "counter campo: ".$campocounter;
+            $campocounter_insertcampo = $getcampocounter->fetchColumn();
+            echo "counter campo: ".$campocounter_insertcampo;
 
 
             $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
