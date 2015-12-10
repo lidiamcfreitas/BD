@@ -40,7 +40,8 @@
 		echo "estou aqui mãe";
         $userid = $_POST["userid"];
         $nomepagina = $_POST["nomepagina"];
-
+		echo "user: ".$userid;
+		echo "nomepagina: ".$nomepagina;
         class TableRows extends RecursiveIteratorIterator { 
             
             function __construct($it) { 
@@ -82,7 +83,7 @@
 		echo "estou aqui</br>";
         $resultado = $connection->prepare($sql);
         $resultado->bindParam(":nomepagina", $nomepagina);
-                $resultado->bindParam(":userid", $userid);
+        $resultado->bindParam(":userid", $userid);
         $resultado->execute();
 		echo "fiz bind pai! </br>";
         $result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
