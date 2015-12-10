@@ -147,7 +147,7 @@
             $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
             $user_ipseq_tr = $idutilizador2;
             $sequencia_itr->execute();
-          header("Location: ./insertpagina.php");
+          header("Location: __DIR__.'/insertpagina.php");
         }
       }
 
