@@ -35,36 +35,22 @@
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
 
-		$sql_maxmom  = "SELECT s.contador_sequencia ";
-		$sql_maxmom .= "FROM sequencia s  ";
-		$sql_maxmom .= "WHERE s.userid = :userid ";
-		$sql_maxmom .= "  AND s.moment = all ";
-		$sql_maxmom .= "    ( SELECT max(s2.moment) ";
-		$sql_maxmom .= "     FROM sequencia s2  ";
-		$sql_maxmom .= "     WHERE s2.userid = :userid)";
+			$sql_maxmom  = "SELECT s.contador_sequencia ";
+			$sql_maxmom .= "FROM sequencia s  ";
+			$sql_maxmom .= "WHERE s.userid = ".$uid;
+			$sql_maxmom .= " AND s.moment = all ";
+			$sql_maxmom .= "( SELECT max(s2.moment) ";
+			$sql_maxmom .= "FROM sequencia s2  ";
+			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
 
+			echo $sql_maxmom;
 
-			// $sql_maxmom  = "SELECT s.contador_sequencia ";
-			// $sql_maxmom .= "FROM sequencia s  ";
-			// $sql_maxmom .= "WHERE s.userid = ".$uid;
-			// $sql_maxmom .= " AND s.moment = all ";
-			// $sql_maxmom .= "( SELECT max(s2.moment) ";
-			// $sql_maxmom .= "FROM sequencia s2  ";
-			// $sql_maxmom .= "WHERE s2.userid = ".$uid.')';
-
-			//echo $sql_maxmom;
-
-			//$getseq = $connection->prepare($sql_maxmom);
+			$getseq = $connection->prepare($sql_maxmom);
 
 			//$getseq = $bindParam(":userid", $uid);
-			//$getseq->execute();
-		$getseq = $connection->prepare($sql_maxmom);
-		$getseq = $bindParam(":userid", $userid);
-		$userid = $uid;
-		$getseq->execute();
+			$getseq->execute();
 
 			$idseq = $getseq->fetchColumn();
-			echo $idseq;
 
 			$sql_maxtc  = "SELECT r.typecnt ";
 			$sql_maxtc .= "FROM tipo_registo r  ";
@@ -107,7 +93,6 @@
 
 
 			echo "END";
-
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
 		}
