@@ -62,7 +62,7 @@
             }
         }
 
-        $teste = "select count(1) as deu, userid from utilizador where email = :email AND password = :password";
+        $teste = "select count(1) as deu from utilizador where email = :email AND password = :password";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":email", $email_teste);
         $email_teste = $email;
@@ -70,12 +70,21 @@
         $password_teste = $password;
         $testarseexiste->execute();
 
-
-
         while ($row = $testarseexiste->fetch(PDO::FETCH_ASSOC))
         {
           $deu= $row['deu'];
-          $userid_1= $row['userid'];
+        }
+
+        $teste = "select count(1) as userid from utilizador where email = :email";
+        $testarseid =$connection->prepare($teste);
+        $testarseid->bindParam(":email", $email_teste);
+        $email_teste = $email;
+        $testarseid->execute();
+
+
+        while ($row = $testarseid->fetch(PDO::FETCH_ASSOC))
+        {
+          $userid= $row['userid'];
         }
 
 
