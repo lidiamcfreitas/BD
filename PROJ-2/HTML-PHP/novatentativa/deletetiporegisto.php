@@ -116,7 +116,7 @@
         $delete_campo = $connection->prepare($sql_delete);
         //$delete_campo->bindParam(":typecnt", $cenas);
         //$delete_campo->bindParam(":userid", $uid);
-        $uid1 = $userid;
+        $uid = $userid;
         $delete_campo->execute();
 
         }
