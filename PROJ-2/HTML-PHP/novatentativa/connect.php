@@ -9,7 +9,8 @@
 
 	try
 	{
-		$con = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password);
+		$connection = new PDO("mysql:host=" . $host. ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+
 	}
 	catch(PDOException $exception)
 	{		
