@@ -38,7 +38,7 @@
 			$sql_maxmom  = "SELECT s.contador_sequencia ";
 			$sql_maxmom .= "FROM sequencia s  ";
 			$sql_maxmom .= "WHERE s.userid = ".$uid;
-			$sql_maxmom .= "AND s.moment = all ";
+			$sql_maxmom .= " AND s.moment = all ";
 			$sql_maxmom .= "( SELECT max(s2.moment) ";
 			$sql_maxmom .= "FROM sequencia s2  ";
 			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
@@ -92,7 +92,7 @@
 
 
 
-			echo "IN THE END... IT DOESN´T EVEN MATTER !!!!";
+			echo "END";
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
 		}
