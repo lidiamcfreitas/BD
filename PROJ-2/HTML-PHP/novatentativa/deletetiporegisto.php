@@ -98,19 +98,19 @@
         $gettypecnt = $connection->prepare($sql_pageid);
         $gettypecnt->bindParam(":userid", $uid);
         $gettypecnt->bindParam(":pagename", $nometiporegisto);
-        $uid1 = $userid;
+        $uid = $userid;
         $gettypecnt->execute();
         $cenas=$gettypecnt->fetchColumn();
 
 
-
+        echo "ONDE ANDAS ?";
 
 
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET `ativo`=0  ";
         $sql_delete .= "WHERE typecnt=:typecnt and userid = :userid";
 
-
+        echo " SQL DELETE ? ";
 
         $delete_campo = $connection->prepare($sql_delete);
         $delete_campo->bindParam(":typecnt", $cenas);
