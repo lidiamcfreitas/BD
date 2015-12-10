@@ -62,19 +62,31 @@
             }
         }
 
-        $teste = "select count(1), email, password from utilizador where email = :email AND password = :password";
+        $teste = "select count(1) as deu, userid from utilizador where email = :email AND password = :password";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":email", $email_teste);
         $email_teste = $email;
         $testarseexiste->bindParam(":password", $password_teste);
         $password_teste = $password;
         $testarseexiste->execute();
-        $deu = $testarseexiste->fetchColumn();
-        $userid_1 = $testarseexiste->fetchColumn(1);
-        $email_1 = $testarseexiste->fetchColumn(2);
 
+
+
+        while ($row = $testarseexiste->fetch(PDO::FETCH_ASSOC))
+        {
+          $deu= $row['deu'];
+          $userid_1= $row['userid'];
+        }
+
+
+    /*    while($row = $testarseexiste->fetch(PDO::FETCH_ASSOC)){
+            $deu= $row['deu'];
+            $userid_1= $row['userid'];
+            $email_1= $row['email'];
+}*/
+        echo "deu:".$deu;
         echo "userid:".$userid_1;
-        echo "eamil".$email_1;
+
 
         if ($deu == 0) {
           echo "<h1>Username ou Palavra passe errada </h1>";
