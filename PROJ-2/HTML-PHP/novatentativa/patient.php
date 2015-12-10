@@ -35,7 +35,7 @@
             </form>
         </div>
     <?php
-    
+    echo "diz qualquer coisa";
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 
         $userid = $_POST["userid"];
@@ -99,6 +99,8 @@
             echo "</table>";
         }
 
+    } else {
+    	echo "please";
     }
     $con = null;
     ?>
