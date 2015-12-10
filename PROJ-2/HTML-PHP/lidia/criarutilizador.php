@@ -151,7 +151,7 @@
         $testarseexiste1->bindParam(":email", $email_teste1);
         $email_teste1 = $email;
         $testarseexiste1->execute();
-        $idutilizador3 = $testarseexiste->fetchColumn();
+        $idutilizador3 = $testarseexiste1->fetchColumn();
 
         echo "something1";
         echo "userid: ".$idutilizador3;
