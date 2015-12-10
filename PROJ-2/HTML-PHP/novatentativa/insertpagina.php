@@ -93,17 +93,14 @@
                 echo "</div>";
             }
         }
-        echo "here";
+
+        // cria sequencia
         $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
-        echo $query_cria;
         $sequencia_ip = $connection->prepare($query_cria);
-        echo "1";
     		$sequencia_ip->bindParam(":userid", $user_ipseq);
-        echo "2";
         $user_ipseq = $userid;
-        echo "aqui tambem";
     		$sequencia_ip->execute();
-        echo "end?";
+
 
         $sql_maxmom  = "SELECT s.contador_sequencia ";
         $sql_maxmom .= "FROM sequencia s  ";
