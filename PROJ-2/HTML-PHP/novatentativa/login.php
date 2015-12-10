@@ -62,7 +62,7 @@
             }
         }
 
-        $teste = "select count(1) from utilizador where email = :email AND password = :password";
+        $teste = "select count(1), email, password from utilizador where email = :email AND password = :password";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":email", $email_teste);
         $email_teste = $email;
@@ -70,11 +70,16 @@
         $password_teste = $password;
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
+        $userid_1 = $testarseexiste->fetchColumn(1);
+        $email_1 = $testarseexiste->fetchColumn(2);
+
+        echo "userid:".$userid_1;
+        echo "eamil".$email_1;
 
         if ($deu == 0) {
           echo "<h1>Username ou Palavra passe errada </h1>";
 
-          $teste = "select count(1) userid from utilizador where email = :email ";
+          $teste = "select userid from utilizador where email = :email ";
           $testarseexiste =$connection->prepare($teste);
           $testarseexiste->bindParam(":email", $email_teste);
           $email_teste = $email;
