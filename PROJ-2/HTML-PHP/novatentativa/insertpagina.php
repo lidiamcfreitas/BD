@@ -120,7 +120,7 @@
         echo "lala";
         $getmaxpc->bindParam(":userid", $uid2);
         echo "lala";
-        $uid = $userid;
+        $uid2 = $userid;
         echo "lala";
         $getmaxpc->execute();
 
