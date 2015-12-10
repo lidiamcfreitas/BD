@@ -72,12 +72,12 @@
 
             $uid = null;
 
-            if (empty($result, $string)) {
+            if (empty($result, $string_1)) {
                 echo "<p>Não existe uma pagina com esse nome</p>";
             } else {
                 echo "<div style='width=100px;'><br><br>";
                 echo "<table class=\"table table-striped\">";
-                echo("<tr><th>$string " . $nomepagina . "</th></tr>\n");
+                echo("<tr><th>".$string_1." " . $nomepagina . "</th></tr>\n");
                 foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
                     echo  $v;
                 }
