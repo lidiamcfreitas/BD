@@ -144,15 +144,15 @@
             $sql_campocnt .= "       AND c1.typecnt = c.typecnt ";
             $sql_campocnt .= "       AND c1.ativo = 1)";
 
-            $getcampocounter = $connection->prepare($sql_campocnt);
-            $getcampocounter->bindParam(":userid", $uid1_campocounter);
-            $getcampocounter->bindParam(":tipoid", $tipoid_ic1);
+            $getcampo_counter = $connection->prepare($sql_campocnt);
+            $getcampo_counter->bindParam(":userid", $uid1_campocounter);
+            $getcampo_counter->bindParam(":tipoid", $tipoid_ic1);
             $uid1_campocounter = $userid;
             $tipoid_ic1 = $idtipo_type;
             echo "here";
             $getcampocounter->execute();
 
-            $campocounter_insertcampo = $getcampocounter->fetchColumn();
+            $campocounter_insertcampo = $getcampo_counter->fetchColumn();
             echo "counter campo: ".$campocounter_insertcampo;
 
 
@@ -171,7 +171,6 @@
             $camponome2 = $nomecampo;
             $seqid2 = $getseq;
             $insert->execute();
-            echo "ola";
 
     }
     $connection = null;
