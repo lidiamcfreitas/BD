@@ -25,18 +25,20 @@
 			}
 			echo "Antes do connect";
 
-			require "connect.php";
+
 
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			 	$nreg = test_input($_POST["nomeregisto"]);
 			 	$uid = test_input($_POST["userid"]);
 			}
+
+			require "connect.php";
+
 			echo "depois do connect";
 
 
 			$sequencia = $connection->prepare("INSERT INTO sequencia (userid) VALUES (:userid)");
-			$sequencia->bindParam(":userid", $userid);
-			$userid = $uid;
+			$sequencia->bindParam(":userid", $uid);
 			$sequencia->execute();
 
 			echo "Acabei de criar uma sequencia";
