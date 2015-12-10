@@ -89,7 +89,7 @@
             }
         }
 
-     echo "BADJORAS ?";
+
 
         $sql_pageid  = "SELECT typecnt ";
         $sql_pageid .= "FROM tipo_registo  ";
@@ -103,10 +103,10 @@
         $uid = $userid;
         $gettypecnt->execute();
         $cenas=$gettypecnt->fetchColumn();
+        echo $cenas;
 
 
-        echo "ONDE ANDAS ?";
-
+       
 
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET ativo=0  ";
@@ -114,13 +114,13 @@
 
         $sql_delete .= "and userid ="+$uid;
   
-        echo " a menina chupa ?";
+
         $delete_campo = $connection->prepare($sql_delete);
         //$delete_campo->bindParam(":typecnt", $cenas);
         //$delete_campo->bindParam(":userid", $uid);
         $uid = $userid;
         $delete_campo->execute();
-        echo "pelos vistos ...";
+ 
         }
 
     $connection = null;
