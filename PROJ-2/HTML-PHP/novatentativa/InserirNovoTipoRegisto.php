@@ -67,7 +67,7 @@
 			$getmaxtc->execute();
 
 			$typecnt = $getmaxtc->fetchColumn();
-
+			++$typecnt;
 			$cenas = $getseq->fetchColumn();
 
 			echo $cenas;
