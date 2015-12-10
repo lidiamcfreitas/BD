@@ -58,6 +58,10 @@
         $nometipo = $_POST["nometipo"];
 		$userid = $_POST["userid"];
 
+        echo $nomecampo."<br>";
+        echo $nometipo."<br>";
+        echo $userid."<br>";
+
         class TableRows extends RecursiveIteratorIterator { 
             
             function __construct($it) { 
