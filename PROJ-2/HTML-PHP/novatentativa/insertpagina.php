@@ -94,7 +94,7 @@
             }
         }
         echo "here";
-        $query_cria_sequencia = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid)";
+        $query_cria_sequencia = "INSERT INTO sequencia (moment, userid) VALUES (\"2015-12-10 17:00:00\", :userid)";
 
         $sequencia_ip123 = $connection->prepare($query_cria_sequencia);
     		$sequencia_ip123->$bindParam(":userid", $user_ipseq);
