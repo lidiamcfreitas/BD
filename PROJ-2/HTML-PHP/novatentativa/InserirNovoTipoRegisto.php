@@ -67,7 +67,10 @@
 
 			echo 'HERE WE ARE !! ';
 
-			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nomeregisto.','.$idseq.'1)';
+			$typecnt = $getmaxtc->fetchColumn();
+			$idseq = $getseq->fetchColumn() + 1;
+
+			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$typecnt.','.$nreg.','.$idseq.'1)';
 			echo 'PREPARARATE GOOD TAIME->'.$preparation;
 			$tiporegisto = $connection->prepare($preparation);
 
@@ -82,10 +85,6 @@
 			//$nomeregisto = $nreg;
 			//$userid = $uid;
 
-			$typecnt = $getmaxtc->fetchColumn();
-			$idseq = $getseq->fetchColumn() + 1;
-
-			echo 'QUERY TIPO REGISTO'.$tiporegisto;
 
 			$tiporegisto->execute();
 			echo "IN THE END... IT DOESN´T EVEN MATTER !!!!";
