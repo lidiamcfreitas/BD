@@ -109,6 +109,18 @@
 
         $getpagecounter = $getpageid->fetchColumn();
 
+        $teste = "select count(*) from utilizador where userid = :userid";
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":userid", $userid_teste);
+        $userid_teste = $userid;
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchColumn();
+
+        if ($deu == 0) {
+          echo "<h1>O Utilizador não existe </h1>";
+          exit();
+        }
+        echo "<h1>Utilizador existe</h1>";
 
         $sql_delete  = "UPDATE pagina ";
         $sql_delete .= "SET ativa=0  ";
