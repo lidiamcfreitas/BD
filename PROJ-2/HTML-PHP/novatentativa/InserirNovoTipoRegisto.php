@@ -82,7 +82,7 @@
 			$idseq = $getseq->fetchColumn() + 1;
 
 			$tiporegisto->execute();
-			echo "IN THE END... IT DOESN´T EVEN MATTER !!!!"
+			echo "IN THE END... IT DOESN´T EVEN MATTER !!!!";
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
 		}
