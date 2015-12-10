@@ -40,8 +40,8 @@
 		echo "estou aqui mãe";
         $userid = $_POST["userid"];
         $nomepagina = $_POST["nomepagina"];
-		echo $userid;
-		echo $nomepagina;
+		echo "user: ".$userid;
+		echo "nomepagina: ".$nomepagina;
         class TableRows extends RecursiveIteratorIterator { 
             
             function __construct($it) { 
