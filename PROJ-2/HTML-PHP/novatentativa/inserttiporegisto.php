@@ -135,13 +135,12 @@
   			$sql_maxtr .= "     FROM tipo_registo r2  ";
   			$sql_maxtr .= "     WHERE r2.userid = :userid )";
 
-        echo $sql_maxtr;
-  			$getmaxtr_itr = $connection->prepare($sql_maxtr);
-  			$getmaxtr_itr->bindParam(":userid", $userid_itr);
-  			$userid_itr = $userid;
-  			$getmaxtr_itr->execute();
+        $typecounterobj = $connection->prepare($sql_maxtr);
+        $typecounterobj->bindParam(":userid", $useridobj);
+        $useridobj = $userid;
+        $typecounterobj->execute();
 
-        $gettypecounter = $getmaxtr_itr->fetchColumn();
+        $gettypecounter = $typecounterobj->fetchColumn();
         $getseqcounter = $getmoment->fetchColumn();
         echo $gettypecounter;
         echo $getseqcounter;
