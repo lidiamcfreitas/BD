@@ -47,7 +47,7 @@ session_start();
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomepagina"] != "")){
 
         $nomepagina = $_POST["nomepagina"];
 		    $userid = $_SESSION['userid'];
