@@ -91,13 +91,13 @@
 
         $sql_pageid  = "SELECT typecnt ";
         $sql_pageid .= "FROM tipo_registo  ";
-        $sql_pageid .= "WHERE userid = :userid ";
-        $sql_pageid .= "  AND nome = `:pagename`";
+        $sql_pageid .= "WHERE userid = ".$uid;
+        $sql_pageid .= "  AND nome = ".$pagename;
 
 
         $gettypecnt = $connection->prepare($sql_pageid);
-        $gettypecnt->bindParam(":userid", $uid);
-        $gettypecnt->bindParam(":pagename", $nometiporegisto);
+        //$gettypecnt->bindParam(":userid", $uid);
+       // $gettypecnt->bindParam(":pagename", $nometiporegisto);
         $uid = $userid;
         $gettypecnt->execute();
         $cenas=$gettypecnt->fetchColumn();
