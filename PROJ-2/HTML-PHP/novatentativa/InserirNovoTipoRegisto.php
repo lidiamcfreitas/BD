@@ -36,7 +36,7 @@
 			$testarseexiste->execute();
 			$deu = $testarseexiste->fetchAll();
 
-			if (empty($deu)) {
+			if ($deu == 0) {
 				echo "Esse Utilizador não existe";
 			}
 
