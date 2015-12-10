@@ -34,8 +34,12 @@
 			echo "depois do connect";
 
 
-			$sequencia = $connection->prepare("INSERT INTO sequencia (userid) VALUES ($uid)");
+			$sequencia = $connection->prepare("INSERT INTO sequencia (userid) VALUES (:userid)");
+			$sequencia->bindParam(":userid", $userid);
+			$userid = $uid;
 			$sequencia->execute();
+
+			echo "Acabei de criar uma sequencia";
 
 			$sql_maxmom  = "SELECT s.contador_sequencia ";
 			$sql_maxmom .= "FROM sequencia s  ";
@@ -49,6 +53,8 @@
 			$getseq = $bindParam(":userid", $userid);
 			$userid = $uid;
 			$getseq->execute();
+
+			echo "acabei de ver qual é a sequencia";
 
 			$sql_maxtc  = "SELECT r.typecnt ";
 			$sql_maxtc .= "FROM tipo_registo r  ";
