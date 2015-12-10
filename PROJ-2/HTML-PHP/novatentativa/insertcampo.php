@@ -109,6 +109,7 @@
             $getmoment->execute();
 
             $getseq = $getmoment->fetchColumn();
+            echo "sequencia: ".$getseq;
 
             $sqltypeid  = "SELECT typecnt ";
             $sqltypeid .= "FROM tipo_registo  ";
@@ -124,6 +125,7 @@
             $gettype->execute();
 
             $idtipo = $gettype->fetchColumn();
+            echo "id do tipo: ".$idtipo;
 
 
             $campocnt  = "SELECT c.campocnt + 1 ";
@@ -146,6 +148,7 @@
             $getcampocounter->execute();
 
             $campocounter = $getcampocounter->fetchColumn();
+            echo "counter campo: ".$campocounter;
 
 
             $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
@@ -163,7 +166,7 @@
             $camponome2 = $nomecampo;
             $seqid2 = $getseq;
             $insert->execute();
-
+            echo "ola";
 
     }
     $connection = null;
