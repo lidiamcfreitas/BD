@@ -1,13 +1,8 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Bloco de Notas</title>
-
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -26,31 +21,42 @@ session_start();
             <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
             <li role="presentation"><a href="inserttiporegisto.php"> Inserir Valores de Campos</a></li>
             <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
+
         </ul>
-        <h3 class="text-muted">Inserir Pagina</h3>
+        <h3 class="text-muted">Apagar Tipo</h3>
+
       </div>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
+                <tr>
+                <div class="form-group">
+                    <td><label for="Tipo">Tipo de Registo</label></td>
+                    <td><input type="text" name="tiporegisto" placeholder="Tipo de Registo" required></td>
+                </div><br>
+                </tr>
             	<tr>
                 <div class="form-group">
-                    <td><label for="nomepagina">Nome da Página</label></td>
-                    <td><input type="text" name="nomepagina" placeholder="Nome da Página" required></td>
+                    <td><label for="Tipo">Nome do Campo a retirar</label></td>
+                    <td><input type="text" name="nomecampoaretirar" placeholder="Nome do Campo a Retirar" required></td>
                 </div><br>
-              </tr>
+                </tr>
+                
+                <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
                 </div>
             </form>
         </div>
     <?php
-
+        //RETIRARCAMPODETIPOREGISTO
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomepagina"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")&& ($_POST["tiporegisto"] != "")){
 
-        $nomepagina = $_POST["nomepagina"];
-		    $userid = $_SESSION['userid'];
+        $tiporegisto = $_POST["tiporegisto"];
+        $nomecampoaretirar = $_POST["nomecampoaretirar"];
+		$userid = $_SESSION['userid'];
 
         class TableRows extends RecursiveIteratorIterator {
 
@@ -88,71 +94,41 @@ session_start();
                 echo "</div>";
             }
         }
-        $SESSIONEMAIL = $_SESSION['email'];
-        echo $SESSIONEMAIL;
-        // cria sequencia
-        $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
-        $sequencia_ip = $connection->prepare($query_cria);
-    		$sequencia_ip->bindParam(":userid", $user_ipseq);
-        $user_ipseq = $userid;
-    		$sequencia_ip->execute();
 
 
-        $sql_maxmom  = "SELECT s.contador_sequencia ";
-        $sql_maxmom .= "FROM sequencia s  ";
-        $sql_maxmom .= "WHERE s.userid = :userid ";
-        $sql_maxmom .= "  AND s.moment = all ";
-        $sql_maxmom .= "    ( SELECT max(s2.moment) ";
-        $sql_maxmom .= "     FROM sequencia s2  ";
-        $sql_maxmom .= "     WHERE s2.userid = :userid)";
 
-        $getmoment = $connection->prepare($sql_maxmom);
-        $getmoment->bindParam(":userid", $uid);
+        $sql_typecnt  = "SELECT typecnt ";
+        $sql_typecnt .= "FROM tipo_registo  ";
+        $sql_typecnt .= "WHERE userid = :userid ";
+        $sql_typecnt .= "  AND nome = :nome";
+
+
+        $gettypecnt = $connection->prepare($sql_pageid);
+        $gettypecnt->bindParam(":userid", $userid);
+        $gettypecnt->bindParam(":nome", $nometiporetirar);
+
         $uid = $userid;
-		    $getmoment->execute();
+        $gettypeid->execute();
 
-        //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC);
-        //$result = $getmoment->fetchAll();
+        $getcnt = $gettypeid->fetchColumn();
 
-        //print_result($result);
+        $sql_delete  = "UPDATE campo ";
+        $sql_delete .= "SET ativo=0  ";
+        $sql_delete .= "WHERE typecnt=:typecnt AND userid = :userid";
+        $sql_delete .= "AND nome = :nomecampo "
 
-        $sql_maxpc  = "SELECT p.pagecounter ";
-        $sql_maxpc .= "FROM pagina p  ";
-        $sql_maxpc .= "WHERE p.userid = :userid ";
-        $sql_maxpc .= "  AND p.pagecounter = all ";
-        $sql_maxpc .= "    ( SELECT max(p2.pagecounter) ";
-        $sql_maxpc .= "     FROM pagina p2  ";
-        $sql_maxpc .= "     WHERE p2.userid = :userid)";
-
-        $getmaxpc = $connection->prepare($sql_maxpc);
-        $getmaxpc->bindParam(":userid", $uid2);
-        $uid2 = $userid;
-        $getmaxpc->execute();
-
-        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC);
-        //$result = $getmaxpc->fetchAll();
-
-        //print_result($result);
-
-        $getseq = $getmoment->fetchColumn();
-        $getmaxpcount = $getmaxpc->fetchColumn();
-        ++$getmaxpcount;
-
-        $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
-        $pagina->bindParam(":nomepagina", $nomep);
-        $pagina->bindParam(":idseq", $pagemoment);
-        $pagina->bindParam(":pagecounter", $maxpc);
-        $pagina->bindParam(":userid", $uid3);
-
-        $nomep  = $nomepagina;
-        $uid3   = $userid;
-        $pagemoment = $getseq;
-        $maxpc  = $getmaxpcount;
-        $pagina->execute();
-
-    } else {
+        $delete_field = $connection->prepare($sql_delete);
+        $delete_field->bindParam(":userid", $uid);
+        $delete_field->bindParam(":typecnt", $getcenas2);
+        $uid = $userid;
+        $delete_field->bindParam(":nomecampo",$nomecampoaremover )
+        $nomecampoaremover = $nomecampoaretirar;
+        $getcenas2 = $gettipos;
+        $delete_field->execute();
 
     }
+
+
     $connection = null;
     ?>
 
