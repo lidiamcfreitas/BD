@@ -14,7 +14,7 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation"><a href="criarutilizador.php"> Criar Utilizador</a></li>
+            <li role="presentation"><a href="criarutilizador.php"> Login</a></li>
             <li role="presentation" class="active"><a href="login.php"> Login</a></li>
         </ul>
         <h3 class="text-muted">Criar Utilizador</h3>
@@ -138,7 +138,7 @@
             $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
             $user_ipseq_tr = $idutilizador2;
             $sequencia_itr->execute();
-
+          header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
         }
       }
 
