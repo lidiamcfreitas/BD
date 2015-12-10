@@ -23,7 +23,7 @@
 				
 				return $data;
 			}
-			echo "1";
+			echo "Antes do connect";
 
 			require "connect.php";
 
@@ -31,8 +31,10 @@
 			 	$nreg = test_input($_POST["nomeregisto"]);
 			 	$uid = test_input($_POST["userid"]);
 			}
+			echo "depois do connect"
 
-			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
+		
+			$sequencia = $connection->prepare("INSERT INTO sequencia (userid) VALUES ($uid)");
 			$sequencia->execute();
 
 			$sql_maxmom  = "SELECT s.contador_sequencia ";
