@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8"> 
+		<meta charset="utf-8">
 
 		<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -25,7 +25,7 @@
         <h3 class="text-muted">Patient</h3>
       </div>
 	    <div>
-			<form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
+			<form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
 				<div class="form-group">
 					<label for="firstname">Name of patient</label>
 					<input type="text" class="form-control" id="patient" name="patient" required="required" title="the name of the patient" placeholder="Name of patient">

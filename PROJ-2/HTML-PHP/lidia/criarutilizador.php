@@ -14,7 +14,8 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation"><a href="criarutilizador.php"> Criar Utilizador</a></li>
+            <li role="presentation" class="active"><a href="criarutilizador.php"> Criar Utilizador</a></li>
+            <li role="presentation"><a href="login.php"> Login</a></li>
         </ul>
         <h3 class="text-muted">Criar Utilizador</h3>
       </div>
@@ -143,6 +144,18 @@
         $pais_aux = $pais;
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
+
+        echo "something";
+        $teste1 = "select userid from utilizador where email = :email ";
+        $testarseexiste1 =$connection->prepare($teste1);
+        $testarseexiste1->bindParam(":email", $email_teste1);
+        $email_teste1 = $email;
+        $testarseexiste1->execute();
+        $idutilizador3 = $testarseexiste1->fetchColumn();
+
+        $_SESSION['userid'] = $idutilizador3;
+
+
         header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/insertpagina.php");
         }
 
