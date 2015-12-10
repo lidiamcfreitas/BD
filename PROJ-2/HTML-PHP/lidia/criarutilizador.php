@@ -86,7 +86,7 @@
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["password"] != "")){
 
         session_start();
 
