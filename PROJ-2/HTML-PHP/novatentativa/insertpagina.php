@@ -125,7 +125,7 @@
         $result = $getmaxpc->fetchAll();
 
         print_result($result);
-        echo "coco: ". $result[0];
+        //echo "coco: ". $result[0];
 
 
 
