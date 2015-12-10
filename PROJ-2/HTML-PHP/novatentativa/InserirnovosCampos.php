@@ -66,7 +66,7 @@
 			$campocnt  = "SELECT c.campocnt + 1 ";
 			$campocnt .= "FROM campo c  ";
 			$campocnt .= "WHERE c.userid =".$uid;
-			$campocnt .= "  AND c.typecnt = ".$getmaxtc;
+			$campocnt .= "  AND c.typecnt = ".$cenas2;
 			$campocnt .= "  AND c.ativo = 1 ";
 			$campocnt .= "  AND c.campocnt = all ";
 			$campocnt .= "    ( SELECT max(c1.campocnt) ";
