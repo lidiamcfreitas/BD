@@ -99,7 +99,7 @@
         if (empty($result)) {
             echo "<p>Não existe uma pagina com esse nome</p>";
         } else {
-            echo "<table style='border: solid 1px black;'>";
+            echo "<table>";
             echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
             foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
                 echo  $v;
