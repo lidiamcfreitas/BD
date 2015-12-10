@@ -21,15 +21,21 @@
       </div>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
+            	<table>
+            	<tr>
                 <div class="form-group">
-                    <label for="nomepagina">Nome da Página</label>
-                    <input type="text" name="nomepagina" placeholder="Nome da Página" required>
+                    <td><label for="nomepagina">Nome da Página</label></td>
+                    <td><input type="text" name="nomepagina" placeholder="Nome da Página" required></td>
                 </div><br>
+                </tr>
+                <tr>
                 <div class="form-group">
-                    <label for="userid">Identificação do Utilizador</label>
-                    <input type="number" name="userid" placeholder="ex: 11321" required>
+                    <td><label for="userid">Identificação do Utilizador</label></td>
+                    <td><input type="number" name="userid" placeholder="ex: 11321" required></td>
                 </div>
+                </tr>
                 <div class="form-group">
+                </table>
                     <input type="submit" name="submit" class="btn btn-success" value="Show">
                 </div>
             </form>
