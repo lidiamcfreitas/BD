@@ -132,23 +132,23 @@
             echo "id do tipo: ".$idtipo_type;
 
 
-            $campocnt  = "SELECT c.campocnt + 1 ";
-            $campocnt .= "FROM campo c  ";
-            $campocnt .= "WHERE c.userid = :userid";
-            $campocnt .= "  AND c.typecnt = :tipoid";
-            $campocnt .= "  AND c.ativo = 1 ";
-            $campocnt .= "  AND c.campocnt = all ";
-            $campocnt .= "    ( SELECT max(c1.campocnt) ";
-            $campocnt .= "     FROM campo c1  ";
-            $campocnt .= "     WHERE c1.userid = c.userid ";
-            $campocnt .= "       AND c1.typecnt = c.typecnt ";
-            $campocnt .= "       AND c1.ativo = 1)";
+            $sql_campocnt  = "SELECT c.campocnt + 1 ";
+            $sql_campocnt .= "FROM campo c  ";
+            $sql_campocnt .= "WHERE c.userid = :userid";
+            $sql_campocnt .= "  AND c.typecnt = :tipoid";
+            $sql_campocnt .= "  AND c.ativo = 1 ";
+            $sql_campocnt .= "  AND c.campocnt = all ";
+            $sql_campocnt .= "    ( SELECT max(c1.campocnt) ";
+            $sql_campocnt .= "     FROM campo c1  ";
+            $sql_campocnt .= "     WHERE c1.userid = c.userid ";
+            $sql_campocnt .= "       AND c1.typecnt = c.typecnt ";
+            $sql_campocnt .= "       AND c1.ativo = 1)";
 
-            $getcampocounter = $connection->prepare($campocnt);
+            $getcampocounter = $connection->prepare($sql_campocnt);
             $getcampocounter->bindParam(":userid", $uid1_campocounter);
-            $getcampocounter->bindParam(":tipoid", $tipoid1);
+            $getcampocounter->bindParam(":tipoid", $tipoid_ic1);
             $uid1_campocounter = $userid;
-            $tipoid1 = $idtipo_type;
+            $tipoid_ic1 = $idtipo_type;
             echo "here";
             $getcampocounter->execute();
 
