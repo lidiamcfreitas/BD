@@ -99,7 +99,7 @@
         $getpageid->bindParam(":pagename", $nometiporegisto);
 
         $uid = $userid;
-        $pagename = $nomepagina;
+
         $getpageid->execute();
 
 
