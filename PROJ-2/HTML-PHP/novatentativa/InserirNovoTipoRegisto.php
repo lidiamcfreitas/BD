@@ -66,7 +66,11 @@
 			echo 'HERE WE ARE !! ';
 
 			$typecnt = $getmaxtc->fetchColumn();
-			$idseq = $getseq->fetchColumn() + 1;
+			$idseq = $getseq->fetchColumn();
+
+			echo "My name is " , get_class($idseq) , "\n";
+
+			$idseq = idseq+1;
 			echo $typecnt;
 			echo $idseq;
 
