@@ -108,7 +108,7 @@
         print_result($result);
         echo "aqui";
 
-        $sql_maxpc  = "SELECT p.pagecounter as pcounter";
+        $sql_maxpc  = "SELECT p.pagecounter ";
         $sql_maxpc .= "FROM pagina p  ";
         $sql_maxpc .= "WHERE p.userid = :userid ";
         $sql_maxpc .= "  AND p.pagecounter = all ";
@@ -125,10 +125,9 @@
         $result = $getmaxpc->fetchAll();
 
         print_result($result);
-        //echo "coco: ". $result[0];
 
 
-
+        
 
     } else {
 
