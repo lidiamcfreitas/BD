@@ -128,8 +128,8 @@
             $nometr = $nometipo;
             $gettype1->execute();
 
-            $idtipo = $gettype1->fetchColumn();
-            echo "id do tipo: ".$idtipo;
+            $idtipo_type = $gettype1->fetchColumn();
+            echo "id do tipo: ".$idtipo_type;
 
 
             $campocnt  = "SELECT c.campocnt + 1 ";
