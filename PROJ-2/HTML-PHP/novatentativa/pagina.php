@@ -21,7 +21,7 @@
       </div>
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
-            	<table>
+            	<table cellspacing="10">
             	<tr>
                 <div class="form-group">
                     <td><label for="nomepagina">Nome da Página</label></td>
@@ -36,7 +36,7 @@
                 </tr>
                 <div class="form-group">
                 </table>
-                    <input type="submit" name="submit" class="btn btn-success" value="Show">
+                    <br><input type="submit" name="submit" class="btn btn-success" value="Show">
                 </div>
             </form>
         </div>
