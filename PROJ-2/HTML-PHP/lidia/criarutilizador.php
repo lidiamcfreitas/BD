@@ -122,7 +122,7 @@
         $utilizador_obj->bindParam(":resposta2", $resposta2_aux);
         $utilizador_obj->bindParam(":pais", $pais_aux);
         $utilizador_obj->bindParam(":categoria", $categoria_aux);
-        
+
         $nome_aux = $nome;
         $email_aux = $email ;
         $password_aux = $password_aux;
@@ -134,7 +134,7 @@
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
 
-        header("Location: /insertpagina.php");
+        header("Location: http://web.ist.utl.pt/~ist178559/BD/PROJ-2/HTML-PHP/lidia/criarutilizador.php");
 
         }
 
