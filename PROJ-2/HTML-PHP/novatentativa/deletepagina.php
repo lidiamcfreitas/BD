@@ -100,9 +100,10 @@
         $uid = $userid;
         $pagename = $nomepagina;
         $getpageid->execute();
-
+        echo "1:".$pagename;
+        echo "1:".$uid;
         $getpagecounter = $getpageid->fetchColumn();
-        echo $getpagecounter;
+        echo "1:".$getpagecounter;
 
 
         $sql_delete  = "UPDATE pagina ";
