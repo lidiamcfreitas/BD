@@ -125,8 +125,8 @@
         //$result = $getmaxpc->fetchAll();
 
         //print_result($result);
-        $row = $getmaxpc->fetch();
-        echo "coco: ". $row['pcounter'];
+        $row = $getmaxpc->fetchColumn();
+        echo "coco: ". $row;
 
 
 
