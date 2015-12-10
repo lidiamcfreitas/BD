@@ -16,8 +16,8 @@
             	<table cellspacing="10">
             	<tr>
                 <div class="form-group">
-                    <td><label for="username">Nome de Utilizador</label></td>
-                    <td><input type="text" name="username" placeholder="Nome de Utilizador" required></td>
+                    <td><label for="email">Email de Utilizador</label></td>
+                    <td><input type="text" name="email" placeholder="Email de Utilizador" required></td>
                 </div><br>
                 </tr>
                 <tr>
@@ -61,10 +61,10 @@
             }
         }
 
-        $teste = "select count(1) from utilizador where userid = :userid AND password = :password";
+        $teste = "select count(1) from utilizador where email = :email AND password = :password";
         $testarseexiste =$connection->prepare($teste);
-        $testarseexiste->bindParam(":userid", $userid_teste);
-        $userid_teste = $userid;
+        $testarseexiste->bindParam(":email", $email_teste);
+        $email_teste = $email;
         $testarseexiste->bindParam(":password", $password_teste);
         $userid_teste = $password;
         $testarseexiste->execute();
@@ -79,6 +79,7 @@
           $sequencia_itr->execute();
           exit();
         }else{
+          echo "<h1>Login efectuado com sucesso ! </h1>";      
           $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 1);";
           $sequencia_itr = $connection->prepare($query_cria);
             $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
