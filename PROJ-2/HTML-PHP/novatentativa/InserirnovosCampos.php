@@ -37,22 +37,22 @@
 
 			$sqltypeid  = "SELECT typecnt ";
 			$sqltypeid .= "FROM tipo_registo  ";
-			$sqltypeid .= "WHERE userid = ".$uid;
-			$sqltypeid .= "  AND nome = ".$ntiporeg;
+			$sqltypeid .= "WHERE userid = :userid";
+			$sqltypeid .= "  AND nome = :nometiporegisto";
 			$sqltypeid .= "  AND ativo = 1";
 
 			$getseq = $connection->prepare($sqltypeid);
-
-			//$getseq = $bindParam(":userid", $uid);
+			$getseq->bindParam(":userid", $uid);
+			$getseq>bindParam(":tiporegisto", $tr);
 			$getseq->execute();
 
 			$sql_maxtc  = "SELECT r.typecnt + 1 ";
 			$sql_maxtc .= "FROM tipo_registo r  ";
-			$sql_maxtc .= "WHERE r.userid = ".$uid;
+			$sql_maxtc .= "WHERE r.userid = :userid";
 			$sql_maxtc .= "  AND r.typecnt = ALL  ";
 			$sql_maxtc .= "    (SELECT max(r2.typecnt) ";
 			$sql_maxtc .= "     FROM tipo_registo r2  ";
-			$sql_maxtc .= "     WHERE r2.userid = ".$uid.')';
+			$sql_maxtc .= "     WHERE r2.userid = :userid )";
 
 
 			$getmaxtc = $connection->prepare($sql_maxtc);
