@@ -139,7 +139,7 @@
   			$getmaxtr_itr = $connection->prepare($sql_maxtr);
   			$getmaxtr_itr->bindParam(":userid", $userid_itr);
   			$userid_itr = $userid;
-  			$getmaxtr_itr-->execute();
+  			$getmaxtr_itr->execute();
 
         $gettypecounter = $getmaxtr_itr->fetchColumn();
         $getseqcounter = $getmoment->fetchColumn();
