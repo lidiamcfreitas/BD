@@ -116,13 +116,9 @@
         $sql_maxpc .= "     FROM pagina p2  ";
         $sql_maxpc .= "     WHERE p2.userid = :userid)";
 
-        echo "lala";
         $getmaxpc = $connection->prepare($sql_maxpc);
-        echo "lala";
-        $getmaxpc = $bindParam(":userid", $uid);
-        echo "lala";
+        $getmaxpc->$bindParam(":userid", $uid);
         $uid = $userid;
-        echo "lala";
         $getmaxpc->execute();
 
         echo "2";
