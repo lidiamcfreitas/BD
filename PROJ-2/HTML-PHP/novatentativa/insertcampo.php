@@ -148,10 +148,10 @@
             $campocounter_insertcampo = $getcampo_counter->fetchColumn();
             echo "counter campo: ".$campocounter_insertcampo;
 
-
-            $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
-
+            ++$campocounter_insertcampo;
+            
             $campo_insertquery = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (:userid, :tipoid, :campoid ,:nomecampo,:seqid,1)";
+
             $insert_campo = $connection->prepare($campo_insertquery);
             $insert_campo->bindParam(":userid", $uid2_ic);
             $insert_campo->bindParam(":tipoid", $tipoid2_ic);
