@@ -67,7 +67,7 @@
         $testarseexiste->bindParam(":email", $email_teste);
         $email_teste = $email;
         $testarseexiste->bindParam(":password", $password_teste);
-        $userid_teste = $password;
+        $password_teste = $password;
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
 
