@@ -142,6 +142,8 @@
         echo $maxpc;
         $pagina->execute();
         echo "here?";
+        $querriiiieee = "INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES ($uid3, $maxpc, $nomep, $maxpc, 1 , NULL)";
+        echo $querriiiieee;
 
 
 
