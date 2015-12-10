@@ -41,12 +41,7 @@
                         <td><input type="text" name="nometipo" placeholder="Nome do Tipo" required></td>
                     </div><br>
                 </tr>
-                <tr>
-                    <div class="form-group">
-                        <td><label for="userid">Identificação do Utilizador</label></td>
-                        <td><input type="number" name="userid" placeholder="ex: 11321" required></td>
-                    </div>
-                </tr>
+                
                 <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
@@ -57,11 +52,11 @@
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
 
         $nomecampo = $_POST["nomecampo"];
         $nometipo = $_POST["nometipo"];
-		$userid = $_POST["userid"];
+		    $userid = $_SESSION['userid'];
 
         class TableRows extends RecursiveIteratorIterator {
 
