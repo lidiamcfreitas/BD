@@ -39,8 +39,8 @@
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["email"] != "") && ($_POST["password"] != "")){
 
-        $username = $_POST["email"];
-        $email = $_POST["password"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
 
 
         class TableRows extends RecursiveIteratorIterator {
