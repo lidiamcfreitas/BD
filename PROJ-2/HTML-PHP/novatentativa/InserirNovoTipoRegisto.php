@@ -30,8 +30,7 @@
 				$uid = test_input($_POST["userid"]);
 			 	$nreg = test_input($_POST["nometiporegisto"]);
 			}
-			echo 'userid:'.$uid;
-			echo 'nreg:'.$nreg;
+
 
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
@@ -40,14 +39,18 @@
 
 			$sql_maxmom  = "SELECT s.contador_sequencia ";
 			$sql_maxmom .= "FROM sequencia s  ";
-			$sql_maxmom .= "WHERE s.userid = :userid ";
+			$sql_maxmom .= "WHERE s.userid = ".$uid;
 			$sql_maxmom .= "AND s.moment = all ";
 			$sql_maxmom .= "( SELECT max(s2.moment) ";
 			$sql_maxmom .= "FROM sequencia s2  ";
-			$sql_maxmom .= "WHERE s2.userid = :userid)";
+			$sql_maxmom .= "WHERE s2.userid = )".$uid.')';
+
+			echo 'MAXMOM ='.$sql_maxmom;
+			echo "ACABEI DE FAZER SET AO SQL_MAXMOM";
 
 			$getseq = $connection->prepare($sql_maxmom);
-			$getseq = $bindParam(":userid", $uid);
+			echo 'LOOK MOM, NO BINDPARAM';
+			//$getseq = $bindParam(":userid", $uid);
 			$getseq->execute();
 
 			echo "acabei de ver qual é a sequencia";
