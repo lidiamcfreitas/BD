@@ -37,9 +37,10 @@
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["username"] != "") && ($_POST["password"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["email"] != "") && ($_POST["password"] != "")){
 
-        $username = $_POST["username"];
+        $username = $_POST["email"];
+        $email = $_POST["password"];
 
 
         class TableRows extends RecursiveIteratorIterator {
@@ -61,7 +62,7 @@
             }
         }
 
-        $teste = "select count(1) from utilizador where email = :email AND password = :password";
+        $teste = "select count(1) userid from utilizador where email = :email AND password = :password";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":email", $email_teste);
         $email_teste = $email;
@@ -72,18 +73,35 @@
 
         if ($deu == 0) {
           echo "<h1>Username ou Palavra passe errada </h1>";
+
+          $teste = "select count(1) userid from utilizador where email = :email ";
+          $testarseexiste =$connection->prepare($teste);
+          $testarseexiste->bindParam(":email", $email_teste);
+          $email_teste = $email;
+          $testarseexiste->execute();
+          $idutilizador = $testarseexiste->fetchColumn();
+
           $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 0);";
           $sequencia_itr = $connection->prepare($query_cria);
           $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
-          $user_ipseq_tr = $userid;
+          $user_ipseq_tr = $idutilizador;
           $sequencia_itr->execute();
           exit();
         }else{
-          echo "<h1>Login efectuado com sucesso ! </h1>";      
+          echo "<h1>Login efectuado com sucesso ! </h1>";
+
+          $teste = "select count(1) userid from utilizador where email = :email ";
+          $testarseexiste =$connection->prepare($teste);
+          $testarseexiste->bindParam(":email", $email_teste);
+          $email_teste = $email;
+          $testarseexiste->execute();
+          $idutilizador2 = $testarseexiste->fetchColumn();
+
           $query_cria = "INSERT INTO login (userid, sucesso) VALUES (:userid, 1);";
+
           $sequencia_itr = $connection->prepare($query_cria);
             $sequencia_itr->bindParam(":userid", $user_ipseq_tr);
-            $user_ipseq_tr = $userid;
+            $user_ipseq_tr = $udutilizador2;
             $sequencia_itr->execute();
 
         }
