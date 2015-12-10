@@ -38,8 +38,8 @@
     echo "<p>diz qualquer coisa</p>";
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
 		echo "estou aqui mãe";
-        $userid = $_POST["userid"];
         $nomepagina = $_POST["nomepagina"];
+		$userid = $_POST["userid"];
 		echo "user: ".$userid;
 		echo "nomepagina: ".$nomepagina;
         class TableRows extends RecursiveIteratorIterator { 
@@ -82,13 +82,16 @@
 
 		echo "estou aqui</br>";
         $resultado = $connection->prepare($sql);
-        $resultado->bindParam(":nomepagina", $nomepagina);
-        $resultado->bindParam(":userid", $userid);
-        $resultado->execute();
+        echo "fiz bind pai! </br>";
+		$resultado->bindParam(":nomepagina", $nomepagina);
 		echo "fiz bind pai! </br>";
-        $result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
-        $result = $resultado->fetchAll();
-    
+        $resultado->bindParam(":userid", $userid);
+        echo "fiz bind pai! </br>";
+		$resultado->execute();
+		echo "fiz bind pai! </br>";
+		
+		$result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
+		$result = $resultado->fetchAll();
 
         if (empty($result)) {
             echo "<p>Não existe uma pagina com esse nome</p>";
