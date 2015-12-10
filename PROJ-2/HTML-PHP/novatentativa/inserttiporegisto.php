@@ -76,7 +76,6 @@
 
         function print_result($result){
 
-            $uid = null;
 
             if (empty($result)) {
                 echo "<p>Não existe uma pagina com esse nome</p>";
@@ -92,7 +91,6 @@
             }
         }
 
-        $uid = null;
 
         $sql_maxmom  = "SELECT s.contador_sequencia ";
         $sql_maxmom .= "FROM sequencia s  ";
@@ -105,13 +103,13 @@
         $getmoment = $connection->prepare($sql_maxmom);
         $getmoment->bindParam(":userid", $uid);
         $uid = $userid;
-		$getmoment->execute();
+		    $getmoment->execute();
 
         //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC);
         //$result = $getmoment->fetchAll();
 
         //print_result($result);
-        $teste = "select count(*) from utilizador where userid = ".$uid;
+        $teste = "select count(*) from utilizador where userid = ".$userid;
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchAll();
@@ -120,16 +118,16 @@
           echo "Esse Utilizador não existe";
         }
 
-        $sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
+        $sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $userid)");
   			$sequencia->execute();
 
   			$sql_maxmom  = "SELECT s.contador_sequencia ";
   			$sql_maxmom .= "FROM sequencia s  ";
-  			$sql_maxmom .= "WHERE s.userid = ".$uid;
+  			$sql_maxmom .= "WHERE s.userid = ".$userid;
   			$sql_maxmom .= " AND s.moment = all ";
   			$sql_maxmom .= "( SELECT max(s2.moment) ";
   			$sql_maxmom .= "FROM sequencia s2  ";
-  			$sql_maxmom .= "WHERE s2.userid = ".$uid.')';
+  			$sql_maxmom .= "WHERE s2.userid = ".$userid.')';
 
 
   			$getseq = $connection->prepare($sql_maxmom);
@@ -141,11 +139,11 @@
 
   			$sql_maxtc  = "SELECT r.typecnt ";
   			$sql_maxtc .= "FROM tipo_registo r  ";
-  			$sql_maxtc .= "WHERE r.userid = ".$uid;
+  			$sql_maxtc .= "WHERE r.userid = ".$userid;
   			$sql_maxtc .= "  AND r.typecnt = ALL  ";
   			$sql_maxtc .= "    (SELECT max(r2.typecnt) ";
   			$sql_maxtc .= "     FROM tipo_registo r2  ";
-  			$sql_maxtc .= "     WHERE r2.userid = ".$uid.')';
+  			$sql_maxtc .= "     WHERE r2.userid = ".$userid.')';
 
 
   			$getmaxtc = $connection->prepare($sql_maxtc);
@@ -164,7 +162,7 @@
   			++$cenas;
 
 
-  			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.',"'.$nreg.'",'.$cenas.',1)';
+  			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$userid.','.$cenas2.',"'.$nreg.'",'.$cenas.',1)';
   			echo ' '.$preparation;
   			$tiporegisto = $connection->prepare($preparation);
   			$tiporegisto->execute();
