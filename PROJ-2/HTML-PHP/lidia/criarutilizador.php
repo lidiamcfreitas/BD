@@ -110,6 +110,16 @@
         $_SESSION['pais'] = $pais;
         $_SESSION['categoria'] = $categoria;
 
+        echo $nome;
+        echo $email ;
+        echo $password_aux;
+        echo $questao1_aux;
+        echo $resposta1;
+        echo $questao2;
+        echo $resposta2;
+        echo $pais;
+        echo $categoria;
+
         $query_cria = "INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid,:email,:nome,:password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
         $utilizador_obj = $connection->prepare($query_cria_aux);
     		$utilizador_obj->bindParam(":userid", $userid_aux);
