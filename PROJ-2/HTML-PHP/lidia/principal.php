@@ -45,13 +45,21 @@ session_start();
 
 		    $userid = $_SESSION['userid'];
 
-        $query_tabelas = "select * from pagina where userid = ?";
+        $query_tabelas = "select nome from pagina where userid = ?";
         $resultado_tabelas = $connection->prepare($query_tabelas);
         $resultado_tabelas->execute(array($userid));
         $resultado_print = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
 
+        $query_tipos = "select nome from tipo_registo where userid = ?";
+        $resultado_tabelas = $connection->prepare($query_tabelas);
+        $resultado_tabelas->execute(array($userid));
+        $resultado_print_tipo = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
+        
+
         ?>
         <div class="container">
+          <div class="row">
+            <div class="col-md-6">
         <table class="table table-striped table-hover table-responsive">
           <thead>
             <tr>
@@ -73,6 +81,31 @@ session_start();
         } ?>
         </tbody>
       </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-striped table-hover table-responsive">
+        <thead>
+          <tr>
+            <?php
+            foreach($resultado_print_tipo[0] as $nome_coluna => $valor_coluna){
+              echo "<td>$nome_coluna</td>";
+            }
+            ?>
+          </tr>
+        </thead>
+        <tbody>
+      <?php
+      foreach($resultado_print_tipo as $num=>$row){
+        echo "<tr>";
+        foreach($row as $nome_coluna => $valor_coluna){
+          echo "<td>$valor_coluna</td>";
+        }
+        echo "</tr>";
+      } ?>
+      </tbody>
+      </table>
+    </div>
+  </div>
     </div>
 
 
