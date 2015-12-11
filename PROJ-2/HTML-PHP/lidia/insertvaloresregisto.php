@@ -2,6 +2,7 @@
 session_start();
 $userid = $_SESSION['userid'];
 require "connect.php";
+$lol = 1;
 ?>
 
 <!DOCTYPE html>
@@ -76,13 +77,13 @@ require "connect.php";
       require "connect.php";
 
 
-      if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "")){
+      if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "") && ($lol == 1) ){
         $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
         $tipoderegisto1 = $_SESSION["tipoderegisto"];
         $nomeregisto1 = $_SESSION["nomeregisto"];
-
+        $lol = 0;
         echo "Im here";
         echo ":".$tipoderegisto1;
         echo ":".$nomeregisto1;
@@ -93,7 +94,7 @@ require "connect.php";
         $sql_campos .= "  AND ativo = 1;";
         $obj_campos = $connection->prepare($sql_campos);
         $obj_campos->execute(array($tipoderegisto1, $userid));
-        
+
         $result_campos = $obj_campos->fetchAll(PDO::FETCH_ASSOC);
         var_dump($result_campos);
 
@@ -101,17 +102,31 @@ require "connect.php";
         <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
           <tr>
             <div class="form-group"> <?php
+            echo "<input type=\"hidden\" name=\"foo\" value=\"foo\">";
             foreach($result_campos as $row){
               echo "<td><label for=\"nomeregisto\">".$row["nome"]."</label></td>";
               echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";
             }
             ?>
+            <td><input type="submit" name="submit" class="btn btn-success" value="Show"></td>
           </div>
         </tr>
       </form> <?php
 
 
+
+
       //header("Location: insertvalorescampo.php");
+    } else if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["foo"] != "")) {
+
+      $valoresdoscampos[] = $_POST["valorcampo"];
+      var_dump($valoresdoscampos);
+
+      foreach($valoresdoscampos as $row){
+        foreach($row as $column){
+          echo $column;
+        }
+      }
     }
     $connection = null;
     ?>
