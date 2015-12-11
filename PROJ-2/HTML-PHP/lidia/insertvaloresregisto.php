@@ -47,7 +47,7 @@ require "connect.php";
               <td>
                 <select name="tipoderegisto">
                   <?php
-                  $sqltypeid1  = "SELECT nome ";
+                  $sqltypeid1  = "SELECT nome, typecnt ";
                   $sqltypeid1 .= "FROM tipo_registo  ";
                   $sqltypeid1 .= "WHERE userid = ? ";
                   $sqltypeid1 .= "  AND ativo = 1";
@@ -56,9 +56,9 @@ require "connect.php";
 
 
                   $result_tipos = $gettype1->fetchAll(PDO::FETCH_ASSOC);
-                  echo "<option value=0>Vazio</option>";
+                  echo "<option value=-1>Vazio</option>";
                   foreach($result_tipos as $row){
-                    echo "<option value=\"".$row["nome"]."\">".$row["nome"]."</option>";
+                    echo "<option value=\"".$row["typecnt"]."\">".$row["nome"]."</option>";
                   }
                   echo "</select>";
 
@@ -73,6 +73,7 @@ require "connect.php";
     <?php
 
     require "connect.php";
+
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
 
@@ -161,6 +162,37 @@ require "connect.php";
       $insert_campo->execute();
       echo "here";
 
+    } else if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "")){
+      $tipoderegisto = $_POST["tipoderegisto"];
+      if($tipoderegisto==-1){
+        echo "<h2>nothing selected</h2>";
+      } else {
+        $query_campos = "SELECT nome, campocnt from campo where typecnt = :typecnt and ativo=1 and userid = :userid";
+        $q_campos = $connection->prepare($query_campos);
+        $q_campos->execute(array($tipoderegisto, $userid));
+
+        $result_campos = $q_campos->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
+        <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
+          <table cellspacing="10">
+            <tr>
+              <div class="form-group">
+                <?php
+
+                foreach($result_campos as $row){
+                  echo "<td><label for=\"nomecampo\">".$row["nome"]."</label></td>";
+                  echo "<td><input type=\"text\" name=\"nome_campo_".$row["campocnt"]." placeholder=\"Nome do Campo\" required></td>";
+                }
+                 ?>
+              </div><br>
+              </tr>
+            </table>
+          </div>
+        </form>
+        <?php
+
+      }
     }
     $connection = null;
     ?>
