@@ -95,11 +95,37 @@
             }
         }
 
+        $teste = "select count(*) from campo where nome = :nomecampo";
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":nomeregisto", $nomecampopararetirar);
+        $nomecampopararetirar = $nomecampoaretirar;
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchColumn();
+
+        if ($deu == 0) {
+          echo "<h1>O Nome de campo não existe. </h1>";
+          exit();
+        }
+
+
+        $teste = "select count(*) from tipo_registo where nome = :nomeregisto";
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":nomeregisto", $nomeregistopara_teste);
+        $nomeregistopara_teste = $tiporegisto
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchColumn();
+
+        if ($deu == 0) {
+          echo "<h1>O Tipo de Registo não existe. </h1>";
+          exit();
+        }
+
+
         $gettypecnt = $connection->prepare($sql_pageid);
-        $gettypecnt->bindParam(":userid", $userid);
-        $gettypecnt->bindParam(":nome", $nometiporetirar);
+        $gettypecnt->bindParam(":userid", $uid);
+        $gettypecnt->bindParam(":nome", $nomearetirar);
 
-
+        $nomearetirar=$nomecampoaretirar;
         $uid = $userid;
         $gettypeid->execute();
 
