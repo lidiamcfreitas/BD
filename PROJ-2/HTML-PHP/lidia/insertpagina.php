@@ -137,12 +137,13 @@ session_start();
     //VERIFICA SE A PAGINA EXISTE, MAS NÃO ACTIVA
     $teste = "select count(*) from pagina where nome = :nomepagina and ativa=0";
     $testarseexiste =$connection->prepare($teste);
-    $testarseexiste->bindParam(":nomepagina", $nomecampopararetirar);
-    $nomecampopararetirar = $nomepagina;
+    $testarseexiste->bindParam(":nomepagina", $acbd);
+    $abcd = $nomepagina;
     $testarseexiste->execute();
     $deu2 = $testarseexiste->fetchColumn();
 
     if ($deu2 != 0) {
+      echo "EXISTE ? ENTAO ACTIVA-A";
       //EXISTE ? ENTÃO ACTIVA-A
       $query = "UPDATE pagina SET ativa=1 WHERE nome = :nomepagina";
       $testarseexiste =$connection->prepare($teste);
@@ -152,6 +153,7 @@ session_start();
 
     }else{
         //EXISTE ALGUMA PAGINA COM O MESMO NOME ?
+        echo "EXISTE ALGUMA PAGINA MESMO NOME?";
       $teste = "select count(*) from pagina where nome = :nomepagina";
       $testarseexiste =$connection->prepare($teste);
       $testarseexiste->bindParam(":nomepagina", $nomep2);
@@ -164,6 +166,7 @@ session_start();
 
       }else{
         //NÃO EXISTINDO, CRIA-A
+        echo "NÃO EXISTINDO, CRIA-A";
         $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
         $pagina->bindParam(":nomepagina", $nomep);
         $pagina->bindParam(":idseq", $pagemoment);
