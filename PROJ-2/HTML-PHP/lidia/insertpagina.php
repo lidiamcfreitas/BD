@@ -148,7 +148,7 @@ session_start();
         $testarexiste =$connection->prepare($query);
         $testarexiste->execute(array($nomepagina));
         //$testarexiste->execute(array($nomepagina, $pagemoment, $userid, $maxpc));
-        echo "A página existia, passando a ficar activa.";
+        
 
         $deu2 = $testarexiste->fetchColumn();
 
@@ -163,7 +163,7 @@ session_start();
 
 
         //NÃO EXISTINDO, CRIA-A
-        echo "página criada com sucesso";
+
         $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
         $pagina->bindParam(":nomepagina", $nomep);
         $pagina->bindParam(":idseq", $pagemoment);
