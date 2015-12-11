@@ -95,17 +95,10 @@
             }
         }
 
-
-
-        $sql_typecnt  = "SELECT typecnt ";
-        $sql_typecnt .= "FROM tipo_registo  ";
-        $sql_typecnt .= "WHERE userid = :userid ";
-        $sql_typecnt .= "  AND nome = :nome";
-
-
         $gettypecnt = $connection->prepare($sql_pageid);
         $gettypecnt->bindParam(":userid", $userid);
         $gettypecnt->bindParam(":nome", $nometiporetirar);
+
 
         $uid = $userid;
         $gettypeid->execute();
