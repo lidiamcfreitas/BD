@@ -34,14 +34,7 @@ session_start();
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
-            	<tr>
-                <div class="form-group">
-                    <td><label for="nomepagina">Nome da Página</label></td>
-                    <td><input type="text" name="nomepagina" placeholder="Nome da Página" required></td>
-                </div><br>
-              </tr>
-                </table>
-                    <br><input type="submit" name="submit" class="btn btn-success" value="Show">
+              </table>
                 </div>
             </form>
         </div>
@@ -50,19 +43,28 @@ session_start();
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomepagina"] != "")){
-
-        $nomepagina = $_POST["nomepagina"];
 		    $userid = $_SESSION['userid'];
 
-        $resultado = $connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($resultado);
+        $query_tabelas = "select nome from pagina where userid = ?";
+        $resultado_tabelas = $connection->prepare($query_tabelas);
+        $resultado_tabelas->execute(array($userid));
+        $resultado_print = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
+
+        $query_tipos = "select nome from tipo_registo where userid = ?";
+        $resultado_tabelas = $connection->prepare($query_tipos);
+        $resultado_tabelas->execute(array($userid));
+        $resultado_print_tipo = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
+
+
         ?>
-        <table class=\"table table-striped table-hover table-responsive\">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+        <table class="table table-striped table-hover table-responsive">
           <thead>
             <tr>
               <?php
-              foreach($resultado[0] as $nome_coluna => $valor_coluna){
+              foreach($resultado_print[0] as $nome_coluna => $valor_coluna){
                 echo "<td>$nome_coluna</td>";
               }
               ?>
@@ -70,82 +72,44 @@ session_start();
           </thead>
           <tbody>
         <?php
-        foreach($resultado as $num=>$row){
+        foreach($resultado_print as $num=>$row){
           echo "<tr>";
           foreach($row as $nome_coluna => $valor_coluna){
             echo "<td>$valor_coluna</td>";
           }
           echo "</tr>";
+        } ?>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-striped table-hover table-responsive">
+        <thead>
+          <tr>
+            <?php
+            foreach($resultado_print_tipo[0] as $nome_coluna => $valor_coluna){
+              echo "<td>$nome_coluna</td>";
+            }
+            ?>
+          </tr>
+        </thead>
+        <tbody>
+      <?php
+      foreach($resultado_print_tipo as $num=>$row){
+        echo "<tr>";
+        foreach($row as $nome_coluna => $valor_coluna){
+          echo "<td>$valor_coluna</td>";
         }
-        die();
-
-        // cria sequencia
-        $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
-        $sequencia_ip = $connection->prepare($query_cria);
-    		$sequencia_ip->bindParam(":userid", $user_ipseq);
-        $user_ipseq = $userid;
-    		$sequencia_ip->execute();
-
-        $imprimeisto = $connection->query("SELECT * FROM utilizador");
-        imprime_tabelas($imprimeisto);
-
-        $sql_maxmom  = "SELECT s.contador_sequencia ";
-        $sql_maxmom .= "FROM sequencia s  ";
-        $sql_maxmom .= "WHERE s.userid = :userid ";
-        $sql_maxmom .= "  AND s.moment = all ";
-        $sql_maxmom .= "    ( SELECT max(s2.moment) ";
-        $sql_maxmom .= "     FROM sequencia s2  ";
-        $sql_maxmom .= "     WHERE s2.userid = :userid)";
-
-        $getmoment = $connection->prepare($sql_maxmom);
-        $getmoment->bindParam(":userid", $uid);
-        $uid = $userid;
-		    $getmoment->execute();
-
-        //$result = $getmoment->setFetchMode(PDO::FETCH_ASSOC);
-        //$result = $getmoment->fetchAll();
-
-        //print_result($result);
-
-        $sql_maxpc  = "SELECT p.pagecounter ";
-        $sql_maxpc .= "FROM pagina p  ";
-        $sql_maxpc .= "WHERE p.userid = :userid ";
-        $sql_maxpc .= "  AND p.pagecounter = all ";
-        $sql_maxpc .= "    ( SELECT max(p2.pagecounter) ";
-        $sql_maxpc .= "     FROM pagina p2  ";
-        $sql_maxpc .= "     WHERE p2.userid = :userid)";
-
-        $getmaxpc = $connection->prepare($sql_maxpc);
-        $getmaxpc->bindParam(":userid", $uid2);
-        $uid2 = $userid;
-        $getmaxpc->execute();
+        echo "</tr>";
+      } ?>
+      </tbody>
+      </table>
+    </div>
+  </div>
+    </div>
 
 
-
-        //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC);
-        //$result = $getmaxpc->fetchAll();
-
-        //print_result($result);
-
-        $getseq = $getmoment->fetchColumn();
-        $getmaxpcount = $getmaxpc->fetchColumn();
-        ++$getmaxpcount;
-
-        $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
-        $pagina->bindParam(":nomepagina", $nomep);
-        $pagina->bindParam(":idseq", $pagemoment);
-        $pagina->bindParam(":pagecounter", $maxpc);
-        $pagina->bindParam(":userid", $uid3);
-
-        $nomep  = $nomepagina;
-        $uid3   = $userid;
-        $pagemoment = $getseq;
-        $maxpc  = $getmaxpcount;
-        $pagina->execute();
-
-    } else {
-
-    }
+<?php
     $connection = null;
     ?>
 
