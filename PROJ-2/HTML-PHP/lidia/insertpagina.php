@@ -141,17 +141,17 @@ session_start();
     $abcd = $nomepagina;
     $testarexiste->execute();
     $deu2 = $testarexiste->fetchColumn();
+    echo "isto é o deu2->".$deu2;
 
     if ($deu2 != 0) {
-      echo "EXISTE ? ENTAO ACTIVA-A";
+      echo "A pagina foi activada";
       //EXISTE ? ENTÃO ACTIVA-A
       $query = "UPDATE pagina SET ativa=1 WHERE nome = :nomepagina";
       $testar =$connection->prepare($query);
       $testar->bindParam(":nomepagina", $nomep);
       $nomep = $nomepagina;
       $testar->execute();
-
-    }else{
+}
         //EXISTE ALGUMA PAGINA COM O MESMO NOME ?
         echo "EXISTE ALGUMA PAGINA MESMO NOME?";
       $teste = "select count(*) from pagina where nome = :nomepagina";
@@ -179,7 +179,7 @@ session_start();
         $maxpc  = $getmaxpcount;
         $pagina->execute();
       }
-    }
+
 
     }
     $connection = null;
