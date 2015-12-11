@@ -1,4 +1,7 @@
 
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,10 +16,7 @@
 
   </head>
   <body>
-    <?php
-    session_start();
-    include 'imprimir_tabelas.php';
-    ?>
+
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
@@ -45,6 +45,7 @@
                 </div>
             </form>
         </div>
+
     <?php
 
         require "connect.php";
@@ -55,7 +56,6 @@
 		    $userid = $_SESSION['userid'];
 
         $resultado = $connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC);
-
         ?>
         <table class=\"table table-striped table-hover table-responsive\">
           <thead>
