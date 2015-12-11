@@ -145,10 +145,10 @@ session_start();
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
 
-        if ($deu == 0) {
+        if ($deu != 0) {
           echo "<h1>Existe uma página com esse nome. </h1>";
-          exit();
-        }
+          
+        }else{
 
         $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
         $pagina->bindParam(":nomepagina", $nomep);
@@ -161,6 +161,7 @@ session_start();
         $pagemoment = $getseq;
         $maxpc  = $getmaxpcount;
         $pagina->execute();
+      }
 
     } else {
 
