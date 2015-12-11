@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,7 +53,7 @@
 
         $nometiporegisto = $_POST["nometiporegisto"];
 		    $userid = $_SESSION['userid'];
-
+        echo $userid;
         class TableRows extends RecursiveIteratorIterator {
 
             function __construct($it) {
