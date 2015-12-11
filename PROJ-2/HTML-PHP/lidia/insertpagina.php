@@ -146,7 +146,7 @@ session_start();
       echo "EXISTE ? ENTAO ACTIVA-A";
       //EXISTE ? ENTÃO ACTIVA-A
       $query = "UPDATE pagina SET ativa=1 WHERE nome = :nomepagina";
-      $testarseexiste =$connection->prepare($teste);
+      $testarseexiste =$connection->prepare($query);
       $testarseexiste->bindParam(":nomepagina", $nomep);
       $nomep = $nomepagina;
       $testarseexiste->execute();
@@ -159,9 +159,9 @@ session_start();
       $testarseexiste->bindParam(":nomepagina", $nomep2);
       $nomep2 = $nomepagina;
       $testarseexiste->execute();
-      $deu = $testarseexiste->fetchColumn();
+      $deu3 = $testarseexiste->fetchColumn();
 
-      if ($deu != 0) {
+      if ($deu3 != 0) {
         echo "<h1>Existe uma página com esse nome. </h1>";
 
       }else{
