@@ -96,28 +96,24 @@ require "connect.php";
             }
         }
         $connection->beginTransaction();
-        $teste = "select count(*) from campo where nome = :nomecampo";
+        $teste = "select count(*) from campo where nome = \"?\"";
         $testarseexiste =$connection->prepare($teste);
-        $testarseexiste->bindParam(":nomecampo", $nomecampopararetirar);
-        $nomecampopararetirar = $nomecampoaretirar;
-        $testarseexiste->execute();
+        $testarseexiste->execute(array($nomecampoaretirar));
         $deu = $testarseexiste->fetchColumn();
 
         if ($deu == 0) {
-          echo "<h1>O Nome de campo não existe. </h1>";
+          echo "<h1>O Nome de campo não existe. $nomecampoaretirar</h1>";
           exit();
         }
 
 
-        $teste = "select count(*) from tipo_registo where nome = :nomeregisto";
+        $teste = "select count(*) from tipo_registo where nome = \" ? \"";
         $testarseexiste =$connection->prepare($teste);
-        $testarseexiste->bindParam(":nomeregisto", $nomeregistopara_teste);
-        $nomeregistopara_teste = $tiporegisto;
-        $testarseexiste->execute();
-        $deu = $testarseexiste->fetchColumn();
+        $testarseexiste->execute(array($tiporegisto));
+        $deu_2 = $testarseexiste->fetchColumn();
 
-        if ($deu == 0) {
-          echo "<h1>O Tipo de Registo não existe. </h1>";
+        if ($deu_2 == 0) {
+          echo "<h1>O Tipo de Registo não existe. $tiporegisto $</h1>";
           exit();
         }
 
