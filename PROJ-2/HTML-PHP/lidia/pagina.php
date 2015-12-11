@@ -103,7 +103,7 @@ session_start();
           foreach($resultado_print as $num=>$row){
             echo "<tr>";
             foreach($row as $nome_coluna => $valor_coluna){
-              echo "<td><a href=\"pagina.php?nomeregisto=$valor_coluna\">$valor_coluna</a></td>";
+              echo "<td><a href=\"insertcampo.php?nometiporegisto=$valor_coluna\">$valor_coluna</a></td>";
             }
             echo "</tr>";
           } ?>

@@ -1,7 +1,9 @@
 <?php
 session_start();
 $userid = $_SESSION['userid'];
+$nometipo = $_POST["nometipo"];
 require "connect.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +60,9 @@ require "connect.php";
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "")){
 
         $nomecampo = $_POST["nomecampo"];
-        $nometipo = $_POST["nometipo"];
 		    $userid = $_SESSION['userid'];
 
         $connection->beginTransaction();
