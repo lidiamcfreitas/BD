@@ -92,12 +92,8 @@ require "connect.php";
         $sql_campos .= "WHERE typecnt = ? and userid = ?";
         $sql_campos .= "  AND ativo = 1;";
         $obj_campos = $connection->prepare($sql_campos);
-
-        echo $userid;
-        echo $tiporegisto1;
-
-        $obj_campos->bindParam(array($tipoderegisto1, $userid));
-
+        $obj_campos->execute(array($tipoderegisto1, $userid));
+        
         $result_campos = $obj_campos->fetchAll(PDO::FETCH_ASSOC);
         var_dump($result_campos);
 
