@@ -89,11 +89,11 @@ require "connect.php";
 
         $sql_campos  = "SELECT campocnt, nome ";
         $sql_campos .= "FROM campo  ";
-        $sql_campos .= "WHERE typecnt = ? ";
+        $sql_campos .= "WHERE typecnt = ? and userid = ?";
         $sql_campos .= "  AND ativo = 1;";
         $obj_campos = $connection->prepare($sql_campos);
 
-        $obj_campos->bindParam(array(tipoderegisto1));
+        $obj_campos->bindParam(array($tipoderegisto1, $userid));
 
         $result_campos = $obj_campos->fetchAll(PDO::FETCH_ASSOC);
 
@@ -109,7 +109,7 @@ require "connect.php";
           </div>
         </tr>
       </form> <?php
-      
+
 
       //header("Location: insertvalorescampo.php");
     }
