@@ -48,7 +48,7 @@ $userid = $_SESSION['userid'];
                             <?php
                             $sqltypeid1  = "SELECT nome ";
                             $sqltypeid1 .= "FROM tipo_registo  ";
-                            $sqltypeid1 .= "WHERE userid = :userid";
+                            $sqltypeid1 .= "WHERE userid = ? ";
                             $sqltypeid1 .= "  AND ativo = 1";
                             $gettype1 = $connection->prepare($sqltypeid1);
                             $gettype1->execute(array($userid));
