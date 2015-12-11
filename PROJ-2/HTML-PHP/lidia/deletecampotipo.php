@@ -118,7 +118,6 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
         $delete_field->execute();
         $connection->commit();
 
-    }
 
 
     $connection = null;
