@@ -51,7 +51,7 @@ session_start();
         $resultado_print = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
-        <table class=\"table table-striped table-hover table-responsive\">
+        <table class="table table-striped table-hover table-responsive">
           <thead>
             <tr>
               <?php
