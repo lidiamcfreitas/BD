@@ -325,10 +325,31 @@ No trigger de update é necessário verificar também se já existe uma sequênc
 	Para além disso, pelo Teorema de Heath, esta é uma decomposição sem perdas de
 	informação, pois \textit{userid} é chave primária nas relações \textit{R}, $R_1$ e $R_2$.
 \end{itemize}
+\newpage
+
+\section{Índices}
+O código para esta secção encontra-se no ficheiro "indices.sql".
+
+Para a alínea a) queremos devolver a média do número de registos por página dado um certo utilizador.
+Como para o cálculo da média apenas é necessário ter conhecimento das quantidades de registos e de
+páginas desse utilizador e não das suas informações específicas, queremos obter essa informação utilizando
+apenas o índice. Para aproveitarmos isso, criámos um índice para a tabela reg\_pag com uma chave composta
+que inclui os atributos regid e pageid. Para além disso, o índice deve ser denso.
+ 
+ (Na realidade, para este projecto, o argumento acima mencionado cai por terra, pois para obtermos dados com
+ significado é necessário que a nossa query faça as verificações da cláusula where. Essas verificações implicam
+ que a informação não está toda no índice.)
+ 
+ O índice seria, idealmente, implementado através de uma hash table, visto ser mais rápida que uma árvore binária, quando aplicável. Neste caso seria, pois as condições da cláusula where são todas igualdades. No entanto, o MySQL apenas implementa índices recorrendo a BTREEs.
+ 
+Na alínea b) queremos ver o nome dos registos associados à página de um dado utilizador. Neste caso não podemos
+aplicar o truque da alínea anterior, em que o índice fornecia a informação sobre aquilo que queríamos saber. Assim,
+criámos três indíces densos (que seriam, idealmente, implementados por hash tables) com os índices de forma a
+acelerar o acesso aos campos verificados na cláusula where e aos campos dos nomes dos registos.
+
 
 \newpage
-\section{Índices}
-\newpage
+
 \section{Transacções}
 Para as transações, de forma a não existirem incoerências devido a acessos simultâneos às mesmas variáveis foi necessário criar transações. As transações fazem o acesso às variáveis dentro de uma transação seja efectuado em regime de exclusividade.
 
