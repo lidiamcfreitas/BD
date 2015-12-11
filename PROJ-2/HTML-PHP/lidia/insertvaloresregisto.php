@@ -122,12 +122,14 @@ $lol = 1;
       $valoresdoscampos[] = $_POST["valorcampo"];
       var_dump($valoresdoscampos);
 
-      foreach($valoresdoscampos as $row=>$v){
+      foreach($valoresdoscampos as $row){
         foreach($row as $column){
           echo $column;
-          echo $row;
-          echo $v;
         }
+      }
+      $cols = count($valoresdoscampos[0]);
+      for ($x = 0; $x <= $cols; $x++) {
+          echo $valoresdoscampos[0][$x];
       }
     }
     $connection = null;
