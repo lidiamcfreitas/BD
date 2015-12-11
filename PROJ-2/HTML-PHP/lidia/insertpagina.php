@@ -135,21 +135,21 @@ session_start();
 
 
     //VERIFICA SE A PAGINA EXISTE, MAS NÃO ACTIVA
-    $teste = "select count(*) from pagina where nome = :nomepagina and ativa=0";
-    $testarseexiste =$connection->prepare($teste);
-    $testarseexiste->bindParam(":nomepagina", $acbd);
+    $testando = "select count(*) from pagina where nome = :nomepagina and ativa=0";
+    $testarexiste =$connection->prepare($testando);
+    $testarexiste->bindParam(":nomepagina", $acbd);
     $abcd = $nomepagina;
-    $testarseexiste->execute();
-    $deu2 = $testarseexiste->fetchColumn();
+    $testarexiste->execute();
+    $deu2 = $testarexiste->fetchColumn();
 
     if ($deu2 != 0) {
       echo "EXISTE ? ENTAO ACTIVA-A";
       //EXISTE ? ENTÃO ACTIVA-A
       $query = "UPDATE pagina SET ativa=1 WHERE nome = :nomepagina";
-      $testarseexiste =$connection->prepare($query);
-      $testarseexiste->bindParam(":nomepagina", $nomep);
+      $testar =$connection->prepare($query);
+      $testar->bindParam(":nomepagina", $nomep);
       $nomep = $nomepagina;
-      $testarseexiste->execute();
+      $testar->execute();
 
     }else{
         //EXISTE ALGUMA PAGINA COM O MESMO NOME ?
