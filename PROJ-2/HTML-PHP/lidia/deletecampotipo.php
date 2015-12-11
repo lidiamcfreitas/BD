@@ -1,3 +1,8 @@
+<?php
+session_start();
+require "connect.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,9 +18,9 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation" class="active"><a href="insertcampo.php"> Inserir Campos </a></li>
-            <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
-            <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
+          <li role="presentation"><a href="insertcampo.php?nometipo=$nometipo"> Inserir Campos </a></li>
+          <li role="presentation" class="active"><a href="deletecampotipo.php?nometipo=$nometipo"> Apagar Campo de Tipo </a></li>
+
 
         </ul>
         <h3 class="text-muted">Apagar Tipo</h3>
@@ -24,13 +29,7 @@
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
-                <tr>
-                <div class="form-group">
-                    <td><label for="Tipo">Tipo de Registo</label></td>
-                    <td><input type="text" name="tiporegisto" placeholder="Tipo de Registo" required></td>
-                </div><br>
-                </tr>
-            	<tr>
+
                 <div class="form-group">
                     <td><label for="Tipo">Nome do Campo a retirar</label></td>
                     <td><input type="text" name="nomecampoaretirar" placeholder="Nome do Campo a Retirar" required></td>
@@ -49,7 +48,7 @@
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")&& ($_POST["tiporegisto"] != "")){
 
-        $tiporegisto = $_POST["tiporegisto"];
+        $tiporegisto = $_SESSION["nometipo"];
         $nomecampoaretirar = $_POST["nomecampoaretirar"];
 		$userid = $_SESSION['userid'];
 

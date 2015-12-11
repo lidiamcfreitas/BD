@@ -25,9 +25,8 @@ require "connect.php";
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation" class="active"><a href="insertcampo.php"> Inserir Campos </a></li>
-            <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
-            <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
+            <li role="presentation" class="active"><a href="insertcampo.php?nometipo=$nometipo"> Inserir Campos </a></li>
+            <li role="presentation"><a href="deletecampotipo.php?nometipo=$nometipo"> Apagar Campo de Tipo </a></li>
 
         </ul>
         <h3 class="text-muted">Inserir Pagina</h3>
