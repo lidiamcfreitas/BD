@@ -23,5 +23,5 @@ function imprime_tabelas($query_obj){
     }
     echo "</tr>";
   }
-}
+}?>
 ?>

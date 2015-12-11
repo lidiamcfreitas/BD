@@ -54,6 +54,30 @@
         $nomepagina = $_POST["nomepagina"];
 		    $userid = $_SESSION['userid'];
 
+        $resultado = $connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
+        <table class=\"table table-striped table-hover table-responsive\">
+          <thead>
+            <tr>
+              <?php
+              foreach($resultado[0] as $nome_coluna => $valor_coluna){
+                echo "<td>$nome_coluna</td>";
+              }
+              ?>
+            </tr>
+          </thead>
+          <tbody>
+        <?php
+        foreach($resultado as $num=>$row){
+          echo "<tr>";
+          foreach($row as $nome_coluna => $valor_coluna){
+            echo "<td>$valor_coluna</td>";
+          }
+          echo "</tr>";
+        }
+        die();
+
         // cria sequencia
         $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
         $sequencia_ip = $connection->prepare($query_cria);
