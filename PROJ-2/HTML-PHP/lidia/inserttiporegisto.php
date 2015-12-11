@@ -34,7 +34,7 @@
                     <td><input type="text" name="nometiporegisto" placeholder="Nome do Tipo" required></td>
                 </div><br>
                 </tr>
-                
+
                 <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
@@ -86,18 +86,6 @@
             }
         }
 
-        $teste = "select count(*) from utilizador where userid = :userid";
-        $testarseexiste =$connection->prepare($teste);
-        $testarseexiste->bindParam(":userid", $userid_teste);
-        $userid_teste = $userid;
-        $testarseexiste->execute();
-        $deu = $testarseexiste->fetchColumn();
-
-        if ($deu == 0) {
-          echo "Esse Utilizador não existe";
-          exit();
-        }
-        echo "<h1>Utilizador existe</h1>";
 
         // cria sequencia
         $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";

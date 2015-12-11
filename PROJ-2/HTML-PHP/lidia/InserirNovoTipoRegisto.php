@@ -31,14 +31,7 @@
 			 	$nreg = test_input($_POST["nometiporegisto"]);
 			}
 
-			$teste = "select count(*) from utilizador where userid = ".$uid;
-			$testarseexiste =$connection->prepare($teste);
-			$testarseexiste->execute();
-			$deu = $testarseexiste->fetchAll();
 
-			if ($deu == 0) {
-				echo "Esse Utilizador não existe";
-			}
 
 
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");

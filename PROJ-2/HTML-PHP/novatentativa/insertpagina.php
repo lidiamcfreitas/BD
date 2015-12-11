@@ -140,18 +140,6 @@
         $getmaxpcount = $getmaxpc->fetchColumn();
         ++$getmaxpcount;
 
-        $teste = "select count(*) from utilizador where userid = :userid";
-        $testarseexiste =$connection->prepare($teste);
-        $testarseexiste->bindParam(":userid", $userid_teste);
-        $userid_teste = $userid;
-        $testarseexiste->execute();
-        $deu = $testarseexiste->fetchColumn();
-
-        if ($deu == 0) {
-          echo "<h1>Esse Utilizador não existe </h1>";
-          exit();
-        }
-        echo "<h1>Utilizador existe</h1>";
 
 
         $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
