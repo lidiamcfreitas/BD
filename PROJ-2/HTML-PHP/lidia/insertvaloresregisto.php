@@ -82,17 +82,18 @@ $lol = 1;
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
 
-        $sql_maxtc  = "SELECT r.regcounter + 1 ";
+        $sql_maxtc  = "SELECT r.regcounter + 1 as soma";
         $sql_maxtc .= "FROM registo r  ";
-        $sql_maxtc .= "WHERE r.userid = ".$userid;
+        $sql_maxtc .= "WHERE r.userid = ?";
         $sql_maxtc .= "  AND r.regcounter = ALL  ";
         $sql_maxtc .= "    (SELECT max(r2.regcounter) ";
         $sql_maxtc .= "     FROM registo r2  ";
-        $sql_maxtc .= "     WHERE r2.userid = ".$userid.')';
+        $sql_maxtc .= "     WHERE r2.userid = ? ";
         $sql_maxtc_smt = $connection->prepare($sql_maxtc);
-        $sql_maxtc_smt->execute();
+        $sql_maxtc_smt->execute(array($userid, $userid));
 
-        $sql_maxtc_result = $sql_maxtc_smt->fetchColumn();
+        $sql_maxtc_result = $sql_maxtc_smt->fetchAll(PDO::FETCH_ASSOC);
+        $reg_counter_result = $sql_maxtc_result[0]["soma"];
         echo "register counter".$sql_maxtc_result;
 
         $tipoderegisto1 = $_SESSION["tipoderegisto"];
