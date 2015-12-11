@@ -51,6 +51,7 @@ session_start();
         $resultado_print = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
+        <div class="container">
         <table class="table table-striped table-hover table-responsive">
           <thead>
             <tr>
@@ -69,10 +70,13 @@ session_start();
             echo "<td>$valor_coluna</td>";
           }
           echo "</tr>";
-        }
+        } ?>
+        </tbody>
+      </table>
+    </div>
 
 
-
+<?php
     $connection = null;
     ?>
 
