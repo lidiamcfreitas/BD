@@ -123,8 +123,9 @@ $lol = 1;
       var_dump($valoresdoscampos);
 
       foreach($valoresdoscampos as $row){
-        echo "<td><label for=\"nomeregisto\">".$row["nome"]."</label></td>";
-        echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";
+        foreach($row as $column){
+          echo $column;
+        }
       }
     }
     $connection = null;
