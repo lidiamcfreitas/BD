@@ -80,7 +80,14 @@ require "connect.php";
         $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
+        $tipoderegisto = $_SESSION["tipoderegisto"];
+        $nomeregisto = $_SESSION["nomeregisto"];
+
         echo "Im here";
+        echo $tipoderegisto1;
+        echo $nomeregisto1;
+
+        
 
 
         //header("Location: insertvalorescampo.php");
