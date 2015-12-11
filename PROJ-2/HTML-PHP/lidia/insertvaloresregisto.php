@@ -44,15 +44,13 @@
                             $sqltypeid1 .= "WHERE userid = :userid";
                             $sqltypeid1 .= "  AND ativo = 1";
                             $gettype1 = $connection->prepare($sqltypeid1);
-                            $gettype1->bindParam(":userid", $uid_type1);
-                            $uid_type1 = $userid;
-                            $gettype1->execute();
+                            $gettype1->execute(array($userid));
 
 
                             $result_tipos = $gettype1->fetchAll(PDO::FETCH_ASSOC);
 
                             foreach($result_tipos as $row){
-                              echo "<option value=\'".$row["nome"]."\'>".$row["nome"]."</option>";
+                              echo "<option value=\"".$row["nome"]."\">".$row["nome"]."</option>";
                             }
                             echo "</select>";
 
@@ -60,8 +58,6 @@
                         </td>
                     </div><br>
                 </tr>
-
-                <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
                 </div>
