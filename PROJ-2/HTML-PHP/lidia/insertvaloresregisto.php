@@ -33,11 +33,11 @@ require "connect.php";
       <h3 class="text-muted">Inserir Pagina</h3>
     </div>
     <div>
-      <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
+      <form method="post" class="form-inline" action="<?php echo $_SERVER["insertvalorescampo.php"];?>">
         <table cellspacing="10">
           <tr>
             <div class="form-group">
-              <td><label for="nomecampo">Nome do Registo</label></td>
+              <td><label for="nomeregisto">Nome do Registo</label></td>
               <td><input type="text" name="nomeregisto" placeholder="Nome do Registo" required></td>
               <?php
               echo $userid; ?>
@@ -54,35 +54,15 @@ require "connect.php";
                   $gettype1 = $connection->prepare($sqltypeid1);
                   $gettype1->execute(array($userid));
 
-
                   $result_tipos = $gettype1->fetchAll(PDO::FETCH_ASSOC);
+
                   echo "<option value=-1>Vazio</option>";
                   foreach($result_tipos as $row){
-                    echo "<option value=\"".$row["nome"]."\">".$row["nome"]."</option>";
+                    echo "<option value=\"".$row["typecnt"]."\">".$row["nome"]."</option>";
                   }
                   echo "</select>";
 
-                  $tipoderegisto = $_POST["tipoderegisto"];
-                  echo $tipoderegisto;
-
-                  $query_campos = "SELECT nome, campocnt from campo where typecnt = :typecnt and ativo=1 and userid = :userid";
-                  $q_campos = $connection->prepare($query_campos);
-                  $q_campos->execute(array($tipoderegisto, $userid));
-
-                  $result_campos = $q_campos->fetchAll(PDO::FETCH_ASSOC);
-
-
                   ?>
-                  <tr>
-                    <div class="form-group">
-                      <?php
-                      foreach($result_campos as $row){
-                        echo "<td><label for=\"nomecampo\">".$row["nome"]."</label></td>";
-                        echo "<td><input type=\"text\" name=\"".$row["campocnt"]." placeholder=\"Nome do Campo\" required></td>";
-                      }
-                       ?>
-                    </div><br>
-                    </tr>
                 </td>
                 <td><input type="submit" name="submit" class="btn btn-success" value="Show"></td>
               </div><br>
