@@ -44,7 +44,6 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
         </div>
     <?php
         //RETIRARCAMPODETIPOREGISTO
-        require "connect.php";
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")){
 
@@ -53,28 +52,6 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
         $nomecampoaretirar = $_POST["nomecampoaretirar"];
 		$userid = $_SESSION['userid'];
 
-        class TableRows extends RecursiveIteratorIterator {
-
-            function __construct($it) {
-                parent::__construct($it, self::LEAVES_ONLY);
-            }
-
-            function current() {
-                return "<td >" . parent::current(). "</td>";
-            }
-
-            function beginChildren() {
-                echo "<tr>";
-            }
-
-            function endChildren() {
-                echo "</tr>" . "\n";
-            }
-        }
-
-        function print_result($result){
-
-            $uid = null;
 
             if (empty($result)) {
                 echo "<p>Não existe uma pagina com esse nome</p>";
