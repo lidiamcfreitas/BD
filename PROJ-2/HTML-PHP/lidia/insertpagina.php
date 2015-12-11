@@ -159,7 +159,7 @@ session_start();
         if ($deu2 != 0) {
           echo "A pagina foi activada";
           //EXISTE ? ENTÃO ACTIVA-A
-          $frase = "UPDATE pagina SET ativa=1 where nome = ?";
+          $frase = "update pagina SET ativa=1 where nome = ?";
           $doc =$connection->prepare($frase);
           $doc->execute(array($nomepagina));
         }else{
