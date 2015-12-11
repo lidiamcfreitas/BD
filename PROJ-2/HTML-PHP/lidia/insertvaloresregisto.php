@@ -104,19 +104,21 @@ $lol = 1;
         $tipoderegisto1 = $_SESSION["tipoderegisto"];
         $nomeregisto1 = $_SESSION["nomeregisto"];
         $lol = 0;
-
-        $sql_cria_registo = "insert into registo (userid, regcounter, typecounter) values (?,?,?)";
+        echo "BADUM"
+        $sql_cria_registo = "insert into registo (userid, regcounter, typecounter) values(?,?,?)";
         $sql_cria_qualquercoisa = $connection->prepare($sql_cria_registo);
         $sql_cria_qualquercoisa->execute(array($userid, $sql_counter_result, $tipoderegisto1));
-
+        echo "TSSS"
         $sql_campos  = "SELECT campocnt, nome ";
         $sql_campos .= "FROM campo  ";
         $sql_campos .= "WHERE typecnt = ? and userid = ?";
         $sql_campos .= "  AND ativo = 1;";
         $obj_campos = $connection->prepare($sql_campos);
         $obj_campos->execute(array($tipoderegisto1, $userid));
+        echo "QUASE A IR"
 
         $result_campos = $obj_campos->fetchAll(PDO::FETCH_ASSOC);
+        echo " logo antes do var dumpesssssss";
         var_dump($result_campos);
         $_SESSION["result_campos"] = $result_campos;
 
