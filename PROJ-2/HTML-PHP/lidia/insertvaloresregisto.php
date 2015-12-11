@@ -130,6 +130,7 @@ $lol = 1;
       $cols = count($valoresdoscampos[0]);
       for ($x = 0; $x <= $cols; $x++) {
           echo $valoresdoscampos[0][$x];
+          var_dump($result_campos);
           echo $result_campos["campocnt"][$x];
 
       }
