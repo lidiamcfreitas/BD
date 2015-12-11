@@ -1,7 +1,6 @@
 <?php
 session_start();
 require "connect.php";
-$_SESSION["nometipo"] = $_GET["nometipo"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,8 +17,8 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-          <li role="presentation"><a href="insertcampo.php?nometipo=<?php echo $_SESSION["nometipo"]; ?>"> Inserir Campos </a></li>
-          <li role="presentation" class="active"><a href="deletecampotipo.php?nometipo=<?php echo $_SESSION["nometipo"]; ?>"> Apagar Campo de Tipo </a></li>
+          <li role="presentation"><a href="insertcampo.php"> Inserir Campos </a></li>
+          <li role="presentation" class="active"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
 
 
         </ul>
@@ -48,14 +47,9 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")){
 
-      function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
 
-        return $data;
-      }
         $tiporegisto = $_SESSION["nometipo"];
+        echo "nometipo:".$tiporegisto;
         $nomecampoaretirar = $_POST["nomecampoaretirar"];
 		$userid = $_SESSION['userid'];
 
