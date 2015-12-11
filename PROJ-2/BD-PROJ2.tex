@@ -389,6 +389,41 @@ Este facto pode ser verificado no código onde uma transação é inicializada c
 \newpage
 
 \section{Data Warehouse}
+A tabela d\_user corresponde à dimensão d\_utilizador do enunciado. Foram incluídos os atributos
+uid e userid. Assim, torna-se possível alterar o email de um utilizador sem se
+perder informação. Se for alterado o email de um utilizador com userid = UID,
+é criado um novo registo nesta página com os mesmos valores para os atributos,
+excepto para o email (obviamente) e para o uid. Se fosse colocado o atributo
+email como chave não seria possível mudar o email. Se fosse colocado o
+atributo userid como chave não seria possível mudar o email sem se perder o
+email anterior.
+
+A tabela d\_time corresponde à dimensão d\_tempo do enunciado. O atributo chave, tid, é redundante
+no nosso modelo, mas permite que se criem queries de forma mais sucinta do que
+fazendo o triplo (ano,mes,dia) chave primária da relação. A coerência desta
+tabela (e das outras duas do diagrama em estrela), é mantida através de um
+trigger, que será descrito mais adiante.
+
+A tabela f\_login corresponde à tabela de factos do diagrama em estrela. Contém como atributos da
+primary key os atributos que são foreign key para as tabelas d\_user e d\_time.
+Como medida é incluído uma coluna attempts que indica o número de tentativas de
+login associado ao par (uid,tid).
+
+O trigger permite manter a coerência das tabelas do diagrama em estrela. Sempre que
+são inseridos novos registos na tabela login este trigger é activado e insere as
+informações desse registo nas tabelas apropriadas.
+Se um novo utilizador fizer uma tentativa de login, a informação desse utilizador é
+inserida na tabela d\_user.
+Se um determinado utilizador já tiver feito uma tentativa no mesmo dia,
+incrementa-se o número de tentativas do par (uid,tid), que identifica o
+utilizador e o dia, respectivamente. Se não, registamos esse novo par e
+inicializamos a sua entrada attempts igual a 1 (primeira tentativa do dia
+para esse utilizador).
+
+A interrogação torna-se simples devido á forma como estruturámos o diagrama em estrela, sendo feito
+através de um simple AVG à coluna attempts da tabela de factos.
+
+O código encontra-se no ficheiro "dw.sql".
 \newpage
 
 \section{Conclusão}

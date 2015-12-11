@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS d_time (
 );
 
 -- Tabela f_login
-
+--
 -- Corresponde à tabela de factos do diagrama em estrela. Contém como atributos da
 -- primary key os atributos que são foreign key para as tabelas d_user e d_time.
 -- Como medida é incluído uma coluna attempts que indica o número de tentativas de
@@ -118,7 +118,7 @@ DELIMITER ;
 SELECT U.categoria, T.ano, T.mes, AVG(L.attempts) AS Media
 FROM d_user U, d_time T, f_login L
 WHERE U.uid = L.uid AND
-T.tid = L.tid AND
-U.pais = 'Portugal'
+      T.tid = L.tid AND
+      U.pais = 'Portugal'
 GROUP BY U.categoria, T.ano, T.mes WITH ROLLUP;
 
