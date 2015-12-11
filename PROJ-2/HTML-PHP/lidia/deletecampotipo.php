@@ -94,7 +94,7 @@
                 echo "</div>";
             }
         }
-
+/*
         $teste = "select count(*) from campo where nome = :nomecampo";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":nomeregisto", $nomecampopararetirar);
@@ -120,7 +120,7 @@
           exit();
         }
 
-
+*/
         $gettypecnt = $connection->prepare($sql_pageid);
         $gettypecnt->bindParam(":userid", $uid);
         $gettypecnt->bindParam(":nome", $nomearetirar);
