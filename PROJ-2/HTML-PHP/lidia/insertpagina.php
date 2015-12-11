@@ -138,7 +138,19 @@ session_start();
         $getmaxpcount = $getmaxpc->fetchColumn();
         ++$getmaxpcount;
 
-        $pagina = $connection->prepare("INSERT INTO pagina as p2 (p2.userid, p2.pagecounter, p2.nome, p2.idseq, p2.ativa, p2.ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL) where not exists(select p.name from pagina p where p2.name = p.name and p.userid = :userid)");
+        $teste = "select count(*) from pagina where nome = :nomepagina";
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":nomepagina", $nomecampopararetirar);
+        $nomecampopararetirar = $nomepagina;
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchColumn();
+
+        if ($deu == 0) {
+          echo "<h1>Existe uma página com esse nome. </h1>";
+          exit();
+        }
+
+        $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
         $pagina->bindParam(":nomepagina", $nomep);
         $pagina->bindParam(":idseq", $pagemoment);
         $pagina->bindParam(":pagecounter", $maxpc);
