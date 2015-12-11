@@ -18,14 +18,10 @@ session_start();
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation"><a href="insertpagina.php"> Inserir Página </a></li>
-            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Tipo </a></li>
-            <li role="presentation"><a href="insertcampo.php"> Inserir Campos </a></li>
-            <li role="presentation"><a href="deletepagina.php"> Apagar Página </a></li>
-            <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
-            <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
-            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Valores de Campos</a></li>
+
+            <li role="presentation"><a href="insertvaloresregisto.php"> Inserir Registo</a></li>
             <li role="presentation" class="active"><a href="pagina.php"> Ver Pagina </a></li>
+
         </ul>
         <h3 class="text-muted">Ver Pagina</h3>
       </div>
@@ -52,8 +48,8 @@ session_start();
     if (($_SERVER["REQUEST_METHOD"] == "GET") && ($_GET["nomepagina"] != "")){
 
         $nomepagina = $_GET["nomepagina"];
+        $_SESSION["nomepagina"] = $nomepagina;
 		    $userid = $_SESSION['userid'];
-        echo $nomepagina;
 
 
         $sql  = "SELECT r.name ";
@@ -89,7 +85,7 @@ session_start();
           <div class="container">
             <div class="row">
               <div class="col-md-12">
-                <h1>Tabela de Páginas</h1>
+                <h1>Tabela de Registos</h1>
           <table class="table table-striped table-hover table-responsive">
             <thead>
               <tr>

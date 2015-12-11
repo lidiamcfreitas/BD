@@ -34,8 +34,32 @@
                         <td><label for="nomecampo">Nome do Registo</label></td>
                         <td><input type="text" name="nomeregisto" placeholder="Nome do Registo" required></td>
                     </div><br>
+                    <div class="form-group">
+                        <td><label for="tipoderegisto">Tipo de Registo</label></td>
+                        <td>
+                          <select name="tipoderegisto">
+                            <?php
+                            $sqltypeid1  = "SELECT name ";
+                            $sqltypeid1 .= "FROM tipo_registo  ";
+                            $sqltypeid1 .= "WHERE userid = :userid";
+                            $sqltypeid1 .= "  AND ativo = 1";
+                            $gettype1 = $connection->prepare($sqltypeid1);
+                            $gettype1->bindParam(":userid", $uid_type1);
+                            $uid_type1 = $userid;
+                            $gettype1->execute();
+
+                            $result_tipos = $gettype1->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach($result_tipos as $row){
+                              echo "<option value=\'".$row["name"]."\'>".$row["name"]."</option>";
+                            }
+                            echo "</select>";
+
+                             ?>
+                        </td>
+                    </div><br>
                 </tr>
-                
+
                 <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
@@ -52,42 +76,7 @@
         $nometipo = $_POST["nometipo"];
 		    $userid = $_SESSION['userid'];
 
-        class TableRows extends RecursiveIteratorIterator {
 
-            function __construct($it) {
-                parent::__construct($it, self::LEAVES_ONLY);
-            }
-
-            function current() {
-                return "<td >" . parent::current(). "</td>";
-            }
-
-            function beginChildren() {
-                echo "<tr>";
-            }
-
-            function endChildren() {
-                echo "</tr>" . "\n";
-            }
-        }
-
-        function print_result($result){
-
-            $uid = null;
-
-            if (empty($result)) {
-                echo "<p>Não existe uma pagina com esse nome</p>";
-            } else {
-                echo "<div style='width=100px;'><br><br>";
-                echo "<table class=\"table table-striped\">";
-                echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
-                    echo  $v;
-                }
-                echo "</table>";
-                echo "</div>";
-            }
-        }
             echo "here";
             // cria sequencia
             $query_cria_ic = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
