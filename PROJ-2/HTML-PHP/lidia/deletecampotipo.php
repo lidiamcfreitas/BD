@@ -99,9 +99,13 @@ require "connect.php";
         $teste = "select count(*) from campo where nome = \"?\"";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->execute(array($nomecampoaretirar));
-        $deu = $testarseexiste->fetchColumn();
+        $deu_1 = $testarseexiste->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($deu == 0) {
+        foreach($deu_1[0] as $nome_coluna => $valor_coluna){
+          $deu_resultado = $valor_coluna;
+        }
+
+        if ($deu_resultado == 0) {
           echo "<h1>O Nome de campo não existe. $nomecampoaretirar</h1>";
           exit();
         }
@@ -114,6 +118,7 @@ require "connect.php";
 
         if ($deu_2 == 0) {
           echo "<h1>O Tipo de Registo não existe. $tiporegisto $</h1>";
+          $connection->commit();
           exit();
         }
 
