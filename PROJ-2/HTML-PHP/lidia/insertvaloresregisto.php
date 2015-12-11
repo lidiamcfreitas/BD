@@ -121,7 +121,7 @@ $lol = 1;
         echo " logo antes do var dumpesssssss";
         var_dump($result_campos);
         $_SESSION["result_campos"] = $result_campos;
-
+        echo "APOS VADRUM";
         ?>
         <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
           <tr>
