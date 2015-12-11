@@ -125,6 +125,7 @@ $lol = 1;
       foreach($valoresdoscampos as $row){
         foreach($row as $column){
           echo $column;
+          echo $row;
         }
       }
     }
