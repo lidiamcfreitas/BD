@@ -144,9 +144,10 @@ session_start();
 
       }else{
         //$query = "select count(*) from pagina where ativa =0 and nome = ? and idseq=? and userid = ? and pagecounter = ?";
-        $query = "select count(*) from pagina where ativa =0 and nome = ?";
+        echo "<h1>Página Criada </h1>";
+        $query = "select count(*) from pagina where ativa = 0 and nome = :nomepagina and userid = :userid";
         $testarexiste =$connection->prepare($query);
-        $testarexiste->execute(array($nomepagina));
+        $testarexiste->execute(array(":nomepagina"=>$nomepagina, ":userid"=>$userid));
         //$testarexiste->execute(array($nomepagina, $pagemoment, $userid, $maxpc));
 
 
@@ -156,9 +157,9 @@ session_start();
         if ($deu2 != 0) {
 
           //EXISTE ? ENTÃO ACTIVA-A
-          $frase = "update pagina SET ativa=1 where nome = ?";
+          $frase = "update pagina SET ativa=1 where nome = :nomepagina and userid = :userid";
           $doc =$connection->prepare($frase);
-          $doc->execute(array($nomepagina));
+          $doc->execute(array(":nomepagina"=>$nomepagina, ":userid"=>$userid));
         }else{
 
 
