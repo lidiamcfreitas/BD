@@ -175,9 +175,8 @@ session_start();
         $pagemoment = $getseq;
         $maxpc  = $getmaxpcount;
         $pagina->execute();
-      }}
-
-    } else {
+      }
+    }
 
     }
     $connection = null;
