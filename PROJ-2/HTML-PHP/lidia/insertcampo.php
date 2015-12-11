@@ -1,12 +1,7 @@
 <?php
 session_start();
 $userid = $_SESSION['userid'];
-$nometipo = $_POST["nometipo"];
-echo $_GET["nometiporegisto"];
-$nometipo = $_GET["nometiporegisto"];
-$_SESSION["nometipo"] = $_GET["nometiporegisto"];
 require "connect.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +35,12 @@ require "connect.php";
                         <td><input type="text" name="nomecampo" placeholder="Nome da Campo" required></td>
                     </div><br>
                 </tr>
+                <tr>
+                    <div class="form-group">
+                        <td><label for="nometipo">Nome do Tipo</label></td>
+                        <td><input type="text" name="nometipo" placeholder="Nome do Tipo" required></td>
+                    </div><br>
+                </tr>
 
                 <div class="form-group">
                 </table>
@@ -51,9 +52,10 @@ require "connect.php";
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "")){
-        $nometipo = $_SESSION["nometipo"];
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
+
         $nomecampo = $_POST["nomecampo"];
+        $nometipo = $_POST["nometipo"];
 		    $userid = $_SESSION['userid'];
 
         $connection->beginTransaction();
@@ -65,6 +67,10 @@ require "connect.php";
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
 
+        if ($deu == 0) {
+        echo "<h1>O Tipo não existe </h1>";
+
+      } else {
 
 
             // cria sequencia
@@ -144,6 +150,7 @@ require "connect.php";
             $seqid2_ic = $id_sequenciaa;
             $insert_campo->execute();
 
+          }
     }
     $connection->commit();
     $connection = null;

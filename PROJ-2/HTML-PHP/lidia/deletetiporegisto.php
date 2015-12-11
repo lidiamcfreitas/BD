@@ -14,10 +14,9 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-
-              <li role="presentation" class="active"><a href="insertcampo.php"> Inserir Campos </a></li>
-              <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
-              <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
+          <li role="presentation"><a href="insertvaloresregisto.php"> Inserir Registo</a></li>
+          <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
+          <li role="presentation" class="active"><a href="pagina.php"> Ver Pagina </a></li>
 
         </ul>
         <h3 class="text-muted">Apagar Tipo</h3>
@@ -85,7 +84,7 @@
             }
         }
 
-        $connection->beginTransaction();
+
 
         $sql_pageid  = "SELECT typecnt ";
         $sql_pageid .= "FROM tipo_registo  ";
@@ -102,7 +101,17 @@
 
         $gettipos = $getpageid->fetchColumn();
 
+        $teste = "select count(*) from utilizador where userid = :userid";
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":userid", $userid_teste);
+        $userid_teste = $userid;
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchColumn();
 
+        if ($deu == 0) {
+          echo "<h1>O Utilizador não existe </h1>";
+          exit();
+        }
 
 
         $sql_delete  = "UPDATE tipo_registo ";
@@ -116,7 +125,7 @@
 
         $getcenas = $gettipos;
         $delete_page->execute();
-        $connection->commit();
+
     }
 
 
