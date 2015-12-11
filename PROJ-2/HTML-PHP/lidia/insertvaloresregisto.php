@@ -82,18 +82,18 @@ $lol = 1;
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
 
-        $sql_maxtc  = "SELECT r.regcounter + 1 as soma";
-        $sql_maxtc .= "FROM registo r  ";
-        $sql_maxtc .= "WHERE r.userid = ?";
-        $sql_maxtc .= "  AND r.regcounter = ALL  ";
-        $sql_maxtc .= "    (SELECT max(r2.regcounter) ";
-        $sql_maxtc .= "     FROM registo r2  ";
-        $sql_maxtc .= "     WHERE r2.userid = ? ";
-        $sql_maxtc_smt = $connection->prepare($sql_maxtc);
+        $sql_maxtc_  = "SELECT r.regcounter + 1 as soma";
+        $sql_maxtc_ .= "FROM registo r  ";
+        $sql_maxtc_ .= "WHERE r.userid = ?";
+        $sql_maxtc_ .= "  AND r.regcounter = ALL  ";
+        $sql_maxtc_ .= "    (SELECT max(r2.regcounter) ";
+        $sql_maxtc_ .= "     FROM registo r2  ";
+        $sql_maxtc_ .= "     WHERE r2.userid = ? )";
+        $sql_maxtc_smt = $connection->prepare($sql_maxtc_);
         $sql_maxtc_smt->execute(array($userid, $userid));
 
         $sql_maxtc_result = $sql_maxtc_smt->fetchAll(PDO::FETCH_ASSOC);
-
+        var_dump($sql_maxtc_result);
         foreach($sql_maxtc_result as $row){
           $reg_counter_result = $row["soma"];
         }
