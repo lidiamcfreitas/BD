@@ -48,7 +48,7 @@ $_SESSION["nometipo"] = $_GET["nometiporegisto"];
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "") ){
 
         $nomecampo = $_POST["nomecampo"];
         $nometipo = $_SESSION["nometipo"];
