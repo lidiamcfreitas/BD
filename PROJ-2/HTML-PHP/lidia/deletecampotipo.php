@@ -104,7 +104,7 @@ require "connect.php";
         $deu = $testarseexiste->fetchColumn();
 
         if ($deu == 0) {
-          echo "<h1>O Nome de campo não existe. </h1>";
+          echo "<h1>O Nome de campo não existe. $nomecampopararetirar </h1>";
           exit();
         }
 
