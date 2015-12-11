@@ -105,10 +105,10 @@ $lol = 1;
             echo "<input type=\"hidden\" name=\"foo\" value=\"foo\">";
 
             foreach($result_campos as $row){
-              $campos_valores_array[] = $row["nome"];
               echo "<td><label for=\"nomeregisto\">".$row["nome"]."</label></td>";
               echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";
             }
+
             ?>
             <td><input type="submit" name="submit" class="btn btn-success" value="Show"></td>
           </div>
@@ -132,7 +132,7 @@ $lol = 1;
       var_dump($campos_valores_array);
       $cols = count($valoresdoscampos[0]);
       for ($x = 0; $x <= $cols; $x++) {
-          echo $campos_valores_array[$x];
+          echo $result_campos[$x]["nome"];
           echo $valoresdoscampos[0][$x]."<br>";
       }
     }
