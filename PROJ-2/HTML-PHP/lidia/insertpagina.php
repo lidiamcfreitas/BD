@@ -141,6 +141,7 @@ session_start();
     $abcd = $nomepagina;
     $testarexiste->execute();
     $deu2 = $testarexiste->fetchColumn();
+    echo "isto é o deu2->".$deu2;
 
     if ($deu2 != 0) {
       echo "A pagina foi activada";
@@ -178,7 +179,7 @@ session_start();
         $maxpc  = $getmaxpcount;
         $pagina->execute();
       }
-    
+
 
     }
     $connection = null;
