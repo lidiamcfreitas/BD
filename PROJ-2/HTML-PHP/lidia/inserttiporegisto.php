@@ -50,41 +50,7 @@ session_start();
 		    $userid = $_SESSION['userid'];
 
 
-        class TableRows extends RecursiveIteratorIterator {
 
-            function __construct($it) {
-                parent::__construct($it, self::LEAVES_ONLY);
-            }
-
-            function current() {
-                return "<td >" . parent::current(). "</td>";
-            }
-
-            function beginChildren() {
-                echo "<tr>";
-            }
-
-            function endChildren() {
-                echo "</tr>" . "\n";
-            }
-        }
-
-        function print_result($result){
-
-
-            if (empty($result)) {
-                echo "<p>Não existe uma pagina com esse nome</p>";
-            } else {
-                echo "<div style='width=100px;'><br><br>";
-                echo "<table class=\"table table-striped\">";
-                echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
-                    echo  $v;
-                }
-                echo "</table>";
-                echo "</div>";
-            }
-        }
 
         $connection->beginTransaction();
         // cria sequencia
@@ -127,7 +93,7 @@ session_start();
         echo $gettypecounter; */
 
 
-        $sql_maxtc  = "SELECT r.typecnt + 1 ";
+        $sql_maxtc  = "SELECT r.typecnt + 1 , nome";
         $sql_maxtc .= "FROM tipo_registo r  ";
         $sql_maxtc .= "WHERE r.userid = ".$userid;
         $sql_maxtc .= "  AND r.typecnt = ALL  ";
@@ -141,12 +107,21 @@ session_start();
         $getmaxtc->execute();
 
         $gettypecounter = $getmaxtc->fetchColumn();
+        $getname = $getmaxtc->fetchColumn(1);
 
+        $teste1 = "select count(*) from tipo_registo where ativo=1 and nome = :tiponome and userid = :userid ";
+        $TAT1 =$connection->prepare($teste1);
+        $TAT1->execute(array(":tiponome"=>$getname, ":userid"=>$userid));
+        $du3 = $TAT1->fetchColumn();
 
+        if ($du3 != 0) {
+          echo "<h1>Existe um tipo de registo com esse nome. </h1>";
+
+        }else{
 
         $tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, 1)";
 
-$print_tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES ($userid, $gettypecounter, $nometiporegisto, $getseqcounter, 1)";
+        $print_tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES ($userid, $gettypecounter, $nometiporegisto, $getseqcounter, 1)";
 
         $tiporegisto_tp = $connection->prepare($tp_query);
         $tiporegisto_tp->bindParam(":userid", $uid_tp);
@@ -158,6 +133,7 @@ $print_tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo
         $nome_tp = $nometiporegisto;
         $idseq_tp = $getseqcounter;
         $tiporegisto_tp->execute();
+      }
 
     } else {
 
