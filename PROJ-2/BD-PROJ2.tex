@@ -51,7 +51,15 @@
 
 Este relatório foi elaborado na âmbito da cadeira de Bases de Dados e sumariza o trabalho realizado para a segunda parte do projecto da cadeira.
 
+Nesta disciplina, o projecto envolveu criar um Bloco de Notas, ou seja, uma conjunto de procedimentos e interrogações que melhor descrevem uma forma de armazenamento e consulta de informação. Tal como o bloco de notas tradicional, a implementação deste projecto seguiu as várias categorias para organizar a informações, tal como a implementação de registos, páginas, valores. De forma a limitar o espaço de cada utilizador ao seu bloco de notas, foram criadas diversas verificações para o acesso á informação, garantindo que um utilizador só pode ver informações a que tenha permissão para tal.
+	Este projecto foi implementado utilizando o SGBD Mysql, e as diversas páginas de acesso á informação foram criadas utilizando PHP. Foram tomadas as devidas precauções no que toca ao tratamento de inputs, de forma a manter a segurança da base de dados prevenida, ao fazer a retirada de caracteres indesejados no input.
+	Todos os acessos á base de dados são atómicos, garantido que cada acesso é unico ao mesmo tempo.
+
+
+
 Neste pretendemos mostrar a nossa implementação de um bloco de notas assim como os aspectos de interação e melhoria da mesma.
+
+
 \newpage
 
 \section{Consultas SQL}
