@@ -168,6 +168,11 @@ session_start();
         $query = "select count(*) from pagina where ativa =0 and nome = ? and idseq=? and userid = ? and pagecounter = ?";
         $testarexiste =$connection->prepare($query);
         $testarexiste->execute(array($nomepagina, $pagemoment, $userid, $maxpc));
+        echo $nomepagina;
+        echo $pagemoment;
+        echo $userid;
+        echo $maxpc;
+        
         $deu2 = $testarexiste->fetchColumn();
         echo "isto é o deu2->".$deu2;
 
