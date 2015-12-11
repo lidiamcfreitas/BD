@@ -89,8 +89,11 @@ $lol = 1;
         $sql_maxtc_ .= "    (SELECT max(r2.regcounter) ";
         $sql_maxtc_ .= "     FROM registo r2  ";
         $sql_maxtc_ .= "     WHERE r2.userid = ? )";
+
         $sql_maxtc_smt = $connection->prepare($sql_maxtc_);
+
         $sql_maxtc_smt->execute(array($userid, $userid));
+        var_dump($sql_maxtc_smt);
 
         $sql_maxtc_result = $sql_maxtc_smt->fetchAll(PDO::FETCH_ASSOC);
         var_dump($sql_maxtc_result);
