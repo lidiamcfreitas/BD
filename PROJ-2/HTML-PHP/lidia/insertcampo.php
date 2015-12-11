@@ -2,6 +2,9 @@
 session_start();
 $userid = $_SESSION['userid'];
 $nometipo = $_POST["nometipo"];
+echo $_GET["nometiporegisto"];
+$nometipo = $_GET["nometiporegisto"];
+$_SESSION["nometipo"] = $_GET["nometiporegisto"];
 require "connect.php";
 
 ?>
@@ -56,7 +59,7 @@ require "connect.php";
         require "connect.php";
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "")){
-
+        $nometipo = $_SESSION["nometipo"];
         $nomecampo = $_POST["nomecampo"];
 		    $userid = $_SESSION['userid'];
 
