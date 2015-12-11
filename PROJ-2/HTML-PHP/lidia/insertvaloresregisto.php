@@ -68,8 +68,8 @@ require "connect.php";
               </div><br>
             </tr>
           </table>
-          </form>
-        </div>
+        </form>
+      </div>
 
       <?php
 
@@ -89,24 +89,35 @@ require "connect.php";
 
         $sql_campos  = "SELECT campocnt, nome ";
         $sql_campos .= "FROM campo  ";
-        $sql_campos .= "WHERE typecnt = ? ";
+        $sql_campos .= "WHERE typecnt = ? and userid = ?";
         $sql_campos .= "  AND ativo = 1;";
         $obj_campos = $connection->prepare($sql_campos);
-        $obj_campos->bindParam(array(tipoderegisto1));
+
+
+        $obj_campos->bindParam(array($tipoderegisto1, $userid));
 
         $result_campos = $obj_campos->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($result_campos);
+        
+        ?>
+        <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
+          <tr>
+            <div class="form-group"> <?php
+            foreach($result_campos as $row){
+              echo "<td><label for=\"nomeregisto\">".$row["nome"]."</label></td>";
+              echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";
+            }
+            ?>
+          </div>
+        </tr>
+      </form> <?php
 
-        foreach($result_campos as $row){
-          echo "<td><label for=\"nomeregisto\">".$row["nome"]."</label></td>";
-          echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";
-        }
 
+      //header("Location: insertvalorescampo.php");
+    }
+    $connection = null;
+    ?>
 
-        //header("Location: insertvalorescampo.php");
-      }
-      $connection = null;
-      ?>
-
-    </div> <!-- /container -->
-  </body>
-  </html>
+  </div> <!-- /container -->
+</body>
+</html>

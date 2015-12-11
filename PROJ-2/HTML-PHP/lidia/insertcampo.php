@@ -1,3 +1,9 @@
+<?php
+session_start();
+$userid = $_SESSION['userid'];
+require "connect.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,42 +64,7 @@
         $nometipo = $_POST["nometipo"];
 		    $userid = $_SESSION['userid'];
 
-        class TableRows extends RecursiveIteratorIterator {
 
-            function __construct($it) {
-                parent::__construct($it, self::LEAVES_ONLY);
-            }
-
-            function current() {
-                return "<td >" . parent::current(). "</td>";
-            }
-
-            function beginChildren() {
-                echo "<tr>";
-            }
-
-            function endChildren() {
-                echo "</tr>" . "\n";
-            }
-        }
-
-        function print_result($result){
-
-            $uid = null;
-
-            if (empty($result)) {
-                echo "<p>Não existe uma pagina com esse nome</p>";
-            } else {
-                echo "<div style='width=100px;'><br><br>";
-                echo "<table class=\"table table-striped\">";
-                echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
-                    echo  $v;
-                }
-                echo "</table>";
-                echo "</div>";
-            }
-        }
 
         $teste = "select count(*) from tipo_registo where nome = :nomeregisto";
         $testarseexiste =$connection->prepare($teste);
@@ -104,16 +75,15 @@
 
         if ($deu == 0) {
         echo "<h1>O Tipo não existe </h1>";
-        exit();
-        }
+
+      } else {
 
             echo "here";
             // cria sequencia
-            $query_cria_ic = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
+            $query_cria_ic = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, ? )";
             $sequencia_ic = $connection->prepare($query_cria_ic);
-            $sequencia_ic->bindParam(":userid", $user_ipseq_ic);
-            $user_ipseq_ic = $userid;
-            $sequencia_ic->execute();
+            $sequencia_ic->execute(array($userid));
+
             echo "here";
             $sqlmaxmom  = "SELECT s.contador_sequencia ";
             $sqlmaxmom .= "FROM sequencia s  ";
@@ -186,7 +156,7 @@
             $seqid2_ic = $id_sequenciaa;
             $insert_campo->execute();
             echo "here";
-
+          }         
     }
     $connection = null;
     ?>
