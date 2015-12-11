@@ -96,7 +96,7 @@ require "connect.php";
             }
         }
         $connection->beginTransaction();
-        $teste = "select count(*) from campo where nome = :nomecampo";
+        $teste = "select count(*) from campo where nome = \":nomecampo\"";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":nomeregisto", $nomecampopararetirar);
         $nomecampopararetirar = $nomecampoaretirar;
