@@ -1,6 +1,7 @@
 <?php
 session_start();
 $userid = $_SESSION['userid'];
+        require "connect.php";
  ?>
 
 <!DOCTYPE html>
