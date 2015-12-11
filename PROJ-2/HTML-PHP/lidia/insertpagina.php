@@ -159,9 +159,9 @@ session_start();
         if ($deu2 != 0) {
           echo "A pagina foi activada";
           //EXISTE ? ENTÃO ACTIVA-A
-          $query = "UPDATE pagina SET ativa=1 where nome = ?";
-          $testar =$connection->prepare($query);
-          $testar->execute(array($nomepagina));
+          $frase = "UPDATE pagina SET ativa=1 where nome = ?";
+          $doc =$connection->prepare($frase);
+          $doc->execute(array($nomepagina));
         }else{
 
 
