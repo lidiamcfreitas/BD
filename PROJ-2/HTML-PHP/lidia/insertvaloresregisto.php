@@ -87,7 +87,7 @@ require "connect.php";
         echo $tipoderegisto1;
         echo $nomeregisto1;
 
-        
+
 
 
         //header("Location: insertvalorescampo.php");
