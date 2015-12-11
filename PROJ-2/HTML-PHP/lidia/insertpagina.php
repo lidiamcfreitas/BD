@@ -136,7 +136,7 @@ session_start();
 
       $teste = "select count(*) from pagina where ativa=1 and nome = ? and userid = ?";
       $TAT =$connection->prepare($teste);
-      $TAT->execute(array($nomepagina, $_SESSION["userid"]));
+      $TAT->execute(array($nomepagina, $userid));
       $du3 = $TAT->fetchColumn();
 
       if ($du3 != 0) {
@@ -146,7 +146,7 @@ session_start();
         //$query = "select count(*) from pagina where ativa =0 and nome = ? and idseq=? and userid = ? and pagecounter = ?";
         $query = "select count(*) from pagina where ativa =0 and nome = ? and userid = ?";
         $testarexiste =$connection->prepare($query);
-        $testarexiste->execute(array($nomepagina, $_SESSION["userid"]));
+        $testarexiste->execute(array($nomepagina, $userid));
         //$testarexiste->execute(array($nomepagina, $pagemoment, $userid, $maxpc));
 
 
