@@ -90,7 +90,7 @@
     if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["questao1"] != "") && ($_POST["questao2"] != "") && ($_POST["resposta1"] != "") && ($_POST["resposta2"] != "")){
 
         session_start();
-        echo "here";
+        
         $nome = $_POST["nome"];
         $email = $_POST["email"];
         $password = $_POST["password"];
@@ -111,15 +111,6 @@
         $_SESSION['pais'] = $pais;
         $_SESSION['categoria'] = $categoria;
 
-        echo "1".$nome."<br>";
-        echo "2".$email ."<br>";
-        echo "3".$password."<br>";
-        echo "4".$questao1."<br>";
-        echo "5".$resposta1."<br>";
-        echo "6".$questao2."<br>";
-        echo "7".$resposta2."<br>";
-        echo "8".$pais."<br>";
-        echo "9".$categoria."<br>";
 
         $query_cria = "INSERT INTO utilizador (userid , email , nome , password , questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid, :email, :nome, :password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
         $utilizador_obj = $connection->prepare($query_cria);
@@ -145,7 +136,7 @@
         $categoria_aux = $categoria;
     		$utilizador_obj->execute();
 
-        echo "something";
+
         $teste1 = "select userid from utilizador where email = :email ";
         $testarseexiste1 =$connection->prepare($teste1);
         $testarseexiste1->bindParam(":email", $email_teste1);

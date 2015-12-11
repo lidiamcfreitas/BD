@@ -107,8 +107,7 @@
             $userid_1= $row['userid'];
             $email_1= $row['email'];
 }*/
-        echo "deu:".$deu;
-        echo "userid:".$userid_1;
+
 
 
         if ($deu == 0) {

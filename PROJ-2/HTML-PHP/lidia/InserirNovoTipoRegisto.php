@@ -79,7 +79,7 @@
 
 
 			$preparation = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.',"'.$nreg.'",'.$cenas.',1)';
-			echo ' '.$preparation;
+
 			$tiporegisto = $connection->prepare($preparation);
 			$tiporegisto->execute();
 
@@ -93,7 +93,6 @@
 			//$nomeregisto = $nreg;
 			//$userid = $uid;
 
-			echo "Executei sem erros";
 
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");

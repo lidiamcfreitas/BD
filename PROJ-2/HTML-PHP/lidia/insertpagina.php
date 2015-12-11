@@ -85,7 +85,7 @@ session_start();
       }
     }
     $SESSIONEMAIL = $_SESSION['email'];
-    echo $SESSIONEMAIL;
+
     // cria sequencia
     $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
     $sequencia_ip = $connection->prepare($query_cria);
@@ -148,16 +148,13 @@ session_start();
         $testarexiste =$connection->prepare($query);
         $testarexiste->execute(array($nomepagina));
         //$testarexiste->execute(array($nomepagina, $pagemoment, $userid, $maxpc));
-        echo $nomepagina;
-        echo $pagemoment;
-        echo $userid;
-        echo $maxpc;
+
 
         $deu2 = $testarexiste->fetchColumn();
-        echo "isto é o deu2->".$deu2;
+
 
         if ($deu2 != 0) {
-          echo "A pagina foi activada";
+
           //EXISTE ? ENTÃO ACTIVA-A
           $frase = "update pagina SET ativa=1 where nome = ?";
           $doc =$connection->prepare($frase);
@@ -166,7 +163,7 @@ session_start();
 
 
         //NÃO EXISTINDO, CRIA-A
-        echo "NÃO EXISTINDO, CRIA-A";
+
         $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
         $pagina->bindParam(":nomepagina", $nomep);
         $pagina->bindParam(":idseq", $pagemoment);

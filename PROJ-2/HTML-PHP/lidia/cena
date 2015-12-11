@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <title>Bloco de Notas</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../bootstrap/css/jumbotron-narrow.css" rel="stylesheet">
-    
+
   </head>
   <body>
     <div class="container">
@@ -20,7 +20,7 @@
         <h3 class="text-muted">Ver Pagina</h3>
       </div>
         <div>
-            <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
+            <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
                 <div class="form-group">
                     <label for="nomepagina">Nome da Página</label>
                     <input type="text" name="nomepagina" placeholder="Nome da Página" required>
@@ -35,30 +35,29 @@
             </form>
         </div>
     <?php
-    echo "<p>diz qualquer coisa</p>";
+
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["userid"] != "") && ($_POST["nomepagina"] != "")){
-		echo "estou aqui mãe";
+
         $nomepagina = $_POST["nomepagina"];
 		$userid = $_POST["userid"];
-		echo "user: ".$userid;
-		echo "nomepagina: ".$nomepagina;
-        class TableRows extends RecursiveIteratorIterator { 
-            
-            function __construct($it) { 
-                parent::__construct($it, self::LEAVES_ONLY); 
+
+        class TableRows extends RecursiveIteratorIterator {
+
+            function __construct($it) {
+                parent::__construct($it, self::LEAVES_ONLY);
             }
 
             function current() {
                 return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
             }
 
-            function beginChildren() { 
-                echo "<tr>"; 
-            } 
+            function beginChildren() {
+                echo "<tr>";
+            }
 
-            function endChildren() { 
+            function endChildren() {
                 echo "</tr>" . "\n";
-            } 
+            }
         }
 
         $sql  = "SELECT r.regcounter ";
@@ -80,17 +79,17 @@
         $sql .= "            AND p.nome = :nomepagina ";
         $sql .= "            AND p.ativa = 1))";
 
-		echo "estou aqui</br>";
+
         $resultado = $connection->prepare($sql);
-        echo "fiz bind pai! </br>";
+
 		$resultado->bindParam(":nomepagina", $nomepagina);
-		echo "fiz bind pai! </br>";
+
         $resultado->bindParam(":userid", $userid);
-        echo "fiz bind pai! </br>";
+
 		$resultado->execute();
-		echo "fiz bind pai! </br>";
-		
-		$result = $resultado->setFetchMode(PDO::FETCH_ASSOC); 
+
+
+		$result = $resultado->setFetchMode(PDO::FETCH_ASSOC);
 		$result = $resultado->fetchAll();
 
         if (empty($result)) {
@@ -98,14 +97,14 @@
         } else {
             echo "<table style='border: solid 1px black;'>";
             echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-            foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) { 
+            foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
                 echo  $v;
             }
             echo "</table>";
         }
 
     } else {
-    	echo "please";
+
     }
     $connection = null;
     ?>
