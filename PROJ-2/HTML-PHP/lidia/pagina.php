@@ -49,31 +49,14 @@ session_start();
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomepagina"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "GET") && ($_GET["nomepagina"] != "")){
 
-        $nomepagina = $_POST["nomepagina"];
+        $nomepagina = $_GET["nomepagina"];
 		    $userid = $_SESSION['userid'];
+        echo $nomepagina;
 
-        class TableRows extends RecursiveIteratorIterator {
 
-            function __construct($it) {
-                parent::__construct($it, self::LEAVES_ONLY);
-            }
-
-            function current() {
-                return "<td >" . parent::current(). "</td>";
-            }
-
-            function beginChildren() {
-                echo "<tr>";
-            }
-
-            function endChildren() {
-                echo "</tr>" . "\n";
-            }
-        }
-
-        $sql  = "SELECT r.regcounter ";
+        $sql  = "SELECT r.name ";
         $sql .= "FROM registo AS r  ";
         $sql .= "WHERE r.ativo = 1 ";
         $sql .= "  AND r.userid = :userid ";
@@ -92,26 +75,46 @@ session_start();
         $sql .= "            AND p.nome = :nomepagina ";
         $sql .= "            AND p.ativa = 1))";
 
-        $resultado = $connection->prepare($sql);
+    $resultado = $connection->prepare($sql);
 		$resultado->bindParam(":nomepagina", $nomepagina);
-        $resultado->bindParam(":userid", $userid);
+    $resultado->bindParam(":userid", $userid);
 		$resultado->execute();
-
 
 		$result = $resultado->setFetchMode(PDO::FETCH_ASSOC);
 		$result = $resultado->fetchAll();
+    $resultado_print = $result;
 
         if (empty($result)) {
             echo "<p>Não existe uma pagina com esse nome</p>";
         } else {
-        	echo "<div style='width=100px;'><br><br>";
-            echo "<table class=\"table table-striped\">";
-            echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-            foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
-                echo  $v;
+          ?>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <h1>Tabela de Páginas</h1>
+          <table class="table table-striped table-hover table-responsive">
+            <thead>
+              <tr>
+                <?php
+                foreach($resultado_print[0] as $nome_coluna => $valor_coluna){
+                  echo "<td>$nome_coluna</td>";
+                }
+                ?>
+              </tr>
+            </thead>
+            <tbody>
+          <?php
+          foreach($resultado_print as $num=>$row){
+            echo "<tr>";
+            foreach($row as $nome_coluna => $valor_coluna){
+              echo "<td><a href=\"pagina.php?nomeregisto=$valor_coluna\">$valor_coluna</a></td>";
             }
-            echo "</table>";
-            echo "</div>";
+            echo "</tr>";
+          } ?>
+          </tbody>
+        </table>
+      </div>
+      <?php
         }
 
     } else {
