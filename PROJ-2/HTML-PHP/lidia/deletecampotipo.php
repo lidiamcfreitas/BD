@@ -111,7 +111,7 @@
         $teste = "select count(*) from tipo_registo where nome = :nomeregisto";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":nomeregisto", $nomeregistopara_teste);
-        $nomeregistopara_teste = $tiporegisto
+        $nomeregistopara_teste = $tiporegisto;
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
 
