@@ -46,7 +46,7 @@ require "connect.php";
         //RETIRARCAMPODETIPOREGISTO
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")&& ($_POST["tiporegisto"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")){
 
         $tiporegisto = $_SESSION["nometipo"];
         $nomecampoaretirar = $_POST["nomecampoaretirar"];
