@@ -182,7 +182,7 @@ require "connect.php";
 
                 foreach($result_campos as $row){
                   echo "<td><label for=\"nomecampo\">".$row["nome"]."</label></td>";
-                  echo "<td><input type=\"text\" name=\"nome_campo_".$row["campocnt"]." placeholder=\"Nome do Campo\" required></td>";
+                  echo "<td><input type=\"text\" name=\"".$row["campocnt"]." placeholder=\"Nome do Campo\" required></td>";
                 }
                  ?>
               </div><br>
