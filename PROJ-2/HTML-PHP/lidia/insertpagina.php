@@ -18,14 +18,9 @@ session_start();
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
+          <li role="presentation"><a href="principal.php"> Página Principal </a></li>
             <li role="presentation" class="active"><a href="insertpagina.php"> Inserir Página </a></li>
-            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Tipo </a></li>
-            <li role="presentation"><a href="insertcampo.php"> Inserir Campos </a></li>
-            <li role="presentation"><a href="deletepagina.php"> Apagar Página </a></li>
-            <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
-            <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
-            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Valores de Campos</a></li>
-            <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
+            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Tipo de Registo</a></li>
         </ul>
         <h3 class="text-muted">Inserir Pagina</h3>
       </div>
@@ -147,7 +142,7 @@ session_start();
 
         if ($deu != 0) {
           echo "<h1>Existe uma página com esse nome. </h1>";
-          
+
         }else{
 
         $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");

@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +38,7 @@
                     <td><input type="text" name="nomepagina" placeholder="Nome da Página" required></td>
                 </div><br>
                 </tr>
-                
+
                 <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
