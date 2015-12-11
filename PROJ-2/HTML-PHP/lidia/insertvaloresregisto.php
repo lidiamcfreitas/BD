@@ -127,6 +127,10 @@ $lol = 1;
           echo $column;
         }
       }
+      $cols = count($valoresdoscampos[0]);
+      for ($x = 0; $x <= $cols; $x++) {
+          echo $valoresdoscampos[0][$x];
+      }
     }
     $connection = null;
     ?>
