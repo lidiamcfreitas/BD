@@ -21,10 +21,9 @@ $lol = 1;
   <div class="container">
     <div class="header">
       <ul class="nav nav-pills pull-right" role="tablist">
-
-        <li role="presentation" class="active"><a href="principal.php"> Página Principal </a></li>
-          <li role="presentation"><a href="insertpagina.php"> Inserir Página </a></li>
-          <li role="presentation" active><a href="inserttiporegisto.php"> Inserir Tipo de Registo</a></li>
+        <li role="presentation"><a href="insertvaloresregisto.php"> Inserir Registo</a></li>
+        <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
+        <li role="presentation" class="active"><a href="pagina.php"> Ver Pagina </a></li>
 
       </ul>
       <h3 class="text-muted">Inserir Pagina</h3>
@@ -76,6 +75,7 @@ $lol = 1;
       if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "") && ($lol == 1) ){
         $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
+        $userid = $_SESSION["userid"];
 
         $connection->beginTransaction();
 
@@ -90,6 +90,26 @@ $lol = 1;
         $sql_maxtc_smt = $connection->prepare($sql_maxtc_);
 
         $sql_maxtc_smt->execute(array($userid, $userid));
+
+        $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, ? )";
+        $sequencia_ip = $connection->prepare($query_cria);
+        $sequencia_ip->execute(array($userid));
+
+        $sql_maxmom  = "SELECT s.contador_sequencia ";
+        $sql_maxmom .= "FROM sequencia s  ";
+        $sql_maxmom .= "WHERE s.userid = :userid ";
+        $sql_maxmom .= "  AND s.moment = all ";
+        $sql_maxmom .= "    ( SELECT max(s2.moment) ";
+        $sql_maxmom .= "     FROM sequencia s2  ";
+        $sql_maxmom .= "     WHERE s2.userid = :userid)";
+
+        $getmoment = $connection->prepare($sql_maxmom);
+        $getmoment->bindParam(":userid", $uid);
+        $uid = $userid;
+        $getmoment->execute();
+        $getseq = $getmoment->fetchColumn();
+
+
         var_dump($sql_maxtc_smt);
 
         $sql_maxtc_result = $sql_maxtc_smt->fetchAll(PDO::FETCH_ASSOC);
@@ -102,9 +122,9 @@ $lol = 1;
         $nomeregisto1 = $_SESSION["nomeregisto"];
         $lol = 0;
 
-        $sql_cria_registo = "insert into registo (userid, regcounter, typecounter) values(?,?,?)";
+        $sql_cria_registo = "insert into registo (userid, nome, ativo, regcounter) values(?,?,?,?)";
         $sql_cria_qualquercoisa = $connection->prepare($sql_cria_registo);
-        $sql_cria_qualquercoisa->execute(array($userid, $sql_counter_result, $tipoderegisto1));
+        $sql_cria_qualquercoisa->execute(array($userid, $nomeregisto1, 1, $sql_counter_result, $_SERVER["tipoderegisto"]));
 
         $sql_campos  = "SELECT campocnt, nome ";
         $sql_campos .= "FROM campo  ";
@@ -147,6 +167,10 @@ $lol = 1;
       $result_campos = $_SESSION["result_campos"];
       $cols = count($valoresdoscampos[0]);
       for ($x = 0; $x <= $cols; $x++) {
+
+
+
+
           echo $result_campos[$x]["nome"];
           echo $valoresdoscampos[0][$x]."<br>";
 
