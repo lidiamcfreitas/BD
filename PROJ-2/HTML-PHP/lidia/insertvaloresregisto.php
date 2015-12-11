@@ -52,7 +52,7 @@
                             $result_tipos = $gettype1->fetchAll(PDO::FETCH_ASSOC);
 
                             foreach($result_tipos as $row){
-                              echo "<option value=\'".$row["name"]."\'>".$row["name"]."</option>";
+                              echo "<option value=\'".$row["nome"]."\'>".$row["nome"]."</option>";
                             }
                             echo "</select>";
 
