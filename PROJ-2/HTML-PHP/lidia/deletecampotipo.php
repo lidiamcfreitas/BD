@@ -48,7 +48,14 @@ require "connect.php";
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")){
 
-        $tiporegisto = $_SESSION["nometipo"];
+      function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+
+        return $data;
+      }
+        $tiporegisto = test_input($_SESSION["nometipo"]);
         $nomecampoaretirar = $_POST["nomecampoaretirar"];
 		$userid = $_SESSION['userid'];
 
