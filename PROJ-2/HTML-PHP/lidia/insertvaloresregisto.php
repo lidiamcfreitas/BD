@@ -81,12 +81,27 @@ $lol = 1;
         $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
+
+        $sql_maxtc  = "SELECT r.regcounter + 1 ";
+        $sql_maxtc .= "FROM registo r  ";
+        $sql_maxtc .= "WHERE r.userid = ".$userid;
+        $sql_maxtc .= "  AND r.regcounter = ALL  ";
+        $sql_maxtc .= "    (SELECT max(r2.regcounter) ";
+        $sql_maxtc .= "     FROM registo r2  ";
+        $sql_maxtc .= "     WHERE r2.userid = ".$userid.')';
+        $sql_maxtc_smt = $connection->prepare($sql_maxtc);
+        $sql_maxtc_smt->execute();
+
+        $sql_maxtc_result = $sql_maxtc_smt->fetchColumn();
+        echo "register counter".$sql_maxtc_result;
+
         $tipoderegisto1 = $_SESSION["tipoderegisto"];
         $nomeregisto1 = $_SESSION["nomeregisto"];
         $lol = 0;
-        echo "Im here";
-        echo ":".$tipoderegisto1;
-        echo ":".$nomeregisto1;
+
+        $sql_cria_registo = "insert into registo (userid, regcounter, typecounter) values (?,?,?)";
+        $sql_cria_qualquercoisa = $connection->prepare($sql_cria_registo);
+        $sql_cria_qualquercoisa->execute(array($userid, $sql_maxtc_result, $tipoderegisto1));
 
         $sql_campos  = "SELECT campocnt, nome ";
         $sql_campos .= "FROM campo  ";
