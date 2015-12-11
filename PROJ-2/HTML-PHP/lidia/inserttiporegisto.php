@@ -93,7 +93,7 @@ session_start();
         echo $gettypecounter; */
 
 
-        $sql_maxtc  = "SELECT r.typecnt + 1 ";
+        $sql_maxtc  = "SELECT r.typecnt + 1 , nome";
         $sql_maxtc .= "FROM tipo_registo r  ";
         $sql_maxtc .= "WHERE r.userid = ".$userid;
         $sql_maxtc .= "  AND r.typecnt = ALL  ";
@@ -107,10 +107,11 @@ session_start();
         $getmaxtc->execute();
 
         $gettypecounter = $getmaxtc->fetchColumn();
+        $getname = $getmaxtc->fetchColumn(1);
 
-        $teste1 = "select count(*) from tipo_registo where ativo=1 and nome = :typecnt and userid = :userid ";
+        $teste1 = "select count(*) from tipo_registo where ativo=1 and nome = :tiponome and userid = :userid ";
         $TAT1 =$connection->prepare($teste1);
-        $TAT1->execute(array(":typecnt"=>$gettypecounter, ":userid"=>$userid));
+        $TAT1->execute(array(":tiponome"=>$getname, ":userid"=>$userid));
         $du3 = $TAT1->fetchColumn();
 
         if ($du3 != 0) {
