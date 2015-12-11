@@ -75,7 +75,8 @@ require "connect.php";
 
         if ($deu == 0) {
         echo "<h1>O Tipo não existe </h1>";
-        }
+
+      } else {
 
             echo "here";
             // cria sequencia
@@ -155,7 +156,7 @@ require "connect.php";
             $seqid2_ic = $id_sequenciaa;
             $insert_campo->execute();
             echo "here";
-
+          }         
     }
     $connection = null;
     ?>
