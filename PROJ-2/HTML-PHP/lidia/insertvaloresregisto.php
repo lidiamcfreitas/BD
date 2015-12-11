@@ -80,8 +80,8 @@ $lol = 1;
       if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "") && ($lol == 1) ){
         $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
-
-
+        echo $userid;
+        
         $sql_maxtc_  = "SELECT r.regcounter + 1 as soma ";
         $sql_maxtc_ .= "FROM registo r  ";
         $sql_maxtc_ .= "WHERE r.userid = ?";
