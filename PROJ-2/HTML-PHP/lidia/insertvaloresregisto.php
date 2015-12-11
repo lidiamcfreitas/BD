@@ -123,19 +123,14 @@ $lol = 1;
     } else if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["foo"] != "")) {
 
       $valoresdoscampos[] = $_POST["valorcampo"];
-      var_dump($valoresdoscampos);
-/*
-      foreach($valoresdoscampos as $row){
-        foreach($row as $column){
-          echo $column;
-        }
-      } */
+
       $result_campos = $_SESSION["result_campos"];
-      var_dump($campos_valores_array);
       $cols = count($valoresdoscampos[0]);
       for ($x = 0; $x <= $cols; $x++) {
-          var_dump($result_campos[$x]["nome"]);
+          echo $result_campos[$x]["nome"];
           echo $valoresdoscampos[0][$x]."<br>";
+
+
       }
     }
     $connection = null;
