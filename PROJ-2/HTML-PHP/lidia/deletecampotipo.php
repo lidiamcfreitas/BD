@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "connect.php";
-
+$_SESSION["nometipo"] = $_GET["nometiporegisto"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@ require "connect.php";
 
         return $data;
       }
-        $tiporegisto = test_input($_SESSION["nometipo"]);
+        $tiporegisto = $_SESSION["nometipo"];
         $nomecampoaretirar = $_POST["nomecampoaretirar"];
 		$userid = $_SESSION['userid'];
 
