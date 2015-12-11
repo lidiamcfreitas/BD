@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './imprimir_tabelas.php';
+include 'imprimir_tabelas.php';
 ?>
 
 <!DOCTYPE html>
