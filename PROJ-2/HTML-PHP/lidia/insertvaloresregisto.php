@@ -50,7 +50,9 @@ echo $userid;
                             $uid_type1 = $userid;
                             $gettype1->execute();
 
+
                             $result_tipos = $gettype1->fetchAll(PDO::FETCH_ASSOC);
+                            var_dump($result_tipos);
 
                             foreach($result_tipos as $row){
                               echo "<option value=\'".$row["name"]."\'>".$row["name"]."</option>";
