@@ -3,6 +3,7 @@ session_start();
 $userid = $_SESSION['userid'];
 require "connect.php";
 $_SESSION["nometipo"] = $_GET["nometipo"];
+echo $_SESSION["nometipo"];
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,7 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
             <li role="presentation" class="active"><a href="insertcampo.php"> Inserir Campos </a></li>
-            <li role="presentation"><a href="deletecampotipo.php?nometipo="> Apagar Campo de Tipo </a></li>
+            <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
 
         </ul>
         <h3 class="text-muted">Inserir Pagina</h3>
