@@ -2,6 +2,7 @@
 session_start();
 $userid = $_SESSION['userid'];
 require "connect.php";
+$_SESSION["nometipo"] = $_GET["nometiporegisto"];
 ?>
 
 <!DOCTYPE html>
@@ -35,12 +36,7 @@ require "connect.php";
                         <td><input type="text" name="nomecampo" placeholder="Nome da Campo" required></td>
                     </div><br>
                 </tr>
-                <tr>
-                    <div class="form-group">
-                        <td><label for="nometipo">Nome do Tipo</label></td>
-                        <td><input type="text" name="nometipo" placeholder="Nome do Tipo" required></td>
-                    </div><br>
-                </tr>
+
 
                 <div class="form-group">
                 </table>
@@ -55,7 +51,7 @@ require "connect.php";
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
 
         $nomecampo = $_POST["nomecampo"];
-        $nometipo = $_POST["nometipo"];
+        $nometipo = $_SESSION["nometipo"];
 		    $userid = $_SESSION['userid'];
 
         $connection->beginTransaction();
