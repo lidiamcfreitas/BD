@@ -1,4 +1,5 @@
 <?php
+echo "estou aqui";
 function imprime_tabelas($query_obj){
   //$resultado = $connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC);
   $resultado = $query_obj->fetchAll(PDO::FETCH_ASSOC);
