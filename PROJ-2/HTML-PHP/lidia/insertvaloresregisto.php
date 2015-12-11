@@ -93,8 +93,10 @@ $lol = 1;
         $sql_maxtc_smt->execute(array($userid, $userid));
 
         $sql_maxtc_result = $sql_maxtc_smt->fetchAll(PDO::FETCH_ASSOC);
-        $reg_counter_result = $sql_maxtc_result[0]["soma"];
-        echo "register counter".$sql_maxtc_result;
+
+        foreach($sql_maxtc_result as $row){
+          $reg_counter_result = $row["soma"];
+        }
 
         $tipoderegisto1 = $_SESSION["tipoderegisto"];
         $nomeregisto1 = $_SESSION["nomeregisto"];
@@ -102,7 +104,7 @@ $lol = 1;
 
         $sql_cria_registo = "insert into registo (userid, regcounter, typecounter) values (?,?,?)";
         $sql_cria_qualquercoisa = $connection->prepare($sql_cria_registo);
-        $sql_cria_qualquercoisa->execute(array($userid, $sql_maxtc_result, $tipoderegisto1));
+        $sql_cria_qualquercoisa->execute(array($userid, $sql_counter_result, $tipoderegisto1));
 
         $sql_campos  = "SELECT campocnt, nome ";
         $sql_campos .= "FROM campo  ";
