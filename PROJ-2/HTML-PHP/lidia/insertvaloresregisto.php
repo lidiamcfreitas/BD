@@ -1,3 +1,8 @@
+<?php
+session_start();
+$userid = $_SESSION['userid'];
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,7 +76,7 @@
 
         $nomecampo = $_POST["nomecampo"];
         $nometipo = $_POST["nometipo"];
-		    $userid = $_SESSION['userid'];
+
 
 
             echo "here";
