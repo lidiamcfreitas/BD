@@ -38,7 +38,8 @@ $userid = $_SESSION['userid'];
                     <div class="form-group">
                         <td><label for="nomecampo">Nome do Registo</label></td>
                         <td><input type="text" name="nomeregisto" placeholder="Nome do Registo" required></td>
-                        echo $userid;
+                        <?php
+                        echo $userid; ?>
                     </div><br>
                     <div class="form-group">
                         <td><label for="tipoderegisto">Tipo de Registo</label></td>
