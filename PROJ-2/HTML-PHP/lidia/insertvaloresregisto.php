@@ -92,6 +92,7 @@ require "connect.php";
         $sql_campos .= "WHERE typecnt = ? and userid = ?";
         $sql_campos .= "  AND ativo = 1;";
         $obj_campos = $connection->prepare($sql_campos);
+        var_dump($obj_campos);
 
         $obj_campos->bindParam(array($tipoderegisto1, $userid));
 
