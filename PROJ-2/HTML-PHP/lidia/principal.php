@@ -56,6 +56,7 @@ session_start();
 		    $userid = $_SESSION['userid'];
 
         $resultado = $connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($resultado);
         ?>
         <table class=\"table table-striped table-hover table-responsive\">
           <thead>
