@@ -84,9 +84,7 @@ session_start();
 		$result = $resultado->fetchAll();
     $resultado_print = $result;
 
-        if (empty($result)) {
-            echo "<p>Não existe uma pagina com esse nome</p>";
-        } else {
+
           ?>
           <div class="container">
             <div class="row">
@@ -116,10 +114,6 @@ session_start();
       </div>
       <?php
         }
-
-    } else {
-
-    }
     $connection = null;
     ?>
 
