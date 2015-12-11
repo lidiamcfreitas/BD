@@ -87,7 +87,19 @@ require "connect.php";
         echo ":".$tipoderegisto1;
         echo ":".$nomeregisto1;
 
+        $sql_campos  = "SELECT campocnt, nome ";
+        $sql_campos .= "FROM campo  ";
+        $sql_campos .= "WHERE typecnt = ? ";
+        $sql_campos .= "  AND ativo = 1;";
+        $obj_campos = $connection->prepare($sql_campos);
+        $obj_campos->bindParam(array(tipoderegisto1));
 
+        $result_campos = $obj_campos->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($result_campos as $row){
+          echo "<td><label for=\"nomeregisto\">".$row["nome"]."</label></td>";
+          echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";
+        }
 
 
         //header("Location: insertvalorescampo.php");
