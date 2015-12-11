@@ -107,6 +107,7 @@ require "connect.php";
               echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";
             }
             ?>
+            <td><input type="submit" name="submit" class="btn btn-success" value="Show"></td>
           </div>
         </tr>
       </form> <?php
@@ -119,7 +120,7 @@ require "connect.php";
 
       $valoresdoscampos = $_POST["valorcampo"];
       var_dump($valoresdoscampos);
-      
+
       foreach($valoresdoscampos as $row){
         echo "<td><label for=\"nomeregisto\">".$row["nome"]."</label></td>";
         echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";
