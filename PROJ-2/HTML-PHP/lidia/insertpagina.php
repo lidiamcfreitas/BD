@@ -134,9 +134,9 @@ session_start();
     $getmaxpcount = $getmaxpc->fetchColumn();
     ++$getmaxpcount;
 
-      $teste = "select count(*) from pagina where ativa=1 and nome = ? and userid = ?";
+      $teste = "select count(*) from pagina where ativa=1 and nome = :pagnome and userid = :userid ";
       $TAT =$connection->prepare($teste);
-      $TAT->execute(array($nomepagina, $userid));
+      $TAT->execute(array(":pagnome"=>$nomepagina, ":userid"=>$userid));
       $du3 = $TAT->fetchColumn();
 
       if ($du3 != 0) {
@@ -144,9 +144,9 @@ session_start();
 
       }else{
         //$query = "select count(*) from pagina where ativa =0 and nome = ? and idseq=? and userid = ? and pagecounter = ?";
-        $query = "select count(*) from pagina where ativa =0 and nome = ? and userid = ?";
+        $query = "select count(*) from pagina where ativa =0 and nome = ?";
         $testarexiste =$connection->prepare($query);
-        $testarexiste->execute(array($nomepagina, $userid));
+        $testarexiste->execute(array($nomepagina));
         //$testarexiste->execute(array($nomepagina, $pagemoment, $userid, $maxpc));
 
 
