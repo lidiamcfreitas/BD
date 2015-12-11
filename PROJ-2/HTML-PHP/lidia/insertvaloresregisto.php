@@ -97,6 +97,7 @@ $lol = 1;
 
         $result_campos = $obj_campos->fetchAll(PDO::FETCH_ASSOC);
         var_dump($result_campos);
+        $_SESSION["result_campos"] = $result_campos;
 
         ?>
         <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
@@ -129,6 +130,7 @@ $lol = 1;
           echo $column;
         }
       } */
+      $result_campos = $_SESSION["result_campos"];
       var_dump($campos_valores_array);
       $cols = count($valoresdoscampos[0]);
       for ($x = 0; $x <= $cols; $x++) {
