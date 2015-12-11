@@ -66,10 +66,6 @@ require "connect.php";
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
 
-        if ($deu == 0) {
-        echo "<h1>O Tipo não existe </h1>";
-
-      } else {
 
 
             // cria sequencia
@@ -149,7 +145,6 @@ require "connect.php";
             $seqid2_ic = $id_sequenciaa;
             $insert_campo->execute();
 
-          }
     }
     $connection->commit();
     $connection = null;
