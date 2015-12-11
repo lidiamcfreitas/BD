@@ -1,12 +1,7 @@
 <?php
 session_start();
 $userid = $_SESSION['userid'];
-$nometipo = $_POST["nometipo"];
-echo $_GET["nometiporegisto"];
-$nometipo = $_GET["nometiporegisto"];
-$_SESSION["nometipo"] = $_GET["nometiporegisto"];
 require "connect.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -25,9 +20,14 @@ require "connect.php";
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation" class="active"><a href="insertcampo.php"> Inserir Campos </a></li>
+            <li role="presentation"><a href="insertpagina.php"> Inserir Página </a></li>
+            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Tipo </a></li>
+            <li role="presentation" class="active"><a href="insertcampo.php"> Inserir Campos </a></li> THIS
+            <li role="presentation"><a href="deletepagina.php"> Apagar Página </a></li>
             <li role="presentation"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
-            <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
+            <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li> THIS
+            <li role="presentation"><a href="inserttiporegisto.php"> Inserir Valores de Campos</a></li>
+            <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
 
         </ul>
         <h3 class="text-muted">Inserir Pagina</h3>
@@ -41,6 +41,12 @@ require "connect.php";
                         <td><input type="text" name="nomecampo" placeholder="Nome da Campo" required></td>
                     </div><br>
                 </tr>
+                <tr>
+                    <div class="form-group">
+                        <td><label for="nometipo">Nome do Tipo</label></td>
+                        <td><input type="text" name="nometipo" placeholder="Nome do Tipo" required></td>
+                    </div><br>
+                </tr>
 
                 <div class="form-group">
                 </table>
@@ -52,9 +58,10 @@ require "connect.php";
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "")){
-        $nometipo = $_SESSION["nometipo"];
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampo"] != "") && ($_POST["nometipo"] != "")){
+
         $nomecampo = $_POST["nomecampo"];
+        $nometipo = $_POST["nometipo"];
 		    $userid = $_SESSION['userid'];
 
         $connection->beginTransaction();
@@ -66,6 +73,10 @@ require "connect.php";
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
 
+        if ($deu == 0) {
+        echo "<h1>O Tipo não existe </h1>";
+
+      } else {
 
 
             // cria sequencia
@@ -145,6 +156,7 @@ require "connect.php";
             $seqid2_ic = $id_sequenciaa;
             $insert_campo->execute();
 
+          }
     }
     $connection->commit();
     $connection = null;

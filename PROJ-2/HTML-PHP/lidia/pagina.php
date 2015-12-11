@@ -20,6 +20,7 @@ session_start();
         <ul class="nav nav-pills pull-right" role="tablist">
 
             <li role="presentation"><a href="insertvaloresregisto.php"> Inserir Registo</a></li>
+            <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
             <li role="presentation" class="active"><a href="pagina.php"> Ver Pagina </a></li>
 
         </ul>
@@ -103,7 +104,7 @@ session_start();
           foreach($resultado_print as $num=>$row){
             echo "<tr>";
             foreach($row as $nome_coluna => $valor_coluna){
-              echo "<td><a href=\"insertcampo.php?nometiporegisto=$valor_coluna\">$valor_coluna</a></td>";
+              echo "<td><a href=\"pagina.php?nomeregisto=$valor_coluna\">$valor_coluna</a></td>";
             }
             echo "</tr>";
           } ?>
