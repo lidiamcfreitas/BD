@@ -68,25 +68,26 @@ require "connect.php";
               </div><br>
             </tr>
           </table>
+          </form>
         </div>
-      </form>
-    <?php
 
-    require "connect.php";
+      <?php
 
-
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "")){
-      $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
-      $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
-
-      echo "I'm here";
+      require "connect.php";
 
 
-      //header("Location: insertvalorescampo.php");
-    }
-    $connection = null;
-    ?>
+      if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "")){
+        $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
+        $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
-  </div> <!-- /container -->
-</body>
-</html>
+        echo "Im here";
+
+
+        //header("Location: insertvalorescampo.php");
+      }
+      $connection = null;
+      ?>
+
+    </div> <!-- /container -->
+  </body>
+  </html>
