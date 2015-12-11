@@ -55,7 +55,7 @@ session_start();
           <thead>
             <tr>
               <?php
-              foreach($resultado[0] as $nome_coluna => $valor_coluna){
+              foreach($resultado_print[0] as $nome_coluna => $valor_coluna){
                 echo "<td>$nome_coluna</td>";
               }
               ?>
@@ -63,7 +63,7 @@ session_start();
           </thead>
           <tbody>
         <?php
-        foreach($resultado as $num=>$row){
+        foreach($resultado_print as $num=>$row){
           echo "<tr>";
           foreach($row as $nome_coluna => $valor_coluna){
             echo "<td>$valor_coluna</td>";
