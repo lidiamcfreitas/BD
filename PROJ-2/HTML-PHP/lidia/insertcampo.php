@@ -21,8 +21,8 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-            <li role="presentation" class="active"><a href="insertcampo.php?nometipo=<?php $_SESSION["nometipo"] ?>"> Inserir Campos </a></li>
-            <li role="presentation"><a href="deletecampotipo.php?nometipo=<?php $_SESSION["nometipo"] ?>"> Apagar Campo de Tipo </a></li>
+            <li role="presentation" class="active"><a href="insertcampo.php?nometipo=<?php echo $_SESSION["nometipo"]; ?>"> Inserir Campos </a></li>
+            <li role="presentation"><a href="deletecampotipo.php?nometipo=<?php echo $_SESSION["nometipo"]; ?>"> Apagar Campo de Tipo </a></li>
 
         </ul>
         <h3 class="text-muted">Inserir Pagina</h3>
