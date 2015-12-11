@@ -58,11 +58,31 @@ require "connect.php";
                   $result_tipos = $gettype1->fetchAll(PDO::FETCH_ASSOC);
                   echo "<option value=-1>Vazio</option>";
                   foreach($result_tipos as $row){
-                    echo "<option value=\"".$row["typecnt"]."\">".$row["nome"]."</option>";
+                    echo "<option value=\"".$row["nome"]."\">".$row["nome"]."</option>";
                   }
                   echo "</select>";
 
+                  $tipoderegisto = $_POST["tipoderegisto"];
+                  echo $tipoderegisto;
+
+                  $query_campos = "SELECT nome, campocnt from campo where typecnt = :typecnt and ativo=1 and userid = :userid";
+                  $q_campos = $connection->prepare($query_campos);
+                  $q_campos->execute(array($tipoderegisto, $userid));
+
+                  $result_campos = $q_campos->fetchAll(PDO::FETCH_ASSOC);
+
+
                   ?>
+                  <tr>
+                    <div class="form-group">
+                      <?php
+                      foreach($result_campos as $row){
+                        echo "<td><label for=\"nomecampo\">".$row["nome"]."</label></td>";
+                        echo "<td><input type=\"text\" name=\"".$row["campocnt"]." placeholder=\"Nome do Campo\" required></td>";
+                      }
+                       ?>
+                    </div><br>
+                    </tr>
                 </td>
                 <td><input type="submit" name="submit" class="btn btn-success" value="Show"></td>
               </div><br>
