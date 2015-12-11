@@ -39,8 +39,6 @@
                         <td>
                           <select name="tipoderegisto">
                             <?php
-echo $userid;
-
                             $sqltypeid1  = "SELECT nome ";
                             $sqltypeid1 .= "FROM tipo_registo  ";
                             $sqltypeid1 .= "WHERE userid = :userid";
