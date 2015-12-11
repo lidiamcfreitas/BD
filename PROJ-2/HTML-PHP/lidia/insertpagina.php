@@ -165,13 +165,9 @@ session_start();
         echo "<h1>Existe uma página com esse nome. </h1>";
 
       }else{
-        $query = "select count(*) from pagina where nome = :nomep and ativa=0 and idseq=:idseq and userid = :userid and pagecounter = :pagecounter";
+        $query = "select count(*) from pagina where ativa =0 and nome = ? and idseq=? and userid = ? and pagecounter = ?";
         $testarexiste =$connection->prepare($query);
-        $testarexiste->bindParam(":nomep", $nomepagina);
-        $testarexiste->bindParam(":idseq", $pagemoment);
-        $testarexiste->bindParam(":pagecounter", $maxpc);
-        $testarexiste->bindParam(":userid", $userid);
-        $testarexiste->execute();
+        $testarexiste->execute(array($nomepagina, $pagemoment, $userid, $maxpc));
         $deu2 = $testarexiste->fetchColumn();
         echo "isto é o deu2->".$deu2;
 
