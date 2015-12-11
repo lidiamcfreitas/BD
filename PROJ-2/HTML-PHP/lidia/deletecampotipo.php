@@ -1,8 +1,13 @@
 <?php
 session_start();
-require "connect.php";
 $userid = $_SESSION['userid'];
+$nometipo = $_GET['nometipo'];
+$nometipo = $_SESSION["nometipo"];
+echo $_GET["nometipo"];
+
 $_SESSION["nometipo"] = $_GET["nometipo"];
+require "connect.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +24,8 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
-          <li role="presentation"><a href="insertcampo.php"> Inserir Campos </a></li>
-          <li role="presentation" class="active"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
+          <li role="presentation"><a href="insertcampo.php?nometipo=$nometipo"> Inserir Campos </a></li>
+          <li role="presentation" class="active"><a href="deletecampotipo.php?nometipo=$nometipo"> Apagar Campo de Tipo </a></li>
 
 
         </ul>
@@ -31,6 +36,7 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
 
+            	<tr>
                 <div class="form-group">
                     <td><label for="Tipo">Nome do Campo a retirar</label></td>
                     <td><input type="text" name="nomecampoaretirar" placeholder="Nome do Campo a Retirar" required></td>
@@ -45,16 +51,36 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
         </div>
     <?php
         //RETIRARCAMPODETIPOREGISTO
+        require "connect.php";
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")){
 
-      require "connect.php";
-      session_start();
-        $tiporegisto = $_SESSION["nometipo"];
-        echo "nometipo:".$tiporegisto;
+        $tiporegisto = $_SESSION["tiporegisto"];
         $nomecampoaretirar = $_POST["nomecampoaretirar"];
 		$userid = $_SESSION['userid'];
 
+        class TableRows extends RecursiveIteratorIterator {
+
+            function __construct($it) {
+                parent::__construct($it, self::LEAVES_ONLY);
+            }
+
+            function current() {
+                return "<td >" . parent::current(). "</td>";
+            }
+
+            function beginChildren() {
+                echo "<tr>";
+            }
+
+            function endChildren() {
+                echo "</tr>" . "\n";
+            }
+        }
+
+        function print_result($result){
+
+            $uid = null;
 
             if (empty($result)) {
                 echo "<p>Não existe uma pagina com esse nome</p>";
@@ -121,6 +147,7 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
         $delete_field->execute();
         $connection->commit();
 
+    }
 
 
     $connection = null;
