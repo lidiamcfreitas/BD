@@ -1,8 +1,8 @@
 <?php
 session_start();
 $userid = $_SESSION['userid'];
-$nomeregisto = $_POST["nomeregisto"];
-$typecnt = $_POST["tipoderegisto"];
+$nomeregisto = $_SESSION["nomeregisto"];
+$typecnt = $_SESSION["tipoderegisto"];
 require "connect.php";
 ?>
 
