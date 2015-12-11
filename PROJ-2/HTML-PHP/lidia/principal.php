@@ -60,6 +60,8 @@ include './imprimir_tabelas.php';
         $user_ipseq = $userid;
     		$sequencia_ip->execute();
 
+        $imprimeisto = $connection->query("SELECT * FROM utilizador");
+        imprime_tabelas($imprimeisto);
 
         $sql_maxmom  = "SELECT s.contador_sequencia ";
         $sql_maxmom .= "FROM sequencia s  ";
