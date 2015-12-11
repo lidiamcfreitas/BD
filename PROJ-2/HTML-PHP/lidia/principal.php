@@ -105,7 +105,7 @@ session_start();
         foreach($resultado_print as $num=>$row){
           echo "<tr>";
           foreach($row as $nome_coluna => $valor_coluna){
-            echo "<td>$valor_coluna</td>";
+            echo "<td><a href='insertpagina.php?pagename=".$valor_coluna."></td>";
           }
           echo "</tr>";
         } ?>
