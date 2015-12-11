@@ -51,10 +51,10 @@ session_start();
         $resultado_print = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
 
         $query_tipos = "select nome from tipo_registo where userid = ?";
-        $resultado_tabelas = $connection->prepare($query_tabelas);
+        $resultado_tabelas = $connection->prepare($query_tipos);
         $resultado_tabelas->execute(array($userid));
         $resultado_print_tipo = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
-        
+
 
         ?>
         <div class="container">
