@@ -347,6 +347,8 @@ aplicar o truque da alínea anterior, em que o índice fornecia a informação s
 criámos três indíces densos (que seriam, idealmente, implementados por hash tables) com os índices de forma a
 acelerar o acesso aos campos verificados na cláusula where e aos campos dos nomes dos registos.
 
+Qualquer benchmark que utilizássemos para tentar provar que os nossos índices beneficiavam o desempenho da
+das queries seria desprovido de significado devido ao facto de o MySQL não implementar índices como hash tables.
 
 \newpage
 
@@ -449,9 +451,9 @@ O código encontra-se no ficheiro "dw.sql".
 
 \section{Conclusão}
 
-Concluindo este relatório, achamos que aprendemos imenso com este projecto. Infelizmente tivemos imensos problemas com debugg do PHP e algumas dificuldades com os indices. Pensamos ter ultrapassado a maior parte das nossas dificuldades mas infelizmente não conseguimos resolver todos os problemas do código do projecto.
+Concluindo este relatório, achamos que aprendemos imenso com este projecto. Infelizmente tivemos imensos problemas com debug do código PHP e algumas dificuldades com os índices. Pensamos ter ultrapassado a maior parte das nossas dificuldades, mas, infelizmente, não conseguimos resolver todos os problemas do código do projecto.
 
-Iremos tentar termina-lo na mesma, mesmo fora do âmbito da cadeira pois pensamos que nos é de bastante interesse.
+Iremos tentar terminá-lo na mesma, mesmo fora do âmbito da cadeira pois pensamos que nos é de bastante interesse.
 \newpage
 
 \end{document}
