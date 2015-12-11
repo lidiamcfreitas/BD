@@ -93,7 +93,7 @@ session_start();
         echo $gettypecounter; */
 
 
-        $sql_maxtc  = "SELECT r.typecnt + 1";
+        $sql_maxtc  = "SELECT r.typecnt + 1 ";
         $sql_maxtc .= "FROM tipo_registo r  ";
         $sql_maxtc .= "WHERE r.userid = ".$userid;
         $sql_maxtc .= "  AND r.typecnt = ALL  ";
@@ -101,32 +101,14 @@ session_start();
         $sql_maxtc .= "     FROM tipo_registo r2  ";
         $sql_maxtc .= "     WHERE r2.userid = ".$userid.')';
 
-        $sql_maxnome  = "SELECT r.nome";
-        $sql_maxnome .= "FROM tipo_registo r  ";
-        $sql_maxnome .= "WHERE r.userid = ".$userid;
-        $sql_maxnome .= "  AND r.typecnt = ALL  ";
-        $sql_maxnome .= "    (SELECT max(r2.typecnt) ";
-        $sql_maxnome .= "     FROM tipo_registo r2  ";
-        $sql_maxnome .= "     WHERE r2.userid = ".$userid.')';
-
         $getmaxtc = $connection->prepare($sql_maxtc);
+        //$getmaxtc = $bindParam(":userid", $userid);
+        //$userid = $uid;
         $getmaxtc->execute();
 
-        $getmaxtc_nome = $connection->prepare($sql_maxnome);
-        $getmaxtc_nome->execute();
-
         $gettypecounter = $getmaxtc->fetchColumn();
-        $getname = $getmaxtc_nome->fetchColumn(1);
 
-        $teste1 = "select count(*) from tipo_registo where ativo=1 and nome = :tiponome and userid = :userid ";
-        $TAT1 =$connection->prepare($teste1);
-        $TAT1->execute(array(":tiponome"=>$getname, ":userid"=>$userid));
-        $du3 = $TAT1->fetchColumn();
 
-        if ($du3 != 0) {
-          echo "<h1>Existe um tipo de registo com esse nome. </h1>";
-
-        }else{
 
         $tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES (:userid, :typecnt, :nome, :idseq, 1)";
 
@@ -142,7 +124,6 @@ session_start();
         $nome_tp = $nometiporegisto;
         $idseq_tp = $getseqcounter;
         $tiporegisto_tp->execute();
-      }
 
     } else {
 
