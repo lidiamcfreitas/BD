@@ -1,5 +1,6 @@
 <?php
 session_start();
+include './imprimir_tabelas.php';
 ?>
 
 <!DOCTYPE html>
@@ -52,43 +53,6 @@ session_start();
         $nomepagina = $_POST["nomepagina"];
 		    $userid = $_SESSION['userid'];
 
-        class TableRows extends RecursiveIteratorIterator {
-
-            function __construct($it) {
-                parent::__construct($it, self::LEAVES_ONLY);
-            }
-
-            function current() {
-                return "<td >" . parent::current(). "</td>";
-            }
-
-            function beginChildren() {
-                echo "<tr>";
-            }
-
-            function endChildren() {
-                echo "</tr>" . "\n";
-            }
-        }
-
-        function print_result($result){
-
-            $uid = null;
-
-            if (empty($result)) {
-                echo "<p>Não existe uma pagina com esse nome</p>";
-            } else {
-                echo "<div style='width=100px;'><br><br>";
-                echo "<table class=\"table table-striped\">";
-                echo("<tr><th>Registos da Página " . $nomepagina . "</th></tr>\n");
-                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
-                    echo  $v;
-                }
-                echo "</table>";
-                echo "</div>";
-            }
-        }
-
         // cria sequencia
         $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
         $sequencia_ip = $connection->prepare($query_cria);
@@ -127,31 +91,7 @@ session_start();
         $getmaxpc->bindParam(":userid", $uid2);
         $uid2 = $userid;
         $getmaxpc->execute();
-        $resultado = $getmaxpc->fetchAll(PDO::FETCH_ASSOC);
 
-        $badboy = $connection->query("SELECT * FROM utilizador")->fetchAll(PDO::FETCH_ASSOC);
-
-        ?>
-        <table class=\"table table-striped\">
-          <thead>
-            <tr>
-              <?php
-              foreach($badboy[0] as $nome_coluna => $valor_coluna){
-                echo "<td>$nome_coluna</td>";
-              }
-              ?>
-            </tr>
-          </thead>
-          <tbody>
-        <?php
-        foreach($badboy as $num=>$row){
-          echo "<tr>";
-          foreach($row as $nome_coluna => $valor_coluna){
-            echo "<td>$valor_coluna</td>";
-          }
-          echo "</tr>";
-        }
-        die();
 
 
         //$result = $getmaxpc->setFetchMode(PDO::FETCH_ASSOC);
