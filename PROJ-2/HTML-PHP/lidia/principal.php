@@ -41,15 +41,14 @@ session_start();
                   <div class="form-group">
                       <td><label for="nomepagina">Nome da Página</label></td>
                       <td><input type="text" name="nomepagina" placeholder="Nome da Página" required></td>
+                      <td><input type="submit" name="submit" class="btn btn-success" value="Ver Página"></td>
                   </div><br>
                 </tr>
                   </table>
-                      <br><input type="submit" name="submit" class="btn btn-success" value="Ver Página">
+
                 </form>
               </div>
-            </div>
 
-            <div class="row">
               <div class="col-md-6">
                 <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
                   <table cellspacing="10">
@@ -57,16 +56,16 @@ session_start();
                     <div class="form-group">
                         <td><label for="nomeregisto">Nome da Registo</label></td>
                         <td><input type="text" name="nomeregisto" placeholder="Nome da Registo" required></td>
+                        <td><input type="submit" name="submit" class="btn btn-success" value="Ver Registo"></td>
                     </div><br>
                   </tr>
                     </table>
-                        <br><input type="submit" name="submit" class="btn btn-success" value="Ver Registo">
+
                   </form>
-                </div>
               </div>
 
         </div>
-
+      </div>
     </div>
 
     <?php
