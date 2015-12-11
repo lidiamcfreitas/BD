@@ -48,6 +48,10 @@
 \newpage
 
 \section{Introdução}
+
+Este relatório foi elaborado na âmbito da cadeira de Bases de Dados e sumariza o trabalho realizado para a segunda parte do projecto da cadeira.
+
+Neste pretendemos mostrar a nossa implementação de um bloco de notas assim como os aspectos de interação e melhoria da mesma.
 \newpage
 
 \section{Consultas SQL}
@@ -67,6 +71,8 @@ HAVING count(*) > ALL
      WHERE l1.sucesso = 1
          AND l1.userid =l.userid);
 		\end{code}
+		
+Esta query é relativamente simples, assim, a nossa implementação baseou-se em contar o número de sucessos de cada utilizador e retorna-lo se este fosse maior que o número de insucessos do mesmo utilizador.
 \end{minipage}
 
 \begin{minipage}{\textwidth}
@@ -98,6 +104,10 @@ WHERE r.ativo
                                AND tp.userid = ID_USER
                                AND tp.ativo)))
         		\end{code}
+        		
+Para esta query seguimos a lógica de que os registos que aparecem em todas as páginas de um utilizador são também os registos para o qual não existe uma página que não tenha esse registo. 
+
+Foi também verificado sempre se as entradas nas tabelas se encontravam activas.
 \end{minipage}	
 
 \begin{minipage}{\textwidth}
@@ -139,14 +149,49 @@ HAVING count(*) / count(DISTINCT rp.pageid) >= all
 				r1.ativo)
 	     GROUP BY rp2.userid);
 		\end{code}
+		
+Para esta query calculamos a média do número de registos por página de um utilizador que tem a média do número de registos por página maior que a de todos os outros utilizadores. Para tal fomos sempre verificando se as entradas estavam activas.
+
+ 
 \end{minipage}
 \begin{minipage}{\textwidth}
 	\item Quais os utilizadores que, em todas as suas páginas, têm registos de todos os tipos de registos que criaram?
 	
 \begin{code}[language=SQL]
-
+SELECT u.userid,
+       u.nome
+FROM
+  ( SELECT t.userid,
+           min(t.num_tipos_pagina) AS minimo
+   FROM
+     ( SELECT rp.userid,
+              rp.pageid,
+              count(DISTINCT rp.typeid) AS num_tipos_pagina
+      FROM registo r,
+           tipo_registo tr,
+           pagina p,
+           reg_pag rp
+      WHERE r.ativo
+        AND tr.ativo AND p.ativa AND rp.ativa
+        AND r.typecounter=tr.typecnt
+        AND r.regcounter=rp.regid
+        AND p.pagecounter=rp.pageid
+        AND r.userid=tr.userid
+        AND p.userid=r.userid
+        AND rp.userid=p.userid
+      GROUP BY rp.pageid) t
+   GROUP BY userid) t,
+     utilizador u
+WHERE t.userid=u.userid
+  AND t.minimo =
+    (SELECT count(*)
+     FROM tipo_registo tr1
+     WHERE tr1.ativo
+       AND tr1.userid= t.userid);
 \end{code}
-	
+
+Para esta query seguimos a lógica de que os utilizadores que o utilizador tem em todas as suas páginas registos com todos os tipos de registos que criaram se o mínimo de tipos diferentes que tiver em todas as suas páginas for igual ao número de tipo de registos que criou. Para esta query não conseguimos retirar as sub-queries dos FROMs, mesmo após algum esforço e por isso acabamos por ter de deixar como está.
+
 \end{minipage}
 \end{enumerate}
 
@@ -156,6 +201,7 @@ Para esta consulta assume-se que se um utilizador não tem páginas então é im
 
 Entendeu-se também com esta questão que eram pedidos os registos que aparecem em todas as páginas de um dado utilizador, caso contrário diria "para cada o utilizador". No entanto, como o número de casos em que o facto é verídico é baixo decidimos verificar então quais os registos por todos os utilizadores que verificavam a consulta, e por isso deixamos em baixo a consulta que nos permitiu ver essa informação:
 
+\begin{minipage}{\textwidth}
 \begin{code}[language=SQL]
 SELECT r_0.userid,
        r_0.regcounter
@@ -185,11 +231,68 @@ WHERE regcounter IN
                                         AND tp.ativo))))
 GROUP BY r_0.userid,
          r_0.regcounter
+         
 \end{code}
+
+\end{minipage}
 
 \newpage
 
 \section{Restrições de Integridade}
+As restrições de integridade foram implementadas com triggers.
+
+Como os triggers acabam por ser todos muito semelhantes apenas apresentaremos aqui um trigger para um insert e um para um update. Os restantes estarão no ficheiro zip da entrega.
+
+
+\begin{minipage}{\textwidth}
+\begin{code}[language=SQL]
+drop trigger if exists contador_sequencia_registo_insert;
+
+delimiter $$
+
+    create trigger contador_sequencia_registo_insert before insert on registo
+    for each row
+    begin
+    if (exists(select * from  tipo_registo tr where tr.idseq = new.idseq) or
+    	exists(select * from  pagina p where p.idseq = new.idseq) or
+    	exists(select * from  campo c where c.idseq = new.idseq) or
+    	exists(select * from  registo r where r.idseq = new.idseq) or
+    	exists(select * from  valor v where v.idseq = new.idseq))
+
+    then
+            call contador_sequencia_registo_insert_trigger();
+    end if;
+    end$$
+
+delimiter ;
+
+drop trigger if exists contador_sequencia_registo_update;
+
+delimiter $$
+
+    create trigger contador_sequencia_registo_update before update on registo
+    for each row
+    begin
+    if (exists(select * from  tipo_registo tr where tr.idseq = new.idseq) or
+    	exists(select * from  pagina p where p.idseq = new.idseq) or
+    	exists(select * from  campo c where c.idseq = new.idseq) or
+    	exists(select * from  registo r where r.regcounter <> old.regcounter and r.idseq=new.idseq ) or
+    	exists(select * from  valor v where v.idseq = new.idseq))
+
+    then
+            call contador_sequencia_registo_update_trigger();
+    end if;
+    end$$
+
+delimiter ;
+         
+\end{code}
+
+O trigger de insert funciona da seguinte maneira, quando um utilizador tenta inserir uma nova entrada na tabela de registos, se já existir alguma sequencia com o mesmo valor noutra tabela chama uma função inexistente que fará com que o mysql dê erro e aborte a inserção da entrada. Impedindo assim resultados incorrectos
+
+No trigger de update é necessário verificar também se já existe uma sequência nas outras tabelas com a mesma sequência e neste caso deve também verificar se já existe um registo diferente do que se tenta inserir que tenha o mesmo descritivo de sequência do que o que estamos a tentar inserir. Caso aconteça é chamada uma função inexistente para proibir a modificação da tabela.
+
+\end{minipage}
 \newpage
 \section{Formas Normais}
 
@@ -217,6 +320,61 @@ GROUP BY r_0.userid,
 \section{Índices}
 \newpage
 \section{Transacções}
+Para as transações, de forma a não existirem incoerências devido a acessos simultâneos às mesmas variáveis foi necessário criar transações. As transações fazem o acesso às variáveis dentro de uma transação seja efectuado em regime de exclusividade.
+
+De forma a não proibir o acesso durante muito tempo ao programa, pretendemos ser breves nas transações e apenas realizá-las quando 
+
+Este facto pode ser verificado no código onde uma transação é inicializada com \$connection->beginTransaction() e terminam com \$connection->commit().
+
+\begin{code}[language=PHP]
+    <?php
+
+    require "connect.php";
+
+    if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") &&
+     ($_POST["email"] != "") && ($_POST["questao1"] != "") && 
+     ($_POST["questao2"] != "") && ($_POST["resposta1"] != "") 
+     && ($_POST["resposta2"] != "")){
+
+        session_start();
+
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $questao1 = $_POST["questao1"];
+        $resposta1 = $_POST["resposta1"];
+        $questao2 = $_POST["questao2"];
+        $resposta2 = $_POST["resposta2"];
+        $pais = $_POST["pais"];
+        $categoria = $_POST["categoria"];
+
+        (...)
+        $connection->beginTransaction();
+        
+        $query_cria  = (...)
+        
+        $utilizador_obj = $connection->prepare($query_cria);
+    	$utilizador_obj->bindParam(":userid", $userid_aux);
+        $utilizador_obj->bindParam(":email", $email_aux);
+        $utilizador_obj->bindParam(":nome", $nome_aux);
+        $utilizador_obj->bindParam(":password", $password_aux);
+        $utilizador_obj->bindParam(":questao1", $questao1_aux);
+        $utilizador_obj->bindParam(":resposta1", $resposta1_aux);
+        $utilizador_obj->bindParam(":questao2", $questao2_aux);
+        $utilizador_obj->bindParam(":resposta2", $resposta2_aux);
+        $utilizador_obj->bindParam(":pais", $pais_aux);
+        $utilizador_obj->bindParam(":categoria", $categoria_aux);
+
+
+		(...)
+
+        $connection->commit();
+        header("Location: principal.php");
+        }
+
+    $connection = null;
+    ?>	
+\end{code}
 
 \newpage
 
@@ -224,6 +382,10 @@ GROUP BY r_0.userid,
 \newpage
 
 \section{Conclusão}
+
+Concluindo este relatório, achamos que aprendemos imenso com este projecto. Infelizmente tivemos imensos problemas com debugg do PHP e algumas dificuldades com os indices. Pensamos ter ultrapassado a maior parte das nossas dificuldades mas infelizmente não conseguimos resolver todos os problemas do código do projecto.
+
+Iremos tentar termina-lo na mesma, mesmo fora do âmbito da cadeira pois pensamos que nos é de bastante interesse.
 \newpage
 
 \end{document}
