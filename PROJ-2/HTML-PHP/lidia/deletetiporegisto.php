@@ -36,7 +36,7 @@
                     <td><input type="text" name="nometiporegisto" placeholder="Nome da Página" required></td>
                 </div><br>
                 </tr>
-                
+
                 <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
@@ -105,6 +105,9 @@
         $getpageid->execute();
 
         $gettipos = $getpageid->fetchColumn();
+
+
+
 
         $sql_delete  = "UPDATE tipo_registo ";
         $sql_delete .= "SET ativo=0  ";

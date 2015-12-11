@@ -41,7 +41,7 @@
                         <td><input type="text" name="nometipo" placeholder="Nome do Tipo" required></td>
                     </div><br>
                 </tr>
-                
+
                 <div class="form-group">
                 </table>
                     <br><input type="submit" name="submit" class="btn btn-success" value="Show">
@@ -94,6 +94,19 @@
                 echo "</div>";
             }
         }
+
+        $teste = "select count(*) from tipo_registo where nome = :nomeregisto";
+        $testarseexiste =$connection->prepare($teste);
+        $testarseexiste->bindParam(":nomeregisto", $nomeregisto_teste);
+        $nomeregisto_teste = $nometipo;
+        $testarseexiste->execute();
+        $deu = $testarseexiste->fetchColumn();
+
+        if ($deu == 0) {
+        echo "<h1>O Tipo não existe </h1>";
+        exit();
+        }
+
             echo "here";
             // cria sequencia
             $query_cria_ic = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";

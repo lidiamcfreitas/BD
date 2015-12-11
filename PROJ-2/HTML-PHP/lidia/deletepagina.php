@@ -101,7 +101,6 @@
         $getpageid->execute();
 
 
-        $getpagecounter = $getpageid->fetchColumn();
 
 
         $sql_delete  = "UPDATE pagina ";
