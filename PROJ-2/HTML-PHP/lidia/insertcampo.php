@@ -2,7 +2,7 @@
 session_start();
 $userid = $_SESSION['userid'];
 require "connect.php";
-$_SESSION["nometipo"] = $_GET["nometiporegisto"];
+$_SESSION["nometipo"] = $_GET["nometipo"];
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "connect.php";
-$_SESSION["nometipo"] = $_GET["nometiporegisto"];
+$_SESSION["nometipo"] = $_GET["nometipo"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
