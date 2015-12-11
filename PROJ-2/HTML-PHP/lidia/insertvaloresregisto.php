@@ -77,6 +77,7 @@ $lol = 1;
         $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
+        $connection->beginTransaction();
 
         $sql_maxtc_  = "SELECT r.regcounter + 1 as soma ";
         $sql_maxtc_ .= "FROM registo r  ";
@@ -117,7 +118,7 @@ $lol = 1;
 
         var_dump($result_campos);
         $_SESSION["result_campos"] = $result_campos;
-      
+        $connection->commit();
         ?>
         <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
           <tr>

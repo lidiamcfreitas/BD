@@ -67,6 +67,7 @@ session_start();
 
         require "connect.php";
 
+        $connection->beginTransaction();
 		    $userid = $_SESSION['userid'];
 
         $query_tabelas = "select nome as Paginas from pagina where userid = ?";
@@ -78,7 +79,7 @@ session_start();
         $resultado_tabelas = $connection->prepare($query_tipos);
         $resultado_tabelas->execute(array($userid));
         $resultado_print_tipo = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
-
+        $connection->commit();
 
         ?>
         <div class="container">

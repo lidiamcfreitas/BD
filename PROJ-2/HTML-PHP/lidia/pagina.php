@@ -47,6 +47,8 @@ session_start();
 
     if (($_SERVER["REQUEST_METHOD"] == "GET") && ($_GET["nomepagina"] != "")){
 
+
+        $connection->beginTransaction();
         $nomepagina = $_GET["nomepagina"];
         $_SESSION["nomepagina"] = $nomepagina;
 		    $userid = $_SESSION['userid'];
@@ -79,7 +81,7 @@ session_start();
 		$result = $resultado->setFetchMode(PDO::FETCH_ASSOC);
 		$result = $resultado->fetchAll();
     $resultado_print = $result;
-
+    $connection->commit();
 
           ?>
           <div class="container">

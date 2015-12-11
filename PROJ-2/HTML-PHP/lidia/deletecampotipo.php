@@ -94,7 +94,7 @@
                 echo "</div>";
             }
         }
-
+        $connection->beginTransaction();
         $teste = "select count(*) from campo where nome = :nomecampo";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":nomeregisto", $nomecampopararetirar);
@@ -144,6 +144,7 @@
         $nomecampoaremover = $nomecampoaretirar;
         $getcenas2 = $gettipos;
         $delete_field->execute();
+        $connection->commit();
 
     }
 

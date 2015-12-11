@@ -40,6 +40,8 @@ require "connect.php";
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomeregisto"] != "") && ($_POST["tipoderegisto"] != "")){
 
+      $connection->beginTransaction();
+
       // get campos para dado tipo
       $sql_campos  = "SELECT campocnt, nome ";
       $sql_campos .= "FROM campo  ";
@@ -50,6 +52,8 @@ require "connect.php";
 
       $result_campos = $obj_campos->fetchAll(PDO::FETCH_ASSOC);
 
+      $connection->commit();
+      
       foreach($result_campos as $row){
         echo "<td><label for=\"nomeregisto\">".$row["nome"]."</label></td>";
         echo "<td><input type=\"text\" name=\"valorcampo[]\" placeholder=\"Valor\" required></td>";

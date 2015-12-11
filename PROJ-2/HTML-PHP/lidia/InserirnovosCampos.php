@@ -10,7 +10,7 @@
 	<body>
 		<div id="wrap">
 
-	<?php 
+	<?php
 		try{
 			// inicia sessão para passar variaveis entre ficheiros php
 			session_start();
@@ -20,17 +20,17 @@
 				$data = trim($data);
 				$data = stripslashes($data);
 				$data = htmlspecialchars($data);
-				
+
 				return $data;
 			}
 
 			require "connect.php";
 
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {			 	
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$uid = test_input($_POST["userid"]);
 			 	$ncampo = test_input($_POST["nomecampo"]);
 			 	$ntiporeg = test_input($_POST["ntiporeg"]);
-			}
+			}$connection->beginTransaction();
 
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
@@ -80,11 +80,12 @@
 
 			$preparation = "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES (".$uid.','.$cenas2.','.$campocounter.',"'.$ncampo.'",'.$cenas.',1)';
 
-			echo ' '.$preparation;
+
 
 			$final = $connection->prepare($preparation);
 			$final->execute();
-echo "3";
+			$connection->commit();
+
 } catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");
 		}
@@ -94,9 +95,3 @@ echo "3";
 
 	</body>
 	</html>
-
-
-
-
-
-

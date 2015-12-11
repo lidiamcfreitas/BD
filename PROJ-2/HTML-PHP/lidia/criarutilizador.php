@@ -90,7 +90,7 @@
     if (($_SERVER["REQUEST_METHOD"] == "POST")  && ($_POST["nome"] != "") && ($_POST["email"] != "") && ($_POST["questao1"] != "") && ($_POST["questao2"] != "") && ($_POST["resposta1"] != "") && ($_POST["resposta2"] != "")){
 
         session_start();
-        
+
         $nome = $_POST["nome"];
         $email = $_POST["email"];
         $password = $_POST["password"];
@@ -111,7 +111,7 @@
         $_SESSION['pais'] = $pais;
         $_SESSION['categoria'] = $categoria;
 
-
+        $connection->beginTransaction();
         $query_cria = "INSERT INTO utilizador (userid , email , nome , password , questao1, resposta1, questao2, resposta2, pais, categoria) VALUES (:userid, :email, :nome, :password, :questao1, :resposta1, :questao2, :resposta2, :pais, :categoria)";
         $utilizador_obj = $connection->prepare($query_cria);
     		$utilizador_obj->bindParam(":userid", $userid_aux);
@@ -146,7 +146,7 @@
 
         $_SESSION['userid'] = $idutilizador3;
 
-
+        $connection->commit();
         header("Location: principal.php");
         }
 

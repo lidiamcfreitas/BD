@@ -31,7 +31,7 @@
 		 	$npag = test_input($_POST["nomepagina"]);
 		 	$uid = test_input($_POST["userid"]);
 		}
-
+		$connection->beginTransaction();
 		$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 		$bindParam(":userid", $userid);
 		$sequencia->execute();
@@ -86,7 +86,8 @@
 
 		$pagina->execute();
 
-
+		$connection->commit();
+		
 	} catch (PDOException $e){
 		echo("<p>ERROR: {$e->getMessage()}</p>");
 	}

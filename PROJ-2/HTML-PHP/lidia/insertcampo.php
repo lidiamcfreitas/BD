@@ -64,7 +64,7 @@ require "connect.php";
         $nometipo = $_POST["nometipo"];
 		    $userid = $_SESSION['userid'];
 
-
+        $connection->beginTransaction();
 
         $teste = "select count(*) from tipo_registo where nome = :nomeregisto";
         $testarseexiste =$connection->prepare($teste);
@@ -158,6 +158,7 @@ require "connect.php";
 
           }
     }
+    $connection->commit();
     $connection = null;
     ?>
 

@@ -76,6 +76,8 @@
             }
         }
 
+        $connection->beginTransaction();
+
         $teste = "select count(1) as deu from utilizador where email = :email AND password = :password";
         $testarseexiste =$connection->prepare($teste);
         $testarseexiste->bindParam(":email", $email_teste);
@@ -151,7 +153,7 @@
 
         }
       }
-
+        $connection->commit();
         $connection = null;
     ?>
 

@@ -86,7 +86,7 @@ session_start();
             }
         }
 
-
+        $connection->beginTransaction();
         // cria sequencia
         $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
         $sequencia_itr = $connection->prepare($query_cria);
@@ -162,6 +162,7 @@ $print_tp_query = "INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo
     } else {
 
     }
+    $connection->commit();
     $connection = null;
     ?>
 

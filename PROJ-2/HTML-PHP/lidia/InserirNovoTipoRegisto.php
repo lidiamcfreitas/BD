@@ -32,7 +32,7 @@
 			}
 
 
-
+			$connection->beginTransaction();
 
 			$sequencia = $connection->prepare("INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, $uid)");
 			$sequencia->execute();
@@ -92,7 +92,7 @@
 
 			//$nomeregisto = $nreg;
 			//$userid = $uid;
-
+			$connection->commit();
 
 	} catch (PDOException $e){
 			echo("<p>ERROR: {$e->getMessage()}</p>");

@@ -85,7 +85,7 @@
                 echo "</div>";
             }
         }
-
+        $connection->beginTransaction();
         $sql_pageid  = "SELECT pagecounter ";
         $sql_pageid .= "FROM pagina  ";
         $sql_pageid .= "WHERE userid = :userid ";
@@ -113,7 +113,7 @@
         $uid1 = $userid;
         $pagec = $getpagecounter;
         $delete_page->execute();
-
+        $connection->commit();
         }
 
     $connection = null;

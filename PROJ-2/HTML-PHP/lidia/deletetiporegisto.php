@@ -89,7 +89,7 @@
             }
         }
 
-
+        $connection->beginTransaction();
 
         $sql_pageid  = "SELECT typecnt ";
         $sql_pageid .= "FROM tipo_registo  ";
@@ -120,7 +120,7 @@
 
         $getcenas = $gettipos;
         $delete_page->execute();
-
+        $connection->commit();
     }
 
 

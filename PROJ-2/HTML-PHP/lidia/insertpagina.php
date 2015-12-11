@@ -46,7 +46,7 @@ session_start();
 
     $nomepagina = $_POST["nomepagina"];
     $userid = $_SESSION['userid'];
-    echo $nomepagina;
+
 
     class TableRows extends RecursiveIteratorIterator {
 
@@ -85,7 +85,7 @@ session_start();
       }
     }
     $SESSIONEMAIL = $_SESSION['email'];
-
+    $connection->beginTransaction();
     // cria sequencia
     $query_cria = "INSERT INTO sequencia (moment, userid) VALUES (current_timestamp, :userid )";
     $sequencia_ip = $connection->prepare($query_cria);
@@ -180,6 +180,7 @@ session_start();
 
 
     }
+    $connection->commit();
     $connection = null;
     ?>
 
