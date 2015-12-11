@@ -27,12 +27,6 @@ session_start();
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
-            	<tr>
-                <div class="form-group">
-                    <td><label for="nometiporegisto">Nome do Tipo</label></td>
-                    <td><input type="text" name="nometiporegisto" placeholder="Nome do Tipo" required></td>
-                </div><br>
-                </tr>
 
                 <div class="form-group">
                 </table>
@@ -44,12 +38,10 @@ session_start();
 
         require "connect.php";
 
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nometiporegisto"] != "")){
+    if (($_SERVER["REQUEST_METHOD"] == "GET") && ($_GET["nometiporegisto"] != "")){
 
-        $nometiporegisto = $_POST["nometiporegisto"];
+        $nometiporegisto = $_GET["nometiporegisto"];
 		    $userid = $_SESSION['userid'];
-
-
 
 
         $connection->beginTransaction();

@@ -109,7 +109,7 @@ session_start();
       </table>
     </div>
     <div class="col-md-6">
-      <h1>Tabela de Registos</h1>
+      <h1>Tabela de Tipos de Registos</h1>
       <table class="table table-striped table-hover table-responsive">
         <thead>
           <tr>
@@ -125,7 +125,7 @@ session_start();
       foreach($resultado_print_tipo as $num=>$row){
         echo "<tr>";
         foreach($row as $nome_coluna => $valor_coluna){
-          echo "<td>$valor_coluna</td>";
+          echo "<td><a href=\"inserttiporegisto.php?nometiporegisto=$valor_coluna\">$valor_coluna</a></td>";
         }
         echo "</tr>";
       } ?>
