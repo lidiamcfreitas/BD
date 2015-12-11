@@ -21,14 +21,10 @@ $lol = 1;
   <div class="container">
     <div class="header">
       <ul class="nav nav-pills pull-right" role="tablist">
-        <li role="presentation"><a href="insertpagina.php"> Inserir Página </a></li>
-        <li role="presentation"><a href="inserttiporegisto.php"> Inserir Tipo </a></li>
-        <li role="presentation"><a href="insertcampo.php"> Inserir Campos </a></li>
-        <li role="presentation"><a href="deletepagina.php"> Apagar Página </a></li>
-        <li role="presentation" class="active"><a href="deletetiporegisto.php"> Apagar Tipo </a></li>
-        <li role="presentation"><a href="deletecampotipo.php"> Apagar Campo de Tipo </a></li>
-        <li role="presentation"><a href="inserttiporegisto.php"> Inserir Valores de Campos</a></li>
-        <li role="presentation"><a href="pagina.php"> Ver Pagina </a></li>
+
+        <li role="presentation" class="active"><a href="principal.php"> Página Principal </a></li>
+          <li role="presentation"><a href="insertpagina.php"> Inserir Página </a></li>
+          <li role="presentation" active><a href="inserttiporegisto.php"> Inserir Tipo de Registo</a></li>
 
       </ul>
       <h3 class="text-muted">Inserir Pagina</h3>
@@ -81,7 +77,7 @@ $lol = 1;
         $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
         echo $userid;
-        
+
         $sql_maxtc_  = "SELECT r.regcounter + 1 as soma ";
         $sql_maxtc_ .= "FROM registo r  ";
         $sql_maxtc_ .= "WHERE r.userid = ?";
