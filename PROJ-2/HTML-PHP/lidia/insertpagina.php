@@ -133,28 +133,35 @@ session_start();
     $getmaxpcount = $getmaxpc->fetchColumn();
     ++$getmaxpcount;
 
+    $teste = "select count(*) from utilizador where userid = :userid";
+    $testarseexiste =$connection->prepare($teste);
+    $testarseexiste->bindParam(":userid", $userid_teste);
+    $userid_teste = $userid;
+    $testarseexiste->execute();
+    $deu = $testarseexiste->fetchColumn();
 
-    //VERIFICA SE A PAGINA EXISTE, MAS NÃO ACTIVA
-    $testando = "select count(*) from pagina where nome = :nomepagina and ativa=0";
-    $testarexiste =$connection->prepare($testando);
-    $testarexiste->bindParam(":nomepagina", $acbd);
-    $abcd = $nomepagina;
-    $testarexiste->execute();
-    $deu2 = $testarexiste->fetchColumn();
-    echo "isto é o deu2->".$deu2;
 
-    if ($deu2 != 0) {
-      echo "A pagina foi activada";
-      //EXISTE ? ENTÃO ACTIVA-A
-      $query = "UPDATE pagina SET ativa=1 WHERE nome = :nomepagina";
-      $testar =$connection->prepare($query);
-      $testar->bindParam(":nomepagina", $nomep);
-      $nomep = $nomepagina;
-      $testar->execute();
-}
+//     //VERIFICA SE A PAGINA EXISTE, MAS NÃO ACTIVA
+//     $t = "select count(*) from pagina where nome = :nomep and ativa=0";
+//     $testarexiste =$connection->prepare($t);
+//     $testarexiste->bindParam(":nomep", $acbd);
+//     $abcd = $nomepagina;
+//     $testarexiste->execute();
+//     $deu2 = $testarexiste->fetchColumn();
+//     echo "isto é o deu2->".$deu2;
+//
+//     if ($deu2 != 0) {
+//       echo "A pagina foi activada";
+//       //EXISTE ? ENTÃO ACTIVA-A
+//       $query = "UPDATE pagina SET ativa=1 WHERE nome = :nomepagina";
+//       $testar =$connection->prepare($query);
+//       $testar->bindParam(":nomepagina", $nomep);
+//       $nomep = $nomepagina;
+//       $testar->execute();
+// }
         //EXISTE ALGUMA PAGINA COM O MESMO NOME ?
         echo "EXISTE ALGUMA PAGINA MESMO NOME?";
-      $teste = "select count(*) from pagina where nome = :nomepagina";
+      $teste = "select count(*) from pagina where nome = :nomepagina and ativa=1";
       $testarseexiste =$connection->prepare($teste);
       $testarseexiste->bindParam(":nomepagina", $nomep2);
       $nomep2 = $nomepagina;
@@ -165,6 +172,30 @@ session_start();
         echo "<h1>Existe uma página com esse nome. </h1>";
 
       }else{
+        $query = "select count(*) from pagina where nome = :nomep and ativa=0 and idseq=:idseq and userid = :userid and pagecounter = :pagecounter";
+        $testarexiste =$connection->prepare($query);
+        $testarexiste->bindParam(":nomep", $nomepagina);
+        $testarexiste->bindParam(":idseq", $pagemoment);
+        $testarexiste->bindParam(":pagecounter", $maxpc);
+        $testarexiste->bindParam(":userid", $userid);
+        $testarexiste->execute();
+        $deu2 = $testarexiste->fetchColumn();
+        echo "isto é o deu2->".$deu2;
+
+        if ($deu2 != 0) {
+          echo "A pagina foi activada";
+          //EXISTE ? ENTÃO ACTIVA-A
+          $query = "UPDATE pagina SET ativa=1 where nome = :nomep and ativa=0 and idseq=:idseq and userid = :userid and pagecounter = :pagecounter";
+          $testar =$connection->prepare($query);
+          $testar->bindParam(":nomepagina", $nomep);
+          $testarexiste->bindParam(":idseq", $pagemoment);
+          $testarexiste->bindParam(":pagecounter", $maxpc);
+          $testarexiste->bindParam(":userid", $userid);
+          $nomep = $nomepagina;
+          $testar->execute();
+        }else{
+
+
         //NÃO EXISTINDO, CRIA-A
         echo "NÃO EXISTINDO, CRIA-A";
         $pagina = $connection->prepare("INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa, ppagecounter) VALUES (:userid, :pagecounter, :nomepagina, :idseq, 1 , NULL)");
@@ -179,6 +210,7 @@ session_start();
         $maxpc  = $getmaxpcount;
         $pagina->execute();
       }
+    }
 
 
     }
