@@ -63,10 +63,7 @@ $_SESSION["nometipo"] = $_GET["nometiporegisto"];
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
 
-        if ($deu == 0) {
-        echo "<h1>O Tipo não existe </h1>";
 
-      } else {
 
 
             // cria sequencia
@@ -146,7 +143,6 @@ $_SESSION["nometipo"] = $_GET["nometiporegisto"];
             $seqid2_ic = $id_sequenciaa;
             $insert_campo->execute();
 
-          }
     }
     $connection->commit();
     $connection = null;
