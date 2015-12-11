@@ -34,8 +34,7 @@ session_start();
         <div>
             <form method="post" class="form-inline" action="<?php echo $_SERVER["PHP_SELF"];?>">
             	<table cellspacing="10">
-                </table>
-                    <br><input type="submit" name="submit" class="btn btn-success" value="Show">
+              </table>
                 </div>
             </form>
         </div>
@@ -46,7 +45,33 @@ session_start();
 
 		    $userid = $_SESSION['userid'];
 
-        
+        $query_tabelas = "select * from pagina where userid = ?";
+        $resultado_tabelas = $connection->prepare($query_tabelas);
+        $resultado_tabelas->execute(array($userid));
+        $resultado_print = $resultado_tabelas->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
+        <table class=\"table table-striped table-hover table-responsive\">
+          <thead>
+            <tr>
+              <?php
+              foreach($resultado[0] as $nome_coluna => $valor_coluna){
+                echo "<td>$nome_coluna</td>";
+              }
+              ?>
+            </tr>
+          </thead>
+          <tbody>
+        <?php
+        foreach($resultado as $num=>$row){
+          echo "<tr>";
+          foreach($row as $nome_coluna => $valor_coluna){
+            echo "<td>$valor_coluna</td>";
+          }
+          echo "</tr>";
+        }
+
+
 
     $connection = null;
     ?>
