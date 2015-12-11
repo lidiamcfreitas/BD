@@ -122,10 +122,11 @@ $lol = 1;
       $valoresdoscampos[] = $_POST["valorcampo"];
       var_dump($valoresdoscampos);
 
-      foreach($valoresdoscampos as $row){
+      foreach($valoresdoscampos as $row=>$v){
         foreach($row as $column){
           echo $column;
           echo $row;
+          echo $v;
         }
       }
     }
