@@ -82,7 +82,7 @@ $lol = 1;
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
 
-        $sql_maxtc_  = "SELECT r.regcounter + 1 as soma";
+        $sql_maxtc_  = "SELECT r.regcounter + 1 as soma ";
         $sql_maxtc_ .= "FROM registo r  ";
         $sql_maxtc_ .= "WHERE r.userid = ?";
         $sql_maxtc_ .= "  AND r.regcounter = ALL  ";
