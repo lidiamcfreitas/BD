@@ -134,13 +134,6 @@ session_start();
     $getmaxpcount = $getmaxpc->fetchColumn();
     ++$getmaxpcount;
 
-    $teste = "select count(*) from utilizador where userid = :userid";
-    $testarseexiste =$connection->prepare($teste);
-    $testarseexiste->bindParam(":userid", $userid_teste);
-    $userid_teste = $userid;
-    $testarseexiste->execute();
-    $deu = $testarseexiste->fetchColumn();
-
 
 //     //VERIFICA SE A PAGINA EXISTE, MAS NÃO ACTIVA
 //     $t = "select count(*) from pagina where nome = :nomep and ativa=0";
@@ -161,15 +154,14 @@ session_start();
 //       $testar->execute();
 // }
         //EXISTE ALGUMA PAGINA COM O MESMO NOME ?
-        echo "EXISTE ALGUMA PAGINA MESMO NOME?";
-      $teste = "select count(*) from pagina where nome = :nomepagina and ativa=1";
-      $testarseexiste =$connection->prepare($teste);
-      $testarseexiste->bindParam(":nomepagina", $nomep2);
-      $nomep2 = $nomepagina;
-      $testarseexiste->execute();
-      $deu3 = $testarseexiste->fetchColumn();
 
-      if ($deu3 != 0) {
+        echo "EXISTE ALGUMA PAGINA MESMO NOME?";
+      $teste = "select count(*) from pagina where ativa=1 and nome = ?";
+      $TAT =$connection->prepare($teste);
+      $TAT->execute(array($nomepagina));
+      $du3 = $TAT->fetchColumn();
+
+      if ($du3 != 0) {
         echo "<h1>Existe uma página com esse nome. </h1>";
 
       }else{
