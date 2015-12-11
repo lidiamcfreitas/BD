@@ -2,6 +2,7 @@
 session_start();
 $userid = $_SESSION['userid'];
 require "connect.php";
+$lol = 1;
 ?>
 
 <!DOCTYPE html>
@@ -76,13 +77,13 @@ require "connect.php";
       require "connect.php";
 
 
-      if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "")){
+      if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["tipoderegisto"] != "") && ($lol == 1) ){
         $_SESSION["tipoderegisto"] = $_POST["tipoderegisto"];
         $_SESSION["nomeregisto"] = $_POST["nomeregisto"];
 
         $tipoderegisto1 = $_SESSION["tipoderegisto"];
         $nomeregisto1 = $_SESSION["nomeregisto"];
-
+        $lol = 0;
         echo "Im here";
         echo ":".$tipoderegisto1;
         echo ":".$nomeregisto1;
@@ -118,7 +119,7 @@ require "connect.php";
       //header("Location: insertvalorescampo.php");
     } else if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["foo"] != "")) {
 
-      $valoresdoscampos = $_POST["valorcampo"];
+      $valoresdoscampos[] = $_POST["valorcampo"];
       var_dump($valoresdoscampos);
 
       foreach($valoresdoscampos as $row){
