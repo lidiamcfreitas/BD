@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "connect.php";
+$userid = $_SESSION['userid'];
 $_SESSION["nometipo"] = $_GET["nometipo"];
 ?>
 <!DOCTYPE html>
@@ -47,6 +48,8 @@ $_SESSION["nometipo"] = $_GET["nometipo"];
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST["nomecampoaretirar"] != "")){
 
+      require "connect.php";
+      session_start();
         $tiporegisto = $_SESSION["nometipo"];
         echo "nometipo:".$tiporegisto;
         $nomecampoaretirar = $_POST["nomecampoaretirar"];
