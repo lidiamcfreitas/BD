@@ -132,7 +132,7 @@ $lol = 1;
       var_dump($campos_valores_array);
       $cols = count($valoresdoscampos[0]);
       for ($x = 0; $x <= $cols; $x++) {
-          echo $result_campos[$x]["nome"];
+          var_dump($result_campos[$x]);
           echo $valoresdoscampos[0][$x]."<br>";
       }
     }
