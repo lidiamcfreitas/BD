@@ -98,13 +98,13 @@ require "connect.php";
         $connection->beginTransaction();
         $teste = "select count(*) from campo where nome = :nomecampo";
         $testarseexiste =$connection->prepare($teste);
-        $testarseexiste->bindParam(":nomecampo", $nomecamporetirar);
-        $nomecamporetirar = $nomecampopararetirar;
+        $testarseexiste->bindParam(":nomecampo", $nomecampopararetirar);
+        $nomecampopararetirar = $nomecampoaretirar;
         $testarseexiste->execute();
         $deu = $testarseexiste->fetchColumn();
 
         if ($deu == 0) {
-          echo "<h1>O Nome de campo não existe. $nomecampopararetirar </h1>";
+          echo "<h1>O Nome de campo não existe. </h1>";
           exit();
         }
 
