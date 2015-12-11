@@ -1,7 +1,4 @@
-<?php
-session_start();
-include 'imprimir_tabelas.php';
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +13,10 @@ include 'imprimir_tabelas.php';
 
   </head>
   <body>
+    <?php
+    session_start();
+    include 'imprimir_tabelas.php';
+    ?>
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
